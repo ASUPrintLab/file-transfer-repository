@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,17 +15,27 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.shape.Circle;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
 
 public class TableViewController implements Initializable {
+	
+	@FXML
+	final DirectoryChooser fc = new DirectoryChooser();
+	@FXML
+	private Label target1; 
+	
 	//Defining table
 	@FXML
 	private TableView<TransferTimeFrom> tableID;
@@ -248,6 +259,15 @@ public class TableViewController implements Initializable {
 		}
 	 }
 	 
+	 @FXML
+	 protected void handleBrowse1Button(ActionEvent event) {
+		 Node source = (Node) event.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 //fc.setFileSelectionMode(FileChooser.DIRECTORIES_ONLY);
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+	 }
 }
 
 //http://stackoverflow.com/questions/26962788/fxmlloader-how-to-access-the-components-by-fxid   ---> For accessing the buttons in XML

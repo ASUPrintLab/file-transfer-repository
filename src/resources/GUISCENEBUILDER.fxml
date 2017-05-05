@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" stylesheets="@../../../hello/src/application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TableViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" stylesheets="resources/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TableViewController">
    <center>
       <TabPane prefHeight="472.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -32,7 +32,7 @@
                      <children>
                         <ImageView fx:id="newTime" fitHeight="559.0" fitWidth="850.0" layoutY="-7.0">
                            <image>
-                              <Image url="@../../../hello/bin/application/1.jpg" />
+                              <Image url="resources/1.jpg" />
                            </image>
                         </ImageView>
                         <TableView fx:id="tableID" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
@@ -114,7 +114,7 @@
                      <children>
                         <ImageView fitHeight="561.0" fitWidth="850.0" layoutY="-7.0">
                            <image>
-                              <Image url="@../../../hello/bin/application/1.jpg" />
+                              <Image url="/resources/1.jpg" />
                            </image>
                         </ImageView>
                         <TableView fx:id="tableID2" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
@@ -196,7 +196,7 @@
                      <children>
                         <ImageView fitHeight="559.0" fitWidth="850.0" layoutY="-7.0">
                            <image>
-                              <Image url="@../../../hello/bin/application/1.jpg" />
+                              <Image url="/resources/1.jpg" />
                            </image>
                         </ImageView>
                         <TableView fx:id="tableID3" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
@@ -274,7 +274,6 @@
             </Tab>
         </tabs>
          <stylesheets>
-            <URL value="@../../../hello/src/application/application.css" />
             <URL value="@application.css" />
          </stylesheets>
       </TabPane>
@@ -284,7 +283,7 @@
          <children>
             <ImageView fitHeight="126.0" fitWidth="850.0">
                <image>
-                  <Image url="@../../../hello/bin/application/1.1.jpg" />
+                  <Image url="/resources/1.1.jpg" />
                </image>
             </ImageView>
             <Button fx:id="startButton" layoutX="552.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleStartAction" text="Start">
@@ -335,7 +334,7 @@
             </Button>
             <ImageView fitHeight="118.0" fitWidth="300.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../hello/bin/application/ASU_PrintImagingLab_Horiz_RGB_MaroonGold_150ppi.png" />
+                  <Image url="resources/ASU_PrintImagingLab_Horiz_RGB_MaroonGold_150ppi.png" />
                </image>
             </ImageView>
             <Circle fx:id="light1" layoutX="826.0" layoutY="36.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
