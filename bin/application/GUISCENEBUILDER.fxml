@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" stylesheets="@../../../hello/src/application/application.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TableViewController">
+   <center>
+      <TabPane prefHeight="472.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Indigo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="805.0">
+                     <children>
+                        <ImageView fx:id="newTime" fitHeight="559.0" fitWidth="850.0" layoutY="-7.0">
+                           <image>
+                              <Image url="@../../../hello/bin/application/1.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableID" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
+                           <columns>
+                              <TableColumn fx:id="TransferTimeFrom1" prefWidth="75.0" text="From" />
+                              <TableColumn fx:id="TransferTimeTo1" prefWidth="75.0" text="To" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Button fx:id="submitButton" layoutX="691.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Submit" />
+                        <TextField layoutX="14.0" layoutY="87.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
+                        <Button layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="21.0" text="Connection 1:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
+                        <Button layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
+                        <Button layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="132.0" text="Connection 2:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="276.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
+                        <Button layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
+                        <Button layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="242.0" text="Connection 3:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
+                        <Button layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="419.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
+                        <Button layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="353.0" text="Connection 4:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="637.0" layoutY="291.0" text="Add Transfer Time" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="NewTransferTimeAM" layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
+                        <ComboBox fx:id="NewTransferTimePM" layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
+                        <Label layoutX="639.0" layoutY="324.0" text="From:">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="657.0" layoutY="364.0" text="To:">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="620.0" layoutY="7.0" text="Transfer Times">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
+                        <Button layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Button fx:id="delete" layoutX="691.0" layoutY="444.0" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="iGen">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="561.0" fitWidth="850.0" layoutY="-7.0">
+                           <image>
+                              <Image url="@../../../hello/bin/application/1.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableID2" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
+                           <columns>
+                              <TableColumn fx:id="TransferTimeFrom2" prefWidth="75.0" text="From" />
+                              <TableColumn fx:id="TransferTimeTo2" prefWidth="75.0" text="To" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="87.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
+                        <Button layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="21.0" text="Connection 1:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
+                        <Button layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="132.0" text="Connection 2:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="276.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
+                        <Button layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="242.0" text="Connection 3:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="419.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
+                        <Button layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="353.0" text="Connection 4:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="submitButton2" layoutX="691.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Submit" />
+                        <Label layoutX="637.0" layoutY="291.0" text="Add Transfer Time" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
+                        <ComboBox layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
+                        <Label layoutX="639.0" layoutY="324.0" text="From:">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="657.0" layoutY="364.0" text="To:">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="620.0" layoutY="7.0" text="Transfer Times">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="delete1" layoutX="691.0" layoutY="444.0" mnemonicParsing="false" onAction="#onDeleteItem2" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+     		 <Tab text="Memjet">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="559.0" fitWidth="850.0" layoutY="-7.0">
+                           <image>
+                              <Image url="@../../../hello/bin/application/1.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableID3" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
+                          <columns>
+                            <TableColumn fx:id="TransferTimeFrom3" prefWidth="75.0" text="From" />
+                              <TableColumn fx:id="TransferTimeTo3" prefWidth="75.0" text="To" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="87.0" prefHeight="25.0" prefWidth="475.0" promptText="A:\" />
+                        <Button layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="21.0" text="Connection 1:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="475.0" promptText="A:\" />
+                        <Button layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="132.0" text="Connection 2:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="276.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
+                        <Button layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="242.0" text="Connection 3:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
+                        <Button layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <TextField layoutX="14.0" layoutY="419.0" prefHeight="25.0" prefWidth="475.0" promptText="A:\" />
+                        <Button layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" />
+                        <Label layoutX="14.0" layoutY="353.0" text="Connection 4:" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="submitButton3" layoutX="691.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Submit" />
+                        <Label layoutX="637.0" layoutY="291.0" text="Add Transfer Time" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
+                        <ComboBox layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
+                        <Label layoutX="639.0" layoutY="324.0" text="From:">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="657.0" layoutY="364.0" text="To:">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="620.0" layoutY="7.0" text="Transfer Times">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="delete2" layoutX="691.0" layoutY="444.0" mnemonicParsing="false" onAction="#onDeleteItem3" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+         <stylesheets>
+            <URL value="@../../../hello/src/application/application.css" />
+            <URL value="@application.css" />
+         </stylesheets>
+      </TabPane>
+   </center>
+   <top>
+      <Pane prefHeight="126.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="126.0" fitWidth="850.0">
+               <image>
+                  <Image url="@../../../hello/bin/application/1.1.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="startButton" layoutX="552.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleStartAction" text="Start">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" color="WHITE" height="27.06" radius="6.265" width="0.0">
+                     <input>
+                        <DropShadow blurType="TWO_PASS_BOX" />
+                     </input></InnerShadow>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <textFill>
+                  <LinearGradient cycleMethod="REFLECT" endX="0.8523809523809524" startX="0.8333333333333334" startY="0.5523809523809524">
+                     <stops>
+                        <Stop color="#0a9e3b" />
+                        <Stop color="#455445" offset="0.9961685823754789" />
+                        <Stop color="#455445" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Button>
+            <Button fx:id="stopButton" depthTest="ENABLE" layoutX="686.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleStopAction" text="Stop">
+               <font>
+                  <Font size="38.0" />
+               </font>
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" color="WHITE" height="27.06" radius="6.265" width="0.0">
+                     <input>
+                        <DropShadow blurType="TWO_PASS_BOX" />
+                     </input></InnerShadow>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <textFill>
+                  <LinearGradient cycleMethod="REFLECT" endX="0.8523809523809524" startX="0.8333333333333334" startY="0.5523809523809524">
+                     <stops>
+                        <Stop color="#c33838" />
+                        <Stop color="#455445" offset="0.9961685823754789" />
+                        <Stop color="#455445" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Button>
+            <ImageView fitHeight="118.0" fitWidth="300.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../hello/bin/application/ASU_PrintImagingLab_Horiz_RGB_MaroonGold_150ppi.png" />
+               </image>
+            </ImageView>
+            <Circle fx:id="light1" layoutX="826.0" layoutY="36.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
+            <Circle fx:id="light2" fill="#00ff0c" layoutX="826.0" layoutY="64.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
+            <Circle fx:id="light3" fill="#00ff0c" layoutX="826.0" layoutY="91.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Pane>
+   </top>
+</BorderPane>
