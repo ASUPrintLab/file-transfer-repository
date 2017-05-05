@@ -43,6 +43,22 @@ public class TableViewController implements Initializable {
 	private TextField source3;
 	@FXML
 	private TextField source4; 
+	@FXML
+	private TextField source5; 
+	@FXML
+	private TextField source6;
+	@FXML
+	private TextField source7;
+	@FXML
+	private TextField source8; 
+	@FXML
+	private TextField source9; 
+	@FXML
+	private TextField source10;
+	@FXML
+	private TextField source11;
+	@FXML
+	private TextField source12;
 	
 	@FXML
 	private TextField target1; 
@@ -52,6 +68,22 @@ public class TableViewController implements Initializable {
 	private TextField target3;
 	@FXML
 	private TextField target4; 
+	@FXML
+	private TextField target5; 
+	@FXML
+	private TextField target6;
+	@FXML
+	private TextField target7;
+	@FXML
+	private TextField target8;
+	@FXML
+	private TextField target9; 
+	@FXML
+	private TextField target10;
+	@FXML
+	private TextField target11;
+	@FXML
+	private TextField target12;
 	
 	//Defining table
 	@FXML
@@ -377,6 +409,214 @@ public class TableViewController implements Initializable {
 		 if(!returnVal.equals(null)){
 			 String val = returnVal.toString();
 			 target4.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse9Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source5.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse10Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target5.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse11Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source6.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse12Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target6.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse13Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source7.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse14Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target7.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse15Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source8.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse16Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target8.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse17Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source9.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse18Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target9.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse19Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source10.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse20Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target10.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse21Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source11.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse22Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target11.setText(val);
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse23Button(ActionEvent event7) {
+		 Node source = (Node) event7.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		        
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 source12.setText(val);	 
+		 }
+	 }
+	 
+	 @FXML
+	 protected void handleBrowse24Button(ActionEvent event8) {
+		 Node source = (Node) event8.getSource();
+		 Window theStage = source.getScene().getWindow();
+		 fc.setTitle("Choose Target Location");
+		 File returnVal = fc.showDialog(theStage);
+		 
+		 if(!returnVal.equals(null)){
+			 String val = returnVal.toString();
+			 target12.setText(val);
 		 }
 	 }
 }
