@@ -46,34 +46,34 @@
                         </TableView>
                         <Button fx:id="submitButton" layoutX="691.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Submit" />
                         <TextField id="target1" fx:id="target1" layoutX="14.0" layoutY="87.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
-                        <Button layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse2Button" />
+                        <Button fx:id="BrowseBut2" layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="21.0" text="Connection 1:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source2" fx:id="source2" layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
-                        <Button layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse3Button" />
+                        <Button fx:id="BrowseBut3" layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target2" fx:id="target2" layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
-                        <Button layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse4Button" />
+                        <Button fx:id="BrowseBut4" layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="132.0" text="Connection 2:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source3" fx:id="source3" layoutX="14.0" layoutY="276.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
-                        <Button layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse5Button" />
+                        <Button fx:id="BrowseBut5" layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target3" fx:id="target3" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
-                        <Button layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse6Button" />
+                        <Button fx:id="BrowseBut6" layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="242.0" text="Connection 3:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source4" fx:id="source4" layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
-                        <Button layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse7Button" />
+                        <Button fx:id="BrowseBut7" layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target4" fx:id="target4" layoutX="14.0" layoutY="419.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\CMYK+Spot" />
-                        <Button layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse8Button" />
+                        <Button fx:id="BrowseBut8" layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="353.0" text="Connection 4:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
@@ -102,7 +102,7 @@
                            </font>
                         </Label>
                         <TextField id="source1" fx:id="source1" layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" />
-                        <Button layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse1Button" />
+                        <Button fx:id="BrowseBut1" layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Button fx:id="delete" layoutX="691.0" layoutY="444.0" mnemonicParsing="false" onAction="#onDeleteItem" prefHeight="25.0" prefWidth="100.0" text="Delete" />
                      </children>
                   </AnchorPane>
@@ -127,36 +127,36 @@
                            </columnResizePolicy>
                         </TableView>
                         <TextField id="source5" fx:id="source5" layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse9Button" />
+                        <Button fx:id="BrowseBut9" layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target5" fx:id="target5" layoutX="14.0" layoutY="87.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
-                        <Button layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse10Button" />
+                        <Button fx:id="BrowseBut10" layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="21.0" text="Connection 1:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source6" fx:id="source6" layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse11Button" />
+                        <Button fx:id="BrowseBut11" layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target6" fx:id="target6" layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
-                        <Button layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse12Button" />
+                        <Button fx:id="BrowseBut12" layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="132.0" text="Connection 2:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source7" fx:id="source7" layoutX="14.0" layoutY="276.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse13Button" />
+                        <Button fx:id="BrowseBut13" layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target7" fx:id="target7" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
-                        <Button layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse14Button" />
+                        <Button fx:id="BrowseBut14" layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="242.0" text="Connection 3:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source8" fx:id="source8" layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse15Button" />
+                        <Button fx:id="BrowseBut15" layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <TextField id="target8" fx:id="target8" layoutX="14.0" layoutY="419.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
-                        <Button layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse16Button" />
+                        <Button fx:id="BrowseBut16" layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton" />
                         <Label layoutX="14.0" layoutY="353.0" text="Connection 4:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
@@ -209,36 +209,36 @@
                            </columnResizePolicy>
                         </TableView>
                         <TextField id="source9" fx:id="source9" layoutX="14.0" layoutY="55.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse17Button"/>
+                        <Button fx:id="BrowseBut17" layoutX="501.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <TextField id="target9" fx:id="target9" layoutX="14.0" layoutY="87.0" prefHeight="25.0" prefWidth="475.0" promptText="A:\" />
-                        <Button layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse18Button"/>
+                        <Button fx:id="BrowseBut18" layoutX="501.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <Label layoutX="14.0" layoutY="21.0" text="Connection 1:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source10" fx:id="source10" layoutX="14.0" layoutY="166.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse19Button"/>
+                        <Button fx:id="BrowseBut19" layoutX="501.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <TextField id="target10" fx:id="target10" layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="475.0" promptText="A:\" />
-                        <Button layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse20Button"/>
+                        <Button fx:id="BrowseBut20" layoutX="501.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <Label layoutX="14.0" layoutY="132.0" text="Connection 2:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source11" fx:id="source11" layoutX="14.0" layoutY="276.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse21Button"/>
+                        <Button fx:id="BrowseBut21" layoutX="501.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <TextField id="target11" fx:id="target11" layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="475.0" promptText="J:\10 x 13 Envelopes" />
-                        <Button layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse22Button"/>
+                        <Button fx:id="BrowseBut22" layoutX="501.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <Label layoutX="14.0" layoutY="242.0" text="Connection 3:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
                            </font>
                         </Label>
                         <TextField id="source12" fx:id="source12" layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="475.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Envelopes\10x13 for Press" />
-                        <Button layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse23Button"/>
+                        <Button fx:id="BrowseBut23" layoutX="501.0" layoutY="387.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <TextField id="target12" fx:id="target12" layoutX="14.0" layoutY="419.0" prefHeight="25.0" prefWidth="475.0" promptText="A:\" />
-                        <Button layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowse24Button"/>
+                        <Button fx:id="BrowseBut24" layoutX="501.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Browse" onAction="#handleBrowseButton"/>
                         <Label layoutX="14.0" layoutY="353.0" text="Connection 4:" underline="true">
                            <font>
                               <Font name="Lucida Sans Demibold" size="20.0" />
