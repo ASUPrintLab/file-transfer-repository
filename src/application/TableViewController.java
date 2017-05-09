@@ -31,7 +31,10 @@ import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
 
 public class TableViewController implements Initializable {
-	
+	/*
+	 * Initializing all objects being used
+	 * Authors: Mitchell & Victor
+	 */
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
 	
@@ -108,15 +111,6 @@ public class TableViewController implements Initializable {
 	@FXML
 	private TableColumn<TransferTimeFrom, String> TransferTimeFrom3;
 	
-//	@FXML
-//	private TableView<TransferTimeTo> tableID;
-//	
-//	@FXML
-//	private TableView<TransferTimeTo> tableID2;
-//	
-//	@FXML
-//	private TableView<TransferTimeTo> tableID3;
-	
 	@FXML
 	private TableColumn<TransferTimeTo, String> TransferTimeTo1;
 	
@@ -161,14 +155,10 @@ public class TableViewController implements Initializable {
 	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
-//	private ObservableList<TransferTimeFrom> masterData;
-//	private ObservableList<String> masterData2;
-	
-//	@FXML
-//	private TableColumn<Product, String> emailTime;
 
 	/*
-	 * Creating all the table data
+	 * Creating all the table data 
+	 * Author: Mitchell
 	 */
 	final ObservableList<TransferTimeFrom> data = FXCollections.observableArrayList(
 		new TransferTimeFrom("7:00 AM","8:30 AM"),
@@ -188,7 +178,7 @@ public class TableViewController implements Initializable {
 		new TransferTimeFrom("12:00 PM","1:30 PM"),
 		new TransferTimeFrom("3:00 PM","4:30 PM")
 	);
-	
+	//Observable List for the drop down times - MR
 	final ObservableList<String> optionAM = FXCollections.observableArrayList(
 			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
 			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 AM",
@@ -204,44 +194,56 @@ public class TableViewController implements Initializable {
 			"11:00 PM"
 		);
 	
+	/*
+	 * Adds new transfer time to the Table View.
+	 * Author: Mitchell
+	 */
 	public void addButtonClicked() {
 		String output = (String) NewTransferTimeAM.getValue();
 		String output2 = (String) NewTransferTimePM.getValue();
-		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2);
-		newTransferTime.setTransferTimeFrom(output);
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
 		newTransferTime.setTransferTimeTo(output2);
 
-		tableID.getItems().add(newTransferTime);
+		tableID.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
 	}
 	
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
+     * Author: Mitchell & Victor
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		TransferTimeFrom1.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
 
-		NewTransferTimeAM.setValue("12:00 AM");
+		NewTransferTimeAM.setValue("12:00 AM"); //Initial Values in drop down value.
 		NewTransferTimeAM.setItems(optionAM);
 		NewTransferTimePM.setValue("12:00 AM");
 		NewTransferTimePM.setItems(optionPM);
 		
-		submitButton.setOnAction(e -> addButtonClicked());
+		submitButton.setOnAction(e -> addButtonClicked()); //Adds event to submit button.. Calls addButtonClicked Method
 		
+		
+		//Applies the objects to the actual cells in the table
 		TransferTimeFrom2.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
 		TransferTimeFrom3.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
 		TransferTimeTo1.setCellValueFactory(new PropertyValueFactory<TransferTimeTo, String>("TransferTimeTo"));
 		TransferTimeTo2.setCellValueFactory(new PropertyValueFactory<TransferTimeTo, String>("TransferTimeTo"));
 		TransferTimeTo3.setCellValueFactory(new PropertyValueFactory<TransferTimeTo, String>("TransferTimeTo"));
-		tableID.setItems(data);
+		tableID.setItems(data); //Displays data
 		tableID2.setItems(data2);
 		tableID3.setItems(data3);
 		
-		stopButton.setOnAction(this::handleStopAction);
+		stopButton.setOnAction(this::handleStopAction); //Invokes the action
 		startButton.setOnAction(this::handleStartAction);
 		
+		
+		/*
+		 * Adds a listener to tell the program where you clicked on the table. Used in order to delete desired transfer time
+		 * Author: Mitchell
+		 */
 		tableID.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable,Object oldvalue, Object newValue) {
@@ -267,7 +269,7 @@ public class TableViewController implements Initializable {
 		});
 	}
 
-	// Button was clicked, do something...
+	// If start or stop button are clicked, change the fill color of circles
 	 @FXML
 	 private void handleStopAction(ActionEvent event) {
 		 light1.setStyle("-fx-fill: #FF0000;");
@@ -283,14 +285,16 @@ public class TableViewController implements Initializable {
 	  
 	 }
 	 
+	  /*
+	   * This deletes the data on the table. Will concatenate the cells and move the values -1. Will not delete out of bounds.
+	   * Author: Mitchell
+	   */
 	 public void onDeleteItem(ActionEvent event) {
 		 int i = index.get();
 		 if(i > -1) {
 			 data.remove(i);
 
 			 tableID.getSelectionModel().clearSelection();
-			 
-			 System.out.print("Data for time: " +  data.toString());
 		}
 	 }
 	 
@@ -312,6 +316,10 @@ public class TableViewController implements Initializable {
 		}
 	 }
 	 
+	 /*
+	  * 
+	  * Author: Victor
+	  */
 	 @FXML
 	 protected void handleBrowseButton(ActionEvent event) {
 		 Node source = (Node) event.getSource();
