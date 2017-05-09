@@ -46,6 +46,22 @@ public class TableViewController implements Initializable {
 	private TextField source3;
 	@FXML
 	private TextField source4; 
+	@FXML
+	private TextField source5; 
+	@FXML
+	private TextField source6;
+	@FXML
+	private TextField source7;
+	@FXML
+	private TextField source8; 
+	@FXML
+	private TextField source9; 
+	@FXML
+	private TextField source10;
+	@FXML
+	private TextField source11;
+	@FXML
+	private TextField source12;
 	
 	@FXML
 	private TextField target1; 
@@ -55,6 +71,26 @@ public class TableViewController implements Initializable {
 	private TextField target3;
 	@FXML
 	private TextField target4; 
+	@FXML
+	private TextField target5; 
+	@FXML
+	private TextField target6;
+	@FXML
+	private TextField target7;
+	@FXML
+	private TextField target8;
+	@FXML
+	private TextField target9; 
+	@FXML
+	private TextField target10;
+	@FXML
+	private TextField target11;
+	@FXML
+	private TextField target12;
+	
+	@FXML
+	private Button BrowseBut1, BrowseBut2, BrowseBut3, BrowseBut4, BrowseBut5, BrowseBut6, BrowseBut7, BrowseBut8, BrowseBut9, BrowseBut10, BrowseBut11, BrowseBut12,
+		BrowseBut13, BrowseBut14, BrowseBut15, BrowseBut16, BrowseBut17, BrowseBut18, BrowseBut19, BrowseBut20, BrowseBut21, BrowseBut22, BrowseBut23, BrowseBut24;
 	
 	//Defining table
 	@FXML
@@ -285,106 +321,178 @@ public class TableViewController implements Initializable {
 	  * Author: Victor
 	  */
 	 @FXML
-	 protected void handleBrowse1Button(ActionEvent event1) {
-		 Node source = (Node) event1.getSource();
+	 protected void handleBrowseButton(ActionEvent event) {
+		 Node source = (Node) event.getSource();
 		 Window theStage = source.getScene().getWindow();
 		 fc.setTitle("Choose Target Location");
 		 File returnVal = fc.showDialog(theStage);
-		        
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 source1.setText(val); 
+		   
+		 if (event.getSource() ==  BrowseBut1) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source1.setText(val); 
+			 }
 		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse2Button(ActionEvent event2) {
-		 Node source = (Node) event2.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
-		        
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 target1.setText(val);	 
-		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse3Button(ActionEvent event3) {
-		 Node source = (Node) event3.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
-		        
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 source2.setText(val); 
-		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse4Button(ActionEvent event4) {
-		 Node source = (Node) event4.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
 		 
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 target2.setText(val); 
+		 else if (event.getSource() ==  BrowseBut2) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target1.setText(val); 
+			 }
 		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse5Button(ActionEvent event5) {
-		 Node source = (Node) event5.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
-		        
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 source3.setText(val);
-		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse6Button(ActionEvent event6) {
-		 Node source = (Node) event6.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
-		        
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 target3.setText(val);	 
-		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse7Button(ActionEvent event7) {
-		 Node source = (Node) event7.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
-		        
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 source4.setText(val);	 
-		 }
-	 }
-	 
-	 @FXML
-	 protected void handleBrowse8Button(ActionEvent event8) {
-		 Node source = (Node) event8.getSource();
-		 Window theStage = source.getScene().getWindow();
-		 fc.setTitle("Choose Target Location");
-		 File returnVal = fc.showDialog(theStage);
 		 
-		 if(!returnVal.equals(null)){
-			 String val = returnVal.toString();
-			 target4.setText(val);
+		 else if (event.getSource() ==  BrowseBut3) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source2.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut4) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target2.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut5) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source3.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut6) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target3.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut7) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source4.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut8) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target4.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut9) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source5.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut10) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target5.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut11) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source6.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut12) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target6.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut13) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source7.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut14) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target7.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut15) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source8.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut16) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target8.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut17) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source9.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut18) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target9.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut19) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source10.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut20) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target10.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut21) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source11.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut22) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target11.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut23) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 source12.setText(val); 
+			 }
+		 }
+		 
+		 else if (event.getSource() ==  BrowseBut24) {
+			 if(!returnVal.equals(null)){
+				 String val = returnVal.toString();
+				 target12.setText(val); 
+			 }
 		 }
 	 }
 }
