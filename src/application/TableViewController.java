@@ -31,7 +31,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
-import networkDrive.CheckConnectivity;
+import application.CheckConnectivity;
 
 public class TableViewController implements Initializable {
 	
