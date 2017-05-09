@@ -4,6 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.joda.time.LocalTime;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,8 +31,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
+import networkDrive.CheckConnectivity;
 
 public class TableViewController implements Initializable {
+	
+	CheckConnectivity prog;
 	
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
@@ -281,7 +286,16 @@ public class TableViewController implements Initializable {
 		 light2.setStyle("-fx-fill: #00ff0c;");
 		 light3.setStyle("-fx-fill: #00ff0c;");
 		 
-		 //run 
+		 // try {
+		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), morn1.getText(), morn2.getText(), aft1.getText(),
+		 //			aft2.getText(), aft3.getText(), aft4.getText(), eve1.getText(), eve2.getText());
+		 // } catch (IllegalArgumentException e1) {
+		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), "09:30", "09:45","10:30", "11:00", "12:45",
+		 //			"13:00", "14:30", "14:45");
+	     // }
+		 // } finally {
+		 //		prog.start();
+		 // }
 	  
 	 }
 	 
