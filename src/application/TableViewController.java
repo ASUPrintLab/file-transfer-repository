@@ -31,16 +31,16 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
+import application.CheckPresses;
 import application.CheckConnectivity;
 
 public class TableViewController implements Initializable {
 	
-	
-	
 	/*
 	 * Initializing all objects being used
-	 * Authors: Mitchell & Victor
+	 * Authors: Mitchell & Victor & Thomass
 	 */
+	
 	CheckConnectivity prog;
 	
 	@FXML
@@ -223,6 +223,13 @@ public class TableViewController implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		light1.setStyle("-fx-fill: #FF0000;");
+		light2.setStyle("-fx-fill: #FF0000;");
+		light3.setStyle("-fx-fill: #FF0000;");
+	  
+		stopButton.setDisable(true);
+		startButton.setDisable(false);
 
 		TransferTimeFrom1.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
 
@@ -284,12 +291,19 @@ public class TableViewController implements Initializable {
 		 light2.setStyle("-fx-fill: #FF0000;");
 		 light3.setStyle("-fx-fill: #FF0000;");
 	  
+		 stopButton.setDisable(true);
+		 startButton.setDisable(false);
+		 
+		 prog.stop();
 	 }
 	 @FXML
 	 private void handleStartAction(ActionEvent event) {
 		 light1.setStyle("-fx-fill: #00ff0c;");
 		 light2.setStyle("-fx-fill: #00ff0c;");
 		 light3.setStyle("-fx-fill: #00ff0c;");
+		 
+		 stopButton.setDisable(false);
+		 startButton.setDisable(true);
 		 
 		 // try {
 		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), morn1.getText(), morn2.getText(), aft1.getText(),
@@ -301,6 +315,16 @@ public class TableViewController implements Initializable {
 		 // } finally {
 		 //		prog.start();
 		 // }
+		/* for (int i = 0; i < data.size(); i++){
+			 System.out.println(TransferTimeFrom1.getCellData(i));
+			 System.out.println(TransferTimeTo1.getCellData(i));
+		 }*/
+		
+		 try{
+			 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+		 }finally {
+				prog.start();
+			}
 	  
 	 }
 	 
