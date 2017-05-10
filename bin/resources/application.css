@@ -1,0 +1,93 @@
+/* Java CSS Author: Mitchell */
+
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width:100px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color:  #C9CED9;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
+
+#stopButton:hover, #startButton:hover { /*changes: the style when hovered over */
+  -fx-background-color: 
+        #152029,
+        linear-gradient(#152029 10%, #152029 20%, #152029 100%),
+        linear-gradient(#152029, #0C1822),
+        radial-gradient(center 50% 0%, radius 60%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+}
+
+#startButton, #stopButton { /*Initial styles for the start and stop button */
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+    -fx-font-size: 38px;
+    -fx-padding: 10 20 10 20;
+}	
+
+#submitButton, #submitButton2, #submitButton3 { /*Initial styles for all the submit buttons */
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5 5 5 5;
+    -fx-font-weight: bold;
+}	
+
+#delete, #delete1, #delete2 { /*Initial styles for the delete buttons  */
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5 5 5 5;
+    -fx-font-weight: bold;
+}	
+#light1, #light2, #light3 { /*Circle lights */
+	-fx-fill: #00ff0c;
+}
+
+#TransferTimeFrom1, #TransferTimeFrom2, #TransferTimeFrom3, #TransferTimeTo1, #TransferTimeTo2, #TransferTimeTo3 { /*Aligns the data in columns in table */
+	-fx-alignment: CENTER;
+}

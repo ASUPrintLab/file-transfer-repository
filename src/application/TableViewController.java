@@ -4,6 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.joda.time.LocalTime;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,12 +31,18 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
+import application.CheckPresses;
+import application.CheckConnectivity;
 
 public class TableViewController implements Initializable {
+	
 	/*
 	 * Initializing all objects being used
-	 * Authors: Mitchell & Victor
+	 * Authors: Mitchell & Victor & Thomass
 	 */
+	
+	CheckConnectivity prog;
+	
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
 	
@@ -215,6 +223,13 @@ public class TableViewController implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		light1.setStyle("-fx-fill: #FF0000;");
+		light2.setStyle("-fx-fill: #FF0000;");
+		light3.setStyle("-fx-fill: #FF0000;");
+	  
+		stopButton.setDisable(true);
+		startButton.setDisable(false);
 
 		TransferTimeFrom1.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
 
@@ -276,12 +291,40 @@ public class TableViewController implements Initializable {
 		 light2.setStyle("-fx-fill: #FF0000;");
 		 light3.setStyle("-fx-fill: #FF0000;");
 	  
+		 stopButton.setDisable(true);
+		 startButton.setDisable(false);
+		 
+		 prog.stop();
 	 }
 	 @FXML
 	 private void handleStartAction(ActionEvent event) {
 		 light1.setStyle("-fx-fill: #00ff0c;");
 		 light2.setStyle("-fx-fill: #00ff0c;");
 		 light3.setStyle("-fx-fill: #00ff0c;");
+		 
+		 stopButton.setDisable(false);
+		 startButton.setDisable(true);
+		 
+		 // try {
+		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), morn1.getText(), morn2.getText(), aft1.getText(),
+		 //			aft2.getText(), aft3.getText(), aft4.getText(), eve1.getText(), eve2.getText());
+		 // } catch (IllegalArgumentException e1) {
+		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), "09:30", "09:45","10:30", "11:00", "12:45",
+		 //			"13:00", "14:30", "14:45");
+	     // }
+		 // } finally {
+		 //		prog.start();
+		 // }
+		/* for (int i = 0; i < data.size(); i++){
+			 System.out.println(TransferTimeFrom1.getCellData(i));
+			 System.out.println(TransferTimeTo1.getCellData(i));
+		 }*/
+		
+		 try{
+			 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+		 }finally {
+				prog.start();
+			}
 	  
 	 }
 	 
