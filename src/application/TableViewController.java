@@ -43,6 +43,12 @@ public class TableViewController implements Initializable {
 	
 	CheckConnectivity prog;
 	
+	CheckConnectivity prog1;
+	
+	CheckConnectivity prog2;
+	
+	CheckConnectivity prog3;
+	
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
 	
@@ -304,24 +310,12 @@ public class TableViewController implements Initializable {
 		 
 		 stopButton.setDisable(false);
 		 startButton.setDisable(true);
-		 
-		 // try {
-		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), morn1.getText(), morn2.getText(), aft1.getText(),
-		 //			aft2.getText(), aft3.getText(), aft4.getText(), eve1.getText(), eve2.getText());
-		 // } catch (IllegalArgumentException e1) {
-		 //		prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), fieldSource.getText(), fieldTarget.getText(), "09:30", "09:45","10:30", "11:00", "12:45",
-		 //			"13:00", "14:30", "14:45");
-	     // }
-		 // } finally {
-		 //		prog.start();
-		 // }
-		/* for (int i = 0; i < data.size(); i++){
-			 System.out.println(TransferTimeFrom1.getCellData(i));
-			 System.out.println(TransferTimeTo1.getCellData(i));
-		 }*/
 		
 		 try{
 			 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
 		 }finally {
 				prog.start();
 			}
