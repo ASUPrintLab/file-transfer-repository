@@ -34,6 +34,18 @@ import javafx.util.converter.DefaultStringConverter;
 import application.CheckPresses;
 import application.CheckConnectivity;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
 public class TableViewController implements Initializable {
 	
 	/*
@@ -229,6 +241,7 @@ public class TableViewController implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		populateValues();
 		
 		light1.setStyle("-fx-fill: #FF0000;");
 		light2.setStyle("-fx-fill: #FF0000;");
@@ -352,7 +365,67 @@ public class TableViewController implements Initializable {
 			 tableID3.getSelectionModel().clearSelection();
 		}
 	 }
-	 
+	 private void populateValues() {
+		 JSONParser parser = new JSONParser();
+		 
+		 try {
+
+	            Object obj = parser.parse(new FileReader("FuckVictorForLife.json"));
+
+	            JSONObject jsonObject = (JSONObject) obj;
+	            System.out.println(jsonObject);
+	            
+	            target1.setText((String)jsonObject.get("target1"));
+	            target2.setText((String)jsonObject.get("target2"));
+	            target3.setText((String)jsonObject.get("target3"));
+	            target4.setText((String)jsonObject.get("target4"));
+	            source1.setText((String)jsonObject.get("source1"));
+	            source2.setText((String)jsonObject.get("source2"));
+	            source3.setText((String)jsonObject.get("source3"));
+	            source4.setText((String)jsonObject.get("source4"));
+
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+	 }
+	 public void saveFields() {
+		 String strTarget1 = target1.getText();
+		 String strTarget2 = target2.getText();
+		 String strTarget3 = target3.getText();
+		 String strTarget4 = target4.getText();
+
+		 String strSource1 = source1.getText();
+		 String strSource2 = source2.getText();
+		 String strSource3 = source3.getText();
+		 String strSource4 = source4.getText();
+ 		 
+		 JSONObject objString = new JSONObject();
+		 	objString.put("target1", strTarget1);
+		 	objString.put("target2", strTarget2);
+		 	objString.put("target3", strTarget3);
+		 	objString.put("target4", strTarget4);
+		 	objString.put("source1", strSource1);
+		 	objString.put("source2", strSource2);
+		 	objString.put("source3", strSource3);
+		 	objString.put("source4", strSource4);
+		 	
+	        try (FileWriter file = new FileWriter("FuckVictorForLife.json")) {
+
+	            file.write(objString.toJSONString());
+	            file.flush();
+	            System.out.println("It Worked");
+	            
+
+	        } catch (IOException e) {
+	        	System.out.println("It didn't work");
+	            e.printStackTrace();
+	        }
+
+	 }
 	 /*
 	  * 
 	  * Author: Victor
@@ -531,6 +604,7 @@ public class TableViewController implements Initializable {
 				 target12.setText(val); 
 			 }
 		 }
+		 saveFields();
 	 }
 }
 
