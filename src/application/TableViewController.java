@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Arrays;
 
 import org.joda.time.LocalTime;
 
@@ -187,22 +188,13 @@ public class TableViewController implements Initializable {
 	 * Author: Mitchell
 	 */
 	final ObservableList<TransferTimeFrom> data = FXCollections.observableArrayList(
-		new TransferTimeFrom("7:00 AM","8:30 AM"),
-		new TransferTimeFrom("10:00 AM","11:10 AM"),
-		new TransferTimeFrom("12:00 PM","1:30 PM"),
-		new TransferTimeFrom("3:00 PM","4:30 PM")
+
 	);
 	final ObservableList<TransferTimeFrom> data2 = FXCollections.observableArrayList(
-		new TransferTimeFrom("8:00 AM","8:30 AM"),
-		new TransferTimeFrom("10:00 AM","11:10 AM"),
-		new TransferTimeFrom("12:00 PM","1:30 PM"),
-		new TransferTimeFrom("3:00 PM","4:30 PM")
+
 	);
 	final ObservableList<TransferTimeFrom> data3 = FXCollections.observableArrayList(
-		new TransferTimeFrom("9:00 AM","8:30 AM"),
-		new TransferTimeFrom("10:00 AM","11:10 AM"),
-		new TransferTimeFrom("12:00 PM","1:30 PM"),
-		new TransferTimeFrom("3:00 PM","4:30 PM")
+
 	);
 	//Observable List for the drop down times - MR
 	final ObservableList<String> optionAM = FXCollections.observableArrayList(
@@ -371,18 +363,33 @@ public class TableViewController implements Initializable {
 		 try {
 
 	            Object obj = parser.parse(new FileReader("FuckVictorForLife.json"));
-
-	            JSONObject jsonObject = (JSONObject) obj;
-	            System.out.println(jsonObject);
 	            
-	            target1.setText((String)jsonObject.get("target1"));
-	            target2.setText((String)jsonObject.get("target2"));
-	            target3.setText((String)jsonObject.get("target3"));
-	            target4.setText((String)jsonObject.get("target4"));
-	            source1.setText((String)jsonObject.get("source1"));
-	            source2.setText((String)jsonObject.get("source2"));
-	            source3.setText((String)jsonObject.get("source3"));
-	            source4.setText((String)jsonObject.get("source4"));
+	            JSONObject theObj = (JSONObject) obj;
+	            
+
+	            
+	         
+	            //JSONArray jsonArray = (JSONArray) theObj.get("timeOneValues");
+	            
+	            /*
+	            for(int i=0; i<jsonArray.size(); i++){
+	                System.out.println(jsonArray.get(i));
+	            }
+	            */
+	            TransferTimeFrom Test = new TransferTimeFrom("7:00 AM","8:30 AM");
+	        	
+	            data.add(0, Test);
+	            
+	            target1.setText((String)theObj.get("target1"));
+	            target2.setText((String)theObj.get("target2"));
+	            target3.setText((String)theObj.get("target3"));
+	            target4.setText((String)theObj.get("target4"));
+	            source1.setText((String)theObj.get("source1"));
+	            source2.setText((String)theObj.get("source2"));
+	            source3.setText((String)theObj.get("source3"));
+	            source4.setText((String)theObj.get("source4"));
+	            
+
 
 	        } catch (FileNotFoundException e) {
 	            e.printStackTrace();
@@ -393,6 +400,61 @@ public class TableViewController implements Initializable {
 	        }
 	 }
 	 public void saveFields() {
+		 
+		 int x = data.size();
+		 int xy = data2.size();
+		 int xz = data3.size();
+
+		 String[][] timeOne = new String[x][2];
+		 String[][] timeTwo = new String[xy][2];
+		 String[][] timeThree = new String[xz][2];
+		 
+         for(int counter = 0; counter < data.size(); counter++) {
+        	 timeOne[counter][0] = TransferTimeFrom1.getCellData(counter);
+         }
+         for(int counter = 0; counter < data.size(); counter++) {
+        	 timeOne[counter][1] = TransferTimeTo1.getCellData(counter);
+         }
+         
+         for(int counter = 0; counter < xy; counter++) {
+        	 timeTwo[counter][0] = TransferTimeFrom2.getCellData(counter);
+         }
+         for(int counter = 0; counter <xy; counter++) {
+        	 timeTwo[counter][1] = TransferTimeTo2.getCellData(counter);
+         }
+         
+         for(int counter = 0; counter < xz; counter++) {
+        	 timeThree[counter][0] = TransferTimeFrom3.getCellData(counter);
+         }
+         for(int counter = 0; counter <xz; counter++) {
+        	 timeThree[counter][1] = TransferTimeTo3.getCellData(counter);
+         }
+         
+         JSONObject timeOneJSON = new JSONObject();
+         JSONObject timeTwoJSON = new JSONObject();
+         JSONObject timeThreeJSON = new JSONObject();
+         int testVal = 0;
+	         for(int counter = 0; counter <x; counter++) {
+	        	 timeOneJSON.put(testVal, timeOne[counter][0]);
+	        	 testVal++;
+	        	 timeOneJSON.put(testVal, timeOne[counter][1]);
+	        	 testVal++;
+	         }
+	         testVal = 0;
+	         for(int counter = 0; counter <xy; counter++) {
+	        	 timeTwoJSON.put(testVal, timeTwo[counter][0]);
+	        	 testVal++;
+	        	 timeTwoJSON.put(testVal, timeTwo[counter][1]);
+	        	 testVal++;
+	         }
+	         testVal = 0;
+	         for(int counter = 0; counter <xz; counter++) {
+	        	 timeThreeJSON.put(testVal, timeThree[counter][0]);
+	        	 testVal++;
+	        	 timeThreeJSON.put(testVal, timeThree[counter][1]);
+	        	 testVal++;
+	         }
+         
 		 String strTarget1 = target1.getText();
 		 String strTarget2 = target2.getText();
 		 String strTarget3 = target3.getText();
@@ -412,12 +474,16 @@ public class TableViewController implements Initializable {
 		 	objString.put("source2", strSource2);
 		 	objString.put("source3", strSource3);
 		 	objString.put("source4", strSource4);
+		 		objString.put("timeOneValues", timeOneJSON);
+		 		objString.put("timeTwoValues", timeTwoJSON);
+		 		objString.put("timeThreeValues", timeThreeJSON);
 		 	
+		 		
+			     System.out.println(objString.toJSONString());
 	        try (FileWriter file = new FileWriter("FuckVictorForLife.json")) {
 
 	            file.write(objString.toJSONString());
 	            file.flush();
-	            System.out.println("It Worked");
 	            
 
 	        } catch (IOException e) {
