@@ -419,19 +419,74 @@ public class TableViewController implements Initializable {
 	            JSONObject theObj = (JSONObject) obj;
 	            
 
-	            
-	         
-	            //JSONArray jsonArray = (JSONArray) theObj.get("timeOneValues");
-	            
-	            /*
-	            for(int i=0; i<jsonArray.size(); i++){
-	                System.out.println(jsonArray.get(i));
+	            //Time One
+	            Object theDataOne = parser.parse(theObj.get("timeOneValues").toString());
+	            JSONObject theObjOne = (JSONObject) theDataOne;
+
+	            System.out.println(theObjOne);
+
+	            int theCounter = theObjOne.size() / 2;
+	            int numEntries = 0;
+	            int incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjOne.get(variable).toString();
+	             incrementNum++;
+	             variable = String.valueOf(incrementNum);
+	             String varTwo = theObjOne.get(variable).toString();
+	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             data.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
 	            }
-	            */
+
+	            //Time Two
+	            Object theDataTwo = parser.parse(theObj.get("timeTwoValues").toString());
+	            JSONObject theObjTwo = (JSONObject) theDataTwo;
+
+	            System.out.println(theObjTwo);
+
+	            theCounter = theObjTwo.size() / 2;
+	            numEntries = 0;
+	            incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjTwo.get(variable).toString();
+	             incrementNum++;
+	             variable = String.valueOf(incrementNum);
+	             String varTwo = theObjTwo.get(variable).toString();
+	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             data2.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
+	            }
+
+	            //Time Two
+	            Object theDataThree = parser.parse(theObj.get("timeThreeValues").toString());
+	            JSONObject theObjThree = (JSONObject) theDataThree;
+
+	            System.out.println(theObjThree);
+
+	            theCounter = theObjThree.size() / 2;
+	            numEntries = 0;
+	            incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjThree.get(variable).toString();
+	             incrementNum++;
+	             variable = String.valueOf(incrementNum);
+	             String varTwo = theObjThree.get(variable).toString();
+	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             data2.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
+	            }
+			            
+		            /*
 	            TransferTimeFrom Test = new TransferTimeFrom("7:00 AM","8:30 AM");
 	        	
-	            data.add(0, Test);
 	            
+	            */
 	            target1.setText((String)theObj.get("target1"));
 	            target2.setText((String)theObj.get("target2"));
 	            target3.setText((String)theObj.get("target3"));
