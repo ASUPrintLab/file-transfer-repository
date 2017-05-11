@@ -677,9 +677,9 @@ public class TableViewController implements Initializable {
 		 		objString.put("timeThreeValues", timeThreeJSON);
 		 	
 		 		
-			     System.out.println(objString.toJSONString());
+			    
 	        try (FileWriter file = new FileWriter("C:/FTU/FuckVictorForLife.json")) {
-
+	        	 System.out.println("File Saved");
 	            file.write(objString.toJSONString());
 	            file.flush();
 	            
