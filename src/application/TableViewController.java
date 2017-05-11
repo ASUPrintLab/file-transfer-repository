@@ -415,7 +415,7 @@ public class TableViewController implements Initializable {
 		 
 		 try {
 
-	            Object obj = parser.parse(new FileReader("FuckVictorForLife.json"));
+	            Object obj = parser.parse(new FileReader("C:/FTU/FuckVictorForLife.json"));
 	            
 	            JSONObject theObj = (JSONObject) obj;
 	            
@@ -423,8 +423,6 @@ public class TableViewController implements Initializable {
 	            //Time One
 	            Object theDataOne = parser.parse(theObj.get("timeOneValues").toString());
 	            JSONObject theObjOne = (JSONObject) theDataOne;
-
-	            System.out.println(theObjOne);
 
 	            int theCounter = theObjOne.size() / 2;
 	            int numEntries = 0;
@@ -445,7 +443,6 @@ public class TableViewController implements Initializable {
 	            Object theDataTwo = parser.parse(theObj.get("timeTwoValues").toString());
 	            JSONObject theObjTwo = (JSONObject) theDataTwo;
 
-	            System.out.println(theObjTwo);
 
 	            theCounter = theObjTwo.size() / 2;
 	            numEntries = 0;
@@ -465,8 +462,6 @@ public class TableViewController implements Initializable {
 	            //Time Two
 	            Object theDataThree = parser.parse(theObj.get("timeThreeValues").toString());
 	            JSONObject theObjThree = (JSONObject) theDataThree;
-
-	            System.out.println(theObjThree);
 
 	            theCounter = theObjThree.size() / 2;
 	            numEntries = 0;
@@ -584,7 +579,7 @@ public class TableViewController implements Initializable {
 		 	
 		 		
 			     System.out.println(objString.toJSONString());
-	        try (FileWriter file = new FileWriter("FuckVictorForLife.json")) {
+	        try (FileWriter file = new FileWriter("C:/FTU/FuckVictorForLife.json")) {
 
 	            file.write(objString.toJSONString());
 	            file.flush();
