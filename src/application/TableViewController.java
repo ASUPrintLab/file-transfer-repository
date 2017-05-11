@@ -432,31 +432,37 @@ public class TableViewController implements Initializable {
 	   */
 	 public void onDeleteItem(ActionEvent event) {
 		 int i = index.get();
-		 if(i > -1) {
-			 data.remove(i);
-
-			 tableID.getSelectionModel().clearSelection();
-			 saveFields();
+		 if(tableID.getSelectionModel().isSelected(i)) { //Only will delete time if selected on table
+			 if(i > -1) {
+				 data.remove(i);
+	
+				 tableID.getSelectionModel().clearSelection();
+				 saveFields();
+		 }
 		}
 	 }
 	 
 	 public void onDeleteItem2(ActionEvent event) { 
 		 int i = index.get();
-		 if(i > -1) {
-			 data2.remove(i);
-
-			 tableID2.getSelectionModel().clearSelection();
-			 saveFields();
-		}
+		 if(tableID2.getSelectionModel().isSelected(i)) {
+			 if(i > -1) {
+				 data2.remove(i);
+	
+				 tableID2.getSelectionModel().clearSelection();
+				 saveFields();
+			 }
+		 }
 	 }
 	 
 	 public void onDeleteItem3(ActionEvent event) { 
 		 int i = index.get();
-		 if(i > -1) {
-			 data3.remove(i);
-
-			 tableID3.getSelectionModel().clearSelection();
-			 saveFields();
+		 if(tableID3.getSelectionModel().isSelected(i)) {
+			 if(i > -1) {
+				 data3.remove(i);
+	
+				 tableID3.getSelectionModel().clearSelection();
+				 saveFields();
+			 }
 		}
 	 }
 	 //Populate the field values.  Reads from JSON file and populates the data fields.
