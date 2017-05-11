@@ -158,6 +158,10 @@ public class TableViewController implements Initializable {
 	
 	@FXML
     private Button submitButton;
+	@FXML
+    private Button submitButton2;
+	@FXML
+    private Button submitButton3;
 	
 	@FXML
     private Button delete;
@@ -182,6 +186,18 @@ public class TableViewController implements Initializable {
 	
 	@FXML
 	private ComboBox NewTransferTimePM;
+	
+	@FXML
+	private ComboBox NewTransferTimeAM2;
+	
+	@FXML
+	private ComboBox NewTransferTimePM2;
+	
+	@FXML
+	private ComboBox NewTransferTimeAM3;
+	
+	@FXML
+	private ComboBox NewTransferTimePM3;
 	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
@@ -237,6 +253,24 @@ public class TableViewController implements Initializable {
 
 		tableID.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
 	}
+	public void addButtonClicked2() {
+		String output = (String) NewTransferTimeAM2.getValue();
+		String output2 = (String) NewTransferTimePM2.getValue();
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
+		newTransferTime.setTransferTimeTo(output2);
+
+		tableID2.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+	}
+	public void addButtonClicked3() {
+		String output = (String) NewTransferTimeAM3.getValue();
+		String output2 = (String) NewTransferTimePM3.getValue();
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
+		newTransferTime.setTransferTimeTo(output2);
+
+		tableID3.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+	}
 	
 	/**
      * Initializes the controller class. This method is automatically called
@@ -259,8 +293,18 @@ public class TableViewController implements Initializable {
 		NewTransferTimeAM.setItems(optionAM);
 		NewTransferTimePM.setValue("12:00 AM");
 		NewTransferTimePM.setItems(optionPM);
+		NewTransferTimeAM2.setValue("12:00 AM"); //Initial Values in drop down value.
+		NewTransferTimeAM2.setItems(optionAM);
+		NewTransferTimePM2.setValue("12:00 AM");
+		NewTransferTimePM2.setItems(optionPM);
+		NewTransferTimeAM3.setValue("12:00 AM"); //Initial Values in drop down value.
+		NewTransferTimeAM3.setItems(optionAM);
+		NewTransferTimePM3.setValue("12:00 AM");
+		NewTransferTimePM3.setItems(optionPM);
 		
 		submitButton.setOnAction(e -> addButtonClicked()); //Adds event to submit button.. Calls addButtonClicked Method
+		submitButton2.setOnAction(e -> addButtonClicked2());
+		submitButton3.setOnAction(e -> addButtonClicked3());
 		
 		
 		//Applies the objects to the actual cells in the table

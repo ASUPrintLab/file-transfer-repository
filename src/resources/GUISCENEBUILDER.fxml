@@ -168,8 +168,8 @@
                               <Font name="Lucida Sans Demibold" size="17.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
-                        <ComboBox layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
+                        <ComboBox fx:id="NewTransferTimeAM2" layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
+                        <ComboBox fx:id="NewTransferTimePM2" layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
                         <Label layoutX="639.0" layoutY="324.0" text="From:">
                            <font>
                               <Font name="Lucida Sans Demibold" size="15.0" />
@@ -250,8 +250,8 @@
                               <Font name="Lucida Sans Demibold" size="17.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
-                        <ComboBox layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
+                        <ComboBox fx:id="NewTransferTimeAM3" layoutX="691.0" layoutY="324.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
+                        <ComboBox fx:id="NewTransferTimePM3" layoutX="691.0" layoutY="361.0" prefHeight="25.0" prefWidth="100.0" promptText="8:00 AM" />
                         <Label layoutX="639.0" layoutY="324.0" text="From:">
                            <font>
                               <Font name="Lucida Sans Demibold" size="15.0" />
