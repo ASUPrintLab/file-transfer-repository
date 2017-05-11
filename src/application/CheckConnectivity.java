@@ -44,7 +44,7 @@ public class CheckConnectivity implements Runnable {
 	public void run() {
 		
 		try {
-			
+			//Victor Varela VV
 			while(!suspended){
 				
 				for (int i = 0; i < data1.size(); i++){

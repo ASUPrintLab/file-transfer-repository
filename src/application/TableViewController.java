@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Arrays;
 
 import org.joda.time.LocalTime;
 
@@ -33,6 +34,18 @@ import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import application.CheckPresses;
 import application.CheckConnectivity;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 
 public class TableViewController implements Initializable {
 	
@@ -207,22 +220,13 @@ public class TableViewController implements Initializable {
 	 * Author: Mitchell
 	 */
 	final ObservableList<TransferTimeFrom> data = FXCollections.observableArrayList(
-		new TransferTimeFrom("7:00 AM","8:30 AM"),
-		new TransferTimeFrom("10:00 AM","11:10 AM"),
-		new TransferTimeFrom("12:00 PM","1:30 PM"),
-		new TransferTimeFrom("3:00 PM","4:30 PM")
+
 	);
 	final ObservableList<TransferTimeFrom> data2 = FXCollections.observableArrayList(
-		new TransferTimeFrom("8:00 AM","8:30 AM"),
-		new TransferTimeFrom("10:00 AM","11:10 AM"),
-		new TransferTimeFrom("12:00 PM","1:30 PM"),
-		new TransferTimeFrom("3:00 PM","4:30 PM")
+
 	);
 	final ObservableList<TransferTimeFrom> data3 = FXCollections.observableArrayList(
-		new TransferTimeFrom("9:00 AM","8:30 AM"),
-		new TransferTimeFrom("10:00 AM","11:10 AM"),
-		new TransferTimeFrom("12:00 PM","1:30 PM"),
-		new TransferTimeFrom("3:00 PM","4:30 PM")
+
 	);
 	//Observable List for the drop down times - MR
 	final ObservableList<String> optionAM = FXCollections.observableArrayList(
@@ -252,6 +256,7 @@ public class TableViewController implements Initializable {
 		newTransferTime.setTransferTimeTo(output2);
 
 		tableID.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
 	}
 	public void addButtonClicked2() {
 		String output = (String) NewTransferTimeAM2.getValue();
@@ -261,6 +266,7 @@ public class TableViewController implements Initializable {
 		newTransferTime.setTransferTimeTo(output2);
 
 		tableID2.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
 	}
 	public void addButtonClicked3() {
 		String output = (String) NewTransferTimeAM3.getValue();
@@ -270,6 +276,7 @@ public class TableViewController implements Initializable {
 		newTransferTime.setTransferTimeTo(output2);
 
 		tableID3.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
 	}
 	
 	/**
@@ -279,6 +286,7 @@ public class TableViewController implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		populateValues();
 		
 		light1.setStyle("-fx-fill: #FF0000;");
 		light2.setStyle("-fx-fill: #FF0000;");
@@ -428,6 +436,7 @@ public class TableViewController implements Initializable {
 			 data.remove(i);
 
 			 tableID.getSelectionModel().clearSelection();
+			 saveFields();
 		}
 	 }
 	 
@@ -437,6 +446,7 @@ public class TableViewController implements Initializable {
 			 data2.remove(i);
 
 			 tableID2.getSelectionModel().clearSelection();
+			 saveFields();
 		}
 	 }
 	 
@@ -446,9 +456,240 @@ public class TableViewController implements Initializable {
 			 data3.remove(i);
 
 			 tableID3.getSelectionModel().clearSelection();
+			 saveFields();
 		}
 	 }
-	 
+	 //Populate the field values.  Reads from JSON file and populates the data fields.
+	 private void populateValues() {
+		 JSONParser parser = new JSONParser();
+		 
+		 try {
+
+	            Object obj = parser.parse(new FileReader("C:/FTU/FuckVictorForLife.json"));
+	            
+	            JSONObject theObj = (JSONObject) obj;
+	            
+
+	            //Time One
+	            Object theDataOne = parser.parse(theObj.get("timeOneValues").toString());
+	            JSONObject theObjOne = (JSONObject) theDataOne;
+
+	            int theCounter = theObjOne.size() / 2;
+	            int numEntries = 0;
+	            int incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjOne.get(variable).toString();
+	             incrementNum++;
+	             variable = String.valueOf(incrementNum);
+	             String varTwo = theObjOne.get(variable).toString();
+	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             data.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
+	            }
+
+	            //Time Two
+	            Object theDataTwo = parser.parse(theObj.get("timeTwoValues").toString());
+	            JSONObject theObjTwo = (JSONObject) theDataTwo;
+
+
+	            theCounter = theObjTwo.size() / 2;
+	            numEntries = 0;
+	            incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjTwo.get(variable).toString();
+	             incrementNum++;
+	             variable = String.valueOf(incrementNum);
+	             String varTwo = theObjTwo.get(variable).toString();
+	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             data2.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
+	            }
+
+	            //Time Two
+	            Object theDataThree = parser.parse(theObj.get("timeThreeValues").toString());
+	            JSONObject theObjThree = (JSONObject) theDataThree;
+
+	            theCounter = theObjThree.size() / 2;
+	            numEntries = 0;
+	            incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjThree.get(variable).toString();
+	             incrementNum++;
+	             variable = String.valueOf(incrementNum);
+	             String varTwo = theObjThree.get(variable).toString();
+	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             data3.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
+	            }
+			            
+	            target1.setText((String)theObj.get("target1"));
+	            target2.setText((String)theObj.get("target2"));
+	            target3.setText((String)theObj.get("target3"));
+	            target4.setText((String)theObj.get("target4"));
+	            target5.setText((String)theObj.get("target5"));
+	            target6.setText((String)theObj.get("target6"));
+	            target7.setText((String)theObj.get("target7"));
+	            target8.setText((String)theObj.get("target8"));
+	            target9.setText((String)theObj.get("target9"));
+	            target10.setText((String)theObj.get("target10"));
+	            target11.setText((String)theObj.get("target11"));
+	            target12.setText((String)theObj.get("target12"));
+	            
+	            source1.setText((String)theObj.get("source1"));
+	            source2.setText((String)theObj.get("source2"));
+	            source3.setText((String)theObj.get("source3"));
+	            source4.setText((String)theObj.get("source4"));
+	            source5.setText((String)theObj.get("source5"));
+	            source6.setText((String)theObj.get("source6"));
+	            source7.setText((String)theObj.get("source7"));
+	            source8.setText((String)theObj.get("source8"));
+	            source9.setText((String)theObj.get("source9"));
+	            source10.setText((String)theObj.get("source10"));
+	            source11.setText((String)theObj.get("source11"));
+	            source12.setText((String)theObj.get("source12"));
+	            
+
+
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+	 }
+	 //Saves Field Data
+	 public void saveFields() {
+		 
+		 int x = data.size();
+		 int xy = data2.size();
+		 int xz = data3.size();
+
+		 String[][] timeOne = new String[x][2];
+		 String[][] timeTwo = new String[xy][2];
+		 String[][] timeThree = new String[xz][2];
+		 
+         for(int counter = 0; counter < data.size(); counter++) {
+        	 timeOne[counter][0] = TransferTimeFrom1.getCellData(counter);
+         }
+         for(int counter = 0; counter < data.size(); counter++) {
+        	 timeOne[counter][1] = TransferTimeTo1.getCellData(counter);
+         }
+         
+         for(int counter = 0; counter < xy; counter++) {
+        	 timeTwo[counter][0] = TransferTimeFrom2.getCellData(counter);
+         }
+         for(int counter = 0; counter <xy; counter++) {
+        	 timeTwo[counter][1] = TransferTimeTo2.getCellData(counter);
+         }
+         
+         for(int counter = 0; counter < xz; counter++) {
+        	 timeThree[counter][0] = TransferTimeFrom3.getCellData(counter);
+         }
+         for(int counter = 0; counter <xz; counter++) {
+        	 timeThree[counter][1] = TransferTimeTo3.getCellData(counter);
+         }
+         
+         JSONObject timeOneJSON = new JSONObject();
+         JSONObject timeTwoJSON = new JSONObject();
+         JSONObject timeThreeJSON = new JSONObject();
+         int testVal = 0;
+	         for(int counter = 0; counter <x; counter++) {
+	        	 timeOneJSON.put(testVal, timeOne[counter][0]);
+	        	 testVal++;
+	        	 timeOneJSON.put(testVal, timeOne[counter][1]);
+	        	 testVal++;
+	         }
+	         testVal = 0;
+	         for(int counter = 0; counter <xy; counter++) {
+	        	 timeTwoJSON.put(testVal, timeTwo[counter][0]);
+	        	 testVal++;
+	        	 timeTwoJSON.put(testVal, timeTwo[counter][1]);
+	        	 testVal++;
+	         }
+	         testVal = 0;
+	         for(int counter = 0; counter <xz; counter++) {
+	        	 timeThreeJSON.put(testVal, timeThree[counter][0]);
+	        	 testVal++;
+	        	 timeThreeJSON.put(testVal, timeThree[counter][1]);
+	        	 testVal++;
+	         }
+         
+		 String strTarget1 = target1.getText();
+		 String strTarget2 = target2.getText();
+		 String strTarget3 = target3.getText();
+		 String strTarget4 = target4.getText();
+		 String strTarget5 = target5.getText();
+		 String strTarget6 = target6.getText();
+		 String strTarget7 = target7.getText();
+		 String strTarget8 = target8.getText();
+		 String strTarget9 = target9.getText();
+		 String strTarget10 = target10.getText();
+		 String strTarget11 = target11.getText();
+		 String strTarget12 = target12.getText();
+		 
+		 String strSource1 = source1.getText();
+		 String strSource2 = source2.getText();
+		 String strSource3 = source3.getText();
+		 String strSource4 = source4.getText();
+		 String strSource5 = source5.getText();
+		 String strSource6 = source6.getText();
+		 String strSource7 = source7.getText();
+		 String strSource8 = source8.getText();
+		 String strSource9 = source9.getText();
+		 String strSource10 = source10.getText();
+		 String strSource11 = source11.getText();
+		 String strSource12 = source12.getText();
+ 		 
+		 JSONObject objString = new JSONObject();
+		 	objString.put("target1", strTarget1);
+		 	objString.put("target2", strTarget2);
+		 	objString.put("target3", strTarget3);
+		 	objString.put("target4", strTarget4);
+		 	objString.put("target5", strTarget5);
+		 	objString.put("target6", strTarget6);
+		 	objString.put("target7", strTarget7);
+		 	objString.put("target8", strTarget8);
+		 	objString.put("target9", strTarget9);
+		 	objString.put("target10", strTarget10);
+		 	objString.put("target11", strTarget11);
+		 	objString.put("target12", strTarget12);
+		 	objString.put("source1", strSource1);
+		 	objString.put("source2", strSource2);
+		 	objString.put("source3", strSource3);
+		 	objString.put("source4", strSource4);
+		 	objString.put("source5", strSource5);
+		 	objString.put("source6", strSource6);
+		 	objString.put("source7", strSource7);
+		 	objString.put("source8", strSource8);
+		 	objString.put("source9", strSource9);
+		 	objString.put("source10", strSource10);
+		 	objString.put("source11", strSource11);
+		 	objString.put("source12", strSource12);
+		 		objString.put("timeOneValues", timeOneJSON);
+		 		objString.put("timeTwoValues", timeTwoJSON);
+		 		objString.put("timeThreeValues", timeThreeJSON);
+		 	
+		 		
+			    
+	        try (FileWriter file = new FileWriter("C:/FTU/FuckVictorForLife.json")) {
+	        	 System.out.println("File Saved");
+	            file.write(objString.toJSONString());
+	            file.flush();
+	            
+
+	        } catch (IOException e) {
+	        	System.out.println("It didn't work");
+	            e.printStackTrace();
+	        }
+
+	 }
 	 /*
 	  * 
 	  * Author: Victor
@@ -627,6 +868,7 @@ public class TableViewController implements Initializable {
 				 target12.setText(val); 
 			 }
 		 }
+		 saveFields();
 	 }
 }
 
