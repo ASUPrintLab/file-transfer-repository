@@ -409,6 +409,7 @@ public class TableViewController implements Initializable {
 			 tableID3.getSelectionModel().clearSelection();
 		}
 	 }
+	 //Populate the field values.  Reads from JSON file and populates the data fields.
 	 private void populateValues() {
 		 JSONParser parser = new JSONParser();
 		 
@@ -482,11 +483,6 @@ public class TableViewController implements Initializable {
 	             incrementNum++;
 	            }
 			            
-		            /*
-	            TransferTimeFrom Test = new TransferTimeFrom("7:00 AM","8:30 AM");
-	        	
-	            
-	            */
 	            target1.setText((String)theObj.get("target1"));
 	            target2.setText((String)theObj.get("target2"));
 	            target3.setText((String)theObj.get("target3"));
@@ -506,6 +502,7 @@ public class TableViewController implements Initializable {
 	            e.printStackTrace();
 	        }
 	 }
+	 //Saves Field Data
 	 public void saveFields() {
 		 
 		 int x = data.size();
