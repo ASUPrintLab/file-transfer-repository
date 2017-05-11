@@ -19,6 +19,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -78,6 +80,9 @@ public class TableViewController implements Initializable {
 	
 	CheckConnectivity prog11;
 	
+	private Alert alert = new Alert(AlertType.ERROR);
+
+	
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
 	
@@ -130,6 +135,7 @@ public class TableViewController implements Initializable {
 	private TextField target11;
 	@FXML
 	private TextField target12;
+	
 	
 	@FXML
 	private Button BrowseBut1, BrowseBut2, BrowseBut3, BrowseBut4, BrowseBut5, BrowseBut6, BrowseBut7, BrowseBut8, BrowseBut9, BrowseBut10, BrowseBut11, BrowseBut12,
@@ -286,6 +292,11 @@ public class TableViewController implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		alert.setTitle("Error Dialog"); //For the delete button if nothing is being selected on table
+		alert.setHeaderText("Ooops, there was nothing to delete!");
+		alert.setContentText("Please select a time on the table to delete");
+		
+		
 		populateValues();
 		
 		light1.setStyle("-fx-fill: #FF0000;");
@@ -431,6 +442,7 @@ public class TableViewController implements Initializable {
 	   * Author: Mitchell
 	   */
 	 public void onDeleteItem(ActionEvent event) {
+
 		 int i = index.get();
 		 if(tableID.getSelectionModel().isSelected(i)) { //Only will delete time if selected on table
 			 if(i > -1) {
@@ -438,8 +450,11 @@ public class TableViewController implements Initializable {
 	
 				 tableID.getSelectionModel().clearSelection();
 				 saveFields();
+			 }
 		 }
-		}
+			 else {
+				 alert.showAndWait(); //Display error dialog if nothing was selected on table
+			 }
 	 }
 	 
 	 public void onDeleteItem2(ActionEvent event) { 
@@ -451,6 +466,9 @@ public class TableViewController implements Initializable {
 				 tableID2.getSelectionModel().clearSelection();
 				 saveFields();
 			 }
+		 }
+		 else {
+			 alert.showAndWait(); 
 		 }
 	 }
 	 
@@ -464,6 +482,9 @@ public class TableViewController implements Initializable {
 				 saveFields();
 			 }
 		}
+		 else {
+			 alert.showAndWait(); 
+		 }
 	 }
 	 //Populate the field values.  Reads from JSON file and populates the data fields.
 	 private void populateValues() {
