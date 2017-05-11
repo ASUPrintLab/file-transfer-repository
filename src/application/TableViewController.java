@@ -2,14 +2,9 @@ package application;
 
 import java.io.File;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.LocalTime;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -36,12 +31,40 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
+import application.CheckPresses;
+import application.CheckConnectivity;
 
 public class TableViewController implements Initializable {
+	
 	/*
 	 * Initializing all objects being used
-	 * Authors: Mitchell & Victor
+	 * Authors: Mitchell & Victor & Thomass
 	 */
+	
+	CheckConnectivity prog;
+	
+	CheckConnectivity prog1;
+	
+	CheckConnectivity prog2;
+	
+	CheckConnectivity prog3;
+	
+	CheckConnectivity prog4;
+	
+	CheckConnectivity prog5;
+	
+	CheckConnectivity prog6;
+	
+	CheckConnectivity prog7;
+	
+	CheckConnectivity prog8;
+	
+	CheckConnectivity prog9;
+	
+	CheckConnectivity prog10;
+	
+	CheckConnectivity prog11;
+	
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
 	
@@ -96,53 +119,8 @@ public class TableViewController implements Initializable {
 	private TextField target12;
 	
 	@FXML
-	private Button BrowseBut1;
-	@FXML
-	private Button BrowseBut2;
-	@FXML
-	private Button BrowseBut3;
-	@FXML
-	private Button BrowseBut4;
-	@FXML
-	private Button BrowseBut5;
-	@FXML
-	private Button BrowseBut6;
-	@FXML
-	private Button BrowseBut7;
-	@FXML
-	private Button BrowseBut8;
-	@FXML
-	private Button BrowseBut9;
-	@FXML
-	private Button BrowseBut10;
-	@FXML
-	private Button BrowseBut11;
-	@FXML
-	private Button BrowseBut12;
-	@FXML
-	private Button BrowseBut13;
-	@FXML
-	private Button BrowseBut14;
-	@FXML
-	private Button BrowseBut15;
-	@FXML
-	private Button BrowseBut16;
-	@FXML
-	private Button BrowseBut17;
-	@FXML
-	private Button BrowseBut18;
-	@FXML
-	private Button BrowseBut19;
-	@FXML
-	private Button BrowseBut20;
-	@FXML
-	private Button BrowseBut21;
-	@FXML
-	private Button BrowseBut22;
-	@FXML
-	private Button BrowseBut23;
-	@FXML
-	private Button BrowseBut24;
+	private Button BrowseBut1, BrowseBut2, BrowseBut3, BrowseBut4, BrowseBut5, BrowseBut6, BrowseBut7, BrowseBut8, BrowseBut9, BrowseBut10, BrowseBut11, BrowseBut12,
+		BrowseBut13, BrowseBut14, BrowseBut15, BrowseBut16, BrowseBut17, BrowseBut18, BrowseBut19, BrowseBut20, BrowseBut21, BrowseBut22, BrowseBut23, BrowseBut24;
 	
 	//Defining table
 	@FXML
@@ -180,10 +158,7 @@ public class TableViewController implements Initializable {
 	
 	@FXML
     private Button submitButton;
-	@FXML
-    private Button submitButton2;
-	@FXML
-    private Button submitButton3;
+	
 	@FXML
     private Button delete;
 	
@@ -274,24 +249,7 @@ public class TableViewController implements Initializable {
 
 		tableID.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
 	}
-	public void addButtonClicked2() {
-		String output = (String) NewTransferTimeAM2.getValue();
-		String output2 = (String) NewTransferTimePM2.getValue();
-		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
-		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
-		newTransferTime.setTransferTimeTo(output2);
-
-		tableID2.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
-	}
-	public void addButtonClicked3() {
-		String output = (String) NewTransferTimeAM3.getValue();
-		String output2 = (String) NewTransferTimePM3.getValue();
-		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
-		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
-		newTransferTime.setTransferTimeTo(output2);
-
-		tableID3.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
-	}
+	
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -299,6 +257,13 @@ public class TableViewController implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		light1.setStyle("-fx-fill: #FF0000;");
+		light2.setStyle("-fx-fill: #FF0000;");
+		light3.setStyle("-fx-fill: #FF0000;");
+	  
+		stopButton.setDisable(true);
+		startButton.setDisable(false);
 
 		TransferTimeFrom1.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
 
@@ -316,8 +281,6 @@ public class TableViewController implements Initializable {
 		NewTransferTimePM3.setItems(optionPM);
 		
 		submitButton.setOnAction(e -> addButtonClicked()); //Adds event to submit button.. Calls addButtonClicked Method
-		submitButton2.setOnAction(e -> addButtonClicked2());
-		submitButton3.setOnAction(e -> addButtonClicked3());
 		
 		
 		//Applies the objects to the actual cells in the table
@@ -331,14 +294,7 @@ public class TableViewController implements Initializable {
 		tableID3.setItems(data3);
 		
 		stopButton.setOnAction(this::handleStopAction); //Invokes the action
-		startButton.setOnAction(arg0 -> {
-			try {
-				handleStartAction(arg0);
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
+		startButton.setOnAction(this::handleStartAction);
 		
 		
 		/*
@@ -377,15 +333,64 @@ public class TableViewController implements Initializable {
 		 light2.setStyle("-fx-fill: #FF0000;");
 		 light3.setStyle("-fx-fill: #FF0000;");
 	  
+		 stopButton.setDisable(true);
+		 startButton.setDisable(false);
+		 
+		 prog.stop();
+		 prog1.stop();
+		 prog2.stop();
+		 prog3.stop();
+		 prog4.stop();
+		 prog5.stop();
+		 prog6.stop();
+		 prog7.stop();
+		 prog8.stop();
+		 prog9.stop();
+		 prog10.stop();
+		 prog11.stop();
 	 }
 	 @FXML
-	 private void handleStartAction(ActionEvent event) throws ParseException {
+	 private void handleStartAction(ActionEvent event) {
 		 light1.setStyle("-fx-fill: #00ff0c;");
 		 light2.setStyle("-fx-fill: #00ff0c;");
 		 light3.setStyle("-fx-fill: #00ff0c;");
 		 
-		 String milTime = timeConversion(TransferTimeFrom1.getCellData(3));
-		 System.out.println(milTime);
+		 stopButton.setDisable(false);
+		 startButton.setDisable(true);
+		
+		 try{
+			 //Indigo
+			 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			 
+			 //iGen
+			 prog4 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source5.getText(), target5.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			 prog5 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source6.getText(), target6.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			 prog6 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source7.getText(), target7.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			 prog7 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source8.getText(), target8.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			 
+			 //Memjet
+			 prog8 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source9.getText(), target9.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			 prog9 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source10.getText(), target10.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			 prog10 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source11.getText(), target11.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			 prog11= new CheckConnectivity("Date Opened: " + LocalTime.now(), source12.getText(), target12.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			 
+		 }finally {
+				prog.start();
+				prog1.start();
+				prog2.start();
+				prog3.start();
+				prog4.start();
+				prog5.start();
+				prog6.start();
+				prog7.start();
+				prog8.start();
+				prog9.start();
+				prog10.start();
+				prog11.start();
+			}
 	  
 	 }
 	 
@@ -419,17 +424,7 @@ public class TableViewController implements Initializable {
 			 tableID3.getSelectionModel().clearSelection();
 		}
 	 }
-	 /*
-	  * Converts traditional time into military time
-	  * Author: Mitchell
-	  */
-	 public static String timeConversion(String inputTime) throws ParseException {
-		 SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
-	     SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
-	     Date date = parseFormat.parse(inputTime);
-		 
-		return displayFormat.format(date);
-	 }
+	 
 	 /*
 	  * 
 	  * Author: Victor
