@@ -16,21 +16,22 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			 //BorderPane is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("/resources/GUISCENEBUILDER.fxml"));
 
-			Scene scene = new Scene(root,850,700);
-			scene.getStylesheets().add(getClass().getResource("/resources/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("File Transfer Utility");
-			primaryStage.show();
+			Scene scene = new Scene(root,850,700); //Size of the window for the program in pixels
+			scene.getStylesheets().add(getClass().getResource("/resources/application.css").toExternalForm()); //Path to CSS
+			primaryStage.setScene(scene); //Set style to window
+			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
+			primaryStage.show(); //Display
 	        
-		} catch(Exception e) {
+		} catch(Exception e) { //Catch Exception and display SEVER null in console
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
 			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
-		Application.launch(Main.class, (java.lang.String[]) null);
+		Application.launch(Main.class, (java.lang.String[]) null); //Launches the program
 	}
 }
