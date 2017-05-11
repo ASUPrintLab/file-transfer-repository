@@ -33,11 +33,12 @@
     -fx-text-fill: black;
 }
 
-#stopButton:hover, #startButton:hover { /*changes: the style when hovered over */
+/*When button is hovered over */
+#stopButton:hover, #startButton:hover {
   -fx-background-color: 
         #152029,
-        linear-gradient(#152029 10%, #152029 20%, #152029 100%),
-        linear-gradient(#152029, #0C1822),
+        linear-gradient(#8E97A1 10%, #8E97A1 20%, #8E97A1 100%),
+        linear-gradient(#A0B1C3, #0C1822),
         radial-gradient(center 50% 0%, radius 60%, rgba(114,131,148,0.9), rgba(255,255,255,0));
 }
 
@@ -55,6 +56,17 @@
     -fx-padding: 10 20 10 20;
 }	
 
+/*When button is pressed */
+#stopButton:pressed, #startButton:pressed {
+  -fx-background-color: 
+        #152029,
+        linear-gradient(#152029 10%, #8E97A1 20%, #8E97A1 100%),
+        linear-gradient(#152029, #0C1822),
+        radial-gradient(center 50% 0%, radius 60%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+        -fx-font-size: 37.5px;
+        
+}
+
 #submitButton, #submitButton2, #submitButton3 { /*Initial styles for all the submit buttons */
     -fx-background-color: 
         #090a0c,
@@ -69,6 +81,25 @@
     -fx-padding: 5 5 5 5;
     -fx-font-weight: bold;
 }	
+
+/*When button is hovered over */
+#submitButton:hover, #submitButton2:hover, #submitButton3:hover, #delete:hover, #delete1:hover, #delete2:hover {
+  -fx-background-color: 
+        #152029,
+        linear-gradient(#8E97A1 10%, #8E97A1 20%, #8E97A1 100%),
+        linear-gradient(#A0B1C3, #0C1822),
+        radial-gradient(center 50% 0%, radius 60%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+}
+
+/*When button is pressed */
+#submitButton:pressed, #submitButton2:pressed, #submitButton3:pressed, #delete:pressed, #delete1:pressed, #delete2:pressed{
+  -fx-background-color: 
+        #152029,
+        linear-gradient(#152029 10%, #8E97A1 20%, #8E97A1 100%),
+        linear-gradient(#152029, #0C1822),
+        radial-gradient(center 50% 0%, radius 60%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+   -fx-font-size: 11.8px;    
+}
 
 #delete, #delete1, #delete2 { /*Initial styles for the delete buttons  */
     -fx-background-color: 
