@@ -2,7 +2,10 @@ package application;
 
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import org.joda.time.LocalTime;
 
@@ -20,6 +23,8 @@ public class CheckConnectivity implements Runnable {
 	TableColumn<TransferTimeFrom, String> ttf;
 	TableColumn<TransferTimeTo, String> ttt;
 	ObservableList<TransferTimeFrom> data1;
+	SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
+	SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
 	
 	public CheckConnectivity(String name, String source, String target, TableColumn<TransferTimeFrom, String> TransferTimeFrom1, TableColumn<TransferTimeTo, String> TransferTimeTo1, ObservableList<TransferTimeFrom> data) {
 		threadName = name;
@@ -43,19 +48,34 @@ public class CheckConnectivity implements Runnable {
 			while(!suspended){
 				
 				for (int i = 0; i < data1.size(); i++){
-					 String from = ttf.getCellData(i);
-					 from = from.replace(" AM", "");
-					 from = from.replace(" PM", "");
-					 
-					 String to = ttt.getCellData(i);
-					 to = to.replace(" AM", "");
-					 to = to.replace(" PM", "");
-					 
-					 LocalTime timeFrom = LocalTime.parse(from);
-					 LocalTime timeTo = LocalTime.parse(to);
-					 LocalTime now = LocalTime.now();
+					
+					LocalTime timeFrom;
+					LocalTime timeTo;
+					
+					String from = ttf.getCellData(i); 
+					String to = ttt.getCellData(i);			 
 					 
 					 
+					LocalTime now = LocalTime.now();
+					 
+					if (from.contains("PM")){
+						Date dateFrom = parseFormat.parse(from);
+						timeFrom = LocalTime.parse(displayFormat.format(dateFrom));
+					}
+					else {
+						from = from.replace(" AM", "");
+						timeFrom = LocalTime.parse(from);
+					}
+					
+					if(to.contains("PM")){
+						Date dateTo = parseFormat.parse(to);
+						timeTo = LocalTime.parse(displayFormat.format(dateTo));
+					}
+					
+					else{
+						to = to.replace(" AM", "");
+						timeTo = LocalTime.parse(to);
+					}
 					 
 					 if((now.isAfter(timeFrom)) && (now.isBefore(timeTo))){
 						 //System.out.println("ITS TIME!");
@@ -76,6 +96,9 @@ public class CheckConnectivity implements Runnable {
 		} catch(InterruptedException e1) {
 			System.out.println("Thread " +  threadName + " interrupted.");
 			e1.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
