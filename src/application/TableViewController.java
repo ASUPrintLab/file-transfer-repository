@@ -158,6 +158,10 @@ public class TableViewController implements Initializable {
 	
 	@FXML
     private Button submitButton;
+	@FXML
+    private Button submitButton2;
+	@FXML
+    private Button submitButton3;
 	
 	@FXML
     private Button delete;
@@ -249,6 +253,24 @@ public class TableViewController implements Initializable {
 
 		tableID.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
 	}
+	public void addButtonClicked2() {
+		String output = (String) NewTransferTimeAM2.getValue();
+		String output2 = (String) NewTransferTimePM2.getValue();
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
+		newTransferTime.setTransferTimeTo(output2);
+
+		tableID2.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+	}
+	public void addButtonClicked3() {
+		String output = (String) NewTransferTimeAM3.getValue();
+		String output2 = (String) NewTransferTimePM3.getValue();
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
+		newTransferTime.setTransferTimeTo(output2);
+
+		tableID3.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+	}
 	
 	/**
      * Initializes the controller class. This method is automatically called
@@ -281,6 +303,8 @@ public class TableViewController implements Initializable {
 		NewTransferTimePM3.setItems(optionPM);
 		
 		submitButton.setOnAction(e -> addButtonClicked()); //Adds event to submit button.. Calls addButtonClicked Method
+		submitButton2.setOnAction(e -> addButtonClicked2());
+		submitButton3.setOnAction(e -> addButtonClicked3());
 		
 		
 		//Applies the objects to the actual cells in the table
