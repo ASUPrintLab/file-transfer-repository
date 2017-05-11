@@ -171,6 +171,10 @@ public class TableViewController implements Initializable {
 	
 	@FXML
     private Button submitButton;
+	@FXML
+    private Button submitButton2;
+	@FXML
+    private Button submitButton3;
 	
 	@FXML
     private Button delete;
@@ -195,6 +199,18 @@ public class TableViewController implements Initializable {
 	
 	@FXML
 	private ComboBox NewTransferTimePM;
+	
+	@FXML
+	private ComboBox NewTransferTimeAM2;
+	
+	@FXML
+	private ComboBox NewTransferTimePM2;
+	
+	@FXML
+	private ComboBox NewTransferTimeAM3;
+	
+	@FXML
+	private ComboBox NewTransferTimePM3;
 	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
@@ -240,6 +256,27 @@ public class TableViewController implements Initializable {
 		newTransferTime.setTransferTimeTo(output2);
 
 		tableID.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
+	}
+	public void addButtonClicked2() {
+		String output = (String) NewTransferTimeAM2.getValue();
+		String output2 = (String) NewTransferTimePM2.getValue();
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
+		newTransferTime.setTransferTimeTo(output2);
+
+		tableID2.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
+	}
+	public void addButtonClicked3() {
+		String output = (String) NewTransferTimeAM3.getValue();
+		String output2 = (String) NewTransferTimePM3.getValue();
+		TransferTimeFrom newTransferTime = new TransferTimeFrom(output,output2); //Creates new object
+		newTransferTime.setTransferTimeFrom(output); //Sets the new data in correct column
+		newTransferTime.setTransferTimeTo(output2);
+
+		tableID3.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
 	}
 	
 	/**
@@ -264,8 +301,18 @@ public class TableViewController implements Initializable {
 		NewTransferTimeAM.setItems(optionAM);
 		NewTransferTimePM.setValue("12:00 AM");
 		NewTransferTimePM.setItems(optionPM);
+		NewTransferTimeAM2.setValue("12:00 AM"); //Initial Values in drop down value.
+		NewTransferTimeAM2.setItems(optionAM);
+		NewTransferTimePM2.setValue("12:00 AM");
+		NewTransferTimePM2.setItems(optionPM);
+		NewTransferTimeAM3.setValue("12:00 AM"); //Initial Values in drop down value.
+		NewTransferTimeAM3.setItems(optionAM);
+		NewTransferTimePM3.setValue("12:00 AM");
+		NewTransferTimePM3.setItems(optionPM);
 		
 		submitButton.setOnAction(e -> addButtonClicked()); //Adds event to submit button.. Calls addButtonClicked Method
+		submitButton2.setOnAction(e -> addButtonClicked2());
+		submitButton3.setOnAction(e -> addButtonClicked3());
 		
 		
 		//Applies the objects to the actual cells in the table
@@ -389,6 +436,7 @@ public class TableViewController implements Initializable {
 			 data.remove(i);
 
 			 tableID.getSelectionModel().clearSelection();
+			 saveFields();
 		}
 	 }
 	 
@@ -398,6 +446,7 @@ public class TableViewController implements Initializable {
 			 data2.remove(i);
 
 			 tableID2.getSelectionModel().clearSelection();
+			 saveFields();
 		}
 	 }
 	 
@@ -407,6 +456,7 @@ public class TableViewController implements Initializable {
 			 data3.remove(i);
 
 			 tableID3.getSelectionModel().clearSelection();
+			 saveFields();
 		}
 	 }
 	 //Populate the field values.  Reads from JSON file and populates the data fields.
@@ -473,7 +523,7 @@ public class TableViewController implements Initializable {
 	             variable = String.valueOf(incrementNum);
 	             String varTwo = theObjThree.get(variable).toString();
 	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
-	             data2.add(numEntries, Test);
+	             data3.add(numEntries, Test);
 	             numEntries++;
 	             incrementNum++;
 	            }
@@ -482,10 +532,27 @@ public class TableViewController implements Initializable {
 	            target2.setText((String)theObj.get("target2"));
 	            target3.setText((String)theObj.get("target3"));
 	            target4.setText((String)theObj.get("target4"));
+	            target5.setText((String)theObj.get("target5"));
+	            target6.setText((String)theObj.get("target6"));
+	            target7.setText((String)theObj.get("target7"));
+	            target8.setText((String)theObj.get("target8"));
+	            target9.setText((String)theObj.get("target9"));
+	            target10.setText((String)theObj.get("target10"));
+	            target11.setText((String)theObj.get("target11"));
+	            target12.setText((String)theObj.get("target12"));
+	            
 	            source1.setText((String)theObj.get("source1"));
 	            source2.setText((String)theObj.get("source2"));
 	            source3.setText((String)theObj.get("source3"));
 	            source4.setText((String)theObj.get("source4"));
+	            source5.setText((String)theObj.get("source5"));
+	            source6.setText((String)theObj.get("source6"));
+	            source7.setText((String)theObj.get("source7"));
+	            source8.setText((String)theObj.get("source8"));
+	            source9.setText((String)theObj.get("source9"));
+	            source10.setText((String)theObj.get("source10"));
+	            source11.setText((String)theObj.get("source11"));
+	            source12.setText((String)theObj.get("source12"));
 	            
 
 
@@ -558,21 +625,53 @@ public class TableViewController implements Initializable {
 		 String strTarget2 = target2.getText();
 		 String strTarget3 = target3.getText();
 		 String strTarget4 = target4.getText();
-
+		 String strTarget5 = target5.getText();
+		 String strTarget6 = target6.getText();
+		 String strTarget7 = target7.getText();
+		 String strTarget8 = target8.getText();
+		 String strTarget9 = target9.getText();
+		 String strTarget10 = target10.getText();
+		 String strTarget11 = target11.getText();
+		 String strTarget12 = target12.getText();
+		 
 		 String strSource1 = source1.getText();
 		 String strSource2 = source2.getText();
 		 String strSource3 = source3.getText();
 		 String strSource4 = source4.getText();
+		 String strSource5 = source5.getText();
+		 String strSource6 = source6.getText();
+		 String strSource7 = source7.getText();
+		 String strSource8 = source8.getText();
+		 String strSource9 = source9.getText();
+		 String strSource10 = source10.getText();
+		 String strSource11 = source11.getText();
+		 String strSource12 = source12.getText();
  		 
 		 JSONObject objString = new JSONObject();
 		 	objString.put("target1", strTarget1);
 		 	objString.put("target2", strTarget2);
 		 	objString.put("target3", strTarget3);
 		 	objString.put("target4", strTarget4);
+		 	objString.put("target5", strTarget5);
+		 	objString.put("target6", strTarget6);
+		 	objString.put("target7", strTarget7);
+		 	objString.put("target8", strTarget8);
+		 	objString.put("target9", strTarget9);
+		 	objString.put("target10", strTarget10);
+		 	objString.put("target11", strTarget11);
+		 	objString.put("target12", strTarget12);
 		 	objString.put("source1", strSource1);
 		 	objString.put("source2", strSource2);
 		 	objString.put("source3", strSource3);
 		 	objString.put("source4", strSource4);
+		 	objString.put("source5", strSource5);
+		 	objString.put("source6", strSource6);
+		 	objString.put("source7", strSource7);
+		 	objString.put("source8", strSource8);
+		 	objString.put("source9", strSource9);
+		 	objString.put("source10", strSource10);
+		 	objString.put("source11", strSource11);
+		 	objString.put("source12", strSource12);
 		 		objString.put("timeOneValues", timeOneJSON);
 		 		objString.put("timeTwoValues", timeTwoJSON);
 		 		objString.put("timeThreeValues", timeThreeJSON);
