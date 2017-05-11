@@ -35,7 +35,7 @@
                               <Image url="resources/1.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="tableID" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
+                        <TableView fx:id="tableID" layoutX="639.0" layoutY="41.0" prefHeight="218.0" prefWidth="159.0">
                            <columns>
                               <TableColumn fx:id="TransferTimeFrom1" prefWidth="75.0" text="From" />
                               <TableColumn fx:id="TransferTimeTo1" prefWidth="75.0" text="To" />
@@ -117,7 +117,7 @@
                               <Image url="/resources/1.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="tableID2" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
+                        <TableView fx:id="tableID2" layoutX="639.0" layoutY="41.0" prefHeight="218.0" prefWidth="159.0">
                            <columns>
                               <TableColumn fx:id="TransferTimeFrom2" prefWidth="75.0" text="From" />
                               <TableColumn fx:id="TransferTimeTo2" prefWidth="75.0" text="To" />
@@ -199,7 +199,7 @@
                               <Image url="/resources/1.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="tableID3" layoutX="639.0" layoutY="41.0" prefHeight="229.0" prefWidth="159.0">
+                        <TableView fx:id="tableID3" layoutX="639.0" layoutY="41.0" prefHeight="218.0" prefWidth="159.0">
                           <columns>
                             <TableColumn fx:id="TransferTimeFrom3" prefWidth="75.0" text="From" />
                               <TableColumn fx:id="TransferTimeTo3" prefWidth="75.0" text="To" />

@@ -56,29 +56,29 @@ public class TableViewController implements Initializable {
 	 * Authors: Mitchell & Victor & Thomass
 	 */
 	
-	CheckConnectivity prog;
+	private CheckConnectivity prog;
 	
-	CheckConnectivity prog1;
+	private CheckConnectivity prog1;
 	
-	CheckConnectivity prog2;
+	private CheckConnectivity prog2;
 	
-	CheckConnectivity prog3;
+	private CheckConnectivity prog3;
 	
-	CheckConnectivity prog4;
+	private CheckConnectivity prog4;
 	
-	CheckConnectivity prog5;
+	private CheckConnectivity prog5;
 	
-	CheckConnectivity prog6;
+	private CheckConnectivity prog6;
 	
-	CheckConnectivity prog7;
+	private CheckConnectivity prog7;
 	
-	CheckConnectivity prog8;
+	private CheckConnectivity prog8;
 	
-	CheckConnectivity prog9;
+	private CheckConnectivity prog9;
 	
-	CheckConnectivity prog10;
+	private CheckConnectivity prog10;
 	
-	CheckConnectivity prog11;
+	private CheckConnectivity prog11;
 	
 	private Alert alert = new Alert(AlertType.ERROR);
 
@@ -237,14 +237,14 @@ public class TableViewController implements Initializable {
 	//Observable List for the drop down times - MR
 	final ObservableList<String> optionAM = FXCollections.observableArrayList(
 			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
-			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 AM",
+			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 PM",
 			"12:15 PM","12:30 PM","12:45 PM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM",
 			"3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM",
 			"11:00 PM"
 		);
 	final ObservableList<String> optionPM = FXCollections.observableArrayList(
 			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
-			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 AM",
+			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 PM",
 			"12:15 PM","12:30 PM","12:45 PM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM",
 			"3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM",
 			"11:00 PM"
@@ -294,7 +294,7 @@ public class TableViewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		alert.setTitle("Error Dialog"); //For the delete button if nothing is being selected on table
 		alert.setHeaderText("Ooops, there was nothing to delete!");
-		alert.setContentText("Please select a time on the table to delete");
+		alert.setContentText("Please select a time on the table to delete.");
 		
 		
 		populateValues();
@@ -699,9 +699,9 @@ public class TableViewController implements Initializable {
 		 	objString.put("source10", strSource10);
 		 	objString.put("source11", strSource11);
 		 	objString.put("source12", strSource12);
-		 		objString.put("timeOneValues", timeOneJSON);
-		 		objString.put("timeTwoValues", timeTwoJSON);
-		 		objString.put("timeThreeValues", timeThreeJSON);
+	 		objString.put("timeOneValues", timeOneJSON);
+	 		objString.put("timeTwoValues", timeTwoJSON);
+	 		objString.put("timeThreeValues", timeThreeJSON);
 		 	
 		 		
 			    
