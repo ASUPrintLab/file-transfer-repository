@@ -486,37 +486,56 @@ public class TableViewController implements Initializable {
 			 alert.showAndWait(); 
 		 }
 	 }
-	 //Populate the field values.  Reads from JSON file and populates the data fields.
+	 /*
+	  * Function to populate data values
+	  * 	- Saves Time
+	  * 	- Saves Browse Button Fields
+	  * 
+	  * Author: Thomas Scheuneman
+	  */
 	 private void populateValues() {
+		 //Create a JSONParser object to pare ou
 		 JSONParser parser = new JSONParser();
 		 
 		 try {
-
+			 	//Parse our saved file
 	            Object obj = parser.parse(new FileReader("C:/FTU/FuckVictorForLife.json"));
-	            
+	            //Turn our file into a JSON object
 	            JSONObject theObj = (JSONObject) obj;
 	            
 
-	            //Time One
+	            //Get our first section
+	            
+	            //Parge our time one values, assign to JSONObject
 	            Object theDataOne = parser.parse(theObj.get("timeOneValues").toString());
 	            JSONObject theObjOne = (JSONObject) theDataOne;
-
+	            
+	            //Counter is half size of array, since two values equals a dataset
 	            int theCounter = theObjOne.size() / 2;
+	            //Set variables
 	            int numEntries = 0;
 	            int incrementNum = 0;
+	            //Loop through each dataset
 	            for (int i = 0; i < theCounter; i++) {
+	            //Get string values of counter.
 	             String variable = String.valueOf(incrementNum);
+	             //Get zero value of JSON object
 	             String varOne = theObjOne.get(variable).toString();
 	             incrementNum++;
+	             //Get string value of +1
 	             variable = String.valueOf(incrementNum);
+	             //Get the value of JSON Object
 	             String varTwo = theObjOne.get(variable).toString();
+	             //Create new timeset with these two values
 	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
+	             //Enter into data table
 	             data.add(numEntries, Test);
+	             //Increment counters
 	             numEntries++;
 	             incrementNum++;
 	            }
 
-	            //Time Two
+	            //Repeat for Two
 	            Object theDataTwo = parser.parse(theObj.get("timeTwoValues").toString());
 	            JSONObject theObjTwo = (JSONObject) theDataTwo;
 
@@ -536,7 +555,7 @@ public class TableViewController implements Initializable {
 	             incrementNum++;
 	            }
 
-	            //Time Two
+	            //Repeat for Three
 	            Object theDataThree = parser.parse(theObj.get("timeThreeValues").toString());
 	            JSONObject theObjThree = (JSONObject) theDataThree;
 
@@ -555,6 +574,7 @@ public class TableViewController implements Initializable {
 	             incrementNum++;
 	            }
 			            
+	            //Set text for all of our browse buttons
 	            target1.setText((String)theObj.get("target1"));
 	            target2.setText((String)theObj.get("target2"));
 	            target3.setText((String)theObj.get("target3"));
@@ -591,31 +611,39 @@ public class TableViewController implements Initializable {
 	            e.printStackTrace();
 	        }
 	 }
-	 //Saves Field Data
+	 /*
+	  * Function to save data
+	  * 	- Saves Time
+	  * 	- Saves Broswe Button Fields
+	  * 
+	  * Author: Thomas Scheuneman
+	  */
 	 public void saveFields() {
-		 
+		 //Declare varibles for size of tables.
 		 int x = data.size();
 		 int xy = data2.size();
 		 int xz = data3.size();
 
+		 //Create array to hold values of table fields.
 		 String[][] timeOne = new String[x][2];
 		 String[][] timeTwo = new String[xy][2];
 		 String[][] timeThree = new String[xz][2];
 		 
+		 //Loop thrpugh all fields, set time From and time to for the table values.
          for(int counter = 0; counter < data.size(); counter++) {
         	 timeOne[counter][0] = TransferTimeFrom1.getCellData(counter);
          }
          for(int counter = 0; counter < data.size(); counter++) {
         	 timeOne[counter][1] = TransferTimeTo1.getCellData(counter);
          }
-         
+         //Loop thrpugh all fields, set time From and time to for the table values.
          for(int counter = 0; counter < xy; counter++) {
         	 timeTwo[counter][0] = TransferTimeFrom2.getCellData(counter);
          }
          for(int counter = 0; counter <xy; counter++) {
         	 timeTwo[counter][1] = TransferTimeTo2.getCellData(counter);
          }
-         
+         //Loop thrpugh all fields, set time From and time to for the table values.
          for(int counter = 0; counter < xz; counter++) {
         	 timeThree[counter][0] = TransferTimeFrom3.getCellData(counter);
          }
@@ -623,16 +651,20 @@ public class TableViewController implements Initializable {
         	 timeThree[counter][1] = TransferTimeTo3.getCellData(counter);
          }
          
+         //Create three JSON objects
          JSONObject timeOneJSON = new JSONObject();
          JSONObject timeTwoJSON = new JSONObject();
          JSONObject timeThreeJSON = new JSONObject();
+         //Set var to 0
          int testVal = 0;
+         //Loop through the number of variables, put them inside of a JSON object in sequential order.
 	         for(int counter = 0; counter <x; counter++) {
 	        	 timeOneJSON.put(testVal, timeOne[counter][0]);
 	        	 testVal++;
 	        	 timeOneJSON.put(testVal, timeOne[counter][1]);
 	        	 testVal++;
 	         }
+	       //Loop through the number of variables, put them inside of a JSON object in sequential order.
 	         testVal = 0;
 	         for(int counter = 0; counter <xy; counter++) {
 	        	 timeTwoJSON.put(testVal, timeTwo[counter][0]);
@@ -640,6 +672,7 @@ public class TableViewController implements Initializable {
 	        	 timeTwoJSON.put(testVal, timeTwo[counter][1]);
 	        	 testVal++;
 	         }
+	       //Loop through the number of variables, put them inside of a JSON object in sequential order.
 	         testVal = 0;
 	         for(int counter = 0; counter <xz; counter++) {
 	        	 timeThreeJSON.put(testVal, timeThree[counter][0]);
@@ -648,6 +681,7 @@ public class TableViewController implements Initializable {
 	        	 testVal++;
 	         }
          
+	     //Get text for each browse button value
 		 String strTarget1 = target1.getText();
 		 String strTarget2 = target2.getText();
 		 String strTarget3 = target3.getText();
@@ -674,7 +708,9 @@ public class TableViewController implements Initializable {
 		 String strSource11 = source11.getText();
 		 String strSource12 = source12.getText();
  		 
+		 //Create a new JSON object, this will be the value that we store data as.
 		 JSONObject objString = new JSONObject();
+		 //Set the JSON object with browse button text
 		 	objString.put("target1", strTarget1);
 		 	objString.put("target2", strTarget2);
 		 	objString.put("target3", strTarget3);
@@ -699,13 +735,15 @@ public class TableViewController implements Initializable {
 		 	objString.put("source10", strSource10);
 		 	objString.put("source11", strSource11);
 		 	objString.put("source12", strSource12);
-	 		objString.put("timeOneValues", timeOneJSON);
-	 		objString.put("timeTwoValues", timeTwoJSON);
-	 		objString.put("timeThreeValues", timeThreeJSON);
+		 	//Save JSON Object Data
+		 		objString.put("timeOneValues", timeOneJSON);
+		 		objString.put("timeTwoValues", timeTwoJSON);
+		 		objString.put("timeThreeValues", timeThreeJSON);
 		 	
 		 		
-			    
+		 	//Attempt to write to file
 	        try (FileWriter file = new FileWriter("C:/FTU/FuckVictorForLife.json")) {
+	        	//System Message and write JSON string to file
 	        	 System.out.println("File Saved");
 	            file.write(objString.toJSONString());
 	            file.flush();
