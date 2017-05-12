@@ -2,6 +2,9 @@ package application;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.Arrays;
 
@@ -218,6 +221,9 @@ public class TableViewController implements Initializable {
 	@FXML
 	private ComboBox NewTransferTimePM3;
 	
+	File file = new File("C:/FTU");
+	File json = new File("C:/FTU/FTU.json");
+	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
 
@@ -367,6 +373,12 @@ public class TableViewController implements Initializable {
 				System.out.println("index is: " + data3.indexOf(newValue));
 			}
 		});
+		
+		if (!file.isDirectory()){
+			//Auto Creates file if it doesnt exist
+			new File("C:/FTU").mkdir();
+		}
+		
 	}
 
 	// If start or stop button are clicked, change the fill color of circles
@@ -498,8 +510,9 @@ public class TableViewController implements Initializable {
 		 JSONParser parser = new JSONParser();
 		 
 		 try {
+			 if(json.exists()){
 			 	//Parse our saved file
-	            Object obj = parser.parse(new FileReader("C:/FTU/FuckVictorForLife.json"));
+	            Object obj = parser.parse(new FileReader("C:/FTU/FTU.json"));
 	            //Turn our file into a JSON object
 	            JSONObject theObj = (JSONObject) obj;
 	            
@@ -601,7 +614,7 @@ public class TableViewController implements Initializable {
 	            source11.setText((String)theObj.get("source11"));
 	            source12.setText((String)theObj.get("source12"));
 	            
-
+			 }
 
 	        } catch (FileNotFoundException e) {
 	            e.printStackTrace();
@@ -742,7 +755,7 @@ public class TableViewController implements Initializable {
 		 	
 		 		
 		 	//Attempt to write to file
-	        try (FileWriter file = new FileWriter("C:/FTU/FuckVictorForLife.json")) {
+	        try (FileWriter file = new FileWriter("C:/FTU/FTU.json")) {
 	        	//System Message and write JSON string to file
 	        	 System.out.println("File Saved");
 	            file.write(objString.toJSONString());
