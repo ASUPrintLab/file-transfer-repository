@@ -30,7 +30,7 @@
 }
 
 /*When button is hovered over */
-#stopButton:hover, #startButton:hover {
+#stopButton:hover, #startButton:hover, #emailstopButton:hover, #emailstartButton:hover {
   -fx-background-color: 
         #152029,
         linear-gradient(#8E97A1 10%, #8E97A1 20%, #8E97A1 100%),
@@ -38,7 +38,7 @@
         radial-gradient(center 50% 0%, radius 60%, rgba(114,131,148,0.9), rgba(255,255,255,0));
 }
 
-#startButton, #stopButton { /*Initial styles for the start and stop button */
+#startButton, #stopButton, #emailstopButton, #emailstartButton { /*Initial styles for the start and stop button */
     -fx-background-color: 
         #090a0c,
         linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
@@ -53,7 +53,7 @@
 }	
 
 /*When button is pressed */
-#stopButton:pressed, #startButton:pressed {
+#stopButton:pressed, #startButton:pressed, #emailstopButton:pressed, #emailstartButton:pressed {
   -fx-background-color: 
         #152029,
         linear-gradient(#152029 10%, #8E97A1 20%, #8E97A1 100%),
@@ -115,6 +115,6 @@
 	-fx-fill: #00ff0c;
 }
 
-#TransferTimeFrom1, #TransferTimeFrom2, #TransferTimeFrom3, #TransferTimeTo1, #TransferTimeTo2, #TransferTimeTo3 { /*Aligns the data in columns in table */
+#TransferTimeFrom1, #TransferTimeFrom2, #TransferTimeFrom3, #TransferTimeTo1, #TransferTimeTo2, #TransferTimeTo3, #EmailTransferTime { /*Aligns the data in columns in table */
 	-fx-alignment: CENTER;
 }
