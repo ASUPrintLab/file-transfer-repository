@@ -19,7 +19,7 @@ public class CheckConnectivity implements Runnable {
 	private String threadName;
 	private boolean suspended = false;
 	public String source, target;
-	TableViewController tvc;
+	//TableViewController tvc;
 	TableColumn<TransferTimeFrom, String> ttf;
 	TableColumn<TransferTimeTo, String> ttt;
 	ObservableList<TransferTimeFrom> data1;
@@ -46,6 +46,7 @@ public class CheckConnectivity implements Runnable {
 		try {
 			//Victor Varela VV
 			while(!suspended){
+				System.out.println(LocalTime.now());
 				
 				for (int i = 0; i < data1.size(); i++){
 					

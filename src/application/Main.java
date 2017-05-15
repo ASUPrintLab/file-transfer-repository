@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 
@@ -23,6 +24,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("/resources/application.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
 			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
+			primaryStage.getIcons().add(new Image("/resources/Blah.jpg"));
 			primaryStage.show(); //Display
 	        
 		} catch(Exception e) { //Catch Exception and display SEVER null in console
