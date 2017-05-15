@@ -152,6 +152,9 @@ public class TableViewController implements Initializable {
 	private TableView<TransferTimeFrom> tableID3;
 	
 	@FXML
+	private TableView<NewEmailTransferTime> emailTableID;
+	
+	@FXML
 	private TableColumn<TransferTimeFrom, String> TransferTimeFrom1;
 	
 	@FXML
@@ -170,11 +173,23 @@ public class TableViewController implements Initializable {
 	private TableColumn<TransferTimeTo, String> TransferTimeTo3;
 	
 	@FXML
-    private Button startButton; // value will be injected by the FXMLLoader
+	private TableColumn<NewEmailTransferTime, String> EmailTransferTime;
+//	
+//	@FXML
+//	private TableColumn<TransferTimeTo, String> NewEmailTimeTo;
 	
 	@FXML
+    private Button startButton; // value will be injected by the FXMLLoade
+	@FXML
     private Button stopButton;
-	
+	@FXML
+    private Button emailstopButton;
+	@FXML
+    private Button emailstartButton;
+	@FXML
+    private Button emailSubmit;
+    @FXML
+    private Button emailDelete;
 	@FXML
     private Button submitButton;
 	@FXML
@@ -201,6 +216,15 @@ public class TableViewController implements Initializable {
     private Circle light3;
 	
 	@FXML
+    private Circle light4;
+	
+	@FXML
+    private Circle light5;
+	
+	@FXML
+    private Circle light6;
+	
+	@FXML
 	private ComboBox NewTransferTimeAM;
 	
 	@FXML
@@ -218,6 +242,10 @@ public class TableViewController implements Initializable {
 	@FXML
 	private ComboBox NewTransferTimePM3;
 	
+	@FXML
+	private ComboBox NewEmailTime;
+
+	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
 
@@ -232,6 +260,9 @@ public class TableViewController implements Initializable {
 
 	);
 	final ObservableList<TransferTimeFrom> data3 = FXCollections.observableArrayList(
+
+	);
+	final ObservableList<NewEmailTransferTime> emailData = FXCollections.observableArrayList(
 
 	);
 	//Observable List for the drop down times - MR
@@ -274,6 +305,7 @@ public class TableViewController implements Initializable {
 		tableID2.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
 		saveFields();
 	}
+	
 	public void addButtonClicked3() {
 		String output = (String) NewTransferTimeAM3.getValue();
 		String output2 = (String) NewTransferTimePM3.getValue();
@@ -282,6 +314,14 @@ public class TableViewController implements Initializable {
 		newTransferTime.setTransferTimeTo(output2);
 
 		tableID3.getItems().add(newTransferTime); //Adds times to actual table in order to be displayed
+		saveFields();
+	}
+	public void addEmailClicked() {
+		String output = (String) NewEmailTime.getValue();
+		NewEmailTransferTime newEmailTime = new NewEmailTransferTime(output); //Creates new object
+		newEmailTime.setNewEmailTransferTime(output); //Sets the new data in correct column
+
+		emailTableID.getItems().add(newEmailTime); //Adds times to actual table in order to be displayed
 		saveFields();
 	}
 	
@@ -302,11 +342,18 @@ public class TableViewController implements Initializable {
 		light1.setStyle("-fx-fill: #FF0000;");
 		light2.setStyle("-fx-fill: #FF0000;");
 		light3.setStyle("-fx-fill: #FF0000;");
+		light4.setStyle("-fx-fill: #FF0000;");
+		light5.setStyle("-fx-fill: #FF0000;");
+		light6.setStyle("-fx-fill: #FF0000;");
+	  
 	  
 		stopButton.setDisable(true);
 		startButton.setDisable(false);
+		emailstopButton.setDisable(true);
+		emailstartButton.setDisable(false);
 
 		TransferTimeFrom1.setCellValueFactory(new PropertyValueFactory<TransferTimeFrom, String>("TransferTimeFrom"));
+		EmailTransferTime.setCellValueFactory(new PropertyValueFactory<NewEmailTransferTime, String>("NewEmailTransferTime"));
 
 		NewTransferTimeAM.setValue("12:00 AM"); //Initial Values in drop down value.
 		NewTransferTimeAM.setItems(optionAM);
@@ -320,10 +367,14 @@ public class TableViewController implements Initializable {
 		NewTransferTimeAM3.setItems(optionAM);
 		NewTransferTimePM3.setValue("12:00 AM");
 		NewTransferTimePM3.setItems(optionPM);
+		NewEmailTime.setValue("12:00 AM"); //Initial Values in drop down value.
+		NewEmailTime.setItems(optionAM);
+
 		
 		submitButton.setOnAction(e -> addButtonClicked()); //Adds event to submit button.. Calls addButtonClicked Method
 		submitButton2.setOnAction(e -> addButtonClicked2());
 		submitButton3.setOnAction(e -> addButtonClicked3());
+		emailSubmit.setOnAction(e -> addEmailClicked());
 		
 		
 		//Applies the objects to the actual cells in the table
@@ -335,9 +386,12 @@ public class TableViewController implements Initializable {
 		tableID.setItems(data); //Displays data
 		tableID2.setItems(data2);
 		tableID3.setItems(data3);
+		emailTableID.setItems(emailData);
 		
 		stopButton.setOnAction(this::handleStopAction); //Invokes the action
 		startButton.setOnAction(this::handleStartAction);
+		emailstopButton.setOnAction(this::handleemailStopAction); //Invokes the action
+		emailstartButton.setOnAction(this::handleemailStartAction);
 		
 		
 		/*
@@ -365,6 +419,13 @@ public class TableViewController implements Initializable {
 			public void changed(ObservableValue<?> observable,Object oldvalue, Object newValue) {
 				index.set(data3.indexOf(newValue));
 				System.out.println("index is: " + data3.indexOf(newValue));
+			}
+		});
+		emailTableID.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable,Object oldvalue, Object newValue) {
+				index.set(emailData.indexOf(newValue));
+				System.out.println("index is: " + emailData.indexOf(newValue));
 			}
 		});
 	}
@@ -435,6 +496,41 @@ public class TableViewController implements Initializable {
 				prog11.start();
 			}
 	  
+	 }
+	 @FXML
+	 private void handleemailStopAction(ActionEvent event) {
+		 light4.setStyle("-fx-fill: #FF0000;");
+		 light5.setStyle("-fx-fill: #FF0000;");
+		 light6.setStyle("-fx-fill: #FF0000;");
+	  
+		 emailstopButton.setDisable(true);
+		 emailstartButton.setDisable(false);
+	 }
+	 
+	 @FXML
+	 private void handleemailStartAction(ActionEvent event) {
+		 light4.setStyle("-fx-fill: #00ff0c;");
+		 light5.setStyle("-fx-fill: #00ff0c;");
+		 light6.setStyle("-fx-fill: #00ff0c;");
+		 
+		 emailstopButton.setDisable(false);
+		 emailstartButton.setDisable(true);
+	 }
+	 
+	 public void onEmailDeleteItem(ActionEvent event) {
+
+		 int i = index.get();
+		 if(emailTableID.getSelectionModel().isSelected(i)) { //Only will delete time if selected on table
+			 if(i > -1) {
+				 emailData.remove(i);
+	
+				 emailTableID.getSelectionModel().clearSelection();
+				 saveFields();
+			 }
+		 }
+			 else {
+				 alert.showAndWait(); //Display error dialog if nothing was selected on table
+			 }
 	 }
 	 
 	  /*

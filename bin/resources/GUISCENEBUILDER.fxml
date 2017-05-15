@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -268,6 +269,84 @@
                            </font>
                         </Label>
                         <Button fx:id="delete2" layoutX="691.0" layoutY="444.0" mnemonicParsing="false" onAction="#onDeleteItem3" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Email">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="559.0" fitWidth="850.0">
+                           <image>
+                              <Image url="/resources/1.jpg" />
+                           </image>
+                        </ImageView>
+                        <TextArea layoutX="375.0" layoutY="31.0" prefHeight="458.0" prefWidth="400.0" />
+                        <Button fx:id="emailstartButton" layoutX="65.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleemailStartAction" text="Start">
+                           <font>
+                              <Font size="38.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow blurType="ONE_PASS_BOX" color="WHITE" height="27.06" radius="6.265" width="0.0">
+                                 <input>
+                                    <DropShadow blurType="TWO_PASS_BOX" />
+                                 </input>
+                              </InnerShadow>
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <textFill>
+                              <LinearGradient cycleMethod="REFLECT" endX="0.8523809523809524" startX="0.8333333333333334" startY="0.5523809523809524">
+                                 <stops>
+                                    <Stop color="#0a9e3b" />
+                                    <Stop color="#455445" offset="0.9961685823754789" />
+                                    <Stop color="#455445" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Button>
+                        <Button fx:id="emailstopButton" depthTest="ENABLE" layoutX="200.0" layoutY="31.0" mnemonicParsing="false" text="Stop">
+                           <font>
+                              <Font size="38.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow blurType="ONE_PASS_BOX" color="WHITE" height="27.06" radius="6.265" width="0.0">
+                                 <input>
+                                    <DropShadow blurType="TWO_PASS_BOX" />
+                                 </input>
+                              </InnerShadow>
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <textFill>
+                              <LinearGradient cycleMethod="REFLECT" endX="0.8523809523809524" startX="0.8333333333333334" startY="0.5523809523809524">
+                                 <stops>
+                                    <Stop color="#c33838" />
+                                    <Stop color="#455445" offset="0.9961685823754789" />
+                                    <Stop color="#455445" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Button>
+                        <Circle fx:id="light4" fill="#00ff0c" layoutX="345.0" layoutY="40.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
+                        <Circle fx:id="light5" fill="#00ff0c" layoutX="345.0" layoutY="68.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
+                        <Circle fx:id="light6" fill="#00ff0c" layoutX="345.0" layoutY="95.0" radius="10.0" stroke="#8a8686" strokeType="INSIDE" />
+	                     <TableView fx:id="emailTableID" layoutX="41.0" layoutY="183.0" prefHeight="228.0" prefWidth="155.0">
+                          <columns>
+                            <TableColumn fx:id="EmailTransferTime" prefWidth="153" text="Email Times" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="emailSubmit" layoutX="235.0" layoutY="273.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Submit" />
+                        <Label layoutX="216.0" layoutY="201.0" text="Add Email Time" underline="true">
+                           <font>
+                              <Font name="Lucida Sans Demibold" size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="NewEmailTime" layoutX="235.0" layoutY="235.0" prefHeight="25.0" prefWidth="100.0" promptText="7:00 AM" />
+                        <Button fx:id="emailDelete" layoutX="235.0" layoutY="311.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" onAction="#onEmailDeleteItem" text="Delete" />
                      </children>
                   </AnchorPane>
               </content>
