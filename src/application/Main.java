@@ -50,7 +50,7 @@ public class Main extends Application {
 	private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
         Alert closeConfirmation = new Alert(
                 Alert.AlertType.CONFIRMATION,
-                "Are you sure you want to exit?"
+                "PLEASE STOP THE APPLICATION BEFORE CLOSING!!!"
         );
         Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
                 ButtonType.OK

@@ -76,14 +76,10 @@ public class CheckConnectivity implements Runnable {
 						to = to.replace(" AM", "");
 						timeTo = LocalTime.parse(to);
 					}
-					
-					System.out.println(timeFrom);
-					System.out.println(timeTo);
-					System.out.println(now);
 					 
 					 if((now.isAfter(timeFrom)) && (now.isBefore(timeTo))){
 						 //System.out.println("ITS TIME!");
-						 new CheckPresses().run(this.source, this.target, true, true);
+						 new CheckPresses().run(source, target, true, true);
 					 }
 					 
 					 Thread.sleep(300);
