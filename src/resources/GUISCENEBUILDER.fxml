@@ -282,7 +282,7 @@
                               <Image url="/resources/1.jpg" />
                            </image>
                         </ImageView>
-                        <TextArea layoutX="375.0" layoutY="31.0" prefHeight="458.0" prefWidth="400.0" />
+                        <TextArea fx:id="emailText" layoutX="375.0" layoutY="31.0" prefHeight="458.0" prefWidth="400.0" />
                         <Button fx:id="emailstartButton" layoutX="65.0" layoutY="31.0" mnemonicParsing="false"  text="Start">
                            <font>
                               <Font size="38.0" />

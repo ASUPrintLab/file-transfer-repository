@@ -5,8 +5,11 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.joda.time.LocalTime;
 
@@ -29,6 +32,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,6 +42,7 @@ import javafx.stage.Window;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import application.CheckPresses;
+import application.MainApp;
 import application.CheckConnectivity;
 
 import java.io.FileNotFoundException;
@@ -84,6 +89,8 @@ public class TableViewController implements Initializable {
 	private CheckConnectivity prog11;
 	
 	private Alert alert = new Alert(AlertType.ERROR);
+	
+	private MainApp runnable = null;
 
 	
 	@FXML
@@ -138,6 +145,8 @@ public class TableViewController implements Initializable {
 	private TextField target11;
 	@FXML
 	private TextField target12;
+	@FXML 
+	TextArea emailText;
 	
 	
 	@FXML
@@ -250,6 +259,8 @@ public class TableViewController implements Initializable {
 	
 	File file = new File("C:/FTU");
 	File json = new File("C:/FTU/FTU.json");
+	DateFormat df = new SimpleDateFormat("MM_dd_yy HH;mm");
+	Date dateobj = new Date();
 	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
@@ -507,11 +518,19 @@ public class TableViewController implements Initializable {
 			}
 	  
 	 }
+	 
+	 public void appendALine(String line){
+		 emailText.appendText(line);
+	 }
+	 
 	 @FXML
 	 private void handleemailStopAction(ActionEvent event) {
 		 light4.setStyle("-fx-fill: #FF0000;");
 		 light5.setStyle("-fx-fill: #FF0000;");
 		 light6.setStyle("-fx-fill: #FF0000;");
+		 
+		 runnable.terminate();
+		 emailText.appendText("Stopped (" + df.format(dateobj) + ")\n");
 	  
 		 emailstopButton.setDisable(true);
 		 emailstartButton.setDisable(false);
@@ -522,6 +541,10 @@ public class TableViewController implements Initializable {
 		 light4.setStyle("-fx-fill: #00ff0c;");
 		 light5.setStyle("-fx-fill: #00ff0c;");
 		 light6.setStyle("-fx-fill: #00ff0c;");
+		 
+		 runnable = new MainApp(EmailTransferTime, emailData);
+		 emailText.appendText("Running (" + df.format(dateobj) + ")\n");
+		 new Thread(runnable).start();
 		 
 		 emailstopButton.setDisable(false);
 		 emailstartButton.setDisable(true);

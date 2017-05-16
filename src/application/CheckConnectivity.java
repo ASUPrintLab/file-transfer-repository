@@ -46,7 +46,6 @@ public class CheckConnectivity implements Runnable {
 		try {
 			//Victor Varela VV
 			while(!suspended){
-				System.out.println(LocalTime.now());
 				
 				for (int i = 0; i < data1.size(); i++){
 					
@@ -77,6 +76,10 @@ public class CheckConnectivity implements Runnable {
 						to = to.replace(" AM", "");
 						timeTo = LocalTime.parse(to);
 					}
+					
+					System.out.println(timeFrom);
+					System.out.println(timeTo);
+					System.out.println(now);
 					 
 					 if((now.isAfter(timeFrom)) && (now.isBefore(timeTo))){
 						 //System.out.println("ITS TIME!");
