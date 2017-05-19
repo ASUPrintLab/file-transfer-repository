@@ -1,60 +1,45 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ResourceBundle;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import org.joda.time.LocalTime;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.util.converter.DateTimeStringConverter;
-import javafx.util.converter.DefaultStringConverter;
-import application.CheckPresses;
-import application.MainApp;
-import application.CheckConnectivity;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Iterator;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 
 public class TableViewController implements Initializable {
@@ -64,34 +49,33 @@ public class TableViewController implements Initializable {
 	 * Authors: Mitchell & Victor & Thomass
 	 */
 	
-	private CheckConnectivity prog;
+	CheckConnectivity prog;
 	
-	private CheckConnectivity prog1;
+	CheckConnectivity prog1;
 	
-	private CheckConnectivity prog2;
+	CheckConnectivity prog2;
 	
-	private CheckConnectivity prog3;
+	CheckConnectivity prog3;
 	
-	private CheckConnectivity prog4;
+	CheckConnectivity prog4;
 	
-	private CheckConnectivity prog5;
+	CheckConnectivity prog5;
 	
-	private CheckConnectivity prog6;
+	CheckConnectivity prog6;
 	
-	private CheckConnectivity prog7;
+	CheckConnectivity prog7;
 	
-	private CheckConnectivity prog8;
+	CheckConnectivity prog8;
 	
-	private CheckConnectivity prog9;
+	CheckConnectivity prog9;
 	
-	private CheckConnectivity prog10;
+	CheckConnectivity prog10;
 	
-	private CheckConnectivity prog11;
+	CheckConnectivity prog11;
 	
 	private Alert alert = new Alert(AlertType.ERROR);
 	
-	private MainApp runnable = null;
-
+	//private MainApp runnable;
 	
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser();
@@ -146,7 +130,7 @@ public class TableViewController implements Initializable {
 	@FXML
 	private TextField target12;
 	@FXML 
-	TextArea emailText;
+	public TextArea emailText;
 	
 	
 	@FXML
@@ -264,6 +248,7 @@ public class TableViewController implements Initializable {
 	
 	//index for delete item
 	private IntegerProperty index = new SimpleIntegerProperty();
+	
 
 	/*
 	 * Creating all the table data 
@@ -281,6 +266,10 @@ public class TableViewController implements Initializable {
 	final ObservableList<NewEmailTransferTime> emailData = FXCollections.observableArrayList(
 
 	);
+	
+	EmailHead runnable;
+	boolean hasStarted = false;
+
 	//Observable List for the drop down times - MR
 	final ObservableList<String> optionAM = FXCollections.observableArrayList(
 			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
@@ -350,7 +339,6 @@ public class TableViewController implements Initializable {
 		alert.setTitle("Error Dialog"); //For the delete button if nothing is being selected on table
 		alert.setHeaderText("Ooops, there was nothing to delete!");
 		alert.setContentText("Please select a time on the table to delete.");
-		
 		
 		populateValues();
 		
@@ -474,6 +462,7 @@ public class TableViewController implements Initializable {
 		 prog10.stop();
 		 prog11.stop();
 	 }
+	 
 	 @FXML
 	 private void handleStartAction(ActionEvent event) {
 		 light1.setStyle("-fx-fill: #00ff0c;");
@@ -516,12 +505,7 @@ public class TableViewController implements Initializable {
 				prog10.start();
 				prog11.start();
 			}
-	  
-	 }
-	 
-	 public void appendALine(String line){
-		 emailText.appendText(line);
-	 }
+	 } 
 	 
 	 @FXML
 	 private void handleemailStopAction(ActionEvent event) {
@@ -529,7 +513,8 @@ public class TableViewController implements Initializable {
 		 light5.setStyle("-fx-fill: #FF0000;");
 		 light6.setStyle("-fx-fill: #FF0000;");
 		 
-		 runnable.terminate();
+		 this.runnable.stop();
+		 hasStarted = false;
 		 emailText.appendText("Stopped (" + df.format(dateobj) + ")\n");
 	  
 		 emailstopButton.setDisable(true);
@@ -542,9 +527,14 @@ public class TableViewController implements Initializable {
 		 light5.setStyle("-fx-fill: #00ff0c;");
 		 light6.setStyle("-fx-fill: #00ff0c;");
 		 
-		 runnable = new MainApp(EmailTransferTime, emailData);
+		 if(!hasStarted){
+			 runnable = new EmailHead(EmailTransferTime, emailData, emailText);
+			 runnable.start();
+			 hasStarted = true;
+		 }
+		 
+		 //runnable.resume();
 		 emailText.appendText("Running (" + df.format(dateobj) + ")\n");
-		 new Thread(runnable).start();
 		 
 		 emailstopButton.setDisable(false);
 		 emailstartButton.setDisable(true);
@@ -623,7 +613,7 @@ public class TableViewController implements Initializable {
 	  * Author: Thomas Scheuneman
 	  */
 	 private void populateValues() {
-		 //Create a JSONParser object to pare ou
+		 //Create a JSONParser object to parse ou
 		 JSONParser parser = new JSONParser();
 		 
 		 try {
@@ -741,10 +731,11 @@ public class TableViewController implements Initializable {
 	            e.printStackTrace();
 	        }
 	 }
+	 
 	 /*
 	  * Function to save data
 	  * 	- Saves Time
-	  * 	- Saves Broswe Button Fields
+	  * 	- Saves Browse Button Fields
 	  * 
 	  * Author: Thomas Scheuneman
 	  */

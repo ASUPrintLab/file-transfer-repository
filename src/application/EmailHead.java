@@ -5,28 +5,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.joda.time.LocalTime;
-
-import application.TransferTimeFrom;
-import application.TransferTimeTo;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 
 
-public class MainApp implements Runnable {
+public class EmailHead implements Runnable {
 
 	EmailJobs email = new EmailJobs();
+	public Thread t;
 	
-	TableViewController tvc;
-	
-	public volatile boolean running = true;
+	private volatile boolean running = true;
 	static File folder = new File("C:\\Users\\vevarela\\Desktop\\New folder");
 	DateFormat df = new SimpleDateFormat("MM_dd_yy");
 	Date dateobj = new Date();
@@ -34,20 +27,25 @@ public class MainApp implements Runnable {
 
 	TableColumn<NewEmailTransferTime, String> ttf;
 	ObservableList<NewEmailTransferTime> data1;
+	TextArea textArea;
 	SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
 	
-	public MainApp(TableColumn<NewEmailTransferTime, String> emailTransferTime, ObservableList<NewEmailTransferTime> emailData){
+	public EmailHead(TableColumn<NewEmailTransferTime, String> emailTransferTime, ObservableList<NewEmailTransferTime> emailData, TextArea textArea){
 		this.ttf = emailTransferTime;
 		this.data1 = emailData;
+		this.textArea = textArea;
+	}
+	
+	public void start() {
+		t = new Thread(this);
+		t.start();
 	}
 	
     @Override
     public void run(){
-    	tvc.appendALine("Fuck Thomass");
-		
+    	
 		while(running){
-			
 			Calendar a = Calendar.getInstance();
 			File[] list = folder.listFiles();
 			
@@ -61,7 +59,7 @@ public class MainApp implements Runnable {
 		    int end = Calendar.SUNDAY;
 		        
 		    if((day == week) || (day == end)){
-		    	tvc.emailText.appendText("Its the weekend!");
+		    	javafx.application.Platform.runLater( () -> textArea.appendText("Its the weekend!"));
 		        try{
 		        	Thread.sleep(60000 * 60);
 			    } catch(InterruptedException e) {
@@ -84,13 +82,19 @@ public class MainApp implements Runnable {
 		        		
 		        	if (time.equals(eTime)){
 		        		email.run();
-		        		tvc.emailText.appendText(email.ret + "\n");
-		        		tvc.emailText.selectPositionCaret(tvc.emailText.getText().length());
+		        		javafx.application.Platform.runLater( () -> textArea.appendText(email.ret + "\n"));
+		        		javafx.application.Platform.runLater( () -> textArea.selectPositionCaret(textArea.getText().length()));
+		        		try {
+							Thread.sleep(60000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 			        }
 		        }
 		           
 		        try{
-		        	Thread.sleep(55000);
+		        	Thread.sleep(2000);
 		        } catch(InterruptedException e) {
 		           	e.printStackTrace();
 		        }
@@ -113,7 +117,7 @@ public class MainApp implements Runnable {
 						BufferedWriter writer = null;
 						try {
 							writer = new BufferedWriter(fw);
-							String content = tvc.emailText.getText();
+							String content = textArea.getText();
 							content = content.replaceAll("(?!\\r)\\n", "\r\n"); //separates all info onto a new line 
 							writer.write(content);
 						} catch (IOException e1) {
@@ -131,14 +135,15 @@ public class MainApp implements Runnable {
 						} catch (IOException e2) {
 							e2.printStackTrace();
 						  }							
-						tvc.emailText.setText(null);
+						javafx.application.Platform.runLater( () -> textArea.setText(null));
 			    	}
 			    }
 			}
 		}
 	}
     
-    public void terminate() {
-        running = false;
-    }
+    @SuppressWarnings("deprecation")
+	public void stop() {
+		t.stop();
+	}
 }

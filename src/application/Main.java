@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
@@ -21,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	
 	private Stage mainStage;
+	TableViewController tvc;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -31,15 +33,14 @@ public class Main extends Application {
 			 //BorderPane is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("/resources/GUISCENEBUILDER.fxml"));
 
-			Scene scene = new Scene(root,850,700); //Size of the window for the program in pixels
+			Scene scene = new Scene(root,835,700); //Size of the window for the program in pixels
 			scene.getStylesheets().add(getClass().getResource("/resources/application.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
 			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
 			primaryStage.getIcons().add(new Image("/resources/Blah.jpg"));
-			
 			primaryStage.setOnCloseRequest(confirmCloseEventHandler);
-			
 			primaryStage.show(); //Display
+			primaryStage.setResizable(false);
 	        
 		} catch(Exception e) { //Catch Exception and display SEVER null in console
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
@@ -55,12 +56,20 @@ public class Main extends Application {
         Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
                 ButtonType.OK
         );
+        
+        exitButton.setOnAction(new EventHandler<ActionEvent>(){
+        	@Override
+        	public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+               //possibly stop threads here
+            }
+        });
         exitButton.setText("Exit");
-        closeConfirmation.setHeaderText("Please Stop Application First");
+        closeConfirmation.setHeaderText("PLEASE STOP THE APPLICATION BEFORE CLOSING!!!");
         closeConfirmation.initModality(Modality.APPLICATION_MODAL);
         closeConfirmation.initOwner(mainStage);
         closeConfirmation.setX(mainStage.getX() + 200);
-        closeConfirmation.setY(mainStage.getY() + 100);//+ mainStage.getHeight());
+        closeConfirmation.setY(mainStage.getY() + 100);
 
         Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
         if (!ButtonType.OK.equals(closeResponse.get())) {
