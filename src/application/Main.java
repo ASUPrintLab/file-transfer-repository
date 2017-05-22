@@ -51,21 +51,21 @@ public class Main extends Application {
 	private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
         Alert closeConfirmation = new Alert(
                 Alert.AlertType.CONFIRMATION,
-                "PLEASE STOP THE APPLICATION BEFORE CLOSING!!!"
+                "Please dont leave me (¤_¤)"
         );
         Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
                 ButtonType.OK
         );
-        
+       
         exitButton.setOnAction(new EventHandler<ActionEvent>(){
         	@Override
         	public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+               //System.exit(0);
                //possibly stop threads here
             }
         });
         exitButton.setText("Exit");
-        closeConfirmation.setHeaderText("PLEASE STOP THE APPLICATION BEFORE CLOSING!!!");
+        closeConfirmation.setHeaderText("Did you talk to Chris first?");
         closeConfirmation.initModality(Modality.APPLICATION_MODAL);
         closeConfirmation.initOwner(mainStage);
         closeConfirmation.setX(mainStage.getX() + 200);

@@ -26,7 +26,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -38,9 +37,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-
 
 public class TableViewController implements Initializable {
 	
@@ -132,10 +129,54 @@ public class TableViewController implements Initializable {
 	@FXML 
 	public TextArea emailText;
 	
-	
 	@FXML
-	private Button BrowseBut1, BrowseBut2, BrowseBut3, BrowseBut4, BrowseBut5, BrowseBut6, BrowseBut7, BrowseBut8, BrowseBut9, BrowseBut10, BrowseBut11, BrowseBut12,
-		BrowseBut13, BrowseBut14, BrowseBut15, BrowseBut16, BrowseBut17, BrowseBut18, BrowseBut19, BrowseBut20, BrowseBut21, BrowseBut22, BrowseBut23, BrowseBut24;
+	private Button BrowseBut1;
+	@FXML
+	private Button BrowseBut2;
+	@FXML
+	private Button BrowseBut3;
+	@FXML
+	private Button BrowseBut4;
+	@FXML
+	private Button BrowseBut5;
+	@FXML
+	private Button BrowseBut6;
+	@FXML
+	private Button BrowseBut7;
+	@FXML
+	private Button BrowseBut8;
+	@FXML
+	private Button BrowseBut9;
+	@FXML
+	private Button BrowseBut10;
+	@FXML
+	private Button BrowseBut11;
+	@FXML
+	private Button BrowseBut12;
+	@FXML
+	private Button BrowseBut13;
+	@FXML
+	private Button BrowseBut14;
+	@FXML
+	private Button BrowseBut15;
+	@FXML
+	private Button BrowseBut16;
+	@FXML
+	private Button BrowseBut17;
+	@FXML
+	private Button BrowseBut18;
+	@FXML
+	private Button BrowseBut19;
+	@FXML
+	private Button BrowseBut20;
+	@FXML
+	private Button BrowseBut21;
+	@FXML
+	private Button BrowseBut22;
+	@FXML
+	private Button BrowseBut23;
+	@FXML
+	private Button BrowseBut24;
 	
 	//Defining table
 	@FXML
@@ -272,14 +313,14 @@ public class TableViewController implements Initializable {
 
 	//Observable List for the drop down times - MR
 	final ObservableList<String> optionAM = FXCollections.observableArrayList(
-			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
+			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM", "8:35 AM","8:45 AM","9:00 AM",
 			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 PM",
 			"12:15 PM","12:30 PM","12:45 PM","12:59 PM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM",
 			"3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM",
 			"11:00 PM"
 		);
 	final ObservableList<String> optionPM = FXCollections.observableArrayList(
-			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
+			"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","8:15 AM","8:30 AM", "8:35 AM","8:45 AM","9:00 AM",
 			"9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:15 AM","10:30 AM","10:45 AM","11:00 AM","11:15 AM","11:30 AM","11:45 AM","12:00 PM",
 			"12:15 PM","12:30 PM","12:45 PM","1:00 PM","1:15 PM","1:30 PM","1:45 PM","2:00 PM","2:15 PM","2:30 PM","2:45 PM","3:00 PM",
 			"3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM",
@@ -449,6 +490,7 @@ public class TableViewController implements Initializable {
 		 stopButton.setDisable(true);
 		 startButton.setDisable(false);
 		 
+		 // Stops file transfer threads
 		 prog.stop();
 		 prog1.stop();
 		 prog2.stop();
@@ -474,24 +516,28 @@ public class TableViewController implements Initializable {
 		
 		 try{
 			 //Indigo
+			 //passes source, target, time from and to, and data table to check connectivity class
 			 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
 			 prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
 			 prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
 			 prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
 			 
 			 //iGen
+			 //passes source, target, time from and to, and data table to check connectivity class
 			 prog4 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source5.getText(), target5.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
 			 prog5 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source6.getText(), target6.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
 			 prog6 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source7.getText(), target7.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
 			 prog7 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source8.getText(), target8.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
 			 
 			 //Memjet
+			 //passes source, target, time from and to, and data table to check connectivity class
 			 prog8 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source9.getText(), target9.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
 			 prog9 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source10.getText(), target10.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
 			 prog10 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source11.getText(), target11.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
 			 prog11= new CheckConnectivity("Date Opened: " + LocalTime.now(), source12.getText(), target12.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
 			 
 		 }finally {
+			 // Starts file transfer threads
 				prog.start();
 				prog1.start();
 				prog2.start();
@@ -513,8 +559,10 @@ public class TableViewController implements Initializable {
 		 light5.setStyle("-fx-fill: #FF0000;");
 		 light6.setStyle("-fx-fill: #FF0000;");
 		 
+		 // Stops email txt creation thread
 		 this.runnable.stop();
 		 hasStarted = false;
+		 // Lets the user know that it has been stopped and the time and date it was stopped
 		 emailText.appendText("Stopped (" + df.format(dateobj) + ")\n");
 	  
 		 emailstopButton.setDisable(true);
@@ -528,12 +576,14 @@ public class TableViewController implements Initializable {
 		 light6.setStyle("-fx-fill: #00ff0c;");
 		 
 		 if(!hasStarted){
+			 // Passes time to and from, table data, and textArea to EmailHead class
 			 runnable = new EmailHead(EmailTransferTime, emailData, emailText);
+			 // Starts email txt creation thread
 			 runnable.start();
 			 hasStarted = true;
 		 }
 		 
-		 //runnable.resume();
+		 // Lets the user know that the thread is running and the time it started
 		 emailText.appendText("Running (" + df.format(dateobj) + ")\n");
 		 
 		 emailstopButton.setDisable(false);
@@ -883,6 +933,7 @@ public class TableViewController implements Initializable {
 	 @FXML
 	 protected void handleBrowseButton(ActionEvent event) {
 		 Node source = (Node) event.getSource();
+		// Gets the current javafx scene
 		 Window theStage = source.getScene().getWindow();
 		 fc.setTitle("Choose Target Location");
 		 File returnVal = fc.showDialog(theStage);

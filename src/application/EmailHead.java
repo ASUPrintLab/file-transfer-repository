@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,10 +21,12 @@ public class EmailHead implements Runnable {
 	public Thread t;
 	
 	private volatile boolean running = true;
-	static File folder = new File("C:\\Users\\vevarela\\Desktop\\New folder");
+	// Target Folder
+	static File folder = new File("C:\\Users\\ASUprint\\Desktop\\Enfocus\\Switch\\ASU Print Online\\Output\\Hold Jobs");
 	DateFormat df = new SimpleDateFormat("MM_dd_yy");
 	Date dateobj = new Date();
-    String endTime = "16:15";
+	// Hardcoded for end of the month archive
+    String endTime = "18:15";
 
 	TableColumn<NewEmailTransferTime, String> ttf;
 	ObservableList<NewEmailTransferTime> data1;
@@ -39,6 +42,8 @@ public class EmailHead implements Runnable {
 	
 	public void start() {
 		t = new Thread(this);
+		// Used to kill all threads when window closes.
+		t.setDaemon(true);
 		t.start();
 	}
 	
@@ -57,35 +62,48 @@ public class EmailHead implements Runnable {
 		    int dayOfMonth = a.get(Calendar.DAY_OF_MONTH);
 		    int week = Calendar.SATURDAY;
 		    int end = Calendar.SUNDAY;
-		        
+		       
+		    // If it is the weekend do nothing but tell the user
+		    // and let the thread sleep for 3 hours
 		    if((day == week) || (day == end)){
-		    	javafx.application.Platform.runLater( () -> textArea.appendText("Its the weekend!"));
+		    	javafx.application.Platform.runLater( () -> textArea.appendText("Its the weekend!" + "\n"));
 		        try{
-		        	Thread.sleep(60000 * 60);
+		        	Thread.sleep(60000 * 60 * 3);
 			    } catch(InterruptedException e) {
 			    	e.printStackTrace();
 			       }       	
 		    }
-		        
+		    
+		    // Otherwise,  
 		    else{
+		    	// Count the number of items in the table data
 		        for (int i = 0; i < data1.size(); i++){
-		        		
+		        	//Do this for each one...
 		        	String eTime = ttf.getCellData(i);
-		        		
+		        	// If it is a PM time convert to 24 hour time
 		        	if (eTime.contains("PM")){
-		        		eTime = eTime.replaceAll(" PM", "");
+		        		try {
+							Date aTime = parseFormat.parse(eTime);
+							eTime = displayFormat.format(aTime);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		        	}
-		        		
+		        	// If it id an AM time remove the space and AM
 		        	else {
 		        		eTime = eTime.replaceAll(" AM", "");
 					}
-		        		
+		        	// If that time is equal to the user input time
+		        	// call emailJobs class
 		        	if (time.equals(eTime)){
 		        		email.run();
+		        		// runLater is used because we need to give javafx time to put the text into the textArea
 		        		javafx.application.Platform.runLater( () -> textArea.appendText(email.ret + "\n"));
 		        		javafx.application.Platform.runLater( () -> textArea.selectPositionCaret(textArea.getText().length()));
 		        		try {
-							Thread.sleep(60000);
+		        			// Thread sleeps for 59 sec otherwise you will get duplicate text files.
+							Thread.sleep(59000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -100,9 +118,11 @@ public class EmailHead implements Runnable {
 		        }
 		    }
 		       
+		    // If it is the last day of the month archive text in textArea, and clear text area
 			if(dayOfMonth == a.getActualMaximum(Calendar.DAY_OF_MONTH) && time.equals(endTime)){
 			    if (folder.isDirectory() && list.length > 0){
-			    	String file = "C:\\Users\\vevarela\\Desktop\\Test\\EmailArchive_" + df.format(dateobj) + ".txt";
+			    	// Creates a txt file
+			    	String file = "C:\\Users\\ASUprint\\Desktop\\Enfocus\\Switch\\ASU Print Online\\Output\\OLD Sent\\EmailArchive_" + df.format(dateobj) + ".txt";
 			    	File fPath = new File(file);
 			    		
 			    	if (!fPath.exists()){
@@ -117,8 +137,10 @@ public class EmailHead implements Runnable {
 						BufferedWriter writer = null;
 						try {
 							writer = new BufferedWriter(fw);
+							// Saves all text from textArea to content variable
 							String content = textArea.getText();
 							content = content.replaceAll("(?!\\r)\\n", "\r\n"); //separates all info onto a new line 
+							// Writes all content to txt file
 							writer.write(content);
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -126,22 +148,25 @@ public class EmailHead implements Runnable {
 						  }
 							
 						try{
+							// Closes bufferedWriter
 							if (writer != null){
 								writer.close();
 							}
+							// Closes fileWriter.
 							if (fw != null){
 								fw.close();
 							}
 						} catch (IOException e2) {
 							e2.printStackTrace();
-						  }							
+						  }		
+						// Clears textArea
 						javafx.application.Platform.runLater( () -> textArea.setText(null));
 			    	}
 			    }
 			}
 		}
 	}
-    
+    // Stops threads
     @SuppressWarnings("deprecation")
 	public void stop() {
 		t.stop();
