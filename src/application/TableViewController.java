@@ -1,10 +1,15 @@
 package application;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,9 +48,9 @@ public class TableViewController implements Initializable {
 	
 	/*
 	 * Initializing all objects being used
-	 * Authors: Mitchell & Victor & Thomass
+	 * Authors: Mitchell & Victor & Thomas
 	 */
-	
+
 	CheckConnectivity prog;
 	
 	CheckConnectivity prog1;
@@ -479,7 +484,7 @@ public class TableViewController implements Initializable {
 		}
 		
 	}
-
+	
 	// If start or stop button are clicked, change the fill color of circles
 	 @FXML
 	 private void handleStopAction(ActionEvent event) {
@@ -709,7 +714,6 @@ public class TableViewController implements Initializable {
 	            Object theDataTwo = parser.parse(theObj.get("timeTwoValues").toString());
 	            JSONObject theObjTwo = (JSONObject) theDataTwo;
 
-
 	            theCounter = theObjTwo.size() / 2;
 	            numEntries = 0;
 	            incrementNum = 0;
@@ -740,6 +744,24 @@ public class TableViewController implements Initializable {
 	             String varTwo = theObjThree.get(variable).toString();
 	             TransferTimeFrom Test = new TransferTimeFrom(varOne, varTwo);
 	             data3.add(numEntries, Test);
+	             numEntries++;
+	             incrementNum++;
+	            }
+	          //Repeat for email
+	            Object theEmailData = parser.parse(theObj.get("emailTimeValues").toString());
+	            JSONObject theObjEmail = (JSONObject) theEmailData;
+	            
+	            System.out.println(theObjEmail.size());
+	            
+	            theCounter = theObjEmail.size();
+	            numEntries = 0;
+	            incrementNum = 0;
+	            for (int i = 0; i < theCounter; i++) {
+	             String variable = String.valueOf(incrementNum);
+	             String varOne = theObjEmail.get(variable).toString();
+	             variable = String.valueOf(incrementNum);
+	             NewEmailTransferTime emailTest = new NewEmailTransferTime(varOne);
+	             emailData.add(numEntries, emailTest);
 	             numEntries++;
 	             incrementNum++;
 	            }
@@ -794,11 +816,13 @@ public class TableViewController implements Initializable {
 		 int x = data.size();
 		 int xy = data2.size();
 		 int xz = data3.size();
+		 int yz = emailData.size();
 
 		 //Create array to hold values of table fields.
 		 String[][] timeOne = new String[x][2];
 		 String[][] timeTwo = new String[xy][2];
 		 String[][] timeThree = new String[xz][2];
+		 String[][] emailTime = new String [yz][1];
 		 
 		 //Loop thrpugh all fields, set time From and time to for the table values.
          for(int counter = 0; counter < data.size(); counter++) {
@@ -821,11 +845,16 @@ public class TableViewController implements Initializable {
          for(int counter = 0; counter <xz; counter++) {
         	 timeThree[counter][1] = TransferTimeTo3.getCellData(counter);
          }
+         //Loop thrpugh all fields, set time From and time to for the table values.
+         for(int counter = 0; counter < yz; counter++) {
+        	 emailTime[counter][0] = EmailTransferTime.getCellData(counter);
+         }
          
          //Create three JSON objects
          JSONObject timeOneJSON = new JSONObject();
          JSONObject timeTwoJSON = new JSONObject();
          JSONObject timeThreeJSON = new JSONObject();
+         JSONObject emailTimeJSON = new JSONObject();
          //Set var to 0
          int testVal = 0;
          //Loop through the number of variables, put them inside of a JSON object in sequential order.
@@ -849,6 +878,12 @@ public class TableViewController implements Initializable {
 	        	 timeThreeJSON.put(testVal, timeThree[counter][0]);
 	        	 testVal++;
 	        	 timeThreeJSON.put(testVal, timeThree[counter][1]);
+	        	 testVal++;
+	         }
+	         //Loop through the number of variables, put them inside of a JSON object in sequential order.
+	         testVal = 0;
+	         for(int counter = 0; counter <yz; counter++) {
+	        	 emailTimeJSON.put(testVal, emailTime[counter][0]);
 	        	 testVal++;
 	         }
          
@@ -910,6 +945,7 @@ public class TableViewController implements Initializable {
 		 		objString.put("timeOneValues", timeOneJSON);
 		 		objString.put("timeTwoValues", timeTwoJSON);
 		 		objString.put("timeThreeValues", timeThreeJSON);
+		 		objString.put("emailTimeValues", emailTimeJSON);
 		 	
 		 		
 		 	//Attempt to write to file
