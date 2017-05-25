@@ -43,74 +43,80 @@ public class CheckConnectivity implements Runnable {
 	@Override
 	public void run() {
 		
-		try {
-			//Victor Varela VV & Luis Quintanilla LQ
-			while(!suspended){
+		if (source.isEmpty() || target.isEmpty() || !(data1.size() > 0)){
+			t.stop();
+		}
+		
+		else {
+			try {
+				//Victor Varela VV & Luis Quintanilla LQ
+				while(!suspended){
+					
+					for (int i = 0; i < data1.size(); i++){
+						
+						LocalTime timeFrom;
+						LocalTime timeTo;
+						
+						String from = ttf.getCellData(i); 
+						String to = ttt.getCellData(i);			 
+						 
+						 
+						LocalTime now = LocalTime.now();
+						 
+						// If the time is PM convert to 24 hour.
+						if (from.contains("PM")){
+							Date dateFrom = parseFormat.parse(from);
+							timeFrom = LocalTime.parse(displayFormat.format(dateFrom));
+						}
+						
+						// If the time has AM remove it with the extra space
+						else {
+							from = from.replace(" AM", "");
+							timeFrom = LocalTime.parse(from);
+						}
+						
+						// If the time is PM convert to 24 hour.
+						if(to.contains("PM")){
+							Date dateTo = parseFormat.parse(to);
+							timeTo = LocalTime.parse(displayFormat.format(dateTo));
+						}
+						
+						// If the time has AM remove it with the extra space
+						else{
+							to = to.replace(" AM", "");
+							timeTo = LocalTime.parse(to);
+						}
+						 
+						// call CheckPresses class if actual time is between From and to
+						if((now.isAfter(timeFrom)) && (now.isBefore(timeTo))){
+							 //System.out.println("ITS TIME!");
+							 new CheckPresses().run(source, target, true, true);
+						 }
+						 
+						Thread.sleep(300);
+					}
+				 }
+				// if source or target is invalid catch it
+			} catch(InvalidPathException e1) {
+				System.out.println("Source Path " + this.source + " may be invalid.");
+				System.out.println("Target Path " + this.target + " may be invalid.");
+				e1.printStackTrace();
 				
-				for (int i = 0; i < data1.size(); i++){
-					
-					LocalTime timeFrom;
-					LocalTime timeTo;
-					
-					String from = ttf.getCellData(i); 
-					String to = ttt.getCellData(i);			 
-					 
-					 
-					LocalTime now = LocalTime.now();
-					 
-					// If the time is PM convert to 24 hour.
-					if (from.contains("PM")){
-						Date dateFrom = parseFormat.parse(from);
-						timeFrom = LocalTime.parse(displayFormat.format(dateFrom));
-					}
-					
-					// If the time has AM remove it with the extra space
-					else {
-						from = from.replace(" AM", "");
-						timeFrom = LocalTime.parse(from);
-					}
-					
-					// If the time is PM convert to 24 hour.
-					if(to.contains("PM")){
-						Date dateTo = parseFormat.parse(to);
-						timeTo = LocalTime.parse(displayFormat.format(dateTo));
-					}
-					
-					// If the time has AM remove it with the extra space
-					else{
-						to = to.replace(" AM", "");
-						timeTo = LocalTime.parse(to);
-					}
-					 
-					// call CheckPresses class if actual time is between From and to
-					if((now.isAfter(timeFrom)) && (now.isBefore(timeTo))){
-						 //System.out.println("ITS TIME!");
-						 new CheckPresses().run(source, target, true, true);
-					 }
-					 
-					Thread.sleep(300);
-				}
-			 }
-			// if source or target is invalid catch it
-		} catch(InvalidPathException e1) {
-			System.out.println("Source Path " + this.source + " may be invalid.");
-			System.out.println("Target Path " + this.target + " may be invalid.");
-			e1.printStackTrace();
-			
-			// if copying files doesnt workout
-		} catch(IOException e1) {
-			System.out.println("Copying files failed.");
-			e1.printStackTrace();
-			
-			//If the thread gets interupted
-		} catch(InterruptedException e1) {
-			System.out.println("Thread " +  threadName + " interrupted.");
-			e1.printStackTrace();
-			
-			// If parseing throws an error
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				// if copying files doesnt workout
+			} catch(IOException e1) {
+				System.out.println("Copying files failed.");
+				e1.printStackTrace();
+				
+				//If the thread gets interupted
+			} catch(InterruptedException e1) {
+				System.out.println("Thread " +  threadName + " interrupted.");
+				e1.printStackTrace();
+				
+				// If parseing throws an error
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
