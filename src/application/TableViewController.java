@@ -521,65 +521,51 @@ public class TableViewController implements Initializable {
 	 
 	 @FXML
 	 private void handleStartAction(ActionEvent event) {
-		 if (data.size() > 0 && data2.size() > 0 && data3.size() > 0){
-			 light1.setStyle("-fx-fill: #00ff0c;");
-			 light2.setStyle("-fx-fill: #00ff0c;");
-			 light3.setStyle("-fx-fill: #00ff0c;");
-			 
-			 stopButton.setDisable(false);
-			 startButton.setDisable(true);
-			
-			 try{
-				 //Indigo
-				 //passes source, target, time from and to, and data table to check connectivity class
-				 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-				 prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-				 prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-				 prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-				 
-				 //iGen
-				 //passes source, target, time from and to, and data table to check connectivity class
-				 prog4 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source5.getText(), target5.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-				 prog5 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source6.getText(), target6.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-				 prog6 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source7.getText(), target7.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-				 prog7 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source8.getText(), target8.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-				 
-				 //Memjet
-				 //passes source, target, time from and to, and data table to check connectivity class
-				 prog8 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source9.getText(), target9.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-				 prog9 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source10.getText(), target10.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-				 prog10 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source11.getText(), target11.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-				 prog11= new CheckConnectivity("Date Opened: " + LocalTime.now(), source12.getText(), target12.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-				 
-			 }finally {
-				 // Starts file transfer threads
-					prog.start();
-					prog1.start();
-					prog2.start();
-					prog3.start();
-					prog4.start();
-					prog5.start();
-					prog6.start();
-					prog7.start();
-					prog8.start();
-					prog9.start();
-					prog10.start();
-					prog11.start();
-				}
-		 }
 		 
-		 else{
-			 Stage dialogStage = new Stage();
-			 dialogStage.initModality(Modality.WINDOW_MODAL);
+		 light1.setStyle("-fx-fill: #00ff0c;");
+		 light2.setStyle("-fx-fill: #00ff0c;");
+		 light3.setStyle("-fx-fill: #00ff0c;");
 			 
-			 VBox vbox = new VBox(new Text("Please Make sure your time tables are not empty."));
-			 vbox.setAlignment(Pos.CENTER);
-			 vbox.setPadding(new Insets(15));
-
-			 dialogStage.setTitle("Houston, we have a problem!");
-			 dialogStage.setScene(new Scene(vbox));
-			 dialogStage.show();
-		 }
+		 stopButton.setDisable(false);
+		 startButton.setDisable(true);
+			
+		 try{
+			//Indigo
+			//passes source, target, time from and to, and data table to check connectivity class
+			prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+			prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+				 
+			//iGen
+			//passes source, target, time from and to, and data table to check connectivity class
+			prog4 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source5.getText(), target5.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			prog5 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source6.getText(), target6.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			prog6 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source7.getText(), target7.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+			prog7 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source8.getText(), target8.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+				 
+			//Memjet
+			//passes source, target, time from and to, and data table to check connectivity class
+			prog8 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source9.getText(), target9.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			prog9 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source10.getText(), target10.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			prog10 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source11.getText(), target11.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+			prog11= new CheckConnectivity("Date Opened: " + LocalTime.now(), source12.getText(), target12.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+				 
+			}finally {
+				// Starts file transfer threads
+				prog.start();
+				prog1.start();
+				prog2.start();
+				prog3.start();
+				prog4.start();
+				prog5.start();
+				prog6.start();
+				prog7.start();
+				prog8.start();
+				prog9.start();
+				prog10.start();
+				prog11.start();
+			}
 	 } 
 	 
 	 @FXML
