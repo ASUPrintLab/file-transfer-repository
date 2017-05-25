@@ -30,18 +30,27 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class TableViewController implements Initializable {
@@ -512,50 +521,65 @@ public class TableViewController implements Initializable {
 	 
 	 @FXML
 	 private void handleStartAction(ActionEvent event) {
-		 light1.setStyle("-fx-fill: #00ff0c;");
-		 light2.setStyle("-fx-fill: #00ff0c;");
-		 light3.setStyle("-fx-fill: #00ff0c;");
+		 if (data.size() > 0 && data2.size() > 0 && data3.size() > 0){
+			 light1.setStyle("-fx-fill: #00ff0c;");
+			 light2.setStyle("-fx-fill: #00ff0c;");
+			 light3.setStyle("-fx-fill: #00ff0c;");
+			 
+			 stopButton.setDisable(false);
+			 startButton.setDisable(true);
+			
+			 try{
+				 //Indigo
+				 //passes source, target, time from and to, and data table to check connectivity class
+				 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+				 prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+				 prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+				 prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+				 
+				 //iGen
+				 //passes source, target, time from and to, and data table to check connectivity class
+				 prog4 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source5.getText(), target5.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+				 prog5 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source6.getText(), target6.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+				 prog6 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source7.getText(), target7.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+				 prog7 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source8.getText(), target8.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
+				 
+				 //Memjet
+				 //passes source, target, time from and to, and data table to check connectivity class
+				 prog8 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source9.getText(), target9.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+				 prog9 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source10.getText(), target10.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+				 prog10 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source11.getText(), target11.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+				 prog11= new CheckConnectivity("Date Opened: " + LocalTime.now(), source12.getText(), target12.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
+				 
+			 }finally {
+				 // Starts file transfer threads
+					prog.start();
+					prog1.start();
+					prog2.start();
+					prog3.start();
+					prog4.start();
+					prog5.start();
+					prog6.start();
+					prog7.start();
+					prog8.start();
+					prog9.start();
+					prog10.start();
+					prog11.start();
+				}
+		 }
 		 
-		 stopButton.setDisable(false);
-		 startButton.setDisable(true);
-		
-		 try{
-			 //Indigo
-			 //passes source, target, time from and to, and data table to check connectivity class
-			 prog = new CheckConnectivity("Date Opened: " + LocalTime.now(), source1.getText(), target1.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-			 prog1 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source2.getText(), target2.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-			 prog2 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source3.getText(), target3.getText(), TransferTimeFrom1, TransferTimeTo1, data);
-			 prog3 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source4.getText(), target4.getText(), TransferTimeFrom1, TransferTimeTo1, data);
+		 else{
+			 Stage dialogStage = new Stage();
+			 dialogStage.initModality(Modality.WINDOW_MODAL);
 			 
-			 //iGen
-			 //passes source, target, time from and to, and data table to check connectivity class
-			 prog4 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source5.getText(), target5.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-			 prog5 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source6.getText(), target6.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-			 prog6 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source7.getText(), target7.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-			 prog7 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source8.getText(), target8.getText(), TransferTimeFrom2, TransferTimeTo2, data2);
-			 
-			 //Memjet
-			 //passes source, target, time from and to, and data table to check connectivity class
-			 prog8 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source9.getText(), target9.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-			 prog9 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source10.getText(), target10.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-			 prog10 = new CheckConnectivity("Date Opened: " + LocalTime.now(), source11.getText(), target11.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-			 prog11= new CheckConnectivity("Date Opened: " + LocalTime.now(), source12.getText(), target12.getText(), TransferTimeFrom3, TransferTimeTo3, data3);
-			 
-		 }finally {
-			 // Starts file transfer threads
-				prog.start();
-				prog1.start();
-				prog2.start();
-				prog3.start();
-				prog4.start();
-				prog5.start();
-				prog6.start();
-				prog7.start();
-				prog8.start();
-				prog9.start();
-				prog10.start();
-				prog11.start();
-			}
+			 VBox vbox = new VBox(new Text("Please Make sure your time tables are not empty."));
+			 vbox.setAlignment(Pos.CENTER);
+			 vbox.setPadding(new Insets(15));
+
+			 dialogStage.setTitle("Houston, we have a problem!");
+			 dialogStage.setScene(new Scene(vbox));
+			 dialogStage.show();
+		 }
 	 } 
 	 
 	 @FXML
@@ -576,23 +600,39 @@ public class TableViewController implements Initializable {
 	 
 	 @FXML
 	 private void handleemailStartAction(ActionEvent event) {
-		 light4.setStyle("-fx-fill: #00ff0c;");
-		 light5.setStyle("-fx-fill: #00ff0c;");
-		 light6.setStyle("-fx-fill: #00ff0c;");
-		 
-		 if(!hasStarted){
-			 // Passes time to and from, table data, and textArea to EmailHead class
-			 runnable = new EmailHead(EmailTransferTime, emailData, emailText);
-			 // Starts email txt creation thread
-			 runnable.start();
-			 hasStarted = true;
+		 if (emailData.size() > 0){
+			 light4.setStyle("-fx-fill: #00ff0c;");
+			 light5.setStyle("-fx-fill: #00ff0c;");
+			 light6.setStyle("-fx-fill: #00ff0c;");
+			 
+			 if(!hasStarted){
+				 // Passes time to and from, table data, and textArea to EmailHead class
+				 runnable = new EmailHead(EmailTransferTime, emailData, emailText);
+				 // Starts email txt creation thread
+				 runnable.start();
+				 hasStarted = true;
+			 }
+			 
+			 // Lets the user know that the thread is running and the time it started
+			 emailText.appendText("Running (" + df.format(dateobj) + ")\n");
+			 
+			 emailstopButton.setDisable(false);
+			 emailstartButton.setDisable(true);
 		 }
 		 
-		 // Lets the user know that the thread is running and the time it started
-		 emailText.appendText("Running (" + df.format(dateobj) + ")\n");
+		 else{
+			 Stage dialogStage = new Stage();
+			 dialogStage.initModality(Modality.WINDOW_MODAL);
+			 
+			 VBox vbox = new VBox(new Text("Please Make sure your email times are not empty."));
+			 vbox.setAlignment(Pos.CENTER);
+			 vbox.setPadding(new Insets(15));
+
+			 dialogStage.setTitle("Houston, we have a problem!");
+			 dialogStage.setScene(new Scene(vbox));
+			 dialogStage.show();
+		 }
 		 
-		 emailstopButton.setDisable(false);
-		 emailstartButton.setDisable(true);
 	 }
 	 
 	  /*
@@ -750,9 +790,7 @@ public class TableViewController implements Initializable {
 	          //Repeat for email
 	            Object theEmailData = parser.parse(theObj.get("emailTimeValues").toString());
 	            JSONObject theObjEmail = (JSONObject) theEmailData;
-	            
-	            System.out.println(theObjEmail.size());
-	            
+	          
 	            theCounter = theObjEmail.size();
 	            numEntries = 0;
 	            incrementNum = 0;
