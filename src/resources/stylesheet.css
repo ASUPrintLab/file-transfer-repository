@@ -1,0 +1,76 @@
+
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+.split-pane:vertical > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #2F3036;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+.menu .label {
+  -fx-text-fill: WHITE;
+}
+
+.menu-bar {
+  -fx-background-color: linear-gradient(to bottom, #1C1C1C,  #1C1C1C);
+  -fx-border-width: 0;
+}
+
+.menu:hover {
+    -fx-background-color: #bc784e;
+}
+
+.label .text {
+  -fx-text-fill: WHITE;
+}
+
+.addButton {
+  -fx-background-color: transparent;
+  -fx-background-insets: 0 0 0 0, 0, 0, 0;
+  -fx-background-radius: 0 0 0 0, 0, 0, 0;
+  -fx-border-width: 0 0 0 0, 0, 0, 0;
+  -fx-text-fill: #828282;
+  -fx-font-family: "Akzidenz-Grotesk Std Regular";
+  -fx-font-size: 25px;
+}
+.addButton:hover {
+  -fx-text-fill: white;
+}
+
+.accordion .titled-pane .title {
+  -fx-background-color: #262626;
+  -fx-background-color:
+      linear-gradient(#262626 0%, #232723 25%, #262626 75%, #2F3036 100%),
+      linear-gradient(#262626, #1C1C1C),
+      linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%),
+      linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%);
+  -fx-text-fill: #262626;
+  -fx-font: 18px "Akzidenz-Grotesk Std Regular";
+}
+
+.titled-pane > *.content {
+    -fx-border-color: #262626;
+}

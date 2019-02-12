@@ -16,7 +16,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
@@ -30,14 +31,14 @@ public class Main extends Application {
 		this.mainStage = primaryStage;
 		
 		try {
-			 //BorderPane is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("/resources/GUISCENEBUILDER.fxml"));
+			 //VBox is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
+			VBox root = FXMLLoader.load(getClass().getResource("/resources/gui.fxml"));
 
-			Scene scene = new Scene(root,835,700); //Size of the window for the program in pixels
-			scene.getStylesheets().add(getClass().getResource("/resources/application.css").toExternalForm()); //Path to CSS
+			Scene scene = new Scene(root, 900, 600, Color.BLACK); //Size of the window for the program in pixels
+			scene.getStylesheets().add(getClass().getResource("/resources/stylesheet.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
 			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
-			primaryStage.getIcons().add(new Image("/resources/Blah.jpg"));
+			primaryStage.getIcons().add(new Image("/resources/icon.png"));
 			primaryStage.setOnCloseRequest(confirmCloseEventHandler);
 			primaryStage.show(); //Display
 			primaryStage.setResizable(false);
@@ -51,7 +52,7 @@ public class Main extends Application {
 	private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
         Alert closeConfirmation = new Alert(
                 Alert.AlertType.CONFIRMATION,
-                "Please dont leave me (¤_¤)"
+                "Please dont leave me"
         );
         Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
                 ButtonType.OK
@@ -65,7 +66,7 @@ public class Main extends Application {
             }
         });
         exitButton.setText("Exit");
-        closeConfirmation.setHeaderText("Did you talk to Chris first?");
+        closeConfirmation.setHeaderText("Are you sure you want to exit?");
         closeConfirmation.initModality(Modality.APPLICATION_MODAL);
         closeConfirmation.initOwner(mainStage);
         closeConfirmation.setX(mainStage.getX() + 200);

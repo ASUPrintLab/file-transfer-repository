@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+  <children>
+      <MenuBar id="menubar" stylesheets="@stylesheet.css">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #1B1B1F; -fx-border-width: 2;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane style="-fx-background-color: #1C1C1C;" stylesheets="@stylesheet.css">
+               <children>
+                  <Accordion layoutX="5.0" layoutY="-1.0" style="-fx-background-color: #1C1C1C;">
+                    <panes>
+                      <TitledPane expanded="false" graphicTextGap="5.0" prefHeight="551.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #262626;" />
+                        </content>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+        </AnchorPane>
+        <ScrollPane prefHeight="551.0" prefWidth="674.0" style="-fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true; -fx-fit-to-height: false;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <content>
+            <AnchorPane id="Content" depthTest="DISABLE" minHeight="-1.0" minWidth="-1.0" prefHeight="551.0" prefWidth="530.0" style="-fx-background-color: #262626; -fx-border-width: 0;">
+              <children>
+                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="-fx-text-fill: #828282;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
+                           <font>
+                      <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
+                           </font></Label>
+                        <Button disable="true" layoutX="142.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="54.0" styleClass="addButton" stylesheets="@stylesheet.css" text="+">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Accordion layoutX="35.0" layoutY="90.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1C1C1C;">
+               <children>
+              <AnchorPane prefHeight="551.0" prefWidth="214.0" style="-fx-background-color: #262626; -fx-border-color: #1C1C1C;" stylesheets="@stylesheet.css">
+                <children>
+                  <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="-fx-text-fill: #828282;" text="Transfer Times" textAlignment="CENTER" wrapText="false" />
+                        <Button disable="true" layoutX="115.0" layoutY="-1.0" mnemonicParsing="false" styleClass="addButton" stylesheets="@stylesheet.css" text="+">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                </children>
+              </AnchorPane>
+               </children>
+            </Pane>
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="-fx-background-color: #1C1C1C;" VBox.vgrow="NEVER">
+      <children>
+        <Label prefHeight="25" maxWidth="-1.0" style="-fx-background-color: #1B1B1F;" text="File Transfer Utility 2.0" textFill="#727585" HBox.hgrow="NEVER">
+               <font>
+            <Font size="11.0" fx:id="x3" />
+               </font></Label>
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
