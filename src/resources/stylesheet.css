@@ -32,6 +32,7 @@
 }
 .menu .label {
   -fx-text-fill: WHITE;
+  -fx-padding: 0 10 0 0;
 }
 
 .menu-bar {
@@ -60,17 +61,56 @@
   -fx-text-fill: white;
 }
 
+.addPress {
+  -fx-background-color: transparent;
+  -fx-border-color: #B9B9B9;
+  -fx-color: white;
+  -fx-text-fill: #828282;
+  -fx-font-family: "Akzidenz-Grotesk Std Regular";
+  -fx-font-size: 20px;
+}
+
+.addPress:hover {
+  -fx-background-color: rgba(185, 185, 185, .1);
+  -fx-border-color: #1C1C1C;
+  -fx-color: transparent;
+  -fx-text-fill: white;
+  -fx-font-family: "Akzidenz-Grotesk Std Regular";
+  -fx-font-size: 20px;
+}
+
 .accordion .titled-pane .title {
   -fx-background-color: #262626;
-  -fx-background-color:
+  /*-fx-background-color:
       linear-gradient(#262626 0%, #232723 25%, #262626 75%, #2F3036 100%),
       linear-gradient(#262626, #1C1C1C),
       linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%),
-      linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%);
+      linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%);*/
   -fx-text-fill: #262626;
   -fx-font: 18px "Akzidenz-Grotesk Std Regular";
 }
 
 .titled-pane > *.content {
     -fx-border-color: #262626;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+    -fx-padding: 1 15 1 0;
+}
+
+.menu-item:focused {
+     -fx-background-color: darkgray;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: black;
+}
+
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: black;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
 }

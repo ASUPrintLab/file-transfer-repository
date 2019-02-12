@@ -1,4 +1,4 @@
-package application;
+package application_v2;
 
 public class Locations {
 	private String fromLocation;

@@ -1,5 +1,4 @@
-package application;
-
+package application_v2;
 
 public class Press {
 	private String name; //name of press

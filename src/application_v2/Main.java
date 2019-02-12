@@ -1,9 +1,11 @@
-package application;
+package application_v2;
 	
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.TableViewController;
+import controllers.Controller;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +25,7 @@ import javafx.scene.paint.Color;
 public class Main extends Application {
 	
 	private Stage mainStage;
-	TableViewController tvc;
+	Controller controller;
 	
 	@Override
 	public void start(Stage primaryStage) {

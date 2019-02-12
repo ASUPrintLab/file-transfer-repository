@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="180.0" prefWidth="419.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.dialogController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #262626;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+      <children>
+            <TextField layoutX="113.0" layoutY="78.0" prefHeight="25.0" prefWidth="227.0" />
+            <Label layoutX="32.0" layoutY="75.0" text="Name:" textFill="#828282">
+               <font>
+                  <Font name="AkzidenzGroteskStd-Md" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="101.0" layoutY="23.0" text="Add new press" textFill="WHITE">
+               <font>
+                  <Font name="AkzidenzGroteskStd-Md" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="confirmPress" layoutX="239.0" layoutY="134.0" mnemonicParsing="false" styleClass="addPress" text="Okay" />
+            <Button fx:id="cancelPress" layoutX="323.0" layoutY="134.0" mnemonicParsing="false" styleClass="addPress" text="Cancel" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

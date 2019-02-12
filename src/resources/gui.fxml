@@ -17,12 +17,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<VBox prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.Controller">
   <children>
       <MenuBar id="menubar" stylesheets="@stylesheet.css">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem mnemonicParsing="false" text="Load" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Start" />
+                  <MenuItem mnemonicParsing="false" text="Stop" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
@@ -36,7 +40,10 @@
                     <panes>
                       <TitledPane expanded="false" graphicTextGap="5.0" prefHeight="551.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #262626;" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #262626;">
+                                 <children>
+                                    <Button fx:id="addPress" layoutX="-3.0" layoutY="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="224.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +" />
+                                 </children></AnchorPane>
                         </content>
                            <opaqueInsets>
                               <Insets />
@@ -84,7 +91,7 @@
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="-fx-background-color: #1C1C1C;" VBox.vgrow="NEVER">
       <children>
-        <Label prefHeight="25" maxWidth="-1.0" style="-fx-background-color: #1B1B1F;" text="File Transfer Utility 2.0" textFill="#727585" HBox.hgrow="NEVER">
+        <Label maxWidth="-1.0" prefHeight="25" style="-fx-background-color: #1B1B1F;" text="File Transfer Utility 2.0" textFill="#727585" HBox.hgrow="NEVER">
                <font>
             <Font size="11.0" fx:id="x3" />
                </font></Label>
