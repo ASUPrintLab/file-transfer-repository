@@ -11,7 +11,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #262626;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
       <children>
-            <TextField layoutX="113.0" layoutY="78.0" prefHeight="25.0" prefWidth="227.0" />
+            <TextField fx:id="pressName" layoutX="113.0" layoutY="78.0" prefHeight="25.0" prefWidth="227.0" />
             <Label layoutX="32.0" layoutY="75.0" text="Name:" textFill="#828282">
                <font>
                   <Font name="AkzidenzGroteskStd-Md" size="25.0" />
