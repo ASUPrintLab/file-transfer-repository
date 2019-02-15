@@ -114,3 +114,53 @@
     -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
     -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
 }
+
+.locationContainer {
+  -fx-background-color: transparent;
+}
+
+.locationDiv {
+  -fx-background-color: #1C1C1C;
+  -fx-background-insets: 15 15 15 15;
+  -fx-background-radius: 10 10 10 10;
+  -fx-effect: dropshadow(GAUSSIAN, black, 10, 0, 4, 5);
+}
+
+/* .locationDiv:hover {
+  -fx-background-color: #1C1C1C;
+  -fx-background-insets: 15 15 15 15;
+  -fx-background-radius: 10 10 10 10;
+  -fx-effect: dropshadow(GAUSSIAN, #bc784e, 5, 0, 1, 2);
+} */
+
+.connections:hover {
+  -fx-underline: true;
+}
+
+.browseButton {
+  -fx-background-color: #262626;
+  -fx-background-radius: 5 5 5 5;
+  -fx-background-color:
+      linear-gradient(#262626 0%, #232723 25%, #262626 75%, #1C1C1C 100%),
+      linear-gradient(#262626, #1C1C1C),
+      linear-gradient(#2F3036 0%, #1C1C1C 20%, black 80%, #1C1C1C 100%),
+      linear-gradient(#2F3036 0%, #1C1C1C 20%, black 80%, #1C1C1C 100%);
+  -fx-text-fill: white;
+  -fx-font: 12px "Akzidenz-Grotesk Std Regular";
+  -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);
+}
+
+.middleContainer {
+  -fx-effect: dropshadow(GAUSSIAN, black, 10, 0, 4, 5);
+  -fx-background-color: black;
+}
+
+/* .browseButton:hover {
+  -fx-background-color: #262626;
+  -fx-background-color:
+      linear-gradient(#262626 0%, #232723 25%, #262626 75%, #2F3036 100%),
+      linear-gradient(#262626, #2F3036),
+      linear-gradient(#1C1C1C 0%, #262626 20%, #2F3036 80%, #1C1C1C 100%),
+      linear-gradient(#1C1C1C 0%, #262626 20%, #2F3036 80%, #1C1C1C 100%);
+
+} */

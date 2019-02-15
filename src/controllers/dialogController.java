@@ -26,11 +26,7 @@ public class dialogController implements Initializable {
     private Button cancelPress; //cancel button in dialog
 	@FXML
     private TextField pressName; //name of new press in dialog
-	
-//	Controller controller; //Main controller
-	
-	Parent root; //Parent root
-
+		
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -43,15 +39,20 @@ public class dialogController implements Initializable {
 	
 	@FXML
 	private void handleconfirm(ActionEvent event) {
-		System.out.println(pressName.getText());
-//		PressManager.addPress(pressName.getText(), "0");
-//		Controller.addPressToScene(pressName.getText());
+		if (pressName.getText().trim().isEmpty()) { //Check if the textfield is empty
+			PressManager.setRecentAdded(false);	
+		}
+		else {
+			PressManager.addPress(pressName.getText(), "0");
+			PressManager.setRecentAdded(true);	
+		}
 		Stage stage = (Stage) confirmPress.getScene().getWindow();
 		stage.close(); //Close current window
 	}
 	
 	@FXML
 	private void handlecancel(ActionEvent event) {
+		PressManager.setRecentAdded(false);	
 		// get a handle to the stage
 	    Stage stage = (Stage) cancelPress.getScene().getWindow();
 	    stage.close(); //Close current window
