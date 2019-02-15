@@ -34,13 +34,13 @@
       </MenuBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #1B1B1F; -fx-border-width: 2;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane style="-fx-background-color: #1C1C1C;" stylesheets="@stylesheet.css">
+        <AnchorPane fx:id="leftManager" style="-fx-background-color: #1C1C1C;" stylesheets="@stylesheet.css">
                <children>
                   <Accordion layoutX="5.0" layoutY="-1.0" style="-fx-background-color: #1C1C1C;">
                     <panes>
                       <TitledPane expanded="false" graphicTextGap="5.0" prefHeight="551.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #262626;">
+                          <AnchorPane fx:id="pressList" minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="216.0" style="-fx-background-color: #262626;">
                                  <children>
                                     <Button fx:id="addPress" layoutX="-3.0" layoutY="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="224.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +" />
                                  </children></AnchorPane>
@@ -60,7 +60,7 @@
           <content>
             <AnchorPane id="Content" depthTest="DISABLE" minHeight="-1.0" minWidth="-1.0" prefHeight="551.0" prefWidth="530.0" style="-fx-background-color: #262626; -fx-border-width: 0;">
               <children>
-                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="-fx-text-fill: #828282;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
+                <Label fx:id="test" alignment="CENTER" layoutX="14.0" layoutY="14.0" style="-fx-text-fill: #828282;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
                            <font>
                       <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
                            </font></Label>

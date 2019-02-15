@@ -9,14 +9,17 @@ import controllers.Controller;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -24,8 +27,7 @@ import javafx.scene.paint.Color;
 
 public class Main extends Application {
 	
-	private Stage mainStage;
-	Controller controller;
+	private static Stage mainStage;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -35,7 +37,6 @@ public class Main extends Application {
 		try {
 			 //VBox is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/gui.fxml"));
-
 			Scene scene = new Scene(root, 900, 600, Color.BLACK); //Size of the window for the program in pixels
 			scene.getStylesheets().add(getClass().getResource("/resources/stylesheet.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
@@ -50,8 +51,8 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
+
+	private static EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
         Alert closeConfirmation = new Alert(
                 Alert.AlertType.CONFIRMATION,
                 "Please dont leave me"
@@ -82,5 +83,14 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(Main.class, (java.lang.String[]) null); //Launches the program
+	}
+
+	public static void RefreshStage() {
+		
+	}
+
+	public static void setScene(Scene newScene) {
+		mainStage.setScene(newScene);
+		
 	}
 }

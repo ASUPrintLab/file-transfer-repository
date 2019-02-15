@@ -1,6 +1,5 @@
 package application_v2;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,12 +17,7 @@ public class PressManager {
 			addPress(name,newKey); //Try again
 		}
 		else {
-			pressManager.put(id, newPress);
-			for (String name2: pressManager.keySet()){
-	            String key =name2.toString();
-	            String value = pressManager.get(name2).toString();  
-	            System.out.println(key + " " + value);  
-			} 
+			pressManager.put(id, newPress); 
 		}
 	}
 	
@@ -33,7 +27,6 @@ public class PressManager {
 	private static String getNewKey() {
 		String keyValue = null;
 		for (String key : pressManager.keySet()) {
-		    System.out.println(key);
 		    keyValue = key;
 		}
 		int ketInt = Integer.parseInt(keyValue) + 1;

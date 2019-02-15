@@ -63,7 +63,7 @@
 
 .addPress {
   -fx-background-color: transparent;
-  -fx-border-color: #B9B9B9;
+  /* -fx-border-color: #B9B9B9; */
   -fx-color: white;
   -fx-text-fill: #828282;
   -fx-font-family: "Akzidenz-Grotesk Std Regular";
@@ -72,7 +72,7 @@
 
 .addPress:hover {
   -fx-background-color: rgba(185, 185, 185, .1);
-  -fx-border-color: #1C1C1C;
+  /* -fx-border-color: #1C1C1C; */
   -fx-color: transparent;
   -fx-text-fill: white;
   -fx-font-family: "Akzidenz-Grotesk Std Regular";

@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class dialogController implements Initializable {
@@ -26,21 +27,27 @@ public class dialogController implements Initializable {
 	@FXML
     private TextField pressName; //name of new press in dialog
 	
-	/**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
+//	Controller controller; //Main controller
+	
+	Parent root; //Parent root
+
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		confirmPress.setOnAction(this::handleconfirm); //Invokes the action
+
+		confirmPress.setOnAction(this::handleconfirm); 
+		//Invokes the action
 		cancelPress.setOnAction(this::handlecancel);
+		
 	}
 	
 	@FXML
 	private void handleconfirm(ActionEvent event) {
-		System.out.println(event);
-		PressManager.addPress(pressName.getText(), "0");
+		System.out.println(pressName.getText());
+//		PressManager.addPress(pressName.getText(), "0");
+//		Controller.addPressToScene(pressName.getText());
+		Stage stage = (Stage) confirmPress.getScene().getWindow();
+		stage.close(); //Close current window
 	}
 	
 	@FXML
