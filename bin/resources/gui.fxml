@@ -39,7 +39,7 @@
                <children>
                   <Accordion layoutX="5.0" layoutY="-1.0" style="-fx-background-color: #1C1C1C;">
                     <panes>
-                      <TitledPane expanded="false" graphicTextGap="5.0" prefHeight="551.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0; -fx-alignment: center;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
+                      <TitledPane expanded="false" graphicTextGap="5.0" prefHeight="551.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0; -fx-alignment: center; -fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -65,7 +65,7 @@
           <content>
             <AnchorPane id="Content" depthTest="DISABLE" minHeight="-1.0" minWidth="-1.0" prefHeight="551.0" prefWidth="530.0" style="-fx-background-color: #262626; -fx-border-width: 0;">
               <children>
-                <Label fx:id="test" alignment="CENTER" layoutY="13.0" style="-fx-text-fill: #828282;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
+                <Label fx:id="test" alignment="CENTER" layoutY="13.0" style="-fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
                            <font>
                       <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
                            </font>
@@ -83,13 +83,13 @@
                                     <Insets />
                                  </VBox.margin>
                                  <children>
-                                    <Label fx:id="editTransferLocation" layoutX="25.0" layoutY="21.0" onMouseClicked="#handleEditTranferLocation" prefHeight="25.0" prefWidth="100.0" styleClass="connections" text="Connection 1" textFill="#828282">
+                                    <Label fx:id="editTransferLocation" layoutX="25.0" layoutY="21.0" onMouseClicked="#handleEditTranferLocation" prefHeight="25.0" prefWidth="100.0" style="-fx-text-fill: #B9B9B9;" styleClass="connections" text="Connection 1" textFill="#828282">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField editable="false" layoutX="25.0" layoutY="53.0" prefHeight="25.0" prefWidth="373.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" style="-fx-background-color: black;" />
-                                    <TextField editable="false" layoutX="25.0" layoutY="93.0" prefHeight="25.0" prefWidth="374.0" promptText="J:\CMYK+Spot" style="-fx-background-color: black;" />
+                                    <TextField editable="false" layoutX="25.0" layoutY="53.0" prefHeight="25.0" prefWidth="373.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" style="-fx-background-color: black;" styleClass="textbox-text" />
+                                    <TextField editable="false" layoutX="25.0" layoutY="93.0" prefHeight="25.0" prefWidth="374.0" promptText="J:\CMYK+Spot" style="-fx-background-color: black;" styleClass="textbox-text" />
                                  </children>
                               </Pane>
                            </children>
@@ -102,7 +102,7 @@
                <children>
               <AnchorPane prefHeight="551.0" prefWidth="214.0" style="-fx-background-color: #262626; -fx-border-color: #1C1C1C;" stylesheets="@stylesheet.css">
                 <children>
-                  <Label alignment="CENTER" font="$x1" layoutY="13.0" style="-fx-text-fill: #828282;" text="Transfer Times" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" font="$x1" layoutY="13.0" style="-fx-text-fill: B9B9B9;" text="Transfer Times" textAlignment="CENTER" wrapText="false">
                            <padding>
                               <Insets left="15.0" />
                            </padding></Label>

@@ -4,34 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="132.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dialogController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="110.0" prefWidth="521.0" style="-fx-background-color: #262626;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="110.0" prefWidth="521.0" style="-fx-background-color: #363636;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
       <children>
-            <TextField fx:id="pressName" layoutX="139.0" layoutY="39.0" prefHeight="25.0" prefWidth="292.0" promptText="Press" style="-fx-background-color: black;">
+            <TextField fx:id="pressName" layoutX="139.0" layoutY="39.0" prefHeight="25.0" prefWidth="292.0" promptText="Press" style="-fx-background-color: black;" styleClass="textbox-text">
                <font>
                   <Font size="15.0" />
                </font></TextField>
-            <Label layoutX="63.0" layoutY="36.0" text="Name:" textFill="#828282">
+            <Label layoutX="58.0" layoutY="36.0" style="-fx-text-fill: F9F9F9;" text="Name:" textFill="#828282">
                <font>
                   <Font name="AkzidenzGroteskStd-Md" size="25.0" />
                </font>
             </Label>
             <Button fx:id="confirmPress" layoutX="340.0" layoutY="79.0" mnemonicParsing="false" styleClass="addPress" text="Okay" />
             <Button fx:id="cancelPress" layoutX="424.0" layoutY="79.0" mnemonicParsing="false" styleClass="addPress" text="Cancel" />
-            <Pane prefHeight="25.0" prefWidth="521.0" style="-fx-background-color: #1C1C1C;">
-               <children>
-                  <Label layoutX="5.0" prefHeight="4.0" prefWidth="183.0" text="Add New Press" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
       </children>
     </AnchorPane>
   </children>

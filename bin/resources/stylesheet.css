@@ -23,7 +23,7 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #2F3036;
+    -fx-background-color: #B9B9B9;
     -fx-background-radius: 5em;
 }
 
@@ -53,7 +53,7 @@
   -fx-background-insets: 0 0 0 0, 0, 0, 0;
   -fx-background-radius: 0 0 0 0, 0, 0, 0;
   -fx-border-width: 0 0 0 0, 0, 0, 0;
-  -fx-text-fill: #828282;
+  -fx-text-fill: #F9F9F9;
   -fx-font-family: "Akzidenz-Grotesk Std Regular";
   -fx-font-size: 25px;
 }
@@ -65,7 +65,7 @@
   -fx-background-color: transparent;
   /* -fx-border-color: #B9B9B9; */
   -fx-color: white;
-  -fx-text-fill: #828282;
+  -fx-text-fill: #B9B9B9;
   -fx-font-family: "Akzidenz-Grotesk Std Regular";
   -fx-font-size: 20px;
 }
@@ -86,7 +86,7 @@
       linear-gradient(#262626, #1C1C1C),
       linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%),
       linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%);*/
-  -fx-text-fill: #262626;
+  /* -fx-text-fill: ##B9B9B9; */
   -fx-font: 18px "Akzidenz-Grotesk Std Regular";
 }
 
@@ -120,7 +120,7 @@
 }
 
 .locationDiv {
-  -fx-background-color: #1C1C1C;
+  -fx-background-color: #363636;
   -fx-background-insets: 15 15 15 15;
   -fx-background-radius: 10 10 10 10;
   -fx-effect: dropshadow(GAUSSIAN, black, 10, 0, 4, 5);
@@ -153,6 +153,10 @@
 .middleContainer {
   -fx-effect: dropshadow(GAUSSIAN, black, 10, 0, 4, 5);
   -fx-background-color: black;
+}
+
+.textbox-text {
+  -fx-text-inner-color: white;
 }
 
 /* .browseButton:hover {
