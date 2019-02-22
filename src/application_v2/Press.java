@@ -1,12 +1,14 @@
 package application_v2;
 
+import java.util.ArrayList;
+
 public class Press {
 	private String name; //name of press
 	private String key; //key for hashtable
 	private TransferTime[] TransferTimes; //Transfer times
-	private Locations[] locations; //Location from/to that files will be moved
+	private ArrayList<Locations> locations; //Location from/to that files will be moved
 	
-	public Press(String name, TransferTime[] transferTimes, Locations[] locations, String key) {
+	public Press(String name, TransferTime[] transferTimes, ArrayList<Locations> locations, String key) {
 		super();
 		this.name = name;
 		TransferTimes = transferTimes;
@@ -38,11 +40,11 @@ public class Press {
 		TransferTimes = transferTimes;
 	}
 
-	public Locations[] getLocations() {
+	public ArrayList<Locations> getLocations() {
 		return locations;
 	}
 
-	public void setLocations(Locations[] locations) {
+	public void setLocations(ArrayList<Locations> locations) {
 		this.locations = locations;
 	}
 }

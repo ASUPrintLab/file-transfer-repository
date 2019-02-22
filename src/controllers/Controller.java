@@ -2,9 +2,11 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application_v2.AddPress;
+import application_v2.Locations;
 import application_v2.Press;
 import application_v2.PressManager;
 import javafx.collections.ObservableList;
@@ -50,6 +52,8 @@ public class Controller implements Initializable {
     private ScrollPane scrollpane; //ScrollPane
 	@FXML
     private TextField connectionName; //name of connection in dialog
+	
+	private Press selectedPress;
 	
 //	Parent root;
 	
@@ -108,14 +112,18 @@ public class Controller implements Initializable {
 	@FXML
 	private void handleNewTranferLocation(ActionEvent event) {
 		try {
-			VBox root = FXMLLoader.load(getClass().getResource("/resources/TransferLocationWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferLocationWindow.fxml"));
+			VBox root = (VBox) loader.load();
+			LocationController mainController = loader.<LocationController>getController();
 			Stage window = new Stage();
 			window.initModality(Modality.APPLICATION_MODAL);
 			window.getIcons().add(new Image("/resources/icon.png"));
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
-			createComponent();
+			if (!mainController.getName().trim().isEmpty()) {
+				createComponent(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -124,22 +132,24 @@ public class Controller implements Initializable {
 	/*
 	 * Creates new ui component for Transfer Location
 	 */
-	private void createComponent() {
+	private void createComponent(String name, String sourceLoc, String targetLoc) {
 		Pane pane = new Pane();
 		VBox vbox = new VBox();
 		pane.getStyleClass().add("locationDiv");
 		pane.setPrefHeight(146.00);
 		pane.prefWidth(424.00);
 		pane.setMinHeight(146);
-		Label label = new Label("Connection");
+		Label label = new Label(name);
 		TextField textfield1 = new TextField();
-		textfield1.setPromptText("C:\\Users\\ASUprint\\Desktop\\Enfocus\\Switch\\ASU Print Online\\Output\\Ready for Print");
 		TextField textfield2 = new TextField();
-		textfield2.setPromptText("J:\\CMYK+Spot");
+		textfield1.setText(sourceLoc);
+		textfield2.setText(targetLoc);
 		textfield1.getStyleClass().add("textboxtext");
 		textfield2.getStyleClass().add("textboxtext");
 		textfield1.setPrefWidth(400);
 		textfield2.setPrefWidth(400);
+		textfield1.setEditable(false);
+		textfield2.setEditable(false);
 
 		label.getStyleClass().add("connections");
 		label.setPadding(new Insets(25, 0, 5, 25));
@@ -149,8 +159,22 @@ public class Controller implements Initializable {
 		vbox.getChildren().add(1,textfield1);
 		vbox.getChildren().add(2,textfield2);
 		pane.getChildren().add(0,vbox);
-		
 		transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
+		
+		addLocationToPress(name, sourceLoc, targetLoc);
+	}
+
+	private void addLocationToPress(String name, String sourceLoc, String targetLoc) {
+		ArrayList<Locations> locations = selectedPress.getLocations();
+		if (locations != null) {
+			locations.add(new Locations(name, sourceLoc, targetLoc));
+		}
+		else { //If location array is null lets create a new one
+			locations = new ArrayList<Locations>();
+			locations.add(new Locations(name, sourceLoc, targetLoc));
+		}
+		selectedPress.setLocations(locations);
+		PressManager.updatePress(selectedPress);
 	}
 
 	/*
@@ -163,10 +187,10 @@ public class Controller implements Initializable {
 	
 	@FXML
 	private void handlePress(ActionEvent event) {
-		Press press = PressManager.getPress(String.valueOf(event.getSource().hashCode())); //Get the press info
+		selectedPress = PressManager.getPress(String.valueOf(event.getSource().hashCode())); //Get the press info
 		addTransferLocation.setDisable(false); //Enables adding
 		addTransferTime.setDisable(false);
-		System.out.println(press.getName());
+		System.out.println(selectedPress.getName());
 	}
 	
 	/*

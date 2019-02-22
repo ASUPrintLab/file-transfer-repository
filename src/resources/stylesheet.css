@@ -168,6 +168,11 @@
   -fx-background-insets: 5 0 5 25;
 }
 
+.addpressTextBox {
+  -fx-background-color: black;
+  -fx-text-inner-color: white;
+}
+
 /* .browseButton:hover {
   -fx-background-color: #262626;
   -fx-background-color:

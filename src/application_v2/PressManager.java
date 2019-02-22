@@ -46,8 +46,6 @@ public class PressManager {
 	}
 	//Gets the most recently added press
 	public static Press getRecentPress() {
-//		String key = String.valueOf(pressManager.size() - 1);
-//		Press press = getPress(key);
 		return mostRecentPress;
 	}
 	
@@ -62,6 +60,12 @@ public class PressManager {
 	
 	public static Boolean getRecentAdded() {
 		return recentAdded;
+	}
+	/*
+	 * Update press in hash map
+	 */
+	public static void updatePress(Press press) {
+		pressManager.put(press.getKey(), press);
 	}
 
 }
