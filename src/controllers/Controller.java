@@ -9,18 +9,26 @@ import application_v2.Press;
 import application_v2.PressManager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -37,9 +45,13 @@ public class Controller implements Initializable {
 	@FXML
     private VBox pressList; //Press list in GUI
 	@FXML
-    private TextField pressName; //name of new press in dialog
+    private VBox transferLocList; //Location list in GUI
+	@FXML
+    private ScrollPane scrollpane; //ScrollPane
+	@FXML
+    private TextField connectionName; //name of connection in dialog
 	
-	Parent root;
+//	Parent root;
 	
 	/**
      * Initializes the controller class. This method is automatically called
@@ -47,7 +59,9 @@ public class Controller implements Initializable {
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		// Always show vertical scroll bar
+		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		VBox.setVgrow(scrollpane, Priority.ALWAYS);
 		addPress.setOnAction(this::handleNewPress);
 		addTransferLocation.setOnAction(this::handleNewTranferLocation);
 		addTransferTime.setOnAction(this::handleNewTranferTime);
@@ -101,12 +115,44 @@ public class Controller implements Initializable {
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
+			createComponent();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
+	 * Creates new ui component for Transfer Location
+	 */
+	private void createComponent() {
+		Pane pane = new Pane();
+		VBox vbox = new VBox();
+		pane.getStyleClass().add("locationDiv");
+		pane.setPrefHeight(146.00);
+		pane.prefWidth(424.00);
+		pane.setMinHeight(146);
+		Label label = new Label("Connection");
+		TextField textfield1 = new TextField();
+		textfield1.setPromptText("C:\\Users\\ASUprint\\Desktop\\Enfocus\\Switch\\ASU Print Online\\Output\\Ready for Print");
+		TextField textfield2 = new TextField();
+		textfield2.setPromptText("J:\\CMYK+Spot");
+		textfield1.getStyleClass().add("textboxtext");
+		textfield2.getStyleClass().add("textboxtext");
+		textfield1.setPrefWidth(400);
+		textfield2.setPrefWidth(400);
+
+		label.getStyleClass().add("connections");
+		label.setPadding(new Insets(25, 0, 5, 25));
+		label.setPrefHeight(35);
+		label.setOnMouseClicked(event -> handleEditTranferLocation());
+		vbox.getChildren().add(0,label);
+		vbox.getChildren().add(1,textfield1);
+		vbox.getChildren().add(2,textfield2);
+		pane.getChildren().add(0,vbox);
+		
+		transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
+	}
+
 	/*
 	 * Handles event for adding a new transfer time
 	 */

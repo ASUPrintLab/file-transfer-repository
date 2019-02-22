@@ -133,6 +133,11 @@
   -fx-effect: dropshadow(GAUSSIAN, #bc784e, 5, 0, 1, 2);
 } */
 
+.connections {
+  -fx-text-fill: #B9B9B9;
+  -fx-font: 16px "Akzidenz-Grotesk Std Regular";
+}
+
 .connections:hover {
   -fx-underline: true;
 }
@@ -155,8 +160,12 @@
   -fx-background-color: black;
 }
 
-.textbox-text {
+.textboxtext {
+  -fx-background-color: black;
   -fx-text-inner-color: white;
+  -fx-padding: 10 5 10 35;
+  -fx-border-insets: 5 0 5 5;
+  -fx-background-insets: 5 0 5 25;
 }
 
 /* .browseButton:hover {

@@ -13,7 +13,7 @@ public class PressManager {
 	 */
 	public static void addPress(String name, String id) {
 		//If hash table contains key lets make another
-		if (pressManager!=null && pressManager.containsKey(id)) {
+		if (pressManager!=null && pressManager.containsKey(id)) { //This could better optimized better for memory purposes. Remove recursion
 			String newKey = getNewKey(); //Lets get a new key
 			addPress(name,newKey); //Try again
 		}

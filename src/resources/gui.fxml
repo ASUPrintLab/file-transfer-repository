@@ -61,41 +61,43 @@
                   </Accordion>
                </children>
         </AnchorPane>
-        <ScrollPane prefHeight="551.0" prefWidth="674.0" style="-fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true; -fx-fit-to-height: false;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollpane" prefHeight="784.0" prefWidth="442.0" style="-fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true; -fx-fit-to-height: true;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <content>
-            <AnchorPane id="Content" depthTest="DISABLE" minHeight="-1.0" minWidth="-1.0" prefHeight="551.0" prefWidth="530.0" style="-fx-background-color: #262626; -fx-border-width: 0;">
-              <children>
-                <Label fx:id="test" alignment="CENTER" layoutY="13.0" style="-fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
+            <VBox fx:id="transferLocList" layoutY="41.0" style="-fx-background-color: #262626;" styleClass="locationContainer" stylesheets="@stylesheet.css">
+               <children>
+                        <HBox prefHeight="36.0" prefWidth="440.0">
+                           <children>
+                       <Label fx:id="test" alignment="CENTER" prefHeight="49.0" prefWidth="157.0" style="-fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
                            <font>
-                      <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
+                             <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
                            </font>
                            <padding>
-                              <Insets left="15.0" />
-                           </padding></Label>
-                        <Button fx:id="addTransferLocation" disable="true" layoutX="142.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="54.0" styleClass="addButton" stylesheets="@stylesheet.css" text="+">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <VBox layoutY="41.0" prefHeight="506.0" prefWidth="424.0" styleClass="locationContainer" stylesheets="@stylesheet.css">
-                           <children>
-                              <Pane prefHeight="146.0" prefWidth="424.0" styleClass="locationDiv">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label fx:id="editTransferLocation" layoutX="25.0" layoutY="21.0" onMouseClicked="#handleEditTranferLocation" prefHeight="25.0" prefWidth="100.0" style="-fx-text-fill: #B9B9B9;" styleClass="connections" text="Connection 1" textFill="#828282">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField editable="false" layoutX="25.0" layoutY="53.0" prefHeight="25.0" prefWidth="373.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" style="-fx-background-color: black;" styleClass="textbox-text" />
-                                    <TextField editable="false" layoutX="25.0" layoutY="93.0" prefHeight="25.0" prefWidth="374.0" promptText="J:\CMYK+Spot" style="-fx-background-color: black;" styleClass="textbox-text" />
-                                 </children>
-                              </Pane>
+                             <Insets left="15.0" />
+                           </padding>
+                       </Label>
+                       <Button fx:id="addTransferLocation" disable="false" graphicTextGap="1.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="54.0" styleClass="addButton" stylesheets="@stylesheet.css" text="+">
+                          <cursor>
+                             <Cursor fx:constant="HAND" />
+                          </cursor>
+                        </Button>
                            </children>
-                        </VBox>
-              </children>
-            </AnchorPane>
+                        </HBox>
+                   <!-- <Pane minHeight="146.0" prefHeight="146.0" prefWidth="424.0" styleClass="locationDiv">
+                      <VBox.margin>
+                         <Insets />
+                      </VBox.margin>
+                      <children>
+                         <Label fx:id="editTransferLocation" layoutX="25.0" layoutY="21.0" onMouseClicked="#handleEditTranferLocation" prefHeight="25.0" prefWidth="100.0" style="-fx-text-fill: #B9B9B9;" styleClass="connections" text="Connection 1" textFill="#828282">
+                            <font>
+                               <Font size="16.0" />
+                            </font>
+                         </Label>
+                         <TextField editable="false" layoutX="25.0" layoutY="53.0" prefHeight="25.0" prefWidth="373.0" promptText="C:\Users\ASUprint\Desktop\Enfocus\Switch\ASU Print Online\Output\Ready for Print" style="-fx-background-color: black;" styleClass="textbox-text" />
+                         <TextField editable="false" layoutX="25.0" layoutY="93.0" prefHeight="25.0" prefWidth="374.0" promptText="J:\CMYK+Spot" style="-fx-background-color: black;" styleClass="textbox-text" />
+                      </children>
+                   </Pane> -->
+               </children>
+            </VBox>
           </content>
         </ScrollPane>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1C1C1C;">

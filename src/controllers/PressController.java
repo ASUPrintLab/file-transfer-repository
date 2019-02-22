@@ -6,33 +6,28 @@ import java.util.ResourceBundle;
 
 import application_v2.PressManager;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class dialogController implements Initializable {
-	
+public class PressController implements Initializable {
+	/*
+	 * Variables for Press Window
+	 */
 	@FXML
     private Button confirmPress; //okay button in dialog
 	@FXML
     private Button cancelPress; //cancel button in dialog
 	@FXML
     private TextField pressName; //name of new press in dialog
-		
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		//Bind the event handler
 		confirmPress.setOnAction(this::handleconfirm); 
-		//Invokes the action
 		cancelPress.setOnAction(this::handlecancel);
 		
 	}
