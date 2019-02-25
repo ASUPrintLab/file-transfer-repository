@@ -41,7 +41,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("/resources/stylesheet.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
 			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
-			primaryStage.getIcons().add(new Image("/resources/icon.png"));
+			primaryStage.getIcons().add(new Image("/resources/upload.png"));
 			primaryStage.setOnCloseRequest(confirmCloseEventHandler);
 			primaryStage.show(); //Display
 			primaryStage.setResizable(false);

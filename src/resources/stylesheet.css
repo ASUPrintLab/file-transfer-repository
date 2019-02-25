@@ -41,7 +41,11 @@
 }
 
 .menu:hover {
-    -fx-background-color: #bc784e;
+    -fx-background-color:
+      linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
 }
 
 .label .text {
@@ -75,8 +79,24 @@
   /* -fx-border-color: #1C1C1C; */
   -fx-color: transparent;
   -fx-text-fill: white;
-  -fx-font-family: "Akzidenz-Grotesk Std Regular";
-  -fx-font-size: 20px;
+}
+
+.addPress:pressed {
+  -fx-opacity: 0.5;
+}
+
+.addTime {
+	-fx-background-color: black;
+	-fx-text-fill: white;
+	-fx-effect:  dropshadow(GAUSSIAN, black, 5, 0, 1, 2);
+}
+
+.addTime:hover {
+	-fx-background-color: #262626;
+}
+
+.addTime:pressed {
+	-fx-opacity: 0.5;
 }
 
 .accordion .titled-pane .title {
@@ -88,6 +108,14 @@
       linear-gradient(#2F3036 0%, #262626 20%, #1C1C1C 80%, #1C1C1C 100%);*/
   /* -fx-text-fill: ##B9B9B9; */
   -fx-font: 18px "Akzidenz-Grotesk Std Regular";
+}
+
+.titled-pane > .title > .arrow-button .arrow {
+	-fx-background-color:
+      linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
 }
 
 .titled-pane > *.content {
@@ -140,6 +168,11 @@
 
 .connections:hover {
   -fx-underline: true;
+  -fx-text-fill: 
+  	linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
 }
 
 .browseButton {
@@ -153,6 +186,10 @@
   -fx-text-fill: white;
   -fx-font: 12px "Akzidenz-Grotesk Std Regular";
   -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);
+}
+
+.browseButton:pressed {
+	-fx-opacity: 0.5;
 }
 
 .middleContainer {
@@ -171,6 +208,56 @@
 .addpressTextBox {
   -fx-background-color: black;
   -fx-text-inner-color: white;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font: 12px "Akzidenz-Grotesk Std Bold";
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-background-color:
+      linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
+}
+
+.table-cell.end {
+    -fx-background-color: black;
+}
+
+.table-view .column-header.end {
+}
+
+.combo-box .cell{
+    -fx-text-fill: White;
+    -fx-background-color:  #363636;
+    -fx-background-radius: 0em;
+    -fx-border-color: transparent;
+}
+
+.combo-box .scroll-bar{
+    -fx-background-color:  #363636;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.combo-box .scroll-bar .thumb {
+    -fx-background-color: #B9B9B9;
+    -fx-background-radius: 5em;
+}
+
+
+.combo-box .arrow {
+    -fx-background-color:
+      linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%)
 }
 
 /* .browseButton:hover {

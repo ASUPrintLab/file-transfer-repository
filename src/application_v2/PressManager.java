@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PressManager {
-	static Map<String, Press> pressManager = new HashMap<String, Press>();
+	static HashMap<String, Press> pressManager = new HashMap<String, Press>();
 	static Boolean recentAdded;
 	static Press mostRecentPress;
 

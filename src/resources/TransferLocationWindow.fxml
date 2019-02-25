@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="193.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LocationController">
+<VBox prefHeight="193.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LocationController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="180.0" prefWidth="476.0" style="-fx-background-color: #363636;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
       <children>
@@ -32,15 +32,21 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Button fx:id="browseFrom" layoutX="417.0" layoutY="68.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="93.0" styleClass="browseButton" text="Browse">
+            <Button fx:id="browseFrom" layoutX="417.0" layoutY="68.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="93.0" styleClass="addTime" text="Browse">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font name="AkzidenzGroteskStd-Md" size="12.0" />
+               </font>
             </Button>
-            <Button fx:id="browseTo" layoutX="417.0" layoutY="104.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="93.0" styleClass="browseButton" text="Browse">
+            <Button fx:id="browseTo" layoutX="417.0" layoutY="104.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="93.0" styleClass="addTime" text="Browse">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font name="AkzidenzGroteskStd-Md" size="12.0" />
+               </font>
             </Button>
       </children>
     </AnchorPane>
