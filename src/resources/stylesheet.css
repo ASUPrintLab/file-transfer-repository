@@ -225,11 +225,14 @@
       linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
       linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
 }
-
+/*
 .table-cell.end {
     -fx-background-color: black;
 }
-
+*/
+.table-row-cell:filled {
+   /* -fx-background-color: lime; */
+}
 .table-view .column-header.end {
 }
 

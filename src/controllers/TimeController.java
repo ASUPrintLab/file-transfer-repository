@@ -1,22 +1,20 @@
 package controllers;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
-import application.TransferTimeFrom;
-import application.TransferTimeTo;
 import application_v2.TransferTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class TimeController implements Initializable{
@@ -24,9 +22,11 @@ public class TimeController implements Initializable{
 	 * Variables for Location Window
 	 */
 	@FXML
-    private Button confirmLoc; //okay button in dialog
+    private Button confirmTime; //okay button in dialog
 	@FXML
-    private Button cancelLoc; //cancel button in dialog
+    private Button cancelTime; //cancel button in dialog
+	@FXML
+    private Button addTime; //cancel button in dialog
 	@FXML
     private Button addTransferTime; //add button in dialog
 	@FXML
@@ -34,11 +34,13 @@ public class TimeController implements Initializable{
 	@FXML
     private ComboBox<String> timeTo; //To drop down
 	@FXML
-	private TableView<TransferTimeFrom> timeTable;
+	private TableView<TransferTime> timeTable;
 	@FXML
-	private TableColumn<TransferTime, String> timeColFrom;
+	private TableColumn<TransferTime, String> timeColFromTemp;
 	@FXML
-	private TableColumn<TransferTime, String> timeColTo;
+	private TableColumn<TransferTime, String> timeColToTemp;
+	
+	private boolean save;
 	
 	//Observable List for the drop down times - MR
 	final ObservableList<String> options = FXCollections.observableArrayList(
@@ -52,24 +54,53 @@ public class TimeController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Bind the event handler
-		confirmLoc.setOnAction(this::handleconfirm); 
-		cancelLoc.setOnAction(this::handlecancel);
+		confirmTime.setOnAction(this::handleconfirm); 
+		cancelTime.setOnAction(this::handlecancel);
+		addTime.setOnAction(this::handleAddTime);
 		timeFrom.setItems(options); //Add options
 		timeTo.setItems(options);
+		
+		this.save = false;
+		
+		//Applies the objects to the actual cells in the table
+		timeColFromTemp.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
+		timeColToTemp.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
 		
 		
 	}
 	
+	/*
+	 * Adds new transfer time to the Table View.
+	 */
+	@FXML
+	public void handleAddTime(ActionEvent event) {
+		String from = timeFrom.getValue();
+		String to = timeTo.getValue();
+		TransferTime newTransferTime = new TransferTime(from,to); 
+		//Add times to table
+		timeTable.getItems().add(newTransferTime); 
+	}
+	
 	@FXML
 	private void handleconfirm(ActionEvent event) {
-		Stage stage = (Stage) cancelLoc.getScene().getWindow();
+		this.save = true;
+		Stage stage = (Stage) confirmTime.getScene().getWindow();
 	    stage.close(); //Close current window
 	}
 	
 	@FXML
 	private void handlecancel(ActionEvent event) {
-	    Stage stage = (Stage) cancelLoc.getScene().getWindow();
+		this.save = false;
+	    Stage stage = (Stage) cancelTime.getScene().getWindow();
 	    stage.close(); //Close current window
+	}
+	
+	public ObservableList<TransferTime> getTimes() {
+		return timeTable.getItems();
+	}
+	
+	public boolean ifSaved() {
+		return this.save;
 	}
 
 }

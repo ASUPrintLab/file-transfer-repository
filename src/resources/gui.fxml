@@ -114,11 +114,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TableView layoutX="2.0" layoutY="47.0" prefHeight="501.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);">
+                        <TableView fx:id="timeTable" layoutX="2.0" layoutY="47.0" prefHeight="501.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);">
                           <columns>
-                            <TableColumn prefWidth="77.0" text="Start" />
-                            <TableColumn prefWidth="70.0" styleClass="end" text="End" />
-                              <TableColumn prefWidth="66.0" text="Actions" />
+                            <TableColumn fx:id="startTime" prefWidth="77.0" text="Start" />
+                            <TableColumn fx:id="endTime" prefWidth="70.0" styleClass="end" text="End" />
+                              <TableColumn fx:id="actions" prefWidth="66.0" text="Actions" />
                           </columns>
                         </TableView>
                 </children>

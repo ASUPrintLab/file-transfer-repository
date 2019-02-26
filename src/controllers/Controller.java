@@ -3,12 +3,14 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import application_v2.AddPress;
 import application_v2.Locations;
 import application_v2.Press;
 import application_v2.PressManager;
+import application_v2.TransferTime;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +24,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -52,8 +57,15 @@ public class Controller implements Initializable {
     private ScrollPane scrollpane; //ScrollPane
 	@FXML
     private TextField connectionName; //name of connection in dialog
+	@FXML
+	private TableView<TransferTime> timeTable; //Table
+	@FXML
+	private TableColumn<TransferTime, String> startTime; //Columns
+	@FXML
+	private TableColumn<TransferTime, String> endTime;
 	
 	private Press selectedPress;
+	
 	
 //	Parent root;
 	
@@ -71,6 +83,10 @@ public class Controller implements Initializable {
 		addPress.setOnAction(this::handleNewPress);
 		addTransferLocation.setOnAction(this::handleNewTranferLocation);
 		addTransferTime.setOnAction(this::handleNewTranferTime);
+		
+		//Applies the objects to the actual cells in the table
+		startTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
+		endTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
 	}
 	
 	@FXML
@@ -187,18 +203,33 @@ public class Controller implements Initializable {
 	@FXML
 	private void handleNewTranferTime(ActionEvent event) {
 		try {
-			VBox root = FXMLLoader.load(getClass().getResource("/resources/TransferTimeWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferTimeWindow.fxml"));
+			VBox root = (VBox) loader.load();
+			TimeController mainController = loader.<TimeController>getController();
 			Stage window = new Stage();
 			window.initModality(Modality.APPLICATION_MODAL);
 			window.getIcons().add(new Image("/resources/icon.png"));
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
+			ObservableList<TransferTime> list = mainController.getTimes();
+			if (mainController.ifSaved() && !list.isEmpty()) { //If list is not empty lets add them to the main table
+				addTimesToTable(list);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	private void addTimesToTable(ObservableList<TransferTime> list) {
+		for (int i = 0; i < list.size(); i++) {
+			TransferTime time = list.get(i);
+			//Add times to table
+			timeTable.getItems().add(time);
+		}
+		
+	}
+
 	@FXML
 	private void handlePress(ActionEvent event) {
 		selectedPress = PressManager.getPress(String.valueOf(event.getSource().hashCode())); //Get the press info
