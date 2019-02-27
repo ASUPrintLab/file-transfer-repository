@@ -60,6 +60,8 @@ public class Controller implements Initializable {
 	
 	private Press selectedPress;
 	
+	private Pane pane;
+	
 	
 //	Parent root;
 	
@@ -85,6 +87,7 @@ public class Controller implements Initializable {
 	
 	@FXML
 	private void handleNewPress(ActionEvent event) {
+		clearGUI();
 		addTransferLocation.setDisable(true); //Disables adding
 		addTransferTime.setDisable(true);
 		try {
@@ -135,6 +138,7 @@ public class Controller implements Initializable {
 			window.showAndWait(); //Wait until window closes
 			if (!mainController.getName().trim().isEmpty()) {
 				createComponent(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
+				addLocationToPress(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
 			}
 
 		} catch (IOException e) {
@@ -145,7 +149,7 @@ public class Controller implements Initializable {
 	 * Creates new ui component for Transfer Location
 	 */
 	private void createComponent(String name, String sourceLoc, String targetLoc) {
-		Pane pane = new Pane();
+		pane = new Pane();
 		VBox vbox = new VBox();
 		pane.getStyleClass().add("locationDiv");
 		pane.setPrefHeight(146.00);
@@ -172,8 +176,6 @@ public class Controller implements Initializable {
 		vbox.getChildren().add(2,textfield2);
 		pane.getChildren().add(0,vbox);
 		transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
-		
-		addLocationToPress(name, sourceLoc, targetLoc);
 	}
 	/*
 	 * Adds the new loation to the press
@@ -242,8 +244,31 @@ public class Controller implements Initializable {
 	 * Updates the GUI with the current Press info
 	 */
 	private void updateGUI() {
+		clearGUI();
+		ArrayList<Locations> locations = selectedPress.getLocations();
+		ArrayList<TransferTime> times = selectedPress.getTransferTimes();
+		if (locations != null) {
+			for (int i = 0; i < locations.size(); i++) { //Lets add the locations back to the UI
+				createComponent(locations.get(i).getName(), locations.get(i).getFromLocation(), locations.get(i).getToLocation()); 
+			}
+		}
+		if (times != null) { //Now add the Transfer times back into the main table
+			for (int i = 0; i < times.size(); i++) {
+				TransferTime time = times.get(i);
+				//Add times to table
+				timeTable.getItems().add(time);
+			}
+		}
 		
-		
+	}
+	/*
+	 * Clears the elements in the Locations pane and time table
+	 */
+	private void clearGUI() {
+		if (transferLocList != null) {
+			transferLocList.getChildren().clear();
+			timeTable.getItems().clear();
+		}
 	}
 
 	/*

@@ -64,7 +64,7 @@
         </AnchorPane>
         <ScrollPane fx:id="scrollpane" prefHeight="784.0" prefWidth="442.0" style="-fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true; -fx-fit-to-height: true;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <content>
-            <VBox fx:id="transferLocList" layoutY="41.0" style="-fx-background-color: #262626;" styleClass="locationContainer" stylesheets="@stylesheet.css">
+            <VBox layoutY="41.0" style="-fx-background-color: #262626;" styleClass="locationContainer" stylesheets="@stylesheet.css">
                <children>
                         <HBox prefHeight="36.0" prefWidth="440.0">
                            <children>
@@ -83,6 +83,7 @@
                         </Button>
                            </children>
                         </HBox>
+                        <VBox fx:id="transferLocList" prefHeight="566.0" prefWidth="447.0" />
                    <!-- <Pane minHeight="146.0" prefHeight="146.0" prefWidth="424.0" styleClass="locationDiv">
                       <VBox.margin>
                          <Insets />
