@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class Press {
 	private String name; //name of press
 	private int key; //key for hashtable
-	private TransferTime[] TransferTimes; //Transfer times
+	private ArrayList<TransferTime> TransferTimes; //Transfer times
 	private ArrayList<Locations> locations; //Location from/to that files will be moved
 	
-	public Press(String name, TransferTime[] transferTimes, ArrayList<Locations> locations, int id) {
+	public Press(String name, ArrayList<TransferTime> transferTimes, ArrayList<Locations> locations, int id) {
 		super();
 		this.name = name;
 		TransferTimes = transferTimes;
@@ -34,11 +34,11 @@ public class Press {
 		this.name = name;
 	}
 
-	public TransferTime[] getTransferTimes() {
+	public ArrayList<TransferTime> getTransferTimes() {
 		return TransferTimes;
 	}
 
-	public void setTransferTimes(TransferTime[] transferTimes) {
+	public void setTransferTimes(ArrayList<TransferTime> transferTimes) {
 		TransferTimes = transferTimes;
 	}
 
@@ -48,5 +48,12 @@ public class Press {
 
 	public void setLocations(ArrayList<Locations> locations) {
 		this.locations = locations;
+	}
+
+	public void updateTimes(ArrayList<TransferTime> times) {
+		if (!this.TransferTimes.isEmpty()) {
+			
+		}
+		
 	}
 }
