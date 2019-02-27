@@ -57,6 +57,8 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> startTime; //Columns
 	@FXML
 	private TableColumn<TransferTime, String> endTime;
+	@FXML
+	private TableColumn<TransferTime, String> actions;
 	
 	private Press selectedPress;
 	
@@ -83,6 +85,7 @@ public class Controller implements Initializable {
 		//Applies the objects to the actual cells in the table
 		startTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
 		endTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
+		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
 	}
 	
 	@FXML
