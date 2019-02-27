@@ -15,7 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
+/*
+ * Author: Mitchell Roberts
+ */
 public class LocationController implements Initializable {
 	
 	/*

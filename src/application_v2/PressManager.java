@@ -2,7 +2,9 @@ package application_v2;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+ * Author: Mitchell Roberts
+ */
 public class PressManager {
 	static HashMap<Integer, Press> pressManager = new HashMap<Integer, Press>();
 	static Boolean recentAdded;

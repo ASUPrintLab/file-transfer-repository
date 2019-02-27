@@ -16,7 +16,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
+/*
+ * Author: Mitchell Roberts
+ */
 public class TimeController implements Initializable{
 	/*
 	 * Variables for Location Window

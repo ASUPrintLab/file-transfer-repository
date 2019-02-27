@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/*
+ * Author: Mitchell Roberts
+ */
 public class PressController implements Initializable {
 	/*
 	 * Variables for Press Window
@@ -38,7 +40,7 @@ public class PressController implements Initializable {
 			PressManager.setRecentAdded(false);	
 		}
 		else {
-			PressManager.addPress(pressName.getText(), "0");
+			PressManager.addPress(pressName.getText(), pressName.getText().hashCode());
 			PressManager.setRecentAdded(true);	
 		}
 		Stage stage = (Stage) confirmPress.getScene().getWindow();

@@ -38,7 +38,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+/*
+ * Author: Mitchell Roberts
+ */
 public class Controller implements Initializable {
 	
 	@FXML
@@ -240,6 +242,14 @@ public class Controller implements Initializable {
 		updateGUI(); //Lets update the UI with the presses current info
 	}
 	
+	/*
+	 * Updates the GUI with the current Press info
+	 */
+	private void updateGUI() {
+		
+		
+	}
+
 	/*
 	 * Adds press name to GUI
 	 */

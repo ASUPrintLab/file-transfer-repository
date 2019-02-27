@@ -1,7 +1,8 @@
 package application_v2;
 
-import java.time.LocalTime;
-
+/*
+ * Author: Mitchell Roberts
+ */
 public class TransferTime {
 	private String startTime;
 	private String stopTime;

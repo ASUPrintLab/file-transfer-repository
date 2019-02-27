@@ -1,7 +1,9 @@
 package application_v2;
 
 import java.util.ArrayList;
-
+/*
+ * Author: Mitchell Roberts
+ */
 public class Press {
 	private String name; //name of press
 	private int key; //key for hashtable
