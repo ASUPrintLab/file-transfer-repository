@@ -227,6 +227,7 @@ public class Controller implements Initializable {
 			timeTable.getItems().add(time);
 		}
 		selectedPress.updateTimes(times);
+		PressManager.updatePress(selectedPress); //Update Press in manager
 	}
 
 	@FXML

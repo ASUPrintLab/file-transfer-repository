@@ -1,6 +1,7 @@
 package application_v2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 /*
  * Author: Mitchell Roberts
  */
@@ -51,9 +52,13 @@ public class Press {
 	}
 
 	public void updateTimes(ArrayList<TransferTime> times) {
-		if (!this.TransferTimes.isEmpty()) {
-			
+		if (this.TransferTimes == null) {
+			setTransferTimes(times);
 		}
-		
+		else {
+			for(TransferTime time : times) { //Iterate through an add times to existing times
+				this.TransferTimes.add(time);
+			}
+		}
 	}
 }

@@ -4,6 +4,7 @@ package application_v2;
  * Author: Mitchell Roberts
  */
 public class TransferTime {
+
 	private String startTime;
 	private String stopTime;
 	
@@ -27,6 +28,11 @@ public class TransferTime {
 
 	public void setStopTime(String stopTime) {
 		this.stopTime = stopTime;
+	}
+	
+	@Override
+	public String toString() {
+		return "TransferTime [startTime=" + startTime + ", stopTime=" + stopTime + "]";
 	}
 }
 

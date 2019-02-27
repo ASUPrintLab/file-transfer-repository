@@ -78,9 +78,11 @@ public class TimeController implements Initializable{
 	public void handleAddTime(ActionEvent event) {
 		String from = timeFrom.getValue();
 		String to = timeTo.getValue();
-		TransferTime newTransferTime = new TransferTime(from,to); 
-		//Add times to table
-		timeTable.getItems().add(newTransferTime); 
+		if (from != null || to != null) {
+			TransferTime newTransferTime = new TransferTime(from,to); 
+			//Add times to table
+			timeTable.getItems().add(newTransferTime); 	
+		}
 	}
 	
 	@FXML
