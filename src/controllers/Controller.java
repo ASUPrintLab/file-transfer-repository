@@ -220,7 +220,9 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
+	 * This method add the new transfer times to the main table
+	 */
 	private void addTimesToTable(ObservableList<TransferTime> list) {
 		for (int i = 0; i < list.size(); i++) {
 			TransferTime time = list.get(i);
@@ -232,10 +234,10 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void handlePress(ActionEvent event) {
-		selectedPress = PressManager.getPress(String.valueOf(event.getSource().hashCode())); //Get the press info
+		selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
 		addTransferLocation.setDisable(false); //Enables adding
 		addTransferTime.setDisable(false);
-		System.out.println(selectedPress.getName());
+		updateGUI(); //Lets update the UI with the presses current info
 	}
 	
 	/*
@@ -252,9 +254,8 @@ public class Controller implements Initializable {
 		newPress.setMinWidth(addPress.getWidth());
 		newPress.setUserData(press);
 		
-		press.setKey(String.valueOf(newPress.hashCode()));
-		PressManager.addPress(press.getName(), String.valueOf(newPress.hashCode())); //Add new press with the same hash code as the button
-		System.out.println(press.getKey());
+		press.setKey(newPress.hashCode());
+		PressManager.addPress(press.getName(), newPress.hashCode()); //Add new press with the same hash code as the button
 		//Set action to handle the new press button
 		newPress.setOnAction(this::handlePress);
 		
