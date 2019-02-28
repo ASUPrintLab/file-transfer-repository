@@ -1,6 +1,7 @@
 package application_v2;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 
 /*
  * Author: Mitchell Roberts
@@ -9,13 +10,13 @@ public class TransferTime {
 
 	private String startTime;
 	private String stopTime;
-	private Button edit;
+	private CheckBox edit;
 
 	public TransferTime(String startTime, String stopTime) {
 		super();
 		this.startTime = startTime;
 		this.stopTime = stopTime;
-		this.edit = new Button("Edit");
+		this.edit = new CheckBox();
 	}
 
 	public String getStartTime() {
@@ -34,11 +35,11 @@ public class TransferTime {
 		this.stopTime = stopTime;
 	}
 	
-	public Button getEdit() {
+	public CheckBox getEdit() {
 		return edit;
 	}
 
-	public void setEdit(Button edit) {
+	public void setEdit(CheckBox edit) {
 		this.edit = edit;
 	}
 	

@@ -225,11 +225,31 @@
       linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
       linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
 }
+
+.table-view {
+  -fx-table-cell-border-color: transparent;
+}
+
 /*
 .table-cell.end {
     -fx-background-color: black;
 }
 */
+
+.table-row-cell:odd {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
+.table-row-cell:even {
+	-fx-background-color: rgba(96, 96, 96, 0.5);
+	-fx-border-color: transparent;
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
 .table-row-cell:filled {
    /* -fx-background-color: lime; */
 }
@@ -263,6 +283,64 @@
       linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%)
 }
 
+.topDiv {
+	-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 10, 0, 4, 5);
+}
+
+.check-box
+{
+    -fx-text-fill: #395cab;
+    /*-fx-label-padding: 0.0em 0.0em 0.416667em;*/
+
+}
+
+.check-box:focused
+{
+    -fx-color: #ff5400;
+}
+
+.check-box .box{
+
+    -fx-background-color:
+      linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
+    -fx-body-color:#9a9a9a;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 2,2,1,1;
+    -fx-padding: 0.25em;
+}
+
+.check-box:focused .box{
+
+     -fx-background-color: #ea7f4;
+    -fx-background-insets: -1.4,0,1,2;
+    -fx-background-radius: 3,4,2,1,1;
+
+}
+
+.check-box:hover .box{
+
+    -fx-color:#9d4024;
+    -fx-hover-base:#7ebcea;
+}
+
+.check-box .mark {
+    -fx-background-insets: 1 0 -1 0 0;
+    -fx-padding: 0.3333333em;
+
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:indeterminate .mark{
+    -fx-background-color: #2a2b2a;
+    -fx-mark-highlight-color: #395cab;
+    -fx-scale-shape: true;
+}
 /* .browseButton:hover {
   -fx-background-color: #262626;
   -fx-background-color:
