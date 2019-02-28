@@ -313,8 +313,6 @@
 }
 
 .check-box:focused .box{
-
-     -fx-background-color: #ea7f4;
     -fx-background-insets: -1.4,0,1,2;
     -fx-background-radius: 3,4,2,1,1;
 
@@ -340,6 +338,35 @@
     -fx-background-color: #2a2b2a;
     -fx-mark-highlight-color: #395cab;
     -fx-scale-shape: true;
+}
+
+.icon {
+	-fx-opacity: 0.5;
+}
+
+.icon:hover {
+	-fx-opacity: 1;
+}
+
+.toggleButtons {
+	-fx-background-radius: 60px;
+	-fx-background-color:
+      linear-gradient(#3986e1 0%, #4c75e6 25%, #7b4cf4 75%, #9c2ffe 100%),
+      linear-gradient(#4c75e6, #9c2ffe),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%),
+      linear-gradient(#3986e1 0%, #4c75e6 20%, #7b4cf4 80%, #9c2ffe 100%);
+}
+
+.toggleButtons:pressed {
+	-fx-opacity: 0.7;
+}
+
+.buttonIcon {
+	-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 15, 0, 0, 0);
+}
+
+.toggleButtons.buttonIcon:pressed {
+	-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 10, 0, 1, 2);
 }
 /* .browseButton:hover {
   -fx-background-color: #262626;

@@ -40,7 +40,15 @@ public class Controller implements Initializable {
 	@FXML
     private Button addPress; //Add press button in Accordion
 	@FXML
+    private Button run; //start the program
+	@FXML
+    private Button stop; //stop the program
+	@FXML
     private ImageView addTransferLocation; //Add Transfer Location '+'
+	@FXML
+    private ImageView startIcon; //Add Transfer Location '+'
+	@FXML
+    private ImageView stopIcon; //Add Transfer Location '+'
 	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -80,6 +88,8 @@ public class Controller implements Initializable {
 		// Always show vertical scroll bar
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
+		run.setOnAction(this::start);
+		stop.setOnAction(this::stop);
 		addPress.setOnAction(this::handleNewPress);
 		addTransferLocation.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			if (selectedPress != null) {
@@ -111,6 +121,17 @@ public class Controller implements Initializable {
 			//Add times to table
 			timeTable.getItems().add(times.get(i));
 		}
+	}
+	
+	@FXML
+	private void start(ActionEvent event) {
+//		startIcon.pre(true);
+//		startIcon.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 10, 0, 1, 2);");
+	}
+	
+	@FXML
+	private void stop(ActionEvent event) {
+
 	}
 
 	@FXML
