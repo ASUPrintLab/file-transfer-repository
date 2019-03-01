@@ -26,6 +26,8 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -35,15 +37,25 @@ import javafx.stage.Stage;
  * Author: Mitchell Roberts
  */
 public class Controller implements Initializable {
-	
+
 	@FXML
     private Button addPress; //Add press button in Accordion
 	@FXML
-    private Button addTransferLocation; //Add Transfer Location '+'
+    private Button run; //start the program
+	@FXML
+    private Button stop; //stop the program
+	@FXML
+    private ImageView addTransferLocation; //Add Transfer Location '+'
+	@FXML
+    private ImageView startIcon; //Add Transfer Location '+'
+	@FXML
+    private ImageView stopIcon; //Add Transfer Location '+'
 	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
 	@FXML
-    private Button addTransferTime; //Add Transfer Time '+'
+    private ImageView addTransferTime; //Add Transfer Time '+'
+	@FXML
+    private ImageView edit; //Edit Transfer Time
 	@FXML
     private VBox pressList; //Press list in GUI
 	@FXML
@@ -58,13 +70,16 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> startTime; //Columns
 	@FXML
 	private TableColumn<TransferTime, String> endTime;
-	
+	@FXML
+	private TableColumn<TransferTime, String> actions;
+
 	private Press selectedPress;
-	
-//	PressManager pressManagerController = new PressManager();
-	Main main = new Main();
+
+	private Pane pane;
+
+
 //	Parent root;
-	
+
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -74,21 +89,55 @@ public class Controller implements Initializable {
 		// Always show vertical scroll bar
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
-		addTransferLocation.setDisable(true); //Disables adding
-		addTransferTime.setDisable(true);
+		run.setOnAction(this::start);
+		stop.setOnAction(this::stop);
 		addPress.setOnAction(this::handleNewPress);
-		addTransferLocation.setOnAction(this::handleNewTranferLocation);
-		addTransferTime.setOnAction(this::handleNewTranferTime);
-		
+		addTransferLocation.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			if (selectedPress != null) {
+				handleNewTranferLocation();
+			}
+	     });
+		addTransferTime.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			if (selectedPress != null) {
+				handleNewTranferTime();
+			}
+	     });
+		edit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			if (selectedPress != null && !timeTable.getItems().isEmpty()) {
+				handleEdit();
+			}
+	     });
+
 		//Applies the objects to the actual cells in the table
 		startTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
 		endTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
+//		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
 	}
-	
+
+	private void handleEdit() {
+		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
+		timeTable.getItems().clear();
+		ArrayList<TransferTime> times = selectedPress.getTransferTimes();
+		for (int i = 0; i < times.size(); i++) {
+			//Add times to table
+			timeTable.getItems().add(times.get(i));
+		}
+	}
+
+	@FXML
+	private void start(ActionEvent event) {
+//		startIcon.pre(true);
+//		startIcon.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 10, 0, 1, 2);");
+	}
+
+	@FXML
+	private void stop(ActionEvent event) {
+
+	}
+
 	@FXML
 	private void handleNewPress(ActionEvent event) {
-		addTransferLocation.setDisable(true); //Disables adding
-		addTransferTime.setDisable(true);
+		clearGUI();
 		try {
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/AddPressWindow.fxml"));
 			Stage window = new Stage();
@@ -104,7 +153,7 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void handleEditTranferLocation() {
 		try {
@@ -119,12 +168,12 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * Handles event for adding a new transfer location
 	 */
 	@FXML
-	private void handleNewTranferLocation(ActionEvent event) {
+	private void handleNewTranferLocation() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferLocationWindow.fxml"));
 			VBox root = (VBox) loader.load();
@@ -137,6 +186,7 @@ public class Controller implements Initializable {
 			window.showAndWait(); //Wait until window closes
 			if (!mainController.getName().trim().isEmpty()) {
 				createComponent(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
+				addLocationToPress(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
 			}
 
 		} catch (IOException e) {
@@ -147,7 +197,7 @@ public class Controller implements Initializable {
 	 * Creates new ui component for Transfer Location
 	 */
 	private void createComponent(String name, String sourceLoc, String targetLoc) {
-		Pane pane = new Pane();
+		pane = new Pane();
 		VBox vbox = new VBox();
 		pane.getStyleClass().add("locationDiv");
 		pane.setPrefHeight(146.00);
@@ -173,8 +223,6 @@ public class Controller implements Initializable {
 		vbox.getChildren().add(2,textfield2);
 		pane.getChildren().add(0,vbox);
 		transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
-		
-		addLocationToPress(name, sourceLoc, targetLoc);
 	}
 	/*
 	 * Adds the new loation to the press
@@ -196,7 +244,7 @@ public class Controller implements Initializable {
 	 * Handles event for adding a new transfer time
 	 */
 	@FXML
-	private void handleNewTranferTime(ActionEvent event) {
+	private void handleNewTranferTime() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferTimeWindow.fxml"));
 			VBox root = (VBox) loader.load();
@@ -215,7 +263,7 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * This method add the new transfer times to the main table
 	 */
@@ -228,47 +276,70 @@ public class Controller implements Initializable {
 			timeTable.getItems().add(time);
 		}
 		selectedPress.updateTimes(times);
+		PressManager.updatePress(selectedPress); //Update Press in manager
 	}
 
 	@FXML
 	private void handlePress(ActionEvent event) {
 		selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
-		addTransferLocation.setDisable(false); //Enables adding
-		addTransferTime.setDisable(false);
 		updateGUI(); //Lets update the UI with the presses current info
 	}
-	
+
 	/*
 	 * Updates the GUI with the current Press info
 	 */
 	private void updateGUI() {
-		
-		
+		clearGUI();
+		ArrayList<Locations> locations = selectedPress.getLocations();
+		ArrayList<TransferTime> times = selectedPress.getTransferTimes();
+		if (locations != null) {
+			for (int i = 0; i < locations.size(); i++) { //Lets add the locations back to the UI
+				createComponent(locations.get(i).getName(), locations.get(i).getFromLocation(), locations.get(i).getToLocation());
+			}
+		}
+		if (times != null) { //Now add the Transfer times back into the main table
+			for (int i = 0; i < times.size(); i++) {
+				TransferTime time = times.get(i);
+				//Add times to table
+				timeTable.getItems().add(time);
+			}
+		}
+
+	}
+	/*
+	 * Clears the elements in the Locations pane and time table
+	 */
+	private void clearGUI() {
+		if (transferLocList != null) {
+			transferLocList.getChildren().clear();
+			timeTable.getItems().clear();
+		}
 	}
 
 	/*
 	 * Adds press name to GUI
 	 */
 	@FXML
-	public void addPressToScene() { 
-	
-		
-		
+	public void addPressToScene() {
+
+
+
 		//Get the most recent press added to hashmap
 		Press press = PressManager.getRecentPress();
 		PressManager.removePress(press.getKey()); //Remove temp obj in hashmap
-		
+
 		Button newPress = new Button(press.getName());
 		newPress.getStyleClass().add("addPress");
 		newPress.setMinWidth(addPress.getWidth());
 		newPress.setUserData(press);
-		
+
 		press.setKey(newPress.hashCode());
 		PressManager.addPress(press.getName(), newPress.hashCode()); //Add new press with the same hash code as the button
+		selectedPress = press;
 		//Set action to handle the new press button
 		newPress.setOnAction(this::handlePress);
-		
-		// Checking if the height of the Press list is greater than the scene. 
+
+		// Checking if the height of the Press list is greater than the scene.
 		//If so create a scroll bar to see the presses
 		if(pressList.getPrefHeight() < main.scene.getHeight()){
 			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
@@ -277,7 +348,7 @@ public class Controller implements Initializable {
 		else {
 			pressList.getChildren().add(0,newPress); //Add button to top of children
 		}
-		
+
 
 	}
 

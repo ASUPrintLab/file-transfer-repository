@@ -54,7 +54,7 @@ public class PressManager {
 	
 
 	public static Press getPress(int key) {
-		return (Press)pressManager.get(key);
+		return pressManager.get(key);
 	}
 	
 	public static void setRecentAdded(Boolean recentAdded) {
