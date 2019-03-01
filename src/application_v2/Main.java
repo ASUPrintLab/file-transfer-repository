@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 public class Main extends Application {
 	
 	private static Stage mainStage;
-	
+	public Scene scene;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -32,7 +32,7 @@ public class Main extends Application {
 		try {
 			 //VBox is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/gui.fxml"));
-			Scene scene = new Scene(root, 900, 600, Color.BLACK); //Size of the window for the program in pixels
+			scene = new Scene(root, 900, 600, Color.BLACK); //Size of the window for the program in pixels
 			scene.getStylesheets().add(getClass().getResource("/resources/stylesheet.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
 			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched

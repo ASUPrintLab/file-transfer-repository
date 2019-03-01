@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application_v2.Locations;
+import application_v2.Main;
 import application_v2.Press;
 import application_v2.PressManager;
 import application_v2.TransferTime;
@@ -60,7 +61,8 @@ public class Controller implements Initializable {
 	
 	private Press selectedPress;
 	
-	
+//	PressManager pressManagerController = new PressManager();
+	Main main = new Main();
 //	Parent root;
 	
 	/**
@@ -160,7 +162,6 @@ public class Controller implements Initializable {
 		textfield2.getStyleClass().add("textboxtext");
 		textfield1.setPrefWidth(400);
 		textfield2.setPrefWidth(400);
-		textfield1.setEditable(false);
 		textfield2.setEditable(false);
 
 		label.getStyleClass().add("connections");
@@ -249,7 +250,10 @@ public class Controller implements Initializable {
 	 * Adds press name to GUI
 	 */
 	@FXML
-	public void addPressToScene() {
+	public void addPressToScene() { 
+	
+		
+		
 		//Get the most recent press added to hashmap
 		Press press = PressManager.getRecentPress();
 		PressManager.removePress(press.getKey()); //Remove temp obj in hashmap
@@ -264,7 +268,16 @@ public class Controller implements Initializable {
 		//Set action to handle the new press button
 		newPress.setOnAction(this::handlePress);
 		
-		pressList.getChildren().add(0,newPress); //Add button to top of children
+		// Checking if the height of the Press list is greater than the scene. 
+		//If so create a scroll bar to see the presses
+		if(pressList.getPrefHeight() < main.scene.getHeight()){
+			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+			VBox.setVgrow(scrollpane, Priority.ALWAYS);
+		}
+		else {
+			pressList.getChildren().add(0,newPress); //Add button to top of children
+		}
+		
 
 	}
 

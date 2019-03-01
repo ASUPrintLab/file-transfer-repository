@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<VBox prefHeight="600.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
   <children>
       <MenuBar id="menubar" stylesheets="@stylesheet.css">
         <menus>
