@@ -138,7 +138,7 @@
                            <padding>
                               <Insets left="15.0" />
                            </padding></Label>
-                        <TableView fx:id="timeTable" layoutX="2.0" layoutY="47.0" prefHeight="383.0" prefWidth="212.0" style="-fx-background-color: transparent; -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);">
+                        <TableView fx:id="timeTable" layoutX="2.0" layoutY="47.0" prefHeight="373.0" prefWidth="212.0" style="-fx-background-color: transparent; -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);">
                           <columns>
                             <TableColumn fx:id="startTime" prefWidth="81.0" text="Start" />
                             <TableColumn fx:id="endTime" prefWidth="76.0" styleClass="end" text="End" />
@@ -153,6 +153,16 @@
                         <ImageView fx:id="addTransferTime" fitHeight="21.0" fitWidth="25.0" layoutX="138.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
                               <Image url="@add-button.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cancel" fitHeight="21.0" fitWidth="25.0" layoutX="172.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="icon" visible="false">
+                           <image>
+                              <Image url="@error.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="delete" fitHeight="21.0" fitWidth="25.0" layoutX="138.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" styleClass="icon" visible="false">
+                           <image>
+                              <Image url="@garbage.png" />
                            </image>
                         </ImageView>
                 </children>

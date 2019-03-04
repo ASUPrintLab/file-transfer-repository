@@ -48,6 +48,10 @@ public class Controller implements Initializable {
 	@FXML
     private ImageView startIcon; //Add Transfer Location '+'
 	@FXML
+    private ImageView cancel;
+	@FXML
+    private ImageView delete;
+	@FXML
     private ImageView stopIcon; //Add Transfer Location '+'
 	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
@@ -121,6 +125,10 @@ public class Controller implements Initializable {
 			//Add times to table
 			timeTable.getItems().add(times.get(i));
 		}
+		addTransferTime.setVisible(false);
+		edit.setVisible(false);
+		cancel.setVisible(true);
+		delete.setVisible(true);
 	}
 	
 	@FXML
