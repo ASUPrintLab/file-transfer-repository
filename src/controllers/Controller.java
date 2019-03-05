@@ -5,14 +5,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.SlideOutRight;
 import application_v2.Locations;
 import application_v2.Press;
 import application_v2.PressManager;
 import application_v2.TransferTime;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,8 +37,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 /*
  * Author: Mitchell Roberts
  */
@@ -50,6 +52,8 @@ public class Controller implements Initializable {
     private Button run; //start the program
 	@FXML
     private Button stop; //stop the program
+	@FXML
+    private ImageView running1; //stop the program
 	@FXML
     private ImageView addTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -138,17 +142,14 @@ public class Controller implements Initializable {
 		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
 		actions.setVisible(false);
 	}
-	
+	/*
+	 * Handles the close 'x' button for the program
+	 */
 	private void handleClose(MouseEvent event) {
-		Alert closeConfirmation = new Alert(
-                Alert.AlertType.CONFIRMATION,
-                "Please dont leave me"
-        );
+		Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,"Please dont leave me");
 		Stage stage = (Stage) close.getScene().getWindow();
 		
-        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
-                ButtonType.OK
-        );
+        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
        
         exitButton.setOnAction(new EventHandler<ActionEvent>(){
         	@Override
@@ -163,7 +164,6 @@ public class Controller implements Initializable {
         closeConfirmation.initOwner(stage);
         closeConfirmation.setX(stage.getX() + 200);
         closeConfirmation.setY(stage.getY() + 100);
-
         closeConfirmation.showAndWait();
 		
 	}
@@ -195,8 +195,8 @@ public class Controller implements Initializable {
 	
 	@FXML
 	private void start(ActionEvent event) {
-//		startIcon.pre(true);
-//		startIcon.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 10, 0, 1, 2);");
+		new SlideOutRight(running1).setCycleDuration(20).setCycleCount(20).setDelay(Duration.valueOf("200ms")).play();
+
 	}
 	
 	@FXML

@@ -52,6 +52,11 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <ImageView fx:id="running1" fitHeight="27.0" fitWidth="29.0" layoutX="202.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <VBox prefHeight="86.0" prefWidth="568.0" style="-fx-background-color: #262626;" />
@@ -171,7 +176,7 @@
             </Pane>
       </items>
     </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="900.0" spacing="5.0" style="-fx-background-color: #1C1C1C;" VBox.vgrow="NEVER">
+    <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="912.0" spacing="5.0" style="-fx-background-color: #1C1C1C;" VBox.vgrow="NEVER">
       <children>
         <Label maxWidth="-1.0" prefHeight="17.0" prefWidth="177.0" style="-fx-background-color: #1B1B1F;" text="  File Transfer Utility 2.0" textFill="#7e808a" HBox.hgrow="NEVER" />
       </children>
