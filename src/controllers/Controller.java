@@ -5,20 +5,25 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application_v2.Locations;
 import application_v2.Press;
 import application_v2.PressManager;
 import application_v2.TransferTime;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -55,6 +60,8 @@ public class Controller implements Initializable {
     private ImageView delete;
 	@FXML
     private ImageView stopIcon; //Add Transfer Location '+'
+	@FXML
+    private ImageView close; //The 'x' to close the program
 	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -117,17 +124,50 @@ public class Controller implements Initializable {
 			edit.setVisible(true);
 			cancel.setVisible(false);
 			delete.setVisible(false);
-			timeTable.getColumns().get(2);
+			actions.setVisible(false);
 	     });
 		delete.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			handleTableRemoval();
 	     });
-		
+		close.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			handleClose(event);
+	     });
 		//Applies the objects to the actual cells in the table
 		startTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
 		endTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
+		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
+		actions.setVisible(false);
 	}
 	
+	private void handleClose(MouseEvent event) {
+		Alert closeConfirmation = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "Please dont leave me"
+        );
+		Stage stage = (Stage) close.getScene().getWindow();
+		
+        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
+                ButtonType.OK
+        );
+       
+        exitButton.setOnAction(new EventHandler<ActionEvent>(){
+        	@Override
+        	public void handle(ActionEvent event) {
+        		stage.close();
+            }
+        });
+                
+        exitButton.setText("Exit");
+        closeConfirmation.setHeaderText("Are you sure you want to exit?");
+        closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+        closeConfirmation.initOwner(stage);
+        closeConfirmation.setX(stage.getX() + 200);
+        closeConfirmation.setY(stage.getY() + 100);
+
+        closeConfirmation.showAndWait();
+		
+	}
+
 	private void handleTableRemoval() {
 		int size = timeTable.getItems().size();
 		for (int i = 0; i < size; i++) { //Table will get smaller as you remove so double for loop to ensure all elements get removed
@@ -146,13 +186,7 @@ public class Controller implements Initializable {
 	}
 
 	private void handleEdit() {
-		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
-		timeTable.getItems().clear();
-		ArrayList<TransferTime> times = selectedPress.getTransferTimes();
-		for (int i = 0; i < times.size(); i++) {
-			//Add times to table
-			timeTable.getItems().add(times.get(i));
-		}
+		actions.setVisible(true);
 		addTransferTime.setVisible(false);
 		edit.setVisible(false);
 		cancel.setVisible(true);
@@ -313,6 +347,7 @@ public class Controller implements Initializable {
 		}
 		selectedPress.updateTimes(times);
 		PressManager.updatePress(selectedPress); //Update Press in manager
+		actions.setVisible(false);
 	}
 
 	@FXML

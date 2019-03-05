@@ -11,6 +11,7 @@ public class TransferTime {
 	private String startTime;
 	private String stopTime;
 	private CheckBox edit;
+	private String clear;
 
 	public TransferTime(String startTime, String stopTime) {
 		super();
@@ -47,5 +48,10 @@ public class TransferTime {
 	public String toString() {
 		return "TransferTime [startTime=" + startTime + ", stopTime=" + stopTime + "]";
 	}
+
+	public String getClear() {
+		return clear;
+	}
+
 }
 

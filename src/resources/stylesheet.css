@@ -368,6 +368,22 @@
 .toggleButtons.buttonIcon:pressed {
 	-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 10, 0, 1, 2);
 }
+.menuDD .arrow-button  {
+	-fx-background-color: transparent;
+    -fx-opacity: 0.0;
+    -fx-cursor: text;
+}
+
+.menuDD {
+	-fx-background-color:  #1C1C1C;
+}
+
+.menuDD .cell{
+    -fx-text-fill: White;
+    -fx-background-color: #1C1C1C;
+    -fx-background-radius: 0em;
+}
+
 /* .browseButton:hover {
   -fx-background-color: #262626;
   -fx-background-color:
