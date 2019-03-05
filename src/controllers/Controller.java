@@ -3,6 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application_v2.Locations;
@@ -110,13 +112,39 @@ public class Controller implements Initializable {
 				handleEdit();	
 			}
 	     });
+		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			addTransferTime.setVisible(true);
+			edit.setVisible(true);
+			cancel.setVisible(false);
+			delete.setVisible(false);
+			timeTable.getColumns().get(2);
+	     });
+		delete.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			handleTableRemoval();
+	     });
 		
 		//Applies the objects to the actual cells in the table
 		startTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
 		endTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
-//		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
 	}
 	
+	private void handleTableRemoval() {
+		int size = timeTable.getItems().size();
+		for (int i = 0; i < size; i++) { //Table will get smaller as you remove so double for loop to ensure all elements get removed
+			for (int j = 0; j < timeTable.getItems().size(); j++) { 
+				if (timeTable.getItems().get(j).getEdit().isSelected()) { // Remove selected check boxes
+					timeTable.getItems().remove(j);
+					break;
+				}
+			}
+		}
+		List<TransferTime> collection = timeTable.getItems(); //Now update the list and press
+		ArrayList<TransferTime> times = new ArrayList<TransferTime>();
+		times.addAll(collection);
+		selectedPress.setTransferTimes(times);
+		PressManager.updatePress(selectedPress); //Update the press in the hashmap
+	}
+
 	private void handleEdit() {
 		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
 		timeTable.getItems().clear();
