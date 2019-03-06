@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<VBox prefHeight="600.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
   <children>
       <Pane prefHeight="27.0" prefWidth="854.0">
          <children>
@@ -71,7 +71,7 @@
                <children>
                   <Accordion layoutX="5.0" layoutY="-1.0" style="-fx-background-color: #1C1C1C;">
                     <panes>
-                      <TitledPane expanded="false" graphicTextGap="5.0" prefHeight="455.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0; -fx-alignment: center; -fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
+                      <TitledPane fx:id="pressTitlePane" expanded="false" graphicTextGap="5.0" prefHeight="455.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0; -fx-alignment: center; -fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -79,21 +79,26 @@
                               <Font size="27.0" />
                            </font>
                            <content>
-                              <VBox fx:id="pressList" alignment="TOP_CENTER" prefHeight="495.0" prefWidth="217.0" style="-fx-background-color: #262626;">
-                                 <children>
-                                    <Button fx:id="addPress" mnemonicParsing="false" prefHeight="50.0" prefWidth="249.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin></Button>
-                                 </children>
-                              </VBox>
+                              <ScrollPane fx:id="scrollPaneAddPress" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" styleClass="scroll-bar" stylesheets="@stylesheet.css">
+                                 <content>
+                                    <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="403.0" prefWidth="217.0" style="-fx-background-color: #262626;">
+                                       <children>
+                                          <Button fx:id="addPress" mnemonicParsing="false" prefHeight="50.0" prefWidth="249.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
                            </content>
                       </TitledPane>
                     </panes>
                   </Accordion>
                </children>
         </AnchorPane>
-        <ScrollPane fx:id="scrollpane" prefHeight="784.0" prefWidth="442.0" style="-fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true; -fx-fit-to-height: true;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollpane" prefHeight="784.0" prefWidth="442.0" style="-fx-fit-to-height: true; -fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <content>
             <VBox layoutY="41.0" style="-fx-background-color: #262626;" styleClass="locationContainer" stylesheets="@stylesheet.css">
                <children>

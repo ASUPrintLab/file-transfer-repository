@@ -101,6 +101,9 @@ public class Controller implements Initializable {
 
 	@FXML
 	private MenuBar menuBar; // Used to identify the size of the program
+	
+	@FXML 
+	private ScrollPane scrollPaneAddPress; // Scroll pane created for adding a new press
 
 	@FXML
 	private Accordion accordion;
@@ -109,12 +112,10 @@ public class Controller implements Initializable {
 
 	private Pane pane;
 
-	@FXML
-	private VBox guiSize;
+//	@FXML
+//	private VBox guiSize;
 
-	 final ScrollPane sp = new ScrollPane(pressList);
-
-	ArrayList<VBox> increaseTitledPane = new ArrayList<VBox>();
+	
 
 	private double pressListIncreased= 403;
 	Main mainScene = new Main();
@@ -126,10 +127,16 @@ public class Controller implements Initializable {
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		// Always show vertical scroll bar that is displayed to the right of transfer locations
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
-
+		
+		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
+		VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
+		
+		scrollPaneAddPress.getStyleClass().add("scroll-bar");
+		
 //		sc.setLayoutX(mainScene.scene.getWidth() - sc.getWidth());
 
 		run.setOnAction(this::start);
@@ -454,27 +461,27 @@ public class Controller implements Initializable {
 
 
 		if(pressList.getPrefHeight() > pressTitlePane.getPrefHeight()) {
-
-			sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-			VBox.setVgrow(sp, Priority.ALWAYS);
-
-			 sp.setVmax(600);
-		     sp.setPrefSize(115, 150);
-		     sp.setContent(pressList);
+			
+//			scrollPaneAddPress.setFitToWidth(true);
+//			scrollPaneAddPress.setFitToHeight(true);
+			
+			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+			VBox.setVgrow(scrollPaneAddPress, Priority.SOMETIMES);
+			
 
 			pressList.getChildren().add(0,newPress); //Add button to top of children
 			System.out.println("This statement is reached when scroll bar is bigger than the main scene");
 		}
 		else {
 			pressListIncreased = pressListIncreased + 70;
-			 pressList.getChildren().add(0,newPress); //Add button to top of children
+			pressList.getChildren().add(0,newPress); //Add button to top of children
 //			increaseTitledPane.add(pressList);
 
 			pressList.setPrefHeight(pressListIncreased);
 
 
 //			System.out.println("A new child has been added");
-			System.out.println("new size of titlePaneIncreased "+pressListIncreased);
+			System.out.println("new size of pressList "+pressListIncreased);
 		}
 
 
