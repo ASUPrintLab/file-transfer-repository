@@ -2,10 +2,14 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import animatefx.animation.SlideOutRight;
+
+import animatefx.animation.FadeOut;
 import application_v2.Locations;
 import application_v2.Main;
 import application_v2.Press;
@@ -53,7 +57,19 @@ public class Controller implements Initializable {
 	@FXML
     private Button stop; //stop the program
 	@FXML
-    private ImageView running1; //stop the program
+    private ImageView running1; //arrow animation
+	@FXML
+    private ImageView running2; //arrow animation
+	@FXML
+    private ImageView running3; //arrow animation
+	@FXML
+    private ImageView running4; //arrow animation
+	@FXML
+    private ImageView running5; //arrow animation
+	@FXML
+    private ImageView running6; //arrow animation
+	@FXML
+    private ImageView running7; //arrow animation
 	@FXML
     private ImageView addTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -66,6 +82,8 @@ public class Controller implements Initializable {
     private ImageView stopIcon; //Add Transfer Location '+'
 	@FXML
     private ImageView close; //The 'x' to close the program
+	@FXML
+    private Label notifier; //Event Log label
 	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -94,8 +112,8 @@ public class Controller implements Initializable {
 
 	@FXML
 	private MenuBar menuBar; // Used to identify the size of the program
-	
-	@FXML 
+
+	@FXML
 	private ScrollPane scrollPaneAddPress; // Scroll pane created for adding a new press
 
 
@@ -105,10 +123,17 @@ public class Controller implements Initializable {
 	private Pane pane;
 
 
-	
 
-	private double pressListIncreased= 403;
-	Main mainScene = new Main();
+	private FadeOut action1;
+	private FadeOut action2;
+	private FadeOut action3;
+	private FadeOut action4;
+	private FadeOut action5;
+	private FadeOut action6;
+	private FadeOut action7;
+
+
+
 //	Parent root;
 
 	/**
@@ -117,15 +142,15 @@ public class Controller implements Initializable {
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		// Always show vertical scroll bar that is displayed to the right of transfer locations
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
-		
+
 		// Don't show the scroll bar for the add press section initially
 		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
 		VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
-		
+
 
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
@@ -217,12 +242,100 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void start(ActionEvent event) {
-		new SlideOutRight(running1).setCycleDuration(20).setCycleCount(20).setDelay(Duration.valueOf("200ms")).play();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		notifier.setText("Running... Started on " + dateFormat.format(date));
+		stop.setStyle(null); //Remove style on stop button
+		run.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 15, 0, 0, 0);"); //Add gradient to run button
+		//Display images
+		running1.setVisible(true);
+		running2.setVisible(true);
+		running3.setVisible(true);
+		running4.setVisible(true);
+		running5.setVisible(true);
+		running6.setVisible(true);
+		running7.setVisible(true);
+		action1 = new FadeOut(running1);
+		action1.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
+		action1.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action1.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action2 = new FadeOut(running2);
+		action2.setCycleCount(500).setDelay(Duration.valueOf("100ms")).play();
+		action2.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action2.setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action3 = new FadeOut(running3);
+		action3.setCycleCount(500).setDelay(Duration.valueOf("150ms")).play();
+		action3.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action3.setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action4 = new FadeOut(running4);
+		action4.setCycleCount(500).setDelay(Duration.valueOf("200ms")).play();
+		action4.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action4.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action5 = new FadeOut(running5);
+		action5.setCycleCount(500).setDelay(Duration.valueOf("250ms")).play();
+		action5.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action5.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action6 = new FadeOut(running6);
+		action6.setCycleCount(500).setDelay(Duration.valueOf("300ms")).play();
+		action6.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action6.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action7 = new FadeOut(running7);
+		action7.setCycleCount(500).setDelay(Duration.valueOf("350ms")).play();
+		action7.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action7.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
 
 	}
 
 	@FXML
 	private void stop(ActionEvent event) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		notifier.setText("Stopped on " + dateFormat.format(date));
+		stop.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #ff0000, 15, 0, 0, 0);");
+		run.setStyle(null);
+		running1.setVisible(false);
+		running2.setVisible(false);
+		running3.setVisible(false);
+		running4.setVisible(false);
+		running5.setVisible(false);
+		running6.setVisible(false);
+		running7.setVisible(false);
+		//Stop animations
+		action1.stop();
+		action2.stop();
+		action3.stop();
+		action4.stop();
+		action5.stop();
+		action6.stop();
+		action7.stop();
 
 	}
 
@@ -432,18 +545,18 @@ public class Controller implements Initializable {
 		newPress.setOnAction(this::handlePress);
 
 
-		/* Once the Vbox increases more than the title pane create a scroll bar and continue 
+		/* Once the Vbox increases more than the title pane create a scroll bar and continue
 		*  to be able to add children
-		*/ 
+		*/
 		if(pressList.getPrefHeight() > pressTitlePane.getPrefHeight()) {
 
-			
+
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 			VBox.setVgrow(scrollPaneAddPress, Priority.SOMETIMES);
-			
+
 
 			pressList.getChildren().add(0,newPress); //Add button to top of children
-			
+
 		}
 		else {
 			pressListIncreased = pressListIncreased + 9;

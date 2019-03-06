@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -32,9 +33,9 @@
       </Pane>
       <HBox prefHeight="86.0" prefWidth="919.0" style="-fx-background-color: #1C1C1C;" styleClass="topDiv">
          <children>
-            <Pane prefHeight="81.0" prefWidth="329.0" style="-fx-background-color: #262626;">
+            <Pane prefHeight="81.0" prefWidth="392.0" style="-fx-background-color: #262626;">
                <children>
-                  <Button fx:id="run" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="33.0" layoutY="9.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="toggleButtons" stylesheets="@stylesheet.css">
+                  <Button fx:id="run" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="33.0" layoutY="9.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" stylesheets="@stylesheet.css">
                      <graphic>
                         <ImageView fx:id="startIcon" fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonIcon">
                            <image>
@@ -42,8 +43,12 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="toggleButtons" />
+                        <String fx:value="runButton" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="stop" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="125.0" layoutY="8.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="toggleButtons" stylesheets="@stylesheet.css">
+                  <Button fx:id="stop" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="125.0" layoutY="8.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" stylesheets="@stylesheet.css">
                      <graphic>
                         <ImageView fx:id="stopIcon" fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonIcon">
                            <image>
@@ -51,15 +56,62 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="toggleButtons" />
+                        <String fx:value="stopButton" />
+                     </styleClass>
                   </Button>
-                  <ImageView fx:id="running1" fitHeight="27.0" fitWidth="29.0" layoutX="202.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="running1" fitHeight="50.0" fitWidth="75.0" layoutX="190.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running2" fitHeight="50.0" fitWidth="50.0" layoutX="215.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running3" fitHeight="50.0" fitWidth="50.0" layoutX="241.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running4" fitHeight="50.0" fitWidth="50.0" layoutX="266.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running5" fitHeight="50.0" fitWidth="50.0" layoutX="291.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running6" fitHeight="50.0" fitWidth="50.0" layoutX="317.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running7" fitHeight="50.0" fitWidth="50.0" layoutX="342.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@right-arrow.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <VBox prefHeight="86.0" prefWidth="568.0" style="-fx-background-color: #262626;" />
+            <VBox prefHeight="81.0" prefWidth="511.0" style="-fx-background-color: #121212; -fx-border-color: #1C1C1C; -fx-border-width: 0 0 0 7px;">
+               <children>
+                  <Label fx:id="notifier" prefHeight="17.0" prefWidth="486.0" style="-fx-text-fill: white;" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="AkzidenzGroteskStd-Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></VBox>
          </children>
          <padding>
             <Insets bottom="5.0" left="7.0" right="7.0" />

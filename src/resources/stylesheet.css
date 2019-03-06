@@ -383,6 +383,14 @@
 	-fx-opacity: 0.7;
 }
 
+.stopButton:pressed {
+	-fx-effect: dropshadow(GAUSSIAN,  #ff0000, 15, 0, 0, 0);
+}
+
+.runButton:pressed {
+	-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 15, 0, 0, 0);
+}
+
 .buttonIcon {
 	-fx-effect: dropshadow(GAUSSIAN,  #1B1B1F, 15, 0, 0, 0);
 }
