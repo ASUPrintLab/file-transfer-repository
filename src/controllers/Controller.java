@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import animatefx.animation.Bounce;
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
+import animatefx.animation.Flash;
+import animatefx.animation.Pulse;
 import animatefx.animation.SlideOutRight;
 import application_v2.Locations;
 import application_v2.Press;
@@ -53,7 +57,13 @@ public class Controller implements Initializable {
 	@FXML
     private Button stop; //stop the program
 	@FXML
-    private ImageView running1; //stop the program
+    private ImageView running1; //arrow animation
+	@FXML
+    private ImageView running2; //arrow animation
+	@FXML
+    private ImageView running3; //arrow animation
+	@FXML
+    private ImageView running4; //arrow animation
 	@FXML
     private ImageView addTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -92,6 +102,12 @@ public class Controller implements Initializable {
 	private Press selectedPress;
 	
 	private Pane pane;
+	
+	private FadeOut action1;
+	private FadeOut action2;
+	private FadeOut action3;
+	private FadeOut action4;
+	
 	
 	
 //	Parent root;
@@ -191,16 +207,65 @@ public class Controller implements Initializable {
 		edit.setVisible(false);
 		cancel.setVisible(true);
 		delete.setVisible(true);
+		//Stop animations
+		action1.stop();
+		action2.stop();
+		action3.stop();
+		action4.stop();
 	}
 	
 	@FXML
 	private void start(ActionEvent event) {
-		new SlideOutRight(running1).setCycleDuration(20).setCycleCount(20).setDelay(Duration.valueOf("200ms")).play();
+		stop.setStyle(null); //Remove style on stop button
+		run.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 15, 0, 0, 0);"); //Add gradient to run button
+		//Display images
+		running1.setVisible(true);
+		running2.setVisible(true);
+		running3.setVisible(true);
+		running4.setVisible(true);
+		action1 = new FadeOut(running1);
+		action1.setDelay(Duration.valueOf("100ms")).play();
+		action1.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action1.setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action2 = new FadeOut(running2);
+		action2.setDelay(Duration.valueOf("200ms")).play();
+		action2.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action2.setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action3 = new FadeOut(running3);
+		action3.setDelay(Duration.valueOf("300ms")).play();
+		action3.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action3.setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action4 = new FadeOut(running4);
+		action4.setDelay(Duration.valueOf("400ms")).play();
+		action4.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action4.setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
 
 	}
 	
 	@FXML
 	private void stop(ActionEvent event) {
+		stop.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #ff0000, 15, 0, 0, 0);");
+		run.setStyle(null);
+		running1.setVisible(false);
+		running2.setVisible(false);
+		running3.setVisible(false);
+		running4.setVisible(false);
 
 	}
 
