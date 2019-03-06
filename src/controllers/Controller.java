@@ -16,15 +16,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,6 +40,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 /*
  * Author: Mitchell Roberts
+ * Author: Gaurav Deshpande
  */
 public class Controller implements Initializable {
 
@@ -72,12 +78,29 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> endTime;
 	@FXML
 	private TableColumn<TransferTime, String> actions;
+	
+	@FXML
+	private TitledPane pressTitlePane; //Used to identify the pane for scrolling
 
+	@FXML
+	private MenuBar menuBar; // Used to identify the size of the program
+	
+	@FXML
+	private Accordion accordion; 
+	
 	private Press selectedPress;
 
 	private Pane pane;
 
-
+	@FXML
+	private VBox guiSize;
+	
+	 final ScrollPane sp = new ScrollPane(pressList);
+	
+	ArrayList<VBox> increaseTitledPane = new ArrayList<VBox>();
+	
+	private double pressListIncreased= 403;
+	Main mainScene = new Main();
 //	Parent root;
 
 	/**
@@ -86,9 +109,12 @@ public class Controller implements Initializable {
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Always show vertical scroll bar
+		// Always show vertical scroll bar that is displayed to the right of transfer locations
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
+		
+//		sc.setLayoutX(mainScene.scene.getWidth() - sc.getWidth());
+		
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
 		addPress.setOnAction(this::handleNewPress);
@@ -322,7 +348,7 @@ public class Controller implements Initializable {
 	@FXML
 	public void addPressToScene() {
 
-
+		
 
 		//Get the most recent press added to hashmap
 		Press press = PressManager.getRecentPress();
@@ -341,12 +367,43 @@ public class Controller implements Initializable {
 
 		// Checking if the height of the Press list is greater than the scene.
 		//If so create a scroll bar to see the presses
-		if(pressList.getPrefHeight() < main.scene.getHeight()){
-			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-			VBox.setVgrow(scrollpane, Priority.ALWAYS);
+//		if(pressList.getPrefHeight() < main.scene.getHeight()){
+//			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//			VBox.setVgrow(scrollpane, Priority.ALWAYS);
+//		}
+//		else {
+		
+//		if(pressScroll.getPrefWidth() < menuBar.getPrefWidth()){
+//			System.out.println("This if statement is reached.");
+//			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//			VBox.setVgrow(scrollpane, Priority.ALWAYS);
+//			pressList.getChildren().add(0,newPress); //Add button to top of children
+//		}
+		
+		
+		
+		if(pressList.getPrefHeight() > pressTitlePane.getPrefHeight()) {
+		
+			sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+			VBox.setVgrow(sp, Priority.ALWAYS);			
+			
+			 sp.setVmax(600);
+		     sp.setPrefSize(115, 150);
+		     sp.setContent(pressList);
+
+			pressList.getChildren().add(0,newPress); //Add button to top of children
+			System.out.println("This statement is reached when scroll bar is bigger than the main scene");
 		}
 		else {
-			pressList.getChildren().add(0,newPress); //Add button to top of children
+			pressListIncreased = pressListIncreased + 70;
+			 pressList.getChildren().add(0,newPress); //Add button to top of children
+//			increaseTitledPane.add(pressList);
+			
+			pressList.setPrefHeight(pressListIncreased);
+			
+			
+//			System.out.println("A new child has been added");
+			System.out.println("new size of titlePaneIncreased "+pressListIncreased);
 		}
 
 
