@@ -81,9 +81,37 @@
                         <Image url="@right-arrow.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="running5" fitHeight="50.0" fitWidth="50.0" layoutX="291.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running6" fitHeight="50.0" fitWidth="50.0" layoutX="317.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="running7" fitHeight="50.0" fitWidth="50.0" layoutX="342.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@right-arrow.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <VBox prefHeight="81.0" prefWidth="511.0" style="-fx-background-color: #262626;" />
+            <VBox prefHeight="81.0" prefWidth="511.0" style="-fx-background-color: #121212; -fx-border-color: #1C1C1C; -fx-border-width: 0 0 0 7px;">
+               <children>
+                  <Label fx:id="notifier" prefHeight="17.0" prefWidth="486.0" style="-fx-text-fill: white;" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="AkzidenzGroteskStd-Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></VBox>
          </children>
          <padding>
             <Insets bottom="5.0" left="7.0" right="7.0" />

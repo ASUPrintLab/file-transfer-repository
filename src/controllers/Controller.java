@@ -2,17 +2,14 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import animatefx.animation.Bounce;
-import animatefx.animation.FadeIn;
 import animatefx.animation.FadeOut;
-import animatefx.animation.Flash;
-import animatefx.animation.Pulse;
-import animatefx.animation.SlideOutRight;
 import application_v2.Locations;
 import application_v2.Press;
 import application_v2.PressManager;
@@ -41,7 +38,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -65,6 +61,12 @@ public class Controller implements Initializable {
 	@FXML
     private ImageView running4; //arrow animation
 	@FXML
+    private ImageView running5; //arrow animation
+	@FXML
+    private ImageView running6; //arrow animation
+	@FXML
+    private ImageView running7; //arrow animation
+	@FXML
     private ImageView addTransferLocation; //Add Transfer Location '+'
 	@FXML
     private ImageView startIcon; //Add Transfer Location '+'
@@ -76,6 +78,8 @@ public class Controller implements Initializable {
     private ImageView stopIcon; //Add Transfer Location '+'
 	@FXML
     private ImageView close; //The 'x' to close the program
+	@FXML
+    private Label notifier; //Event Log label
 	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
 	@FXML
@@ -107,6 +111,9 @@ public class Controller implements Initializable {
 	private FadeOut action2;
 	private FadeOut action3;
 	private FadeOut action4;
+	private FadeOut action5;
+	private FadeOut action6;
+	private FadeOut action7;
 	
 	
 	
@@ -207,15 +214,13 @@ public class Controller implements Initializable {
 		edit.setVisible(false);
 		cancel.setVisible(true);
 		delete.setVisible(true);
-		//Stop animations
-		action1.stop();
-		action2.stop();
-		action3.stop();
-		action4.stop();
 	}
 	
 	@FXML
 	private void start(ActionEvent event) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		notifier.setText("Running... Started on " + dateFormat.format(date));
 		stop.setStyle(null); //Remove style on stop button
 		run.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 15, 0, 0, 0);"); //Add gradient to run button
 		//Display images
@@ -223,16 +228,19 @@ public class Controller implements Initializable {
 		running2.setVisible(true);
 		running3.setVisible(true);
 		running4.setVisible(true);
+		running5.setVisible(true);
+		running6.setVisible(true);
+		running7.setVisible(true);
 		action1 = new FadeOut(running1);
-		action1.setDelay(Duration.valueOf("100ms")).play();
+		action1.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
 		action1.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
 			@Override
 			public void handle(ActionEvent arg0) {
-				action1.setDelay(Duration.valueOf("0ms")).play();
+				action1.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
 			}
         });
 		action2 = new FadeOut(running2);
-		action2.setDelay(Duration.valueOf("200ms")).play();
+		action2.setCycleCount(500).setDelay(Duration.valueOf("100ms")).play();
 		action2.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -240,7 +248,7 @@ public class Controller implements Initializable {
 			}
         });
 		action3 = new FadeOut(running3);
-		action3.setDelay(Duration.valueOf("300ms")).play();
+		action3.setCycleCount(500).setDelay(Duration.valueOf("150ms")).play();
 		action3.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -248,11 +256,35 @@ public class Controller implements Initializable {
 			}
         });
 		action4 = new FadeOut(running4);
-		action4.setDelay(Duration.valueOf("400ms")).play();
+		action4.setCycleCount(500).setDelay(Duration.valueOf("200ms")).play();
 		action4.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
 			@Override
 			public void handle(ActionEvent arg0) {
-				action4.setDelay(Duration.valueOf("0ms")).play();
+				action4.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action5 = new FadeOut(running5);
+		action5.setCycleCount(500).setDelay(Duration.valueOf("250ms")).play();
+		action5.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action5.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action6 = new FadeOut(running6);
+		action6.setCycleCount(500).setDelay(Duration.valueOf("300ms")).play();
+		action6.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action6.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+			}
+        });
+		action7 = new FadeOut(running7);
+		action7.setCycleCount(500).setDelay(Duration.valueOf("350ms")).play();
+		action7.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
+			@Override
+			public void handle(ActionEvent arg0) {
+				action7.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
 			}
         });
 
@@ -260,12 +292,26 @@ public class Controller implements Initializable {
 	
 	@FXML
 	private void stop(ActionEvent event) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		notifier.setText("Stopped on " + dateFormat.format(date));
 		stop.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #ff0000, 15, 0, 0, 0);");
 		run.setStyle(null);
 		running1.setVisible(false);
 		running2.setVisible(false);
 		running3.setVisible(false);
 		running4.setVisible(false);
+		running5.setVisible(false);
+		running6.setVisible(false);
+		running7.setVisible(false);
+		//Stop animations
+		action1.stop();
+		action2.stop();
+		action3.stop();
+		action4.stop();
+		action5.stop();
+		action6.stop();
+		action7.stop();
 
 	}
 
