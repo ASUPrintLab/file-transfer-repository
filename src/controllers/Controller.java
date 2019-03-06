@@ -3,11 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import animatefx.animation.Bounce;
 import animatefx.animation.SlideOutRight;
 import application_v2.Locations;
 import application_v2.Main;
@@ -21,15 +18,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,7 +37,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -105,15 +98,12 @@ public class Controller implements Initializable {
 	@FXML 
 	private ScrollPane scrollPaneAddPress; // Scroll pane created for adding a new press
 
-	@FXML
-	private Accordion accordion;
+
 
 	private Press selectedPress;
 
 	private Pane pane;
 
-//	@FXML
-//	private VBox guiSize;
 
 	
 
@@ -132,12 +122,10 @@ public class Controller implements Initializable {
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
 		
+		// Don't show the scroll bar for the add press section initially
 		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
 		VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
 		
-		scrollPaneAddPress.getStyleClass().add("scroll-bar");
-		
-//		sc.setLayoutX(mainScene.scene.getWidth() - sc.getWidth());
 
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
@@ -443,45 +431,25 @@ public class Controller implements Initializable {
 		//Set action to handle the new press button
 		newPress.setOnAction(this::handlePress);
 
-		// Checking if the height of the Press list is greater than the scene.
-		//If so create a scroll bar to see the presses
-//		if(pressList.getPrefHeight() < main.scene.getHeight()){
-//			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-//			VBox.setVgrow(scrollpane, Priority.ALWAYS);
-//		}
-//		else {
 
-//		if(pressScroll.getPrefWidth() < menuBar.getPrefWidth()){
-//			System.out.println("This if statement is reached.");
-//			scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-//			VBox.setVgrow(scrollpane, Priority.ALWAYS);
-//			pressList.getChildren().add(0,newPress); //Add button to top of children
-//		}
-
-
-
+		/* Once the Vbox increases more than the title pane create a scroll bar and continue 
+		*  to be able to add children
+		*/ 
 		if(pressList.getPrefHeight() > pressTitlePane.getPrefHeight()) {
-			
-//			scrollPaneAddPress.setFitToWidth(true);
-//			scrollPaneAddPress.setFitToHeight(true);
+
 			
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 			VBox.setVgrow(scrollPaneAddPress, Priority.SOMETIMES);
 			
 
 			pressList.getChildren().add(0,newPress); //Add button to top of children
-			System.out.println("This statement is reached when scroll bar is bigger than the main scene");
+			
 		}
 		else {
-			pressListIncreased = pressListIncreased + 70;
+			pressListIncreased = pressListIncreased + 9;
 			pressList.getChildren().add(0,newPress); //Add button to top of children
-//			increaseTitledPane.add(pressList);
-
 			pressList.setPrefHeight(pressListIncreased);
 
-
-//			System.out.println("A new child has been added");
-			System.out.println("new size of pressList "+pressListIncreased);
 		}
 
 

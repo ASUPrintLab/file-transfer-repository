@@ -1,32 +1,51 @@
 
 .split-pane:horizontal > .split-pane-divider {
-   -fx-background-color: transparent;
+   -fx-background-color:  #1C1C1C;
 }
 .split-pane:vertical > .split-pane-divider {
-   -fx-background-color: transparent;
+   -fx-background-color: #1C1C1C;
 }
-.scroll-bar:horizontal, .scroll-bar:vertical{
-    -fx-background-color:transparent;
+.scroll-bar:horizontal ,  .scroll-bar:vertical  {
+    -fx-background-color: #262626;
+
+
 }
 
 .increment-button, .decrement-button {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
+    -fx-background-color:  #262626;
+    -fx-border-color:  #262626;
     -fx-background-radius : 0.0em;
+
 
 }
 
-.scroll-bar:horizontal .track,
-.scroll-bar:vertical .track{
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
+.scroll-bar:horizontal .track ,
+.scroll-bar:vertical .track {
+    -fx-background-color:  #262626;
+    -fx-border-color:  #262626;
     -fx-background-radius: 0em;
+
+}
+
+.scroll-bar:vertical .increment-arrow {
+
+-fx-padding: 5.5;
+}
+
+.scroll-bar:vertical .decrement-arrow {
+
+-fx-padding: 5.5;
 }
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
     -fx-background-color: #B9B9B9;
     -fx-background-radius: 5em;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 16.5;
+    -fx-padding: 3;
 }
 
 

@@ -79,9 +79,9 @@
                               <Font size="27.0" />
                            </font>
                            <content>
-                              <ScrollPane fx:id="scrollPaneAddPress" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" styleClass="scroll-bar" stylesheets="@stylesheet.css">
+                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css">
                                  <content>
-                                    <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="403.0" prefWidth="217.0" style="-fx-background-color: #262626;">
+                                    <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="403.0" prefWidth="300.0" style="-fx-background-color: #262626;">
                                        <children>
                                           <Button fx:id="addPress" mnemonicParsing="false" prefHeight="50.0" prefWidth="249.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +">
                                              <VBox.margin>
