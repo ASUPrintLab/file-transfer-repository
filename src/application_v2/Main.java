@@ -25,6 +25,9 @@ public class Main extends Application {
 
 	private static Stage mainStage;
 	public Scene scene;
+	private double xoffset;
+	private double yoffset;
+	
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -33,6 +36,17 @@ public class Main extends Application {
 		try {
 			 //VBox is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/gui.fxml"));
+			
+			// Being able to move the program around
+			root.setOnMousePressed(event -> {
+				xoffset = event.getSceneX();
+				yoffset = event.getSceneY();
+			});
+			root.setOnMouseDragged(e->{
+				primaryStage.setX(e.getScreenX() - xoffset);
+				primaryStage.setY(e.getScreenY() - yoffset);
+			});
+			
 			Scene scene = new Scene(root, 912, 600, Color.BLACK); //Size of the window for the program in pixels
 			scene.getStylesheets().add(getClass().getResource("/resources/stylesheet.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
