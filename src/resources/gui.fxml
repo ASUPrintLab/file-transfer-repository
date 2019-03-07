@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +9,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -119,37 +117,25 @@
       </HBox>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="200.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F; -fx-border-width: 2;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane fx:id="leftManager" style="-fx-background-color: #1C1C1C;" stylesheets="@stylesheet.css">
-               <children>
-                  <Accordion layoutX="5.0" layoutY="-1.0" style="-fx-background-color: #1C1C1C;">
-                    <panes>
-                      <TitledPane fx:id="pressTitlePane" expanded="false" graphicTextGap="5.0" prefHeight="455.0" prefWidth="219.0" style="-fx-background-color: #1C1C1C; -fx-border-width: 0; -fx-alignment: center; -fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Presses" textFill="#828282">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                           <content>
-                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css">
-                                 <content>
-                                    <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="403.0" prefWidth="300.0" style="-fx-background-color: #262626;">
-                                       <children>
-                                          <Button fx:id="addPress" mnemonicParsing="false" prefHeight="50.0" prefWidth="249.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +">
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </content>
-                              </ScrollPane>
-                           </content>
-                      </TitledPane>
-                    </panes>
-                  </Accordion>
-               </children>
-        </AnchorPane>
+            <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css">
+               <content>
+                  <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #262626;">
+                     <children>
+                        <Pane fx:id="pressPane" minHeight="-Infinity" prefHeight="360.0" prefWidth="225.0">
+                           <children>
+                              <Label fx:id="pressLabel" layoutX="14.0" layoutY="12.0" style="-fx-text-fill: #B9B9B9;" styleClass="labelPress" stylesheets="@stylesheet.css" text="Presses" />
+                              <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                 <image>
+                                    <Image url="@add-button.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="addPress" layoutX="102.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="21.0" styleClass="addButtonPress" stylesheets="@stylesheet.css" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
         <ScrollPane fx:id="scrollpane" prefHeight="784.0" prefWidth="442.0" style="-fx-fit-to-height: true; -fx-background-color: #1B1B1F; -fx-border-color: #1B1B1F; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <content>
             <VBox layoutY="41.0" style="-fx-background-color: #262626;" styleClass="locationContainer" stylesheets="@stylesheet.css">
@@ -161,7 +147,7 @@
                              <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
                            </font>
                        </Label>
-                              <ImageView fx:id="addTransferLocation" fitHeight="21.0" fitWidth="25.0" layoutX="178.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                              <ImageView fx:id="addTransferLocation" fitHeight="21.0" fitWidth="25.0" layoutX="186.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
                                     <Image url="@add-button.png" />
                                  </image>

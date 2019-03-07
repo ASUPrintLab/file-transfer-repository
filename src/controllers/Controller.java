@@ -51,11 +51,11 @@ import javafx.util.Duration;
 public class Controller implements Initializable {
 
 	@FXML
-    private Button addPress; //Add press button in Accordion
-	@FXML
     private Button run; //start the program
 	@FXML
     private Button stop; //stop the program
+	@FXML
+    private Button addPress; //Adding a press
 	@FXML
     private ImageView running1; //arrow animation
 	@FXML
@@ -108,14 +108,15 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> actions;
 
 	@FXML
-	private TitledPane pressTitlePane; //Used to identify the pane for scrolling
+	private Pane pressPane; //Used to identify the pane for scrolling
 
 	@FXML
 	private MenuBar menuBar; // Used to identify the size of the program
 
 	@FXML
 	private ScrollPane scrollPaneAddPress; // Scroll pane created for adding a new press
-
+	@FXML
+	private Label pressLabel; // Representing the name of the presses
 
 
 	private Press selectedPress;
@@ -155,6 +156,8 @@ public class Controller implements Initializable {
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
 		addPress.setOnAction(this::handleNewPress);
+		
+		
 		addTransferLocation.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			if (selectedPress != null) {
 				handleNewTranferLocation();
@@ -341,6 +344,7 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void handleNewPress(ActionEvent event) {
+		System.out.println("This method is getting reached");
 		clearGUI();
 		try {
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/AddPressWindow.fxml"));
@@ -534,8 +538,10 @@ public class Controller implements Initializable {
 		PressManager.removePress(press.getKey()); //Remove temp obj in hashmap
 
 		Button newPress = new Button(press.getName());
+		
+		System.out.println("I am able to get to the addPressToScene method");
 		newPress.getStyleClass().add("addPress");
-		newPress.setMinWidth(addPress.getWidth());
+		newPress.setMinWidth(pressLabel.getWidth());
 		newPress.setUserData(press);
 
 		press.setKey(newPress.hashCode());
@@ -547,14 +553,13 @@ public class Controller implements Initializable {
 
 		/* Once the Vbox increases more than the title pane create a scroll bar and continue
 		*  to be able to add children
-		*/
-		if(pressList.getPrefHeight() > pressTitlePane.getPrefHeight()) {
-
+		*/	if(pressList.getPrefHeight() > pressPane.getPrefHeight()) {
 
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-			VBox.setVgrow(scrollPaneAddPress, Priority.SOMETIMES);
-
-
+			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+			
+			pressListIncreased = pressListIncreased + 9;
+			pressList.setPrefHeight(pressListIncreased);
 			pressList.getChildren().add(0,newPress); //Add button to top of children
 
 		}

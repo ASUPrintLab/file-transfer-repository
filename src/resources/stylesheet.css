@@ -87,6 +87,10 @@
   -fx-text-fill: white;
 }
 
+.pressButton{
+  -fx-background-color: transparent;
+}
+
 .addPress {
   -fx-background-color: transparent;
   /* -fx-border-color: #B9B9B9; */
@@ -103,10 +107,28 @@
   -fx-text-fill: white;
 }
 
+.labelPress{
+  -fx-background-color: transparent;
+  /* -fx-border-color: #B9B9B9; */
+  -fx-color: white;
+  -fx-text-fill: #B9B9B9;
+  -fx-font-family: "Akzidenz-Grotesk Std Regular";
+  -fx-font-size: 20px;
+}
+
+
+
 .addPress:pressed {
   -fx-opacity: 0.5;
 }
-
+.addButtonPress{
+  -fx-background-color: transparent;
+  -fx-opacity: 0.5;
+}
+.addButtonPress: hover{
+  -fx-text-fill: #F7FAFF;
+  -fx-opacity: 1;
+}
 .addTime {
 	-fx-background-color: black;
 	-fx-text-fill: white;
