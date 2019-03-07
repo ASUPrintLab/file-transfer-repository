@@ -121,11 +121,11 @@
                <content>
                   <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #262626;">
                      <children>
-                        <Pane fx:id="pressPane" minHeight="-Infinity" prefHeight="360.0" prefWidth="225.0">
+                        <Pane fx:id="pressPane" minHeight="-Infinity" prefHeight="450.0" prefWidth="225.0">
                            <children>
-                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" layoutX="7.0" layoutY="36.0" prefHeight="298.0" prefWidth="204.0" style="-fx-background-color: #262626; -fx-border-color: #262626; -fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" vbarPolicy="ALWAYS">
+                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" layoutX="7.0" layoutY="36.0" prefHeight="407.0" prefWidth="204.0" style="-fx-background-color: #262626; -fx-border-color: #262626; -fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" vbarPolicy="ALWAYS">
                                  <content>
-                                    <VBox fx:id="pressLocList" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="208.0" style="-fx-background-color: #262626; -fx-border-color: #262626;" />
+                                    <VBox fx:id="pressLocList" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="208.0" style="-fx-background-color: #262626; -fx-border-color: #262626;" />
                                  </content>
                               </ScrollPane>
                               <Label fx:id="pressLabel" layoutX="14.0" layoutY="12.0" style="-fx-text-fill: #B9B9B9;" styleClass="labelPress" stylesheets="@stylesheet.css" text="Presses" />

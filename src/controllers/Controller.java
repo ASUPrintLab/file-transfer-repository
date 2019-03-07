@@ -135,7 +135,7 @@ public class Controller implements Initializable {
 	private FadeOut action6;
 	private FadeOut action7;
 
- private int pressListIncreased = 294;
+ private int pressListIncreased = 412;
 
 //	Parent root;
 
@@ -563,14 +563,14 @@ public class Controller implements Initializable {
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
 //			scrollPaneAddPress.setContent(pressLocList);
 			
-			pressListIncreased = pressListIncreased + 30;
+			pressListIncreased = pressListIncreased + 10;
 			pressLocList.setPrefHeight(pressListIncreased);
 			
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 
 		}
 		else {
-			pressListIncreased = pressListIncreased + 30;
+			pressListIncreased = pressListIncreased + 10;
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 			pressLocList.setPrefHeight(pressListIncreased);
 
