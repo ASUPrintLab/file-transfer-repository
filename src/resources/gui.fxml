@@ -117,12 +117,17 @@
       </HBox>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="200.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F; -fx-border-width: 2;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
       <items>
-            <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css">
+            <ScrollPane hbarPolicy="NEVER" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css">
                <content>
                   <VBox fx:id="pressList" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #262626;">
                      <children>
                         <Pane fx:id="pressPane" minHeight="-Infinity" prefHeight="360.0" prefWidth="225.0">
                            <children>
+                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" layoutX="7.0" layoutY="36.0" prefHeight="298.0" prefWidth="204.0" style="-fx-background-color: #262626; -fx-border-color: #262626; -fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" vbarPolicy="ALWAYS">
+                                 <content>
+                                    <VBox fx:id="pressLocList" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="208.0" style="-fx-background-color: #262626; -fx-border-color: #262626;" />
+                                 </content>
+                              </ScrollPane>
                               <Label fx:id="pressLabel" layoutX="14.0" layoutY="12.0" style="-fx-text-fill: #B9B9B9;" styleClass="labelPress" stylesheets="@stylesheet.css" text="Presses" />
                               <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>

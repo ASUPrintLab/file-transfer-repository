@@ -95,6 +95,8 @@ public class Controller implements Initializable {
 	@FXML
     private VBox transferLocList; //Location list in GUI
 	@FXML
+    private VBox pressLocList; //Press list in GUI
+	@FXML
     private ScrollPane scrollpane; //ScrollPane
 	@FXML
     private TextField connectionName; //name of connection in dialog
@@ -133,7 +135,7 @@ public class Controller implements Initializable {
 	private FadeOut action6;
 	private FadeOut action7;
 
- private int pressListIncreased = 403;
+ private int pressListIncreased = 294;
 
 //	Parent root;
 
@@ -150,6 +152,7 @@ public class Controller implements Initializable {
 
 		// Don't show the scroll bar for the add press section initially
 		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
+		
 		VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
 
 
@@ -344,7 +347,6 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void handleNewPress(ActionEvent event) {
-		System.out.println("This method is getting reached");
 		clearGUI();
 		try {
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/AddPressWindow.fxml"));
@@ -522,6 +524,7 @@ public class Controller implements Initializable {
 		if (transferLocList != null) {
 			transferLocList.getChildren().clear();
 			timeTable.getItems().clear();
+
 		}
 	}
 
@@ -539,7 +542,7 @@ public class Controller implements Initializable {
 
 		Button newPress = new Button(press.getName());
 		
-		System.out.println("I am able to get to the addPressToScene method");
+		
 		newPress.getStyleClass().add("addPress");
 		newPress.setMinWidth(pressLabel.getWidth());
 		newPress.setUserData(press);
@@ -553,20 +556,23 @@ public class Controller implements Initializable {
 
 		/* Once the Vbox increases more than the title pane create a scroll bar and continue
 		*  to be able to add children
-		*/	if(pressList.getPrefHeight() > pressPane.getPrefHeight()) {
-
-			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
+			System.out.println("pressLocList is greater than pressPane");
+			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			
-			pressListIncreased = pressListIncreased + 9;
-			pressList.setPrefHeight(pressListIncreased);
-			pressList.getChildren().add(0,newPress); //Add button to top of children
+			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+//			scrollPaneAddPress.setContent(pressLocList);
+			
+			pressListIncreased = pressListIncreased + 30;
+			pressLocList.setPrefHeight(pressListIncreased);
+			
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 
 		}
 		else {
-			pressListIncreased = pressListIncreased + 9;
-			pressList.getChildren().add(0,newPress); //Add button to top of children
-			pressList.setPrefHeight(pressListIncreased);
+			pressListIncreased = pressListIncreased + 30;
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+			pressLocList.setPrefHeight(pressListIncreased);
 
 		}
 
