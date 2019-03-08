@@ -123,7 +123,7 @@
                      <children>
                         <Pane fx:id="pressPane" minHeight="-Infinity" prefHeight="450.0" prefWidth="225.0">
                            <children>
-                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" layoutX="7.0" layoutY="36.0" prefHeight="407.0" prefWidth="204.0" style="-fx-background-color: #262626; -fx-border-color: #262626; -fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" vbarPolicy="ALWAYS">
+                              <ScrollPane fx:id="scrollPaneAddPress" hbarPolicy="NEVER" layoutX="11.0" layoutY="35.0" prefHeight="407.0" prefWidth="204.0" style="-fx-background-color: #262626; -fx-border-color: #262626; -fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" vbarPolicy="ALWAYS">
                                  <content>
                                     <VBox fx:id="pressLocList" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="208.0" style="-fx-background-color: #262626; -fx-border-color: #262626;" />
                                  </content>
@@ -145,21 +145,25 @@
           <content>
             <VBox layoutY="41.0" style="-fx-background-color: #262626;" styleClass="locationContainer" stylesheets="@stylesheet.css">
                <children>
-                        <Pane prefHeight="87.0" prefWidth="447.0">
+                        <Pane fx:id="transferLocationPane" minHeight="-Infinity" prefHeight="455.0" prefWidth="447.0">
                            <children>
-                       <Label fx:id="test" alignment="CENTER" graphicTextGap="0.0" prefHeight="49.0" prefWidth="196.0" style="-fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Transfer Locations" textAlignment="CENTER" wrapText="false">
-                           <font>
-                             <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
-                           </font>
-                       </Label>
-                              <ImageView fx:id="addTransferLocation" fitHeight="21.0" fitWidth="25.0" layoutX="186.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                              <ScrollPane fx:id="scrollPaneTransferLocation" hbarPolicy="NEVER" layoutX="-1.0" layoutY="53.0" prefHeight="407.0" prefWidth="449.0" style="-fx-background-color: #262626; -fx-border-color: #262626; -fx-fit-to-height: true; -fx-fit-to-width: true;" stylesheets="@stylesheet.css" vbarPolicy="ALWAYS">
+                                 <content>
+                                    <VBox fx:id="transferLocList" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="416.0" style="-fx-background-color: #262626; -fx-border-color: #262626;" />
+                                 </content>
+                              </ScrollPane>
+                              <Label fx:id="test" graphicTextGap="0.0" layoutX="14.0" layoutY="-15.0" prefHeight="86.0" prefWidth="150.0" style="-fx-text-fill: #B9B9B9;" stylesheets="@stylesheet.css" text="Transfer Locations" wrapText="false">
+                                 <font>
+                                    <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x11" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="addTransferLocation" fitHeight="21.0" fitWidth="25.0" layoutX="179.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
                                     <Image url="@add-button.png" />
                                  </image>
                               </ImageView>
                            </children>
                         </Pane>
-                        <VBox fx:id="transferLocList" prefHeight="458.0" prefWidth="449.0" />
                    <!-- <Pane minHeight="146.0" prefHeight="146.0" prefWidth="424.0" styleClass="locationDiv">
                       <VBox.margin>
                          <Insets />
@@ -182,10 +186,13 @@
                <children>
               <AnchorPane prefHeight="489.0" prefWidth="218.0" style="-fx-background-color: #262626; -fx-border-color: #1C1C1C;" stylesheets="@stylesheet.css">
                 <children>
-                  <Label alignment="CENTER" font="$x1" layoutY="13.0" style="-fx-text-fill: B9B9B9;" text="Transfer Times" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" layoutY="13.0" style="-fx-text-fill: B9B9B9;" text="Transfer Times" textAlignment="CENTER" wrapText="false">
                            <padding>
                               <Insets left="15.0" />
-                           </padding></Label>
+                           </padding>
+                           <font>
+                       <Font name="AkzidenzGroteskStd-Regular" size="18.0" fx:id="x1" />
+                           </font></Label>
                         <TableView fx:id="timeTable" layoutX="2.0" layoutY="47.0" prefHeight="407.0" prefWidth="212.0" style="-fx-background-color: transparent; -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);">
                           <columns>
                             <TableColumn fx:id="startTime" prefWidth="81.0" text="Start" />
