@@ -13,6 +13,7 @@ import animatefx.animation.FadeOut;
 import animatefx.animation.GlowText;
 import animatefx.animation.Pulse;
 import application_v2.Locations;
+import application_v2.Main;
 import application_v2.Press;
 import application_v2.PressManager;
 import application_v2.TransferTime;
@@ -28,12 +29,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,15 +49,16 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 /*
  * Author: Mitchell Roberts
+ * Author: Gaurav Deshpande
  */
 public class Controller implements Initializable {
-	
-	@FXML
-    private Button addPress; //Add press button in Accordion
+
 	@FXML
     private Button run; //start the program
 	@FXML
     private Button stop; //stop the program
+	@FXML
+    private Button addPress; //Adding a press
 	@FXML
     private ImageView running1; //arrow animation
 	@FXML
@@ -88,11 +92,13 @@ public class Controller implements Initializable {
 	@FXML
     private ImageView addTransferTime; //Add Transfer Time '+'
 	@FXML
-    private ImageView edit; //Edit Transfer Time 
+    private ImageView edit; //Edit Transfer Time
 	@FXML
     private VBox pressList; //Press list in GUI
 	@FXML
     private VBox transferLocList; //Location list in GUI
+	@FXML
+    private VBox pressLocList; //Press list in GUI
 	@FXML
     private ScrollPane scrollpane; //ScrollPane
 	@FXML
@@ -105,13 +111,25 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> endTime;
 	@FXML
 	private TableColumn<TransferTime, String> actions;
+
 	@FXML
-    private Circle pulse;
-	
+	private Pane pressPane; //Used to identify the pane for scrolling
+
+	@FXML
+	private MenuBar menuBar; // Used to identify the size of the program
+
+	@FXML
+	private ScrollPane scrollPaneAddPress; // Scroll pane created for adding a new press
+	@FXML
+	private Label pressLabel; // Representing the name of the presses
+
+
 	private Press selectedPress;
-	
+
 	private Pane pane;
-	
+
+
+
 	private FadeOut action1;
 	private FadeOut action2;
 	private FadeOut action3;
@@ -119,23 +137,33 @@ public class Controller implements Initializable {
 	private FadeOut action5;
 	private FadeOut action6;
 	private FadeOut action7;
-//	private Pulse playAction;
-	
-	
+
+ private int pressListIncreased = 294;
+
 //	Parent root;
-	
+
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Always show vertical scroll bar
+
+		// Always show vertical scroll bar that is displayed to the right of transfer locations
 		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		VBox.setVgrow(scrollpane, Priority.ALWAYS);
+
+		// Don't show the scroll bar for the add press section initially
+		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
+
+		VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
+
+
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
 		addPress.setOnAction(this::handleNewPress);
+
+
 		addTransferLocation.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			if (selectedPress != null) {
 				handleNewTranferLocation();
@@ -143,12 +171,12 @@ public class Controller implements Initializable {
 	     });
 		addTransferTime.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			if (selectedPress != null) {
-				handleNewTranferTime();	
+				handleNewTranferTime();
 			}
 	     });
 		edit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			if (selectedPress != null && !timeTable.getItems().isEmpty()) {
-				handleEdit();	
+				handleEdit();
 			}
 	     });
 		cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
@@ -176,16 +204,16 @@ public class Controller implements Initializable {
 	private void handleClose(MouseEvent event) {
 		Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,"Please dont leave me");
 		Stage stage = (Stage) close.getScene().getWindow();
-		
+
         Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
-       
+
         exitButton.setOnAction(new EventHandler<ActionEvent>(){
         	@Override
         	public void handle(ActionEvent event) {
         		stage.close();
             }
         });
-                
+
         exitButton.setText("Exit");
         closeConfirmation.setHeaderText("Are you sure you want to exit?");
         closeConfirmation.initModality(Modality.APPLICATION_MODAL);
@@ -193,13 +221,13 @@ public class Controller implements Initializable {
         closeConfirmation.setX(stage.getX() + 200);
         closeConfirmation.setY(stage.getY() + 100);
         closeConfirmation.showAndWait();
-		
+
 	}
 
 	private void handleTableRemoval() {
 		int size = timeTable.getItems().size();
 		for (int i = 0; i < size; i++) { //Table will get smaller as you remove so double for loop to ensure all elements get removed
-			for (int j = 0; j < timeTable.getItems().size(); j++) { 
+			for (int j = 0; j < timeTable.getItems().size(); j++) {
 				if (timeTable.getItems().get(j).getEdit().isSelected()) { // Remove selected check boxes
 					timeTable.getItems().remove(j);
 					break;
@@ -220,7 +248,7 @@ public class Controller implements Initializable {
 		cancel.setVisible(true);
 		delete.setVisible(true);
 	}
-	
+
 	@FXML
 	private void start(ActionEvent event) {
 //		playAction = new Pulse(startIcon);
@@ -296,7 +324,7 @@ public class Controller implements Initializable {
         });
 
 	}
-	
+
 	@FXML
 	private void stop(ActionEvent event) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -340,7 +368,7 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void handleEditTranferLocation() {
 		try {
@@ -355,7 +383,7 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * Handles event for adding a new transfer location
 	 */
@@ -399,7 +427,6 @@ public class Controller implements Initializable {
 		textfield2.getStyleClass().add("textboxtext");
 		textfield1.setPrefWidth(400);
 		textfield2.setPrefWidth(400);
-		textfield1.setEditable(false);
 		textfield2.setEditable(false);
 
 		label.getStyleClass().add("connections");
@@ -451,7 +478,7 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * This method add the new transfer times to the main table
 	 */
@@ -473,7 +500,7 @@ public class Controller implements Initializable {
 		selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
 		updateGUI(); //Lets update the UI with the presses current info
 	}
-	
+
 	/*
 	 * Updates the GUI with the current Press info
 	 */
@@ -483,7 +510,7 @@ public class Controller implements Initializable {
 		ArrayList<TransferTime> times = selectedPress.getTransferTimes();
 		if (locations != null) {
 			for (int i = 0; i < locations.size(); i++) { //Lets add the locations back to the UI
-				createComponent(locations.get(i).getName(), locations.get(i).getFromLocation(), locations.get(i).getToLocation()); 
+				createComponent(locations.get(i).getName(), locations.get(i).getFromLocation(), locations.get(i).getToLocation());
 			}
 		}
 		if (times != null) { //Now add the Transfer times back into the main table
@@ -493,7 +520,7 @@ public class Controller implements Initializable {
 				timeTable.getItems().add(time);
 			}
 		}
-		
+
 	}
 	/*
 	 * Clears the elements in the Locations pane and time table
@@ -502,6 +529,7 @@ public class Controller implements Initializable {
 		if (transferLocList != null) {
 			transferLocList.getChildren().clear();
 			timeTable.getItems().clear();
+
 		}
 	}
 
@@ -510,22 +538,49 @@ public class Controller implements Initializable {
 	 */
 	@FXML
 	public void addPressToScene() {
+
+
+
 		//Get the most recent press added to hashmap
 		Press press = PressManager.getRecentPress();
 		PressManager.removePress(press.getKey()); //Remove temp obj in hashmap
-		
+
 		Button newPress = new Button(press.getName());
+
+
 		newPress.getStyleClass().add("addPress");
-		newPress.setMinWidth(addPress.getWidth());
+		newPress.setMinWidth(pressLabel.getWidth());
 		newPress.setUserData(press);
-		
+
 		press.setKey(newPress.hashCode());
 		PressManager.addPress(press.getName(), newPress.hashCode()); //Add new press with the same hash code as the button
 		selectedPress = press;
 		//Set action to handle the new press button
 		newPress.setOnAction(this::handlePress);
-		
-		pressList.getChildren().add(0,newPress); //Add button to top of children
+
+
+		/* Once the Vbox increases more than the title pane create a scroll bar and continue
+		*  to be able to add children
+		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
+			System.out.println("pressLocList is greater than pressPane");
+			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+
+			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+//			scrollPaneAddPress.setContent(pressLocList);
+
+			pressListIncreased = pressListIncreased + 30;
+			pressLocList.setPrefHeight(pressListIncreased);
+
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+
+		}
+		else {
+			pressListIncreased = pressListIncreased + 30;
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+			pressLocList.setPrefHeight(pressListIncreased);
+
+		}
+
 
 	}
 

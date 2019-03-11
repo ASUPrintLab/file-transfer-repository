@@ -1,5 +1,5 @@
 package application_v2;
-	
+
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,17 +22,31 @@ import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
-	
+
 	private static Stage mainStage;
+	public Scene scene;
+	private double xoffset;
+	private double yoffset;
 	
 	@Override
 	public void start(Stage primaryStage) {
-		
+
 		this.mainStage = primaryStage;
-		
+
 		try {
 			 //VBox is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/gui.fxml"));
+			
+			// Being able to move the program around
+			root.setOnMousePressed(event -> {
+				xoffset = event.getSceneX();
+				yoffset = event.getSceneY();
+			});
+			root.setOnMouseDragged(e->{
+				primaryStage.setX(e.getScreenX() - xoffset);
+				primaryStage.setY(e.getScreenY() - yoffset);
+			});
+			
 			Scene scene = new Scene(root, 912, 600, Color.BLACK); //Size of the window for the program in pixels
 			scene.getStylesheets().add(getClass().getResource("/resources/stylesheet.css").toExternalForm()); //Path to CSS
 			primaryStage.setScene(scene); //Set style to window
@@ -41,7 +55,7 @@ public class Main extends Application {
 			primaryStage.getIcons().add(new Image("/resources/upload.png"));
 			primaryStage.show(); //Display
 			primaryStage.setResizable(false);
-	        
+
 		} catch(Exception e) { //Catch Exception and display SEVER null in console
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
 			e.printStackTrace();
@@ -53,11 +67,11 @@ public class Main extends Application {
 	}
 
 	public static void RefreshStage() {
-		
+
 	}
 
 	public static void setScene(Scene newScene) {
 		mainStage.setScene(newScene);
-		
+
 	}
 }
