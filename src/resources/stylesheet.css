@@ -102,6 +102,7 @@
 
 .addPress:hover {
   -fx-background-color: rgba(185, 185, 185, .1);
+  /* -fx-background-color: #F44242; */
   /* -fx-border-color: #1C1C1C; */
   -fx-color: transparent;
   -fx-text-fill: white;
@@ -120,6 +121,10 @@
 
 .addPress:pressed {
   -fx-opacity: 0.5;
+}
+
+.addPress:selected{
+  -fx-background-color: #F44242;
 }
 .addButtonPress{
   -fx-background-color: transparent;

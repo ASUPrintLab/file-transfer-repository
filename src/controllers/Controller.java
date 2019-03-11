@@ -139,8 +139,8 @@ public class Controller implements Initializable {
 	private FadeOut action7;
 
  private int pressListIncreased = 412;
- private int transferLocationIncreased = 407;
- private int transferLocationVBox = 403;
+ private int transferLocationIncreased = 400;
+
 //	Parent root;
 
 	/**
@@ -444,32 +444,34 @@ public class Controller implements Initializable {
 		/* Once the Vbox increases more than the transfer locations pane create a scroll bar and continue
 		*  to be able to add transfer locations
 		*/
-		if(scrollPaneTransferLocation.getPrefHeight() > transferLocationPane.getPrefHeight()) {
+		if(transferLocList.getPrefHeight() > transferLocationPane.getPrefHeight()) {
 			System.out.println("This if line has been reached");
 			scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			
 			VBox.setVgrow(scrollPaneTransferLocation, Priority.ALWAYS);
 
 			
-			transferLocationIncreased = transferLocationIncreased + 20;
-			scrollPaneTransferLocation.setPrefHeight(transferLocationIncreased);
-			
-			transferLocationVBox = transferLocationVBox + 500;
-			transferLocList.setPrefHeight(transferLocationVBox);
+//			transferLocationIncreased = transferLocationIncreased + 40;
+//			transferLocList.setPrefHeight(transferLocationIncreased);
+//			
+			// Makes sure the scroll bar is set to the size of how many transfer locations there are
+			scrollPaneTransferLocation.vvalueProperty().bind(transferLocList.heightProperty());
+
 			
 			// Adding a new transfer location associated with a press
-			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane); 
+			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
 
 		}
 		else {
 			System.out.println("The else line has been reached");
-			transferLocationIncreased = transferLocationIncreased + 40;
-			scrollPaneTransferLocation.setPrefHeight(transferLocationIncreased);
+			transferLocationIncreased = transferLocationIncreased + 30;
+			transferLocList.setPrefHeight(transferLocationIncreased);
 			
-			transferLocationVBox = transferLocationVBox + 500;
-			transferLocList.setPrefHeight(transferLocationVBox);
+			
 			// Adding a new transfer location associated with a press
-			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane); 
+			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
+			
+			
 		}
 		
 	
@@ -586,6 +588,8 @@ public class Controller implements Initializable {
 		newPress.getStyleClass().add("addPress");
 		newPress.setMinWidth(pressLabel.getWidth());
 		newPress.setUserData(press);
+		
+		newPress.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
 
 		press.setKey(newPress.hashCode());
 		PressManager.addPress(press.getName(), newPress.hashCode()); //Add new press with the same hash code as the button
@@ -598,21 +602,26 @@ public class Controller implements Initializable {
 		*  to be able to add presses
 		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
 			
+			
+			System.out.println("pressLocList is now bigger than pressPane");
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
 
 			
-			pressListIncreased = pressListIncreased + 4;
-			pressLocList.setPrefHeight(pressListIncreased);
+			// Makes sure the scroll bar is set to the size of how many presses there are
+			scrollPaneAddPress.vvalueProperty().bind(pressLocList.heightProperty());
 			
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 
 		}
 		else {
 			pressListIncreased = pressListIncreased + 4;
-			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 			pressLocList.setPrefHeight(pressListIncreased);
+			
+			System.out.println("This is the value of pressListIncreased "+pressListIncreased);
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+			
 			
 			
 
