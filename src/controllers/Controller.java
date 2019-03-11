@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import animatefx.animation.FadeOut;
+import animatefx.animation.GlowText;
+import animatefx.animation.Pulse;
 import application_v2.Locations;
 import application_v2.Press;
 import application_v2.PressManager;
@@ -38,6 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -102,6 +105,8 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> endTime;
 	@FXML
 	private TableColumn<TransferTime, String> actions;
+	@FXML
+    private Circle pulse;
 	
 	private Press selectedPress;
 	
@@ -114,7 +119,7 @@ public class Controller implements Initializable {
 	private FadeOut action5;
 	private FadeOut action6;
 	private FadeOut action7;
-	
+//	private Pulse playAction;
 	
 	
 //	Parent root;
@@ -218,6 +223,8 @@ public class Controller implements Initializable {
 	
 	@FXML
 	private void start(ActionEvent event) {
+//		playAction = new Pulse(startIcon);
+//		playAction.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		notifier.setText("Running... Started on " + dateFormat.format(date));

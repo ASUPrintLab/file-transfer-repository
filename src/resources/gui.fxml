@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="600.0" prefWidth="912.0" style="-fx-background-color: #1B1B1F;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
@@ -35,6 +36,7 @@
          <children>
             <Pane prefHeight="81.0" prefWidth="392.0" style="-fx-background-color: #262626;">
                <children>
+                  <Circle fx:id="pulse" fill="#1f93ff00" layoutX="65.0" layoutY="43.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" styleClass="runPulse" />
                   <Button fx:id="run" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="33.0" layoutY="9.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" stylesheets="@stylesheet.css">
                      <graphic>
                         <ImageView fx:id="startIcon" fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonIcon">
@@ -131,12 +133,13 @@
                               <Font size="27.0" />
                            </font>
                            <content>
-                              <VBox fx:id="pressList" alignment="TOP_CENTER" prefHeight="495.0" prefWidth="217.0" style="-fx-background-color: #262626;">
+                              <VBox fx:id="pressList" alignment="TOP_CENTER" prefHeight="404.0" prefWidth="220.0" style="-fx-background-color: #262626;">
                                  <children>
                                     <Button fx:id="addPress" mnemonicParsing="false" prefHeight="50.0" prefWidth="249.0" styleClass="addPress" stylesheets="@stylesheet.css" text="Add Press +">
                                        <VBox.margin>
                                           <Insets />
-                                       </VBox.margin></Button>
+                                       </VBox.margin>
+                                    </Button>
                                  </children>
                               </VBox>
                            </content>
@@ -192,8 +195,8 @@
                            </padding></Label>
                         <TableView fx:id="timeTable" layoutX="2.0" layoutY="47.0" prefHeight="407.0" prefWidth="212.0" style="-fx-background-color: transparent; -fx-effect: dropshadow(GAUSSIAN, black, 5, 0, 1, 2);">
                           <columns>
-                            <TableColumn fx:id="startTime" prefWidth="81.0" text="Start" />
-                            <TableColumn fx:id="endTime" prefWidth="76.0" styleClass="end" text="End" />
+                            <TableColumn fx:id="startTime" editable="false" prefWidth="81.0" sortable="false" text="Start" />
+                            <TableColumn fx:id="endTime" editable="false" prefWidth="76.0" sortable="false" styleClass="end" text="End" />
                               <TableColumn fx:id="actions" prefWidth="52.0" text="Actions" />
                           </columns>
                         </TableView>
