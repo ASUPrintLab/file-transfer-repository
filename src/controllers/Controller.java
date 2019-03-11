@@ -162,6 +162,7 @@ public class Controller implements Initializable {
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
 		addPress.setOnAction(this::handleNewPress);
+		stop.setDisable(true);
 
 
 		addTransferLocation.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
@@ -251,6 +252,14 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void start(ActionEvent event) {
+		stop.setDisable(false);
+		run.setDisable(true);
+		startAnimation();
+	}
+	/*
+	 * Handles the animation of the start button
+	 */
+	private void startAnimation() {
 //		playAction = new Pulse(startIcon);
 //		playAction.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -323,10 +332,12 @@ public class Controller implements Initializable {
 			}
         });
 
+		
 	}
-
 	@FXML
 	private void stop(ActionEvent event) {
+		stop.setDisable(true);
+		run.setDisable(false);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		notifier.setText("Stopped on " + dateFormat.format(date));

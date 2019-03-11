@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/gndeshpa/Documents/GitHub/file-transfer-repository/src/resources/jars/animatefx-1.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/gndeshpa/Documents/GitHub/file-transfer-repository/src/resources/jars/joda-time-2.9.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/gndeshpa/Documents/GitHub/file-transfer-repository/src/resources/jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/resources/jars/animatefx-1.2.1.jar"/>
+	<classpathentry kind="lib" path="src/resources/jars/joda-time-2.9.4.jar"/>
+	<classpathentry kind="lib" path="src/resources/jars/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

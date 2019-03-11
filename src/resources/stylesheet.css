@@ -125,7 +125,7 @@
   -fx-background-color: transparent;
   -fx-opacity: 0.5;
 }
-.addButtonPress: hover{
+.addButtonPress:hover{
   -fx-text-fill: #F7FAFF;
   -fx-opacity: 1;
 }
