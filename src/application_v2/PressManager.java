@@ -50,6 +50,7 @@ public class PressManager {
 	//Gets the most recently added press
 	public static Press getRecentPress() {
 		return mostRecentPress;
+		
 	}
 	
 

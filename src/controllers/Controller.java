@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -127,8 +128,10 @@ public class Controller implements Initializable {
 	private Press selectedPress;
 
 	private Pane pane;
+	
+	private Button clearButton;
 
-
+	
 
 	private FadeOut action1;
 	private FadeOut action2;
@@ -445,15 +448,11 @@ public class Controller implements Initializable {
 		*  to be able to add transfer locations
 		*/
 		if(transferLocList.getPrefHeight() > transferLocationPane.getPrefHeight()) {
-			System.out.println("This if line has been reached");
+			
 			scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			
 			VBox.setVgrow(scrollPaneTransferLocation, Priority.ALWAYS);
 
-			
-//			transferLocationIncreased = transferLocationIncreased + 40;
-//			transferLocList.setPrefHeight(transferLocationIncreased);
-//			
 			// Makes sure the scroll bar is set to the size of how many transfer locations there are
 			scrollPaneTransferLocation.vvalueProperty().bind(transferLocList.heightProperty());
 
@@ -535,6 +534,7 @@ public class Controller implements Initializable {
 	@FXML
 	private void handlePress(ActionEvent event) {
 		selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
+		
 		updateGUI(); //Lets update the UI with the presses current info
 	}
 
@@ -563,11 +563,26 @@ public class Controller implements Initializable {
 	 * Clears the elements in the Locations pane and time table
 	 */
 	private void clearGUI() {
-		if (transferLocList != null) {
+		if (transferLocList != null || pressLocList != null) {
 			transferLocList.getChildren().clear();
 			timeTable.getItems().clear();
 
+
 		}
+		
+	}
+	
+	// When new press is added set the buttons to a default style
+	private void clearPresses() {
+			
+			// Creating a generic type to store all of the children in
+			ObservableList<Node> tempButton = pressLocList.getChildren();
+			for (int i = 0; i < tempButton.size(); i++) {
+				Button newButton = (Button) tempButton.get(i);
+				
+				newButton.setStyle("-fx-background-color: #262626; -fx-text-fill: white;");
+			}
+
 	}
 
 	/*
@@ -589,13 +604,33 @@ public class Controller implements Initializable {
 		newPress.setMinWidth(pressLabel.getWidth());
 		newPress.setUserData(press);
 		
-		newPress.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-
+		
 		press.setKey(newPress.hashCode());
 		PressManager.addPress(press.getName(), newPress.hashCode()); //Add new press with the same hash code as the button
 		selectedPress = press;
+		
+	
+		clearPresses();
 		//Set action to handle the new press button
 		newPress.setOnAction(this::handlePress);
+		
+	
+		newPress.setOnAction(new EventHandler<ActionEvent>() {
+//           @Override
+            public void handle(ActionEvent event) {
+            	
+            	clearPresses();
+            	
+            		newPress.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
+            		
+            		
+                	selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
+           		
+                	updateGUI(); //Lets update the UI with the presses current info
+            	}
+            	
+           });
+       
 
 
 		/* Once the Vbox increases more than the press pane create a scroll bar and continue
@@ -603,7 +638,7 @@ public class Controller implements Initializable {
 		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
 			
 			
-			System.out.println("pressLocList is now bigger than pressPane");
+			
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
@@ -618,12 +653,9 @@ public class Controller implements Initializable {
 		else {
 			pressListIncreased = pressListIncreased + 4;
 			pressLocList.setPrefHeight(pressListIncreased);
-			
-			System.out.println("This is the value of pressListIncreased "+pressListIncreased);
+		
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
-			
-			
-			
+
 
 		}
 
