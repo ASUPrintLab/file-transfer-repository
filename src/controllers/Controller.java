@@ -38,6 +38,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -531,12 +532,6 @@ public class Controller implements Initializable {
 		actions.setVisible(false);
 	}
 
-	@FXML
-	private void handlePress(ActionEvent event) {
-		selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
-		
-		updateGUI(); //Lets update the UI with the presses current info
-	}
 
 	/*
 	 * Updates the GUI with the current Press info
@@ -566,7 +561,6 @@ public class Controller implements Initializable {
 		if (transferLocList != null || pressLocList != null) {
 			transferLocList.getChildren().clear();
 			timeTable.getItems().clear();
-
 
 		}
 		
@@ -612,11 +606,11 @@ public class Controller implements Initializable {
 	
 		clearPresses();
 		//Set action to handle the new press button
-		newPress.setOnAction(this::handlePress);
+
 		
 	
 		newPress.setOnAction(new EventHandler<ActionEvent>() {
-//           @Override
+            @Override
             public void handle(ActionEvent event) {
             	
             	clearPresses();
@@ -627,10 +621,45 @@ public class Controller implements Initializable {
                 	selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
            		
                 	updateGUI(); //Lets update the UI with the presses current info
+                	
+                	newPress.setOnMouseClicked(new EventHandler<MouseEvent>() {
+          			  
+        	            @Override
+        	            public void handle(MouseEvent event) {
+        	                MouseButton button = event.getButton();
+        	                // Allow right click only when a press is highlighted
+        	                if(button==MouseButton.SECONDARY && newPress.hashCode()==selectedPress.getKey()){
+        	                	
+        	                	Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        	                    
+        	                    Stage stage = (Stage) close.getScene().getWindow();
+
+        	                    Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+        	                    
+        	                    exitButton.setOnAction(new EventHandler<ActionEvent>(){
+        	                    	@Override
+        	                    	public void handle(ActionEvent event) {
+        	                    		// Specifying the press we want to remove
+        	                    		ObservableList<Node> tempButton = pressLocList.getChildren();
+        	                    		pressLocList.getChildren().remove(tempButton.indexOf(newPress));
+        	                    		clearGUI();
+        	                        }
+        	                    });
+        	                    exitButton.setText("Delete");
+        	                    closeConfirmation.setHeaderText("Are you sure you want to remove this press?");
+        	                    closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+        	                    closeConfirmation.initOwner(stage);
+        	                    closeConfirmation.setX(stage.getX() + 200);
+        	                    closeConfirmation.setY(stage.getY() + 100);
+        	                    closeConfirmation.showAndWait();
+        	                }
+        	            }
+        	        });
             	}
             	
            });
-       
+			
+		
 
 
 		/* Once the Vbox increases more than the press pane create a scroll bar and continue
