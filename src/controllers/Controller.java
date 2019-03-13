@@ -1,5 +1,6 @@
 package controllers;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -27,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -39,9 +41,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -54,7 +57,7 @@ import javafx.util.Duration;
  * Author: Mitchell Roberts
  * Author: Gaurav Deshpande
  */
-public class Controller implements Initializable {
+public class Controller implements Initializable{
 
 	@FXML
     private Button run; //start the program
@@ -116,7 +119,9 @@ public class Controller implements Initializable {
 	private TableColumn<TransferTime, String> actions;
 
 	@FXML
-	private Pane pressPane; //Used to identify the pane for scrolling
+	private Pane pressPane; //Used to identify the press pane for scrolling
+	@FXML
+	private Pane transferLocationPane; // Used to identify the transfer location pane for scrolling
 
 	@FXML
 	private MenuBar menuBar; // Used to identify the size of the program
@@ -125,17 +130,18 @@ public class Controller implements Initializable {
 	private ScrollPane scrollPaneAddPress; // Scroll pane created for adding a new press
 	@FXML
 	private Label pressLabel; // Representing the name of the presses
-
+	@FXML
+	private ScrollPane scrollPaneTransferLocation; // Scroll pane created for adding a new transfer location
 
 	private Press selectedPress;
 
 	private Pane pane;
-	
+
 	private ArrayList<Worker> workers = new ArrayList<Worker>();
 
-	
+
 	ExecutorService executorService;
-	
+
 
 	private FadeOut action1;
 	private FadeOut action2;
@@ -145,7 +151,8 @@ public class Controller implements Initializable {
 	private FadeOut action6;
 	private FadeOut action7;
 
- private int pressListIncreased = 294;
+ private int pressListIncreased = 412;
+ private int transferLocationIncreased = 400;
 
 //	Parent root;
 
@@ -157,8 +164,12 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// Always show vertical scroll bar that is displayed to the right of transfer locations
-		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		VBox.setVgrow(scrollpane, Priority.ALWAYS);
+//		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//		VBox.setVgrow(scrollpane, Priority.ALWAYS);
+
+		// Don't show the scroll bar for the transfer location section initially
+		scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.NEVER);
+		VBox.setVgrow(scrollPaneTransferLocation, Priority.NEVER);
 
 		// Don't show the scroll bar for the add press section initially
 		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
@@ -267,11 +278,11 @@ public class Controller implements Initializable {
 		stop.setDisable(false);
 		run.setDisable(true); //Disable button
 		startAnimation(); //Start animation
-		
+
 		ArrayList<Press> list = PressManager.getAllPresses();
-		
+
 		executorService = Executors.newFixedThreadPool(list.size());
-		
+
 		for (Press press : list) {
 			Worker worker = new Worker(press);
 			workers.add(worker);
@@ -355,7 +366,7 @@ public class Controller implements Initializable {
 			}
         });
 
-		
+
 	}
 	@FXML
 	private void stop(ActionEvent event) {
@@ -367,7 +378,7 @@ public class Controller implements Initializable {
 		for (int i = 0; i < workers.size(); i++) {
 			workers.get(i).cancel(true);
 		}
-		
+
 		stopAnimation(); //Stop the animation
 	}
 	/*
@@ -461,7 +472,7 @@ public class Controller implements Initializable {
 		VBox vbox = new VBox();
 		pane.getStyleClass().add("locationDiv");
 		pane.setPrefHeight(146.00);
-		pane.prefWidth(424.00);
+		pane.prefWidth(380.00);
 		pane.setMinHeight(146);
 		Label label = new Label(name);
 		TextField textfield1 = new TextField();
@@ -482,10 +493,40 @@ public class Controller implements Initializable {
 		vbox.getChildren().add(1,textfield1);
 		vbox.getChildren().add(2,textfield2);
 		pane.getChildren().add(0,vbox);
-		transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
+
+		/* Once the Vbox increases more than the transfer locations pane create a scroll bar and continue
+		*  to be able to add transfer locations
+		*/
+		if(transferLocList.getPrefHeight() > transferLocationPane.getPrefHeight()) {
+
+			scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+
+			VBox.setVgrow(scrollPaneTransferLocation, Priority.ALWAYS);
+
+			// Makes sure the scroll bar is set to the size of how many transfer locations there are
+			scrollPaneTransferLocation.vvalueProperty().bind(transferLocList.heightProperty());
+
+
+			// Adding a new transfer location associated with a press
+			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
+
+		}
+		else {
+			System.out.println("The else line has been reached");
+			transferLocationIncreased = transferLocationIncreased + 30;
+			transferLocList.setPrefHeight(transferLocationIncreased);
+
+
+			// Adding a new transfer location associated with a press
+			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
+
+
+		}
+
+
 	}
 	/*
-	 * Adds the new loation to the press
+	 * Adds the new location to the press
 	 */
 	private void addLocationToPress(String name, String sourceLoc, String targetLoc) {
 		ArrayList<Locations> locations = selectedPress.getLocations();
@@ -540,11 +581,6 @@ public class Controller implements Initializable {
 		actions.setVisible(false);
 	}
 
-	@FXML
-	private void handlePress(ActionEvent event) {
-		selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
-		updateGUI(); //Lets update the UI with the presses current info
-	}
 
 	/*
 	 * Updates the GUI with the current Press info
@@ -571,11 +607,25 @@ public class Controller implements Initializable {
 	 * Clears the elements in the Locations pane and time table
 	 */
 	private void clearGUI() {
-		if (transferLocList != null) {
+		if (transferLocList != null || pressLocList != null) {
 			transferLocList.getChildren().clear();
 			timeTable.getItems().clear();
 
 		}
+
+	}
+
+	// When new press is added set the buttons to a default style
+	private void clearPresses() {
+
+			// Creating a generic type to store all of the children in
+			ObservableList<Node> tempButton = pressLocList.getChildren();
+			for (int i = 0; i < tempButton.size(); i++) {
+				Button newButton = (Button) tempButton.get(i);
+
+				newButton.setStyle("-fx-background-color: #262626; -fx-text-fill: white;");
+			}
+
 	}
 
 	/*
@@ -597,36 +647,116 @@ public class Controller implements Initializable {
 		newPress.setMinWidth(pressLabel.getWidth());
 		newPress.setUserData(press);
 
+
 		press.setKey(newPress.hashCode());
 		PressManager.addPress(press.getName(), newPress.hashCode()); //Add new press with the same hash code as the button
 		selectedPress = press;
+
+
+		clearPresses();
 		//Set action to handle the new press button
-		newPress.setOnAction(this::handlePress);
 
 
-		/* Once the Vbox increases more than the title pane create a scroll bar and continue
-		*  to be able to add children
+
+		newPress.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            	clearPresses();
+
+            		newPress.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+
+
+                	selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
+
+                	updateGUI(); //Lets update the UI with the presses current info
+
+                	newPress.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+        	            @Override
+        	            public void handle(MouseEvent event) {
+        	                MouseButton button = event.getButton();
+        	                // Allow right click only when a press is highlighted
+        	                if(button==MouseButton.SECONDARY && newPress.hashCode()==selectedPress.getKey()){
+
+        	                	Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+
+        	                    Stage stage = (Stage) close.getScene().getWindow();
+
+        	                    Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+
+        	                    exitButton.setOnAction(new EventHandler<ActionEvent>(){
+        	                    	@Override
+        	                    	public void handle(ActionEvent event) {
+        	                    		// Specifying the press we want to remove from the PressManager
+        	                    		ObservableList<Node> tempButton = pressLocList.getChildren();
+
+        	                    		PressManager.removePress(selectedPress.getKey());
+        	                    		pressLocList.getChildren().remove(tempButton.indexOf(newPress));
+
+        	                    		clearGUI();
+        	                        }
+        	                    });
+        	                    exitButton.setText("Delete");
+        	                    closeConfirmation.setHeaderText("Are you sure you want to remove this press?");
+        	                    closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+        	                    closeConfirmation.initOwner(stage);
+        	                    closeConfirmation.setX(stage.getX() + 200);
+        	                    closeConfirmation.setY(stage.getY() + 100);
+        	                    closeConfirmation.showAndWait();
+        	                }
+        	            }
+        	        });
+            	}
+
+           });
+
+
+
+
+		/* Once the Vbox increases more than the press pane create a scroll bar and continue
+		*  to be able to add presses
 		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
-			System.out.println("pressLocList is greater than pressPane");
+
+//			scrollPaneAddPress.addEventFilter(ScrollEvent.SCROLL_STARTED, new EventHandler<ScrollEvent>() {
+//			        @Override
+//			        public void handle(ScrollEvent event) {
+//			        	System.out.println("This method has been entered");
+
+//			            event.consume();
+//			        }});
+//
+//			scrollPaneAddPress.setOnScroll(new EventHandler<ScrollEvent>() {
+//				@Override
+//				public void handle(ScrollEvent event) {
+//					System.out.println("This method has been entered");
+//					scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//
+//					VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+//				}
+//			});
+
+		
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
-//			scrollPaneAddPress.setContent(pressLocList);
 
-			pressListIncreased = pressListIncreased + 30;
-			pressLocList.setPrefHeight(pressListIncreased);
+			// Makes sure the scroll bar is set to the size of how many presses there are
+			scrollPaneAddPress.vvalueProperty().bind(pressLocList.heightProperty());
 
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 
 		}
 		else {
-			pressListIncreased = pressListIncreased + 30;
-			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+			pressListIncreased = pressListIncreased + 4;
 			pressLocList.setPrefHeight(pressListIncreased);
+
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+
 
 		}
 
 
 	}
+
 
 }
