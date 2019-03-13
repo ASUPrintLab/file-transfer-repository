@@ -1,5 +1,6 @@
 package controllers;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -50,7 +51,7 @@ import javafx.util.Duration;
  * Author: Mitchell Roberts
  * Author: Gaurav Deshpande
  */
-public class Controller implements Initializable {
+public class Controller implements Initializable{
 
 	@FXML
     private Button run; //start the program
@@ -130,7 +131,7 @@ public class Controller implements Initializable {
 
 	private Pane pane;
 	
-	private Button clearButton;
+	
 
 	
 
@@ -669,12 +670,27 @@ public class Controller implements Initializable {
 		*  to be able to add presses
 		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
 			
+//			scrollPaneAddPress.addEventFilter(ScrollEvent.SCROLL_STARTED, new EventHandler<ScrollEvent>() {
+//			        @Override
+//			        public void handle(ScrollEvent event) {
+//			        	System.out.println("This method has been entered");
+			        	
+//			            event.consume();
+//			        }});
+//			
+//			scrollPaneAddPress.setOnScroll(new EventHandler<ScrollEvent>() {
+//				@Override
+//				public void handle(ScrollEvent event) {
+//					System.out.println("This method has been entered");
+//					scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+//					
+//					VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+//				}
+//			});
 			
-			
+		
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-			
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
-
 			
 			// Makes sure the scroll bar is set to the size of how many presses there are
 			scrollPaneAddPress.vvalueProperty().bind(pressLocList.heightProperty());
@@ -693,5 +709,6 @@ public class Controller implements Initializable {
 
 
 	}
+	
 
 }
