@@ -35,7 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -639,9 +639,12 @@ public class Controller implements Initializable {
         	                    exitButton.setOnAction(new EventHandler<ActionEvent>(){
         	                    	@Override
         	                    	public void handle(ActionEvent event) {
-        	                    		// Specifying the press we want to remove
+        	                    		// Specifying the press we want to remove from the PressManager
         	                    		ObservableList<Node> tempButton = pressLocList.getChildren();
+        	                    	
+        	                    		PressManager.removePress(selectedPress.getKey());
         	                    		pressLocList.getChildren().remove(tempButton.indexOf(newPress));
+        	                    		
         	                    		clearGUI();
         	                        }
         	                    });
