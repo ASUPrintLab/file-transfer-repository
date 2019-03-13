@@ -1,5 +1,6 @@
 package application_v2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 /*
  * Author: Mitchell Roberts
@@ -68,7 +69,18 @@ public class PressManager {
 	 * Update press in hash map
 	 */
 	public static void updatePress(Press press) {
+		mostRecentPress = press;
 		pressManager.put(press.getKey(), press);
+	}
+	/*
+	 * Return a list of press objects
+	 */
+	public static ArrayList<Press> getAllPresses() {
+		ArrayList<Press> list = new ArrayList<>();
+		for (Press press : pressManager.values()) {
+			list.add(press);
+		}
+		return list;
 	}
 
 }

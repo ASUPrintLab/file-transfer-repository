@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import animatefx.animation.FadeOut;
 import animatefx.animation.GlowText;
@@ -17,6 +19,7 @@ import application_v2.Main;
 import application_v2.Press;
 import application_v2.PressManager;
 import application_v2.TransferTime;
+import application_v2.Worker;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -127,8 +130,12 @@ public class Controller implements Initializable {
 	private Press selectedPress;
 
 	private Pane pane;
+	
+	private ArrayList<Worker> workers = new ArrayList<Worker>();
 
-
+	
+	ExecutorService executorService;
+	
 
 	private FadeOut action1;
 	private FadeOut action2;
@@ -211,6 +218,11 @@ public class Controller implements Initializable {
         exitButton.setOnAction(new EventHandler<ActionEvent>(){
         	@Override
         	public void handle(ActionEvent event) {
+        		//Shutdown and dont allow new task to enter pool
+        		executorService.shutdown();
+        		for (int i = 0; i < workers.size(); i++) {
+        			workers.get(i).cancel(true);
+        		}
         		stage.close();
             }
         });
@@ -253,13 +265,24 @@ public class Controller implements Initializable {
 	@FXML
 	private void start(ActionEvent event) {
 		stop.setDisable(false);
-		run.setDisable(true);
-		startAnimation();
+		run.setDisable(true); //Disable button
+		startAnimation(); //Start animation
+		
+		ArrayList<Press> list = PressManager.getAllPresses();
+		
+		executorService = Executors.newFixedThreadPool(list.size());
+		
+		for (Press press : list) {
+			Worker worker = new Worker(press);
+			workers.add(worker);
+			executorService.execute(worker); //Start running tasks
+		}
 	}
 	/*
 	 * Handles the animation of the start button
 	 */
 	private void startAnimation() {
+		System.out.println("Here with animation");
 //		playAction = new Pulse(startIcon);
 //		playAction.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -338,6 +361,19 @@ public class Controller implements Initializable {
 	private void stop(ActionEvent event) {
 		stop.setDisable(true);
 		run.setDisable(false);
+
+		//Stop all thread safely to prevent corrupted memory
+		executorService.shutdownNow();
+		for (int i = 0; i < workers.size(); i++) {
+			workers.get(i).cancel(true);
+		}
+		
+		stopAnimation(); //Stop the animation
+	}
+	/*
+	 * This method stops the animation and adds the time stopped in the GUI
+	 */
+	private void stopAnimation() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		notifier.setText("Stopped on " + dateFormat.format(date));
@@ -358,9 +394,7 @@ public class Controller implements Initializable {
 		action5.stop();
 		action6.stop();
 		action7.stop();
-
 	}
-
 	@FXML
 	private void handleNewPress(ActionEvent event) {
 		clearGUI();
