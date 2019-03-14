@@ -61,4 +61,22 @@ public class Press {
 			}
 		}
 	}
+
+	public boolean locationsEmpty() {
+		if (this.locations != null) {
+			return this.locations.isEmpty();
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean timesEmpty() {
+		if (this.TransferTimes != null) {
+			return this.locations.isEmpty();
+		}
+		else {
+			return false;
+		}
+	}
 }

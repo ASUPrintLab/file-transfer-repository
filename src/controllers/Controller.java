@@ -230,9 +230,11 @@ public class Controller implements Initializable{
         	@Override
         	public void handle(ActionEvent event) {
         		//Shutdown and dont allow new task to enter pool
-        		executorService.shutdown();
-        		for (int i = 0; i < workers.size(); i++) {
-        			workers.get(i).cancel(true);
+        		if (!PressManager.isEmpty()) {
+        			executorService.shutdownNow();
+        			for (int i = 0; i < workers.size(); i++) {
+        				workers.get(i).cancel(true);
+        			}	
         		}
         		stage.close();
             }
@@ -278,24 +280,25 @@ public class Controller implements Initializable{
 		stop.setDisable(false);
 		run.setDisable(true); //Disable button
 		startAnimation(); //Start animation
+		if (!PressManager.isEmpty()) {
+			ArrayList<Press> list = PressManager.getAllPresses();
 
-		ArrayList<Press> list = PressManager.getAllPresses();
-
-		executorService = Executors.newFixedThreadPool(list.size());
-
-		for (Press press : list) {
-			Worker worker = new Worker(press);
-			workers.add(worker);
-			executorService.execute(worker); //Start running tasks
+			executorService = Executors.newFixedThreadPool(list.size());
+			for (Press press : list) {
+				if (!press.locationsEmpty() && !press.timesEmpty()) { //Prevent empty presses from creating tasks
+					Worker worker = new Worker(press);
+					workers.add(worker);
+					executorService.execute(worker); //Start running tasks	
+				}
+			}
 		}
 	}
 	/*
 	 * Handles the animation of the start button
 	 */
 	private void startAnimation() {
-		System.out.println("Here with animation");
-//		playAction = new Pulse(startIcon);
-//		playAction.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
+		Pulse playAction = new Pulse(run);
+		playAction.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		notifier.setText("Running... Started on " + dateFormat.format(date));
@@ -374,9 +377,11 @@ public class Controller implements Initializable{
 		run.setDisable(false);
 
 		//Stop all thread safely to prevent corrupted memory
-		executorService.shutdownNow();
-		for (int i = 0; i < workers.size(); i++) {
-			workers.get(i).cancel(true);
+		if (!PressManager.isEmpty()) {
+			executorService.shutdownNow();
+			for (int i = 0; i < workers.size(); i++) {
+				workers.get(i).cancel(true);
+			}	
 		}
 
 		stopAnimation(); //Stop the animation
@@ -617,7 +622,6 @@ public class Controller implements Initializable{
 
 	// When new press is added set the buttons to a default style
 	private void clearPresses() {
-
 			// Creating a generic type to store all of the children in
 			ObservableList<Node> tempButton = pressLocList.getChildren();
 			for (int i = 0; i < tempButton.size(); i++) {
@@ -633,9 +637,6 @@ public class Controller implements Initializable{
 	 */
 	@FXML
 	public void addPressToScene() {
-
-
-
 		//Get the most recent press added to hashmap
 		Press press = PressManager.getRecentPress();
 		PressManager.removePress(press.getKey()); //Remove temp obj in hashmap
@@ -711,31 +712,9 @@ public class Controller implements Initializable{
 
            });
 
-
-
-
 		/* Once the Vbox increases more than the press pane create a scroll bar and continue
 		*  to be able to add presses
 		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
-
-//			scrollPaneAddPress.addEventFilter(ScrollEvent.SCROLL_STARTED, new EventHandler<ScrollEvent>() {
-//			        @Override
-//			        public void handle(ScrollEvent event) {
-//			        	System.out.println("This method has been entered");
-
-//			            event.consume();
-//			        }});
-//
-//			scrollPaneAddPress.setOnScroll(new EventHandler<ScrollEvent>() {
-//				@Override
-//				public void handle(ScrollEvent event) {
-//					System.out.println("This method has been entered");
-//					scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-//
-//					VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
-//				}
-//			});
-
 		
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);

@@ -56,10 +56,12 @@ public class Worker extends Task<Press> {
 				// call CheckPresses class if actual time is between From and to
 				if((time24.isAfter(from)) && (time24.isBefore(to))){
 					 System.out.println("ITS TIME!");
-					 ArrayList<Locations> locations = this.press.getLocations(); //Get times
-					 for (Locations location : locations) {
-						 new CheckPresses().run(location.getFromLocation(), location.getToLocation(), true, true);
-					 }
+					 if (!this.press.locationsEmpty()) { //Check is locations exist
+						 ArrayList<Locations> locations = this.press.getLocations(); //Get times
+						 for (Locations location : locations) {
+							 new CheckPresses().run(location.getFromLocation(), location.getToLocation(), true, true);
+						 }
+					}
 				 }
              }
 			

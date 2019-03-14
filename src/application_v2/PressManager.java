@@ -87,4 +87,9 @@ public class PressManager {
 		return list;
 	}
 
+	public static boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return pressManager.isEmpty();
+	}
+
 }
