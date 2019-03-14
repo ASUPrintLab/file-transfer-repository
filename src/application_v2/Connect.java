@@ -3,15 +3,20 @@ package application_v2;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import application.Transfer;
+import controllers.Controller;
+import controllers.TimeController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
 
-public class CheckPresses {
+public class Connect {
 	File source, target;
 	
-    public void run(String sourceFolder, String targetFolder, boolean retryConnection, boolean continueChecking) throws InvalidPathException, IOException, InterruptedException {
-    	
+    public String run(String sourceFolder, String targetFolder, boolean retryConnection, boolean continueChecking) throws InvalidPathException, IOException, InterruptedException {
     	try {
     		source = new File(sourceFolder);
         	target = new File(targetFolder);
@@ -22,6 +27,15 @@ public class CheckPresses {
     	if(source.exists() && target.exists()) {
 	    	try {
 				Transfer.copy(source, target);
+//				FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/gui.fxml"));
+//				Controller controller = loader.<Controller>getController();
+				Date date = new Date();
+				String strDateFormat = "EEE, MMM d, hh:mm a";
+			    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+			    String formattedDate = dateFormat.format(date);
+				String msg = "Files from " + sourceFolder + " were succefully sent to " + targetFolder + " at " + formattedDate;
+//				controller.transferSentMsg(msg);
+				return msg;
 			} catch (IOException e) {
 				throw e;
 			}
@@ -35,7 +49,7 @@ public class CheckPresses {
     				throw e;
     			}
     		} else {
-        		return;
+        		return null;
     		}
     	}
     	
@@ -48,7 +62,8 @@ public class CheckPresses {
     		}
     	} 
     	else {
-    		return;
+    		return null;
     	}
+		return null;
     }
 }

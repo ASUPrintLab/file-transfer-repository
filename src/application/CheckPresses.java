@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.util.concurrent.TimeUnit;
 
+import application_v2.Transfer;
+
 public class CheckPresses {
 	
 	File source, target;

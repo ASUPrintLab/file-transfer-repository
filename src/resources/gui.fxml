@@ -96,7 +96,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <VBox prefHeight="81.0" prefWidth="511.0" style="-fx-background-color: #121212; -fx-border-color: #1C1C1C; -fx-border-width: 0 0 0 7px;">
+            <VBox fx:id="messageLog" prefHeight="81.0" prefWidth="511.0" style="-fx-background-color: #121212; -fx-border-color: #1C1C1C; -fx-border-width: 0 0 0 7px;">
                <children>
                   <Label fx:id="notifier" prefHeight="17.0" prefWidth="486.0" style="-fx-text-fill: white;" wrapText="true">
                      <VBox.margin>
@@ -105,6 +105,14 @@
                      <font>
                         <Font name="AkzidenzGroteskStd-Bold" size="12.0" />
                      </font>
+                  </Label>
+                  <Label fx:id="message1" prefHeight="47.0" prefWidth="486.0" style="-fx-text-fill: white;" wrapText="true">
+                     <font>
+                        <Font name="AkzidenzGroteskStd-Md" size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </VBox.margin>
                   </Label>
                </children>
                <HBox.margin>

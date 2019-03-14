@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.script.Bindings;
+
 import animatefx.animation.FadeOut;
 import animatefx.animation.GlowText;
 import animatefx.animation.Pulse;
@@ -94,6 +96,10 @@ public class Controller implements Initializable{
 	@FXML
     private Label notifier; //Event Log label
 	@FXML
+    private Label message1; //Event Log label
+	@FXML
+    private Label message2; //Event Log label
+	@FXML
     private Label editTransferLocation; //Add Transfer Location '+'
 	@FXML
     private ImageView addTransferTime; //Add Transfer Time '+'
@@ -134,14 +140,9 @@ public class Controller implements Initializable{
 	private ScrollPane scrollPaneTransferLocation; // Scroll pane created for adding a new transfer location
 
 	private Press selectedPress;
-
 	private Pane pane;
-
 	private ArrayList<Worker> workers = new ArrayList<Worker>();
-
-
 	ExecutorService executorService;
-
 
 	private FadeOut action1;
 	private FadeOut action2;
@@ -151,10 +152,8 @@ public class Controller implements Initializable{
 	private FadeOut action6;
 	private FadeOut action7;
 
- private int pressListIncreased = 412;
- private int transferLocationIncreased = 400;
-
-//	Parent root;
+	private int pressListIncreased = 412;
+	private int transferLocationIncreased = 400;
 
 	/**
      * Initializes the controller class. This method is automatically called
@@ -287,8 +286,14 @@ public class Controller implements Initializable{
 			for (Press press : list) {
 				if (!press.locationsEmpty() && !press.timesEmpty()) { //Prevent empty presses from creating tasks
 					Worker worker = new Worker(press);
-					workers.add(worker);
-					executorService.execute(worker); //Start running tasks	
+					workers.add(worker);	
+					message1.textProperty().bind(worker.messageProperty());
+//					worker.messageProperty().addListener((obs, oldMsg, newMsg) -> {
+//						System.out.println("Event happened!");
+//						message2.setText(message1.getText());
+//						message1.setText(newMsg);
+//					});
+					executorService.execute(worker); //Start running tasks
 				}
 			}
 		}
@@ -615,9 +620,19 @@ public class Controller implements Initializable{
 		if (transferLocList != null || pressLocList != null) {
 			transferLocList.getChildren().clear();
 			timeTable.getItems().clear();
-
 		}
-
+	}
+	
+	/*
+	 * add message of recent transfer to GUI
+	 */
+	public void transferSentMsg(String msg) {
+		System.out.println("Success");
+		System.out.println(msg);
+		message2.setText(message1.getText());
+		message1.setText(msg);
+		System.out.println(message1);
+		System.out.println("Done");
 	}
 
 	// When new press is added set the buttons to a default style

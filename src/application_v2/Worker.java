@@ -8,6 +8,7 @@ import java.util.Date;
 import org.joda.time.LocalTime;
 
 import application.CheckPresses;
+import controllers.Controller;
 import javafx.concurrent.Task;
 
 /*
@@ -16,7 +17,7 @@ import javafx.concurrent.Task;
 public class Worker extends Task<Press> {
 	 
     private Press press;
-    private int interval = 800;
+    private int interval = 2000;
     SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
  
     public Worker(Press press) {
@@ -37,7 +38,6 @@ public class Worker extends Task<Press> {
             }
             
             ArrayList<TransferTime> times = this.press.getTransferTimes(); //Get times
-            System.out.println("With Press " + this.press.getName());
             for (int i = 0; i < times.size(); i++) { //Loop through times 
 				
 				Date date = new Date();
@@ -55,11 +55,10 @@ public class Worker extends Task<Press> {
 				
 				// call CheckPresses class if actual time is between From and to
 				if((time24.isAfter(from)) && (time24.isBefore(to))){
-					 System.out.println("ITS TIME!");
 					 if (!this.press.locationsEmpty()) { //Check is locations exist
 						 ArrayList<Locations> locations = this.press.getLocations(); //Get times
 						 for (Locations location : locations) {
-							 new CheckPresses().run(location.getFromLocation(), location.getToLocation(), true, true);
+							 updateMessage(new Connect().run(location.getFromLocation(), location.getToLocation(), true, true)); //setup transfer and update gui log
 						 }
 					}
 				 }
