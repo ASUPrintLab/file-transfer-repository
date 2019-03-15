@@ -13,6 +13,8 @@ import javafx.concurrent.Task;
 
 /*
  * Author: Mitchell
+ * Class: Worker
+ * Tasks that handle the file transfer
  */
 public class Worker extends Task<Press> {
 	 
@@ -35,6 +37,7 @@ public class Worker extends Task<Press> {
                     updateMessage("Cancelled");
                     break;
                 }
+                Logs.writeToException(interrupted.toString());
             }
             
             ArrayList<TransferTime> times = this.press.getTransferTimes(); //Get times

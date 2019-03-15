@@ -13,6 +13,7 @@ public class Transfer {
             copyDirectory(sourceLocation, targetLocation);
         } else {
             copyFile(sourceLocation, targetLocation);
+            Logs.writeToEvent(sourceLocation.getName() + "sent to " + targetLocation.getName()); // log the transfer
         }
     }
 

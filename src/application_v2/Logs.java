@@ -8,7 +8,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
+/*
+ * Author: Mitchell
+ * Class: Logs - Creates a file and logs events and exceptions that occur in the program.
+ */
 public class Logs {
 	private static File parentfolder;
 	private static File childfolder;
@@ -44,12 +47,12 @@ public class Logs {
 			String transfers = "C:\\Users\\msrober3\\Desktop\\Test File Transfer\\Logs\\" + Logs.year + "\\" + Logs.month + "\\transfers.log";
 			String exceptions = "C:\\Users\\msrober3\\Desktop\\Test File Transfer\\Logs\\exceptions.log";
 			Logs.fh = new FileHandler(transfers); 
-	        Logs.fh2 = new FileHandler(exceptions);
+	        Logs.fh2 = new FileHandler(exceptions); //Add file handler that logs are written to
 	        Logs.events.addHandler(fh);
 	        Logs.exceptions.addHandler(fh2);
-	        Logs.events.setLevel(Level.INFO);
+	        Logs.events.setLevel(Level.INFO); //Set the level
 	        Logs.exceptions.setLevel(Level.ALL);
-	        fh.setFormatter(new SimpleFormatter());
+	        fh.setFormatter(new SimpleFormatter()); //Formatter for the logger
 	        fh2.setFormatter(new SimpleFormatter());
 	    } catch (Exception e) {  
 	        e.printStackTrace();  
@@ -71,12 +74,16 @@ public class Logs {
 	    String formattedDate = dateFormat.format(date);
 		return formattedDate;
 	}
-	
+	/*
+	 * Write the event (transfer info) to the log
+	 */
 	public static void writeToEvent(String event) {
 		checkLogs();
 		Logs.events.log(Level.INFO,event);
 	}
-	
+	/*
+	 * Write the exception to the log
+	 */
 	public static void writeToException(String event) {
 		checkLogs();
 		Logs.exceptions.log(Level.SEVERE,event);
@@ -87,5 +94,13 @@ public class Logs {
 			Logs.fh.close();
 			Logs.fh2.close();	
 		}
+	}
+	
+	public static String getCurrentDate() {
+		Date date = new Date();
+		String strDateFormat = "EEE, MMM d, hh:mm a";
+	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+	    String formattedDate = dateFormat.format(date);
+	    return formattedDate;
 	}
 }

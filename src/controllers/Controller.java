@@ -281,8 +281,6 @@ public class Controller implements Initializable{
 
 	@FXML
 	private void start(ActionEvent event) {
-		Logs.writeToEvent("This is an event");
-		Logs.writeToException("This is an exception");
 		stop.setDisable(false);
 		run.setDisable(true); //Disable button
 		startAnimation(); //Start animation
@@ -295,11 +293,6 @@ public class Controller implements Initializable{
 					Worker worker = new Worker(press);
 					workers.add(worker);	
 					message1.textProperty().bind(worker.messageProperty());
-//					worker.messageProperty().addListener((obs, oldMsg, newMsg) -> {
-//						System.out.println("Event happened!");
-//						message2.setText(message1.getText());
-//						message1.setText(newMsg);
-//					});
 					executorService.execute(worker); //Start running tasks
 				}
 			}
@@ -444,6 +437,7 @@ public class Controller implements Initializable{
 				addPressToScene();
 			}
 		} catch (IOException e) {
+			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -459,6 +453,7 @@ public class Controller implements Initializable{
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
 		} catch (IOException e) {
+			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -484,6 +479,7 @@ public class Controller implements Initializable{
 			}
 
 		} catch (IOException e) {
+			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
 	}
@@ -584,6 +580,7 @@ public class Controller implements Initializable{
 				addTimesToTable(list);
 			}
 		} catch (IOException e) {
+			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
 	}

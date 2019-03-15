@@ -57,7 +57,7 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 
 		} catch(Exception e) { //Catch Exception and display SEVER null in console
-			Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,e);
+			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
 	}

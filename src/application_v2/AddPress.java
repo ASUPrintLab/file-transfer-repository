@@ -32,7 +32,7 @@ public class AddPress {
 			window.setScene(new Scene(root));
 			window.showAndWait();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
        	}
