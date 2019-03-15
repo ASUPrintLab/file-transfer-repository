@@ -18,6 +18,7 @@ import animatefx.animation.FadeOut;
 import animatefx.animation.GlowText;
 import animatefx.animation.Pulse;
 import application_v2.Locations;
+import application_v2.Logs;
 import application_v2.Main;
 import application_v2.Press;
 import application_v2.PressManager;
@@ -123,6 +124,8 @@ public class Controller implements Initializable{
 	private TableColumn<TransferTime, String> endTime;
 	@FXML
 	private TableColumn<TransferTime, String> actions;
+	@FXML
+	private Circle circle;
 
 	@FXML
 	private Pane pressPane; //Used to identify the press pane for scrolling
@@ -151,6 +154,7 @@ public class Controller implements Initializable{
 	private FadeOut action5;
 	private FadeOut action6;
 	private FadeOut action7;
+	private Pulse playAction;
 
 	private int pressListIncreased = 412;
 	private int transferLocationIncreased = 400;
@@ -235,6 +239,7 @@ public class Controller implements Initializable{
         				workers.get(i).cancel(true);
         			}	
         		}
+        		Logs.closeFiles();
         		stage.close();
             }
         });
@@ -276,6 +281,8 @@ public class Controller implements Initializable{
 
 	@FXML
 	private void start(ActionEvent event) {
+		Logs.writeToEvent("This is an event");
+		Logs.writeToException("This is an exception");
 		stop.setDisable(false);
 		run.setDisable(true); //Disable button
 		startAnimation(); //Start animation
@@ -302,11 +309,14 @@ public class Controller implements Initializable{
 	 * Handles the animation of the start button
 	 */
 	private void startAnimation() {
-		Pulse playAction = new Pulse(run);
-		playAction.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		circle.setVisible(true);
+		playAction = new Pulse(circle);
+		playAction.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
 		Date date = new Date();
-		notifier.setText("Running... Started on " + dateFormat.format(date));
+		String strDateFormat = "EEE, MMM d, hh:mm a";
+	    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+	    String formattedDate = dateFormat.format(date);
+		notifier.setText("Running... Started on " + formattedDate);
 		stop.setStyle(null); //Remove style on stop button
 		run.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 15, 0, 0, 0);"); //Add gradient to run button
 		//Display images
@@ -378,6 +388,7 @@ public class Controller implements Initializable{
 	}
 	@FXML
 	private void stop(ActionEvent event) {
+		Logs.closeFiles();
 		stop.setDisable(true);
 		run.setDisable(false);
 
@@ -397,6 +408,8 @@ public class Controller implements Initializable{
 	private void stopAnimation() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
+		playAction.stop();
+		circle.setVisible(false);
 		notifier.setText("Stopped on " + dateFormat.format(date));
 		stop.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #ff0000, 15, 0, 0, 0);");
 		run.setStyle(null);
