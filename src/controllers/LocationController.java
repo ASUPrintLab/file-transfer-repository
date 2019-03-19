@@ -47,7 +47,6 @@ public class LocationController implements Initializable {
 		cancelLoc.setOnAction(this::handlecancel);
 		browseFrom.setOnAction(this::handleBrowse); 
 		browseTo.setOnAction(this::handleBrowse);
-		
 	}
 	
 	@FXML
@@ -110,7 +109,4 @@ public class LocationController implements Initializable {
 		return toLocation.getText();
 	}
 	
-	
-
-
 }

@@ -2,6 +2,7 @@ package application_v2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 /*
  * Author: Mitchell Roberts
  */
@@ -90,6 +91,10 @@ public class PressManager {
 	public static boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return pressManager.isEmpty();
+	}
+
+	public static HashMap<Integer, Press> getMap() {
+		return pressManager;
 	}
 
 }

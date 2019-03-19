@@ -12,16 +12,13 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.script.Bindings;
-
 import animatefx.animation.FadeOut;
-import animatefx.animation.GlowText;
 import animatefx.animation.Pulse;
 import application_v2.Locations;
 import application_v2.Logs;
-import application_v2.Main;
 import application_v2.Press;
 import application_v2.PressManager;
+import application_v2.SaveData;
 import application_v2.TransferTime;
 import application_v2.Worker;
 import javafx.collections.ObservableList;
@@ -44,7 +41,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -241,6 +237,7 @@ public class Controller implements Initializable{
         			}	
         		}
         		Logs.closeFiles();
+        		SaveData.saveToJSON(); //Write JSON file
         		stage.close();
             }
         });
@@ -458,7 +455,7 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
+	
 	/*
 	 * Handles event for adding a new transfer location
 	 */
@@ -488,12 +485,12 @@ public class Controller implements Initializable{
 	 * Creates new ui component for Transfer Location
 	 */
 	private void createComponent(String name, String sourceLoc, String targetLoc) {
-		pane = new Pane();
+		this.pane = new Pane();
 		VBox vbox = new VBox();
-		pane.getStyleClass().add("locationDiv");
-		pane.setPrefHeight(146.00);
-		pane.prefWidth(380.00);
-		pane.setMinHeight(146);
+		this.pane.getStyleClass().add("locationDiv");
+		this.pane.setPrefHeight(146.00);
+		this.pane.prefWidth(380.00);
+		this.pane.setMinHeight(146);
 		Label label = new Label(name);
 		TextField textfield1 = new TextField();
 		TextField textfield2 = new TextField();
@@ -512,7 +509,7 @@ public class Controller implements Initializable{
 		vbox.getChildren().add(0,label);
 		vbox.getChildren().add(1,textfield1);
 		vbox.getChildren().add(2,textfield2);
-		pane.getChildren().add(0,vbox);
+		this.pane.getChildren().add(0,vbox);
 
 		/* Once the Vbox increases more than the transfer locations pane create a scroll bar and continue
 		*  to be able to add transfer locations
