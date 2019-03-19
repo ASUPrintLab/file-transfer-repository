@@ -96,7 +96,7 @@ public class LocationController implements Initializable {
 			 }
 		 }
 	}
-
+	
 	public String getName() {
 		return connectionName.getText();
 	}

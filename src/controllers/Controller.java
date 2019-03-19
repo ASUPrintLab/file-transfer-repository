@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 
 import animatefx.animation.FadeOut;
 import animatefx.animation.Pulse;
+import application_v2.LoadData;
 import application_v2.Locations;
 import application_v2.Logs;
 import application_v2.Press;
@@ -162,10 +163,12 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		// Always show vertical scroll bar that is displayed to the right of transfer locations
-//		scrollpane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-//		VBox.setVgrow(scrollpane, Priority.ALWAYS);
-
+		ArrayList<Press> pressList = LoadData.loadJSON();
+		if (!pressList.isEmpty()) {
+			for (int i = pressList.size() - 1; i > -1; i--) {
+				addPressToScene(pressList.get(i));
+			}
+		}
 		// Don't show the scroll bar for the transfer location section initially
 		scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.NEVER);
 		VBox.setVgrow(scrollPaneTransferLocation, Priority.NEVER);
@@ -737,27 +740,96 @@ public class Controller implements Initializable{
 
 		/* Once the Vbox increases more than the press pane create a scroll bar and continue
 		*  to be able to add presses
-		*/	if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
-		
+		*/	
+		if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
-
 			// Makes sure the scroll bar is set to the size of how many presses there are
 			scrollPaneAddPress.vvalueProperty().bind(pressLocList.heightProperty());
-
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
-
-		}
-		else {
+		} else {
 			pressListIncreased = pressListIncreased + 4;
 			pressLocList.setPrefHeight(pressListIncreased);
-
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
-
-
 		}
+	}
+	
+	public void addPressToScene(Press press) {
+		Button newPress = new Button(press.getName());
+		newPress.getStyleClass().add("addPress");
+		newPress.setMinWidth(pressLabel.getWidth());
+		newPress.setUserData(press);
 
+		press.setKey(newPress.hashCode());
+		PressManager.addPress(press); //Add new press with the same hash code as the button
+		selectedPress = press;
 
+		clearPresses();
+		//Set action to handle the new press button
+
+		newPress.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            	clearPresses();
+
+            		newPress.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+                	selectedPress = PressManager.getPress(event.getSource().hashCode()); //Get the press info
+
+                	updateGUI(); //Lets update the UI with the presses current info
+                	newPress.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+        	            @Override
+        	            public void handle(MouseEvent event) {
+        	                MouseButton button = event.getButton();
+        	                // Allow right click only when a press is highlighted
+        	                if(button==MouseButton.SECONDARY && newPress.hashCode()==selectedPress.getKey()){
+
+        	                	Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+
+        	                    Stage stage = (Stage) close.getScene().getWindow();
+
+        	                    Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+
+        	                    exitButton.setOnAction(new EventHandler<ActionEvent>(){
+        	                    	@Override
+        	                    	public void handle(ActionEvent event) {
+        	                    		// Specifying the press we want to remove from the PressManager
+        	                    		ObservableList<Node> tempButton = pressLocList.getChildren();
+
+        	                    		PressManager.removePress(selectedPress.getKey());
+        	                    		pressLocList.getChildren().remove(tempButton.indexOf(newPress));
+
+        	                    		clearGUI();
+        	                        }
+        	                    });
+        	                    exitButton.setText("Delete");
+        	                    closeConfirmation.setHeaderText("Are you sure you want to remove this press?");
+        	                    closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+        	                    closeConfirmation.initOwner(stage);
+        	                    closeConfirmation.setX(stage.getX() + 200);
+        	                    closeConfirmation.setY(stage.getY() + 100);
+        	                    closeConfirmation.showAndWait();
+        	                }
+        	            }
+        	        });
+            	}
+           });
+
+		/* Once the Vbox increases more than the press pane create a scroll bar and continue
+		*  to be able to add presses
+		*/	
+		if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
+			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);
+			// Makes sure the scroll bar is set to the size of how many presses there are
+			scrollPaneAddPress.vvalueProperty().bind(pressLocList.heightProperty());
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+		} else {
+			pressListIncreased = pressListIncreased + 4;
+			pressLocList.setPrefHeight(pressListIncreased);
+			pressLocList.getChildren().add(0,newPress); //Add button to top of children
+		}
 	}
 
 

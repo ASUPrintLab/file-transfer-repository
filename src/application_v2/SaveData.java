@@ -27,6 +27,7 @@ public class SaveData {
             file.flush();
             file.close();
         } catch (IOException e) {
+        	Logs.writeToException(e.toString());
             e.printStackTrace();
         }
 	}
@@ -43,8 +44,10 @@ public class SaveData {
 	  for (Press press : pressList) {
 		  JsonObject pressObj = new JsonObject();
 		  JsonElement name = gson.fromJson (press.getName(), JsonElement.class);
+		  JsonElement id = gson.fromJson (Integer.toString(press.getKey()), JsonElement.class);
 		  JsonArray locationList = getLocationsAsJSON(press.getLocations());
 		  JsonArray timeList = geTimesAsJSON(press.getTransferTimes());
+		  pressObj.add("Id", id);
 		  pressObj.add("Name", name);
 		  pressObj.add("Locations", locationList);
 		  pressObj.add("Times", timeList);
@@ -80,6 +83,7 @@ public class SaveData {
 		
 		for (Locations loc : locList) {
 			JsonObject locObj = new JsonObject();
+			locObj.addProperty("Name", loc.getName());
 			locObj.addProperty("To", loc.getToLocation());
 			locObj.addProperty("From", loc.getFromLocation());
 			locationsJSONArray.add(locObj);

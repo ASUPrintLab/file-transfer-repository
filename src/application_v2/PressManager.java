@@ -29,6 +29,21 @@ public class PressManager {
 		}
 	}
 	
+	public static void addPress(Press press) {
+		//If hash table contains key lets make another
+		if (pressManager!=null && pressManager.containsKey(press.getKey())) { //This could better optimized better for memory purposes. Remove recursion
+			int newKey = getNewKey(press.getKey()); //Lets get a new key
+			Press newPress = new Press(press.getName(), press.getTransferTimes(), press.getLocations(), newKey);
+			mostRecentPress = newPress; //Used to find the most recent press added to map
+			pressManager.put(newKey, newPress);
+		}
+		else {
+			Press newPress = new Press(press.getName(), press.getTransferTimes(), press.getLocations(), press.getKey());
+			mostRecentPress = newPress; //Used to find the most recent press added to map
+			pressManager.put(press.getKey(), newPress); 
+		}
+	}
+	
 	/*
 	 * Remove press from map
 	 */
