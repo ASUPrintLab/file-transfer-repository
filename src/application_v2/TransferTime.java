@@ -1,18 +1,21 @@
 package application_v2;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-
-/*
- * Author: Mitchell Roberts
- */
+/** This Class is the TransferTime object that contains information like start and stop time 12hr format
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class TransferTime {
 
 	private String startTime;
 	private String stopTime;
-	private CheckBox edit;
+	private CheckBox edit; //Check box used for GUI table
 	private String clear;
-
+	/**
+	 * Constructor
+	 * @param startTime - Start time that transfer time will start looking for files based on location
+	 * @param stopTime - Stop time 
+	 */
 	public TransferTime(String startTime, String stopTime) {
 		super();
 		this.startTime = startTime;

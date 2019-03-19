@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.google.gson.JsonElement;
-/*
- * Author: Mitchell Roberts
- */
+/** This Class is the Press object that contains information like transfer times, locations and key
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class Press {
 	private String name; //name of press
 	private int key; //key for hashtable
 	private ArrayList<TransferTime> TransferTimes; //Transfer times
 	private ArrayList<Locations> locations; //Location from/to that files will be moved
-	
+	/**
+	 * Constructor
+	 * @param name - name of the press
+	 * @param transferTimes - ArrayList of Transfer Times
+	 * @param locations - ArrayList of Locations
+	 * @param id - key
+	 */
 	public Press(String name, ArrayList<TransferTime> transferTimes, ArrayList<Locations> locations, int id) {
 		super();
 		this.name = name;
@@ -52,7 +59,10 @@ public class Press {
 	public void setLocations(ArrayList<Locations> locations) {
 		this.locations = locations;
 	}
-
+	/**
+	 * Update the times in press
+	 * @param times - ArrayList of new Tranfer Times
+	 */
 	public void updateTimes(ArrayList<TransferTime> times) {
 		if (this.TransferTimes == null) {
 			setTransferTimes(times);
@@ -63,7 +73,10 @@ public class Press {
 			}
 		}
 	}
-
+	/**
+	 * This method returns true if the locations ArrayList is empty
+	 * @return locations - boolean
+	 */
 	public boolean locationsEmpty() {
 		if (this.locations != null) {
 			return this.locations.isEmpty();
@@ -72,10 +85,13 @@ public class Press {
 			return false;
 		}
 	}
-
+	/**
+	 * This method returns true if the TranferTimes ArrayList is empty
+	 * @return TransferTimes - boolean
+	 */
 	public boolean timesEmpty() {
 		if (this.TransferTimes != null) {
-			return this.locations.isEmpty();
+			return this.TransferTimes.isEmpty();
 		}
 		else {
 			return false;

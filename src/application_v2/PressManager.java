@@ -2,17 +2,19 @@ package application_v2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-/*
- * Author: Mitchell Roberts
- */
+/** This Class serves as a manager (hashmap) for the presses added 
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class PressManager {
-	static HashMap<Integer, Press> pressManager = new HashMap<Integer, Press>();
+	static HashMap<Integer, Press> pressManager = new HashMap<Integer, Press>(); //Collection of presses
 	static Boolean recentAdded;
-	static Press mostRecentPress;
+	static Press mostRecentPress; //Used to identify the most recent press added to collection
 
-	/*
+	/**
 	 * Add new press to collection
+	 * @param name - name of press
+	 * @param id - key used for the hashmap
 	 */
 	public static void addPress(String name, int id) {
 		//If hash table contains key lets make another
@@ -28,7 +30,10 @@ public class PressManager {
 			pressManager.put(id, newPress); 
 		}
 	}
-	
+	/**
+	 * Adds Press object to collection
+	 * @param press - Press object that can contain transfer times, locations, key
+	 */
 	public static void addPress(Press press) {
 		//If hash table contains key lets make another
 		if (pressManager!=null && pressManager.containsKey(press.getKey())) { //This could better optimized better for memory purposes. Remove recursion
@@ -44,16 +49,19 @@ public class PressManager {
 		}
 	}
 	
-	/*
-	 * Remove press from map
+	/**
+	 * Removes Press from hashmap
+	 * @param key
 	 */
 	public static void removePress(int key) {
 		pressManager.remove(key);
 	}
 	
-	 /*
-     * Generate new key value
-     */
+	 /**
+	  * Generate new key value
+	  * @param n - key
+	  * @return n - new key
+	  */
     private static int getNewKey(int n) {
 
         n = n + 1; //increment hashcode
@@ -69,10 +77,11 @@ public class PressManager {
 		return mostRecentPress;
 		
 	}
-	
-	
-	
-
+	/**
+	 * Gets a press based off key
+	 * @param key
+	 * @return Press object
+	 */
 	public static Press getPress(int key) {
 	
 		return pressManager.get(key);
@@ -85,15 +94,17 @@ public class PressManager {
 	public static Boolean getRecentAdded() {
 		return recentAdded;
 	}
-	/*
+	/**
 	 * Update press in hash map
+	 * @param press
 	 */
 	public static void updatePress(Press press) {
 		mostRecentPress = press;
 		pressManager.put(press.getKey(), press);
 	}
-	/*
-	 * Return a list of press objects
+	/**
+	 * Return a list of press objects in hashmap
+	 * @return list - ArrayList of Press objects
 	 */
 	public static ArrayList<Press> getAllPresses() {
 		ArrayList<Press> list = new ArrayList<>();
@@ -104,10 +115,12 @@ public class PressManager {
 	}
 
 	public static boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return pressManager.isEmpty();
 	}
-
+	/**
+	 * Returns the hashmap
+	 * @return pressManager - hashmap of Press collection
+	 */
 	public static HashMap<Integer, Press> getMap() {
 		return pressManager;
 	}

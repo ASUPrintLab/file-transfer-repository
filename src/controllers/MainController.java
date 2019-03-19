@@ -1,6 +1,5 @@
 package controllers;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -53,11 +52,11 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-/*
- * Author: Mitchell Roberts
- * Author: Gaurav Deshpande
- */
-public class Controller implements Initializable{
+/** Main controller of the GUI that initially loads
+ * @author Mitchell Roberts & Gaurav Deshpande
+ * @version 2.0
+*/
+public class MainController implements Initializable{
 
 	@FXML
     private Button run; //start the program
@@ -143,7 +142,9 @@ public class Controller implements Initializable{
 	private Pane pane;
 	private ArrayList<Worker> workers = new ArrayList<Worker>();
 	ExecutorService executorService;
-
+	/*
+	 * Actions for the GUI - used for running arrows
+	 */
 	private FadeOut action1;
 	private FadeOut action2;
 	private FadeOut action3;
@@ -220,8 +221,9 @@ public class Controller implements Initializable{
 		actions.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("edit"));
 		actions.setVisible(false);
 	}
-	/*
+	/**
 	 * Handles the close 'x' button for the program
+	 * @param event
 	 */
 	private void handleClose(MouseEvent event) {
 		Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,"Please dont leave me");
@@ -254,7 +256,9 @@ public class Controller implements Initializable{
         closeConfirmation.showAndWait();
 
 	}
-
+	/**
+	 * This method removed the times from the table and re-adds the new ones
+	 */
 	private void handleTableRemoval() {
 		int size = timeTable.getItems().size();
 		for (int i = 0; i < size; i++) { //Table will get smaller as you remove so double for loop to ensure all elements get removed
@@ -271,7 +275,9 @@ public class Controller implements Initializable{
 		selectedPress.setTransferTimes(times);
 		PressManager.updatePress(selectedPress); //Update the press in the hashmap
 	}
-
+	/**
+	 * This method displays the checkbox in the transfer time table for deletion 
+	 */
 	private void handleEdit() {
 		actions.setVisible(true);
 		addTransferTime.setVisible(false);
@@ -279,7 +285,10 @@ public class Controller implements Initializable{
 		cancel.setVisible(true);
 		delete.setVisible(true);
 	}
-
+	/**
+	 * This method starts the transfers of all presses in the software
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	private void start(ActionEvent event) {
 		stop.setDisable(false);
@@ -299,8 +308,8 @@ public class Controller implements Initializable{
 			}
 		}
 	}
-	/*
-	 * Handles the animation of the start button
+	/**
+	 * Handles the animation of the start button - starts the animation.
 	 */
 	private void startAnimation() {
 		circle.setVisible(true);
@@ -380,6 +389,12 @@ public class Controller implements Initializable{
 
 
 	}
+	/**
+	 * This method stops the program from transfering files.
+	 * Will also close log files and shut down thread pool 
+	 * in order to prevent any tasks from entering the pool and cancel tasks.
+	 * @param event
+	 */
 	@FXML
 	private void stop(ActionEvent event) {
 		Logs.closeFiles();
@@ -396,7 +411,7 @@ public class Controller implements Initializable{
 
 		stopAnimation(); //Stop the animation
 	}
-	/*
+	/**
 	 * This method stops the animation and adds the time stopped in the GUI
 	 */
 	private void stopAnimation() {
@@ -423,6 +438,10 @@ public class Controller implements Initializable{
 		action6.stop();
 		action7.stop();
 	}
+	/**
+	 * This method will clear the current information on the GUI.
+	 * Launches the add press window.
+	 */
 	@FXML
 	private void handleNewPress() {
 		clearGUI();
@@ -442,7 +461,10 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * This method handles edits to the transfer location.
+	 * Re-launches the transfer location window.
+	 */
 	@FXML
 	private void handleEditTranferLocation() {
 		try {
@@ -458,8 +480,7 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
-	/*
+	/**
 	 * Handles event for adding a new transfer location
 	 */
 	@FXML
@@ -474,7 +495,7 @@ public class Controller implements Initializable{
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
-			if (!mainController.getName().trim().isEmpty()) {
+			if (!mainController.getName().trim().isEmpty()) { //If the field is not empty add the component to GUI and PressManager
 				createComponent(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
 				addLocationToPress(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
 			}
@@ -484,8 +505,11 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	/*
+	/**
 	 * Creates new ui component for Transfer Location
+	 * @param name - Name of the location/connection
+	 * @param sourceLoc - Source from where the file will be moved from.
+	 * @param targetLoc - Target location the file will be moved to.
 	 */
 	private void createComponent(String name, String sourceLoc, String targetLoc) {
 		this.pane = new Pane();
@@ -514,39 +538,34 @@ public class Controller implements Initializable{
 		vbox.getChildren().add(2,textfield2);
 		this.pane.getChildren().add(0,vbox);
 
-		/* Once the Vbox increases more than the transfer locations pane create a scroll bar and continue
-		*  to be able to add transfer locations
-		*/
+		/* 
+		 * Once the Vbox increases more than the transfer locations pane create a scroll bar and continue
+		 * to be able to add transfer locations
+		 */
 		if(transferLocList.getPrefHeight() > transferLocationPane.getPrefHeight()) {
-
 			scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-
 			VBox.setVgrow(scrollPaneTransferLocation, Priority.ALWAYS);
 
 			// Makes sure the scroll bar is set to the size of how many transfer locations there are
 			scrollPaneTransferLocation.vvalueProperty().bind(transferLocList.heightProperty());
 
-
 			// Adding a new transfer location associated with a press
 			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
-
-		}
-		else {
+		} else {
 			System.out.println("The else line has been reached");
 			transferLocationIncreased = transferLocationIncreased + 30;
 			transferLocList.setPrefHeight(transferLocationIncreased);
-
-
+			
 			// Adding a new transfer location associated with a press
 			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
-
-
 		}
-
-
 	}
-	/*
+
+	/**
 	 * Adds the new location to the press
+	 * @param name - Name of the location/connection
+	 * @param sourceLoc - Source from where the file will be moved from.
+	 * @param targetLoc - Target location the file will be moved to.
 	 */
 	private void addLocationToPress(String name, String sourceLoc, String targetLoc) {
 		ArrayList<Locations> locations = selectedPress.getLocations();
@@ -561,8 +580,8 @@ public class Controller implements Initializable{
 		PressManager.updatePress(selectedPress); //Update the press in the hashmap
 	}
 
-	/*
-	 * Handles event for adding a new transfer time
+	/**
+	 * Handles event for adding a new transfer time - launches the transfer time window.
 	 */
 	@FXML
 	private void handleNewTranferTime() {
@@ -586,8 +605,9 @@ public class Controller implements Initializable{
 		}
 	}
 
-	/*
+	/**
 	 * This method add the new transfer times to the main table
+	 * @param list - Observable List of Transfer Times
 	 */
 	private void addTimesToTable(ObservableList<TransferTime> list) {
 		ArrayList<TransferTime> times = new ArrayList<TransferTime>(); //initialize temp array for new times
@@ -602,8 +622,7 @@ public class Controller implements Initializable{
 		actions.setVisible(false);
 	}
 
-
-	/*
+	/**
 	 * Updates the GUI with the current Press info
 	 */
 	private void updateGUI() {
@@ -624,7 +643,7 @@ public class Controller implements Initializable{
 		}
 
 	}
-	/*
+	/**
 	 * Clears the elements in the Locations pane and time table
 	 */
 	private void clearGUI() {
@@ -633,20 +652,17 @@ public class Controller implements Initializable{
 			timeTable.getItems().clear();
 		}
 	}
-	
-	/*
-	 * add message of recent transfer to GUI
+	/**
+	 * Add message of recent transfer to GUI
+	 * @param msg - The most recent transfer success.
 	 */
 	public void transferSentMsg(String msg) {
-		System.out.println("Success");
-		System.out.println(msg);
-		message2.setText(message1.getText());
 		message1.setText(msg);
-		System.out.println(message1);
-		System.out.println("Done");
 	}
 
-	// When new press is added set the buttons to a default style
+	/**
+	 * When new press is added set the buttons to a default style
+	 */
 	private void clearPresses() {
 			// Creating a generic type to store all of the children in
 			ObservableList<Node> tempButton = pressLocList.getChildren();
@@ -657,9 +673,8 @@ public class Controller implements Initializable{
 			}
 
 	}
-
-	/*
-	 * Adds press name to GUI
+	/**
+	 * Adds press name to GUI in the left sidebar
 	 */
 	@FXML
 	public void addPressToScene() {
@@ -753,7 +768,10 @@ public class Controller implements Initializable{
 			pressLocList.getChildren().add(0,newPress); //Add button to top of children
 		}
 	}
-	
+	/**
+	 * Adds the press to the GUI
+	 * @param press - Press object
+	 */
 	public void addPressToScene(Press press) {
 		Button newPress = new Button(press.getName());
 		newPress.getStyleClass().add("addPress");
@@ -816,9 +834,10 @@ public class Controller implements Initializable{
             	}
            });
 
-		/* Once the Vbox increases more than the press pane create a scroll bar and continue
-		*  to be able to add presses
-		*/	
+		/* 
+		 * Once the Vbox increases more than the press pane create a scroll bar and continue
+		 * to be able to add presses
+		 */	
 		if(pressLocList.getPrefHeight() > pressPane.getPrefHeight()) {
 			scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 			VBox.setVgrow(scrollPaneAddPress, Priority.ALWAYS);

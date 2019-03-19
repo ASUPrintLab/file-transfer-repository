@@ -1,8 +1,5 @@
 package application_v2;
-/** Loads JSON data from saved file 
- * @author Mitchell Roberts
- * @since 1.0
-*/
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +10,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+/** Loads JSON data from saved file 
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class LoadData {
 	/**
 	 * This method checks to see if a saved file exist 

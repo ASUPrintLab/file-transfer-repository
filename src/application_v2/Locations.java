@@ -1,5 +1,8 @@
 package application_v2;
-
+/** This Class is the Locations object that contains information like name of connection, from and to location path
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class Locations {
 	private String name;
 	private String fromLocation;

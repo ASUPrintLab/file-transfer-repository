@@ -1,10 +1,5 @@
 package application_v2;
 
-/** Saved hashmap of PressManager as JSON 
- * @author Mitchell Roberts
- * @since 1.0
-*/
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +8,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
+/** Saved hashmap of PressManager as JSON 
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class SaveData {
 	public static void saveToJSON() {
 		Gson gson = new Gson();

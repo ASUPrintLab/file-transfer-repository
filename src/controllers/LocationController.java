@@ -1,5 +1,8 @@
 package controllers;
-
+/** This Class is the controller for the locations window
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,9 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-/*
- * Author: Mitchell Roberts
- */
+
 public class LocationController implements Initializable {
 	
 	/*
@@ -39,7 +40,9 @@ public class LocationController implements Initializable {
     private TextField fromLocation; 
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser(); //Directory to choose location of folder
-	
+	/**
+	 * Initializes the components actions on launch - first method called
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Bind the event handler
@@ -48,10 +51,13 @@ public class LocationController implements Initializable {
 		browseFrom.setOnAction(this::handleBrowse); 
 		browseTo.setOnAction(this::handleBrowse);
 	}
-	
+	/**
+	 * Method that handles the action if the user presses "Save"
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	private void handleconfirm(ActionEvent event) {
-
+		//If the user left a field blank Alert them
 		if (connectionName.getText().trim().isEmpty() || fromLocation.getText().trim().isEmpty() || toLocation.getText().trim().isEmpty()) {
 			Alert errorAlert = new Alert(
 	                Alert.AlertType.ERROR,
@@ -67,14 +73,18 @@ public class LocationController implements Initializable {
 			stage.close(); //Close current window	
 		}
 	}
-	
+	/**
+	 * Method that handles the action if the user presses "Cancel" 
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	private void handlecancel(ActionEvent event) {
-	    Stage stage = (Stage) cancelLoc.getScene().getWindow();
+	    Stage stage = (Stage) cancelLoc.getScene().getWindow(); //Get current stage
 	    stage.close(); //Close current window
 	}
-	/*
+	/**
 	 * Handles the browse button action for finding folder locations 
+	 * @param event - ActionEvent
 	 */
 	@FXML
 	private void handleBrowse(ActionEvent event) {

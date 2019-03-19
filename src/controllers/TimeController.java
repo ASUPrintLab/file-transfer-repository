@@ -16,9 +16,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-/*
- * Author: Mitchell Roberts
- */
+
+/** Transfer Time controller when adding a new transfer time window
+ * @author Mitchell Roberts
+ * @version 2.0
+*/
 public class TimeController implements Initializable{
 	/*
 	 * Variables for Location Window
@@ -52,7 +54,9 @@ public class TimeController implements Initializable{
 			"3:15 PM","3:30 PM","3:45 PM","4:00 PM","4:15 PM","4:30 PM","4:45 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM",
 			"11:00 PM"
 		);
-	
+	/**
+	 * Initializes the components actions on launch - first method called
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//Bind the event handler
@@ -71,8 +75,9 @@ public class TimeController implements Initializable{
 		
 	}
 	
-	/*
+	/**
 	 * Adds new transfer time to the Table View.
+	 * @param event
 	 */
 	@FXML
 	public void handleAddTime(ActionEvent event) {
@@ -84,14 +89,20 @@ public class TimeController implements Initializable{
 			timeTable.getItems().add(newTransferTime); 	
 		}
 	}
-	
+	/**
+	 * Method that handles the action if the user presses "Save" - Close the window
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	private void handleconfirm(ActionEvent event) {
 		this.save = true;
 		Stage stage = (Stage) confirmTime.getScene().getWindow();
 	    stage.close(); //Close current window
 	}
-	
+	/**
+	 * Method that handles the action if the user presses "Cancel" 
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	private void handlecancel(ActionEvent event) {
 		this.save = false;

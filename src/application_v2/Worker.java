@@ -7,15 +7,11 @@ import java.util.Date;
 
 import org.joda.time.LocalTime;
 
-import application.CheckPresses;
-import controllers.Controller;
 import javafx.concurrent.Task;
-
-/*
- * Author: Mitchell
- * Class: Worker
- * Tasks that handle the file transfer
- */
+/** This Class creates tasks that handle the file transfer
+ * @author Mitchell Roberts
+ * @since 1.0
+*/
 public class Worker extends Task<Press> {
 	 
     private Press press;
@@ -26,7 +22,6 @@ public class Worker extends Task<Press> {
         this.press = press;
     }
   
-
 	@Override
 	protected Press call() throws Exception {
 		while (!isCancelled()) { //keep running until task is canceled
