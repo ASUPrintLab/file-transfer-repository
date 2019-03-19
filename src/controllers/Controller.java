@@ -67,7 +67,7 @@ public class Controller implements Initializable{
 	@FXML
     private Button stop; //stop the program
 	@FXML
-    private Button addPress; //Adding a press
+    private ImageView addPress; //Adding a press
 	@FXML
     private ImageView running1; //arrow animation
 	@FXML
@@ -182,9 +182,10 @@ public class Controller implements Initializable{
 
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
-		addPress.setOnAction(this::handleNewPress);
 		stop.setDisable(true);
-
+		addPress.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+			handleNewPress();
+	     });
 
 		addTransferLocation.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
 			if (selectedPress != null) {
@@ -233,7 +234,7 @@ public class Controller implements Initializable{
         	@Override
         	public void handle(ActionEvent event) {
         		//Shutdown and dont allow new task to enter pool
-        		if (!PressManager.isEmpty()) {
+        		if (!workers.isEmpty()) {
         			executorService.shutdownNow();
         			for (int i = 0; i < workers.size(); i++) {
         				workers.get(i).cancel(true);
@@ -386,7 +387,7 @@ public class Controller implements Initializable{
 		run.setDisable(false);
 
 		//Stop all thread safely to prevent corrupted memory
-		if (!PressManager.isEmpty()) {
+		if (!workers.isEmpty()) {
 			executorService.shutdownNow();
 			for (int i = 0; i < workers.size(); i++) {
 				workers.get(i).cancel(true);
@@ -423,7 +424,7 @@ public class Controller implements Initializable{
 		action7.stop();
 	}
 	@FXML
-	private void handleNewPress(ActionEvent event) {
+	private void handleNewPress() {
 		clearGUI();
 		try {
 			VBox root = FXMLLoader.load(getClass().getResource("/resources/AddPressWindow.fxml"));

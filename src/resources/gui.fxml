@@ -137,12 +137,11 @@
                            </content>
                         </ScrollPane>
                         <Label fx:id="pressLabel" layoutX="14.0" layoutY="12.0" style="-fx-text-fill: #B9B9B9;" styleClass="labelPress" stylesheets="@stylesheet.css" text="Presses" />
-                        <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                        <ImageView fx:id="addPress" fitHeight="27.0" fitWidth="21.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
                               <Image url="@add-button.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="addPress" layoutX="102.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="21.0" styleClass="addButtonPress" stylesheets="@stylesheet.css" />
                      </children>
                   </Pane>
                </children>
