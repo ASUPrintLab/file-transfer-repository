@@ -51,6 +51,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 /** Main controller of the GUI that initially loads
  * @author Mitchell Roberts & Gaurav Deshpande
@@ -157,6 +158,13 @@ public class MainController implements Initializable{
 	private int pressListIncreased = 412;
 	private int transferLocationIncreased = 400;
 
+	private String nameTransfer;
+	private String fromLocation;
+	private String toLocation;
+	
+//	 private Locations selectedLocation;
+//	 private TextField selectedSourceLocation;
+//	 private TextField selectedTargetLocation;
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -468,13 +476,38 @@ public class MainController implements Initializable{
 	@FXML
 	private void handleEditTranferLocation() {
 		try {
-			VBox root = FXMLLoader.load(getClass().getResource("/resources/TransferLocationWindow.fxml"));
+//		
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferLocationWindow.fxml"));
+			VBox root = (VBox) loader.load();
+			LocationController mainController = loader.<LocationController>getController();
+			
 			Stage window = new Stage();
 			window.initModality(Modality.APPLICATION_MODAL);
+		
+			
+			  window.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>()
+		        {
+		            @Override
+		            public void handle(WindowEvent window)
+		            {
+//
+		            	mainController.handleWindowShownEvent();
+		                mainController.updateTransferLocation(nameTransfer, fromLocation, toLocation);
+
+		            }
+		        });
+			  
 			window.getIcons().add(new Image("/resources/icon.png"));
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
+				
+			if(!mainController.getName().trim().isEmpty()) {
+				nameTransfer = mainController.getName();
+				fromLocation = mainController.getSourceLoc();
+				toLocation = mainController.getTargetLoc();
+			}
+				
 		} catch (IOException e) {
 			Logs.writeToException(e.toString());
 			e.printStackTrace();
@@ -496,8 +529,11 @@ public class MainController implements Initializable{
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
 			if (!mainController.getName().trim().isEmpty()) { //If the field is not empty add the component to GUI and PressManager
-				createComponent(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
-				addLocationToPress(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
+				nameTransfer = mainController.getName();
+				fromLocation = mainController.getSourceLoc();
+				toLocation = mainController.getTargetLoc();
+				createComponent(nameTransfer, fromLocation, toLocation);
+				addLocationToPress(nameTransfer, fromLocation, toLocation);
 			}
 
 		} catch (IOException e) {

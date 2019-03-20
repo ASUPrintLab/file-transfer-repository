@@ -119,4 +119,17 @@ public class LocationController implements Initializable {
 		return toLocation.getText();
 	}
 	
+	public void updateTransferLocation(String name, String fromLoc, String toLoc) {
+		connectionName.setText(name);
+		fromLocation.setText(fromLoc);
+		toLocation.setText(toLoc);
+	}
+	
+	 public void handleWindowShownEvent() {
+	    
+		 connectionName.requestFocus();
+		 toLocation.requestFocus();
+		 fromLocation.requestFocus();
+	}
+	
 }
