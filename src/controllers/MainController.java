@@ -491,11 +491,11 @@ public class MainController implements Initializable{
 			LocationController mainController = loader.<LocationController>getController();
 			Stage window = new Stage();
 			window.initModality(Modality.APPLICATION_MODAL);
-			window.getIcons().add(new Image("/resources/icon.png"));
+//			window.getIcons().add(new Image("/resources/icon.png"));
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
-			if (!mainController.getName().trim().isEmpty()) { //If the field is not empty add the component to GUI and PressManager
+			if (mainController.isSaved()) { //If the field is not empty add the component to GUI and PressManager
 				createComponent(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
 				addLocationToPress(mainController.getName(), mainController.getSourceLoc(), mainController.getTargetLoc());
 			}
@@ -552,7 +552,6 @@ public class MainController implements Initializable{
 			// Adding a new transfer location associated with a press
 			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
 		} else {
-			System.out.println("The else line has been reached");
 			transferLocationIncreased = transferLocationIncreased + 30;
 			transferLocList.setPrefHeight(transferLocationIncreased);
 			

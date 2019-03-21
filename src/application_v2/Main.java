@@ -41,7 +41,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene); //Set style to window
 			primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			primaryStage.getIcons().add(new Image("/resources/upload.png"));
+//			primaryStage.getIcons().add(new Image("/resources/upload.png"));
 			primaryStage.show(); //Display
 			primaryStage.setResizable(false);
 

@@ -40,6 +40,7 @@ public class LocationController implements Initializable {
     private TextField fromLocation; 
 	@FXML
 	final DirectoryChooser fc = new DirectoryChooser(); //Directory to choose location of folder
+	private boolean saved;
 	/**
 	 * Initializes the components actions on launch - first method called
 	 */
@@ -50,6 +51,7 @@ public class LocationController implements Initializable {
 		cancelLoc.setOnAction(this::handlecancel);
 		browseFrom.setOnAction(this::handleBrowse); 
 		browseTo.setOnAction(this::handleBrowse);
+		this.saved = false;
 	}
 	/**
 	 * Method that handles the action if the user presses "Save"
@@ -69,6 +71,7 @@ public class LocationController implements Initializable {
 			errorAlert.showAndWait();
 		}
 		else {
+			this.saved = true;
 			Stage stage = (Stage) confirmLoc.getScene().getWindow();
 			stage.close(); //Close current window	
 		}
@@ -117,6 +120,9 @@ public class LocationController implements Initializable {
 	
 	public String getTargetLoc() {
 		return toLocation.getText();
+	}
+	public boolean isSaved() {
+		return this.saved;
 	}
 	
 }

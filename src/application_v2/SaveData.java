@@ -38,21 +38,20 @@ public class SaveData {
 	private static JsonArray mapToJson(ArrayList<Press> pressList) {
 	  Gson gson = new Gson();
 	  JsonArray pressJSONArray = new JsonArray();
-	  
-	  for (Press press : pressList) {
-		  JsonObject pressObj = new JsonObject();
-		  JsonElement name = gson.fromJson (press.getName(), JsonElement.class);
-		  JsonElement id = gson.fromJson (Integer.toString(press.getKey()), JsonElement.class);
-		  JsonArray locationList = getLocationsAsJSON(press.getLocations());
-		  JsonArray timeList = geTimesAsJSON(press.getTransferTimes());
-		  pressObj.add("Id", id);
-		  pressObj.add("Name", name);
-		  pressObj.add("Locations", locationList);
-		  pressObj.add("Times", timeList);
-		  pressJSONArray.add(pressObj);
+	  if (!pressList.isEmpty()) {
+		  for (Press press : pressList) {
+			  JsonObject pressObj = new JsonObject();
+			  JsonElement name = gson.fromJson (press.getName(), JsonElement.class);
+			  JsonElement id = gson.fromJson (Integer.toString(press.getKey()), JsonElement.class);
+			  JsonArray locationList = getLocationsAsJSON(press.getLocations());
+			  JsonArray timeList = geTimesAsJSON(press.getTransferTimes());
+			  pressObj.add("Id", id);
+			  pressObj.add("Name", name);
+			  pressObj.add("Locations", locationList);
+			  pressObj.add("Times", timeList);
+			  pressJSONArray.add(pressObj);
+		  }
 	  }
-
-
 	  return pressJSONArray;
 	}
 	/**
@@ -62,12 +61,13 @@ public class SaveData {
 	 */
 	private static JsonArray geTimesAsJSON(ArrayList<TransferTime> timeList) {
 		JsonArray timesJSONArray = new JsonArray();
-		
-		for (TransferTime time : timeList) {
-			JsonObject timeObj = new JsonObject();
-			timeObj.addProperty("Start", time.getStartTime());
-			timeObj.addProperty("Stop", time.getStopTime());
-			timesJSONArray.add(timeObj);
+		if (!timeList.isEmpty()) {
+			for (TransferTime time : timeList) {
+				JsonObject timeObj = new JsonObject();
+				timeObj.addProperty("Start", time.getStartTime());
+				timeObj.addProperty("Stop", time.getStopTime());
+				timesJSONArray.add(timeObj);
+			}
 		}
 		return timesJSONArray;
 	}
@@ -78,13 +78,14 @@ public class SaveData {
 	 */
 	private static JsonArray getLocationsAsJSON(ArrayList<Locations> locList) {
 		JsonArray locationsJSONArray = new JsonArray();
-		
-		for (Locations loc : locList) {
-			JsonObject locObj = new JsonObject();
-			locObj.addProperty("Name", loc.getName());
-			locObj.addProperty("To", loc.getToLocation());
-			locObj.addProperty("From", loc.getFromLocation());
-			locationsJSONArray.add(locObj);
+		if (!locList.isEmpty()) {
+			for (Locations loc : locList) {
+				JsonObject locObj = new JsonObject();
+				locObj.addProperty("Name", loc.getName());
+				locObj.addProperty("To", loc.getToLocation());
+				locObj.addProperty("From", loc.getFromLocation());
+				locationsJSONArray.add(locObj);
+			}
 		}
 		return locationsJSONArray;
 	}
