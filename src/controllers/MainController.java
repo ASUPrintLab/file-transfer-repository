@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 
 import animatefx.animation.FadeOut;
 import animatefx.animation.Pulse;
+import animatefx.animation.ZoomIn;
 import application_v2.LoadData;
 import application_v2.Locations;
 import application_v2.Logs;
@@ -487,7 +488,6 @@ public class MainController implements Initializable{
 	 */
 	@FXML
 	private void handleEditTranferLocation(MouseEvent event) {
-	    System.out.println(event);
 	    Label target = (Label) event.getSource();
 	    for (int i = 0; i < transferLocList.getChildren().size(); i++) {
             Pane wrapper = (Pane) transferLocList.getChildren().get(i);
@@ -504,7 +504,6 @@ public class MainController implements Initializable{
                             fromLocation = fromLoc.getText();
                             toLocation = toLoc.getText();
                             indexofLoc = i;
-                            System.out.println("Found you at index " + i);
                         }
                     }
                 }
@@ -596,7 +595,56 @@ public class MainController implements Initializable{
 		label.getStyleClass().add("connections");
 		label.setPadding(new Insets(25, 0, 5, 25));
 		label.setPrefHeight(35);
-		label.setOnMouseClicked(event -> handleEditTranferLocation(event));
+		label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                MouseButton button = event.getButton();
+                // Allow right click only when a press is highlighted
+                if(button == button.SECONDARY){
+
+                    Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                    Stage stage = (Stage) close.getScene().getWindow();
+                    Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+
+                    exitButton.setOnAction(new EventHandler<ActionEvent>(){
+                        @Override
+                        public void handle(ActionEvent Exitevent) { //Find location and remove it if the user clicks delete
+                            Label target = (Label) event.getSource();
+                            for (int i = 0; i < transferLocList.getChildren().size(); i++) {
+                                Pane wrapper = (Pane) transferLocList.getChildren().get(i);
+                                for (int j = 0; j < wrapper.getChildren().size(); j++) {
+                                    VBox box = (VBox) wrapper.getChildren().get(j);
+                                    for (int k = 0; k < box.getChildren().size(); k++) {
+                                        System.out.println(box.getChildren().get(k));
+                                        if (k == 0) {
+                                            Label label = (Label) box.getChildren().get(0);
+                                            if (label.getText() == target.getText()) {
+                                                ArrayList<Locations> locations = selectedPress.getLocations();
+                                                locations.remove(i);
+                                                selectedPress.setLocations(locations);
+                                                PressManager.updatePress(selectedPress);
+                                                updateGUI();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    exitButton.setText("Delete");
+                    closeConfirmation.setHeaderText("Are you sure you want to remove this location?");
+                    closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+                    closeConfirmation.initOwner(stage);
+                    closeConfirmation.setX(stage.getX() + 200);
+                    closeConfirmation.setY(stage.getY() + 100);
+                    closeConfirmation.showAndWait();
+                }
+                else {
+                    handleEditTranferLocation(event);
+                }
+            }
+        });
 		vbox.getChildren().add(0,label);
 		vbox.getChildren().add(1,textfield1);
 		vbox.getChildren().add(2,textfield2);
