@@ -494,7 +494,6 @@ public class MainController implements Initializable{
             for (int j = 0; j < wrapper.getChildren().size(); j++) {
                 VBox box = (VBox) wrapper.getChildren().get(j);
                 for (int k = 0; k < box.getChildren().size(); k++) {
-                    System.out.println(box.getChildren().get(k));
                     if (k == 0) {
                         Label label = (Label) box.getChildren().get(0);
                         TextField fromLoc = (TextField) box.getChildren().get(1);
@@ -609,14 +608,13 @@ public class MainController implements Initializable{
 
                     exitButton.setOnAction(new EventHandler<ActionEvent>(){
                         @Override
-                        public void handle(ActionEvent Exitevent) { //Find location and remove it if the user clicks delete
+                        public void handle(ActionEvent exitEvent) { //Find location and remove it if the user clicks delete
                             Label target = (Label) event.getSource();
                             for (int i = 0; i < transferLocList.getChildren().size(); i++) {
                                 Pane wrapper = (Pane) transferLocList.getChildren().get(i);
                                 for (int j = 0; j < wrapper.getChildren().size(); j++) {
                                     VBox box = (VBox) wrapper.getChildren().get(j);
                                     for (int k = 0; k < box.getChildren().size(); k++) {
-                                        System.out.println(box.getChildren().get(k));
                                         if (k == 0) {
                                             Label label = (Label) box.getChildren().get(0);
                                             if (label.getText() == target.getText()) {
@@ -655,11 +653,11 @@ public class MainController implements Initializable{
 		 * to be able to add transfer locations
 		 */
 		if(transferLocList.getPrefHeight() > transferLocationPane.getPrefHeight()) {
-			scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+			scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 			VBox.setVgrow(scrollPaneTransferLocation, Priority.ALWAYS);
-
-			// Makes sure the scroll bar is set to the size of how many transfer locations there are
-			scrollPaneTransferLocation.vvalueProperty().bind(transferLocList.heightProperty());
+			
+			// Makes sure the scroll bar is set to the size of how many transfer locations there are starting at top
+			scrollPaneTransferLocation.setVvalue(0);
 
 			// Adding a new transfer location associated with a press
 			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
@@ -752,7 +750,6 @@ public class MainController implements Initializable{
 				timeTable.getItems().add(time);
 			}
 		}
-
 	}
 	/**
 	 * Clears the elements in the Locations pane and time table
