@@ -7,6 +7,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application_v2.Locations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -110,6 +111,19 @@ public class LocationController implements Initializable {
 		 }
 	}
 	
+   public void updateTransferLocation(String name, String fromLoc, String toLoc) {
+       System.out.println("Here");
+       connectionName.setText(name);
+       fromLocation.setText(fromLoc);
+       toLocation.setText(toLoc);
+    }
+    
+     public void handleWindowShownEvent() {
+        connectionName.requestFocus();
+        toLocation.requestFocus();
+        fromLocation.requestFocus();
+    }
+	
 	public String getName() {
 		return connectionName.getText();
 	}
@@ -124,5 +138,9 @@ public class LocationController implements Initializable {
 	public boolean isSaved() {
 		return this.saved;
 	}
+    public Locations getSavedLocation() {
+        Locations location = new Locations(connectionName.getText(), fromLocation.getText(), toLocation.getText());
+        return location;
+    }
 	
 }

@@ -51,6 +51,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 /** Main controller of the GUI that initially loads
  * @author Mitchell Roberts & Gaurav Deshpande
@@ -156,6 +157,11 @@ public class MainController implements Initializable{
 
 	private int pressListIncreased = 412;
 	private int transferLocationIncreased = 400;
+	
+	private String nameTransfer;
+    private String fromLocation;
+    private String toLocation;
+    private int indexofLoc;
 
 	/**
      * Initializes the controller class. This method is automatically called
@@ -477,17 +483,62 @@ public class MainController implements Initializable{
 	/**
 	 * This method handles edits to the transfer location.
 	 * Re-launches the transfer location window.
+	 * @param event 
 	 */
 	@FXML
-	private void handleEditTranferLocation() {
+	private void handleEditTranferLocation(MouseEvent event) {
+	    System.out.println(event);
+	    Label target = (Label) event.getSource();
+	    for (int i = 0; i < transferLocList.getChildren().size(); i++) {
+            Pane wrapper = (Pane) transferLocList.getChildren().get(i);
+            for (int j = 0; j < wrapper.getChildren().size(); j++) {
+                VBox box = (VBox) wrapper.getChildren().get(j);
+                for (int k = 0; k < box.getChildren().size(); k++) {
+                    System.out.println(box.getChildren().get(k));
+                    if (k == 0) {
+                        Label label = (Label) box.getChildren().get(0);
+                        TextField fromLoc = (TextField) box.getChildren().get(1);
+                        TextField toLoc = (TextField) box.getChildren().get(2);
+                        if (label.getText() == target.getText()) {
+                            nameTransfer = label.getText();
+                            fromLocation = fromLoc.getText();
+                            toLocation = toLoc.getText();
+                            indexofLoc = i;
+                            System.out.println("Found you at index " + i);
+                        }
+                    }
+                }
+            }
+        }
 		try {
-			VBox root = FXMLLoader.load(getClass().getResource("/resources/TransferLocationWindow.fxml"));
-			Stage window = new Stage();
+		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferLocationWindow.fxml"));
+            VBox root = (VBox) loader.load();
+            LocationController mainController = loader.<LocationController>getController();
+            
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            
+            window.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent window) {
+                    mainController.handleWindowShownEvent();
+                    mainController.updateTransferLocation(nameTransfer, fromLocation, toLocation);
+                }
+            });
 			window.initModality(Modality.APPLICATION_MODAL);
 			window.getIcons().add(new Image("/resources/icon.png"));
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
+			if (mainController.isSaved()) {
+			    //If saved from location window lets update the location in Manager and refresh GUI
+                ArrayList<Locations> locations = selectedPress.getLocations();
+                Locations location = mainController.getSavedLocation();
+                locations.set(indexofLoc, location);
+                selectedPress.setLocations(locations);
+                PressManager.updatePress(selectedPress);
+                updateGUI();
+            }
 		} catch (IOException e) {
 			Logs.writeToException(e.toString());
 			e.printStackTrace();
@@ -545,7 +596,7 @@ public class MainController implements Initializable{
 		label.getStyleClass().add("connections");
 		label.setPadding(new Insets(25, 0, 5, 25));
 		label.setPrefHeight(35);
-		label.setOnMouseClicked(event -> handleEditTranferLocation());
+		label.setOnMouseClicked(event -> handleEditTranferLocation(event));
 		vbox.getChildren().add(0,label);
 		vbox.getChildren().add(1,textfield1);
 		vbox.getChildren().add(2,textfield2);
