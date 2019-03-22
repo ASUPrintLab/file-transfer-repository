@@ -169,16 +169,29 @@ public class MainController implements Initializable{
 			for (int i = pressList.size() - 1; i > -1; i--) {
 				addPressToScene(pressList.get(i));
 			}
+			selectedPress = pressList.get(0);
+			Button press = (Button) pressLocList.getChildren().get(0);
+			press.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+			updateGUI();
+			//Show scroll bar if needed
+            scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+            VBox.setVgrow(scrollPaneTransferLocation, Priority.SOMETIMES);
+
+            //Show scroll bar if needed
+            scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+
+            VBox.setVgrow(scrollPaneAddPress, Priority.SOMETIMES);
 		}
-		// Don't show the scroll bar for the transfer location section initially
-		scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.NEVER);
-		VBox.setVgrow(scrollPaneTransferLocation, Priority.NEVER);
+		else {
+		 // Don't show the scroll bar for the transfer location section initially
+	        scrollPaneTransferLocation.setVbarPolicy(ScrollBarPolicy.NEVER);
+	        VBox.setVgrow(scrollPaneTransferLocation, Priority.NEVER);
 
-		// Don't show the scroll bar for the add press section initially
-		scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
+	        // Don't show the scroll bar for the add press section initially
+	        scrollPaneAddPress.setVbarPolicy(ScrollBarPolicy.NEVER);
 
-		VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
-
+	        VBox.setVgrow(scrollPaneAddPress, Priority.NEVER);
+		}
 
 		run.setOnAction(this::start);
 		stop.setOnAction(this::stop);
