@@ -203,12 +203,9 @@
   -fx-effect: dropshadow(GAUSSIAN, black, 10, 0, 4, 5);
 }
 
-/* .locationDiv:hover {
-  -fx-background-color: #1C1C1C;
-  -fx-background-insets: 15 15 15 15;
-  -fx-background-radius: 10 10 10 10;
-  -fx-effect: dropshadow(GAUSSIAN, #bc784e, 5, 0, 1, 2);
-} */
+.locationDiv:hover {
+  transform: scale(1.5);
+}
 
 .connections {
   -fx-text-fill: #B9B9B9;
