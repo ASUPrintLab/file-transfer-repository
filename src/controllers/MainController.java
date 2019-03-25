@@ -476,7 +476,8 @@ public class MainController implements Initializable{
             VBox root = FXMLLoader.load(getClass().getResource("/resources/AddPressWindow.fxml"));
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
-            window.getIcons().add(new Image("/resources/icon.png"));
+            javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/icon.png").toExternalForm());
+            window.getIcons().add(image);
             window.setTitle("Add New Press");
             window.setScene(new Scene(root));
             window.showAndWait(); //Wait until window closes
@@ -532,7 +533,8 @@ public class MainController implements Initializable{
                 }
             });
             window.initModality(Modality.APPLICATION_MODAL);
-            window.getIcons().add(new Image("/resources/icon.png"));
+            javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/icon.png").toExternalForm());
+            window.getIcons().add(image);
             window.setTitle("Edit Location");
             window.setScene(new Scene(root));
             window.showAndWait(); //Wait until window closes
@@ -562,7 +564,8 @@ public class MainController implements Initializable{
             LocationController mainController = loader.<LocationController>getController();
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
-            //window.getIcons().add(new Image("/resources/icon.png"));
+            javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/icon.png").toExternalForm());
+            window.getIcons().add(image);
             window.setTitle("Edit Location");
             window.setScene(new Scene(root));
             window.showAndWait(); //Wait until window closes
@@ -709,7 +712,8 @@ public class MainController implements Initializable{
             TimeController mainController = loader.<TimeController>getController();
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
-            window.getIcons().add(new Image("/resources/icon.png"));
+            javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/icon.png").toExternalForm());
+            window.getIcons().add(image);
             window.setTitle("Edit Location");
             window.setScene(new Scene(root));
             window.showAndWait(); //Wait until window closes

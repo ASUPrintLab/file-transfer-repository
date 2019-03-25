@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -40,7 +42,8 @@ public class Main extends Application {
             primaryStage.setScene(scene); //Set style to window
             primaryStage.setTitle("File Transfer Utility"); //Title of Program listed on top-left window when launched
             primaryStage.initStyle(StageStyle.UNDECORATED);
-            //primaryStage.getIcons().add(new Image("/resources/upload.png"));
+            javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/upload.png").toExternalForm());
+            primaryStage.getIcons().add(image);
             primaryStage.show(); //Display
             primaryStage.setResizable(false);
 
