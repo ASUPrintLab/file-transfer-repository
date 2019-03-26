@@ -11,7 +11,7 @@
 
 <VBox prefHeight="307.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TimeController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="301.0" prefWidth="497.0" style="-fx-background-color: #1C1C1C;" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="301.0" prefWidth="497.0" style="-fx-background-color: #1C1C1C;" stylesheets="/resources/stylesheet.css" VBox.vgrow="ALWAYS">
       <children>
             <Button fx:id="confirmTime" layoutX="201.0" layoutY="255.0" mnemonicParsing="false" styleClass="addPress" text="Save" />
             <Button fx:id="cancelTime" layoutX="285.0" layoutY="255.0" mnemonicParsing="false" styleClass="addPress" text="Cancel" />

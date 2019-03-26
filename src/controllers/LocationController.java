@@ -7,7 +7,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application_v2.Locations;
+import application.Locations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

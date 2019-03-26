@@ -1,4 +1,4 @@
-package application_v2;
+package application;
 
 import java.io.FileWriter;
 import java.io.IOException;

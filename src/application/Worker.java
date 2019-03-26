@@ -1,4 +1,4 @@
-package application_v2;
+package application;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,6 +32,7 @@ public class Worker extends Task<Press> {
                     updateMessage("Cancelled");
                     break;
                 }
+//                Thread.currentThread().interrupt();
                 Logs.writeToException(interrupted.toString());
             }
 

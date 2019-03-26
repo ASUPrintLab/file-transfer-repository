@@ -4,7 +4,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
-import application_v2.TransferTime;
+import application.TransferTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -1,4 +1,4 @@
-package application_v2;
+package application;
 
 /** This Class is the Locations object that contains information like name of connection, from and to location path.
  * @author Mitchell Roberts

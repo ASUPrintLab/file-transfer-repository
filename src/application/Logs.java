@@ -1,4 +1,4 @@
-package application_v2;
+package application;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -14,6 +14,7 @@ import java.util.logging.SimpleFormatter;
  * @since 1.0
  */
 public class Logs {
+    private static File logfolder;
     private static File parentfolder;
     private static File childfolder;
     private static Logger events = Logger.getLogger("Events");
@@ -30,8 +31,12 @@ public class Logs {
     private static void checkLogs() {
         Logs.year = getYear();
         Logs.month = getMonth();
-        Logs.parentfolder = new File("C:\\Users\\msrober3\\Desktop\\Test File Transfer\\Logs\\" + Logs.year);
-        Logs.childfolder = new File("C:\\Users\\msrober3\\Desktop\\Test File Transfer\\Logs\\" + Logs.year + "\\" + Logs.month);
+        Logs.logfolder = new File("Logs");
+        if (!Logs.logfolder.isDirectory()) {
+            Logs.logfolder.mkdir();
+        }
+        Logs.parentfolder = new File("Logs\\" + Logs.year);
+        Logs.childfolder = new File("Logs\\" + Logs.year + "\\" + Logs.month);
         //Check to see if folders exist before creating
         if (!Logs.parentfolder.exists() && !Logs.parentfolder.isDirectory()) {
             Logs.parentfolder.mkdir(); //Create directories
@@ -48,8 +53,8 @@ public class Logs {
     private static void createEventLogs() {
         try {  
             // This block configure the logger with handler and formatter  
-            String transfers = "C:\\Users\\msrober3\\Desktop\\Test File Transfer\\Logs\\" + Logs.year + "\\" + Logs.month + "\\transfers.log";
-            String exceptions = "C:\\Users\\msrober3\\Desktop\\Test File Transfer\\Logs\\exceptions.log";
+            String transfers = "Logs\\" + Logs.year + "\\" + Logs.month + "\\transfers.log";
+            String exceptions = "Logs\\exceptions.log";
             Logs.fh = new FileHandler(transfers); 
             Logs.fh2 = new FileHandler(exceptions); //Add file handler that logs are written to
             Logs.events.addHandler(fh);

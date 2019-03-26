@@ -1,4 +1,4 @@
-package application_v2;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ public class Main extends Application {
     private double yoffset;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(final Stage primaryStage) {
 
         this.mainStage = primaryStage;
 

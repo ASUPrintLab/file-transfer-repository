@@ -1,4 +1,4 @@
-package application_v2;
+package application;
 
 import javafx.scene.control.CheckBox;
 
