@@ -1,2 +1,0 @@
-Mar 26, 2019 3:03:21 PM application.Logs writeToException
-SEVERE: java.lang.InterruptedException: sleep interrupted

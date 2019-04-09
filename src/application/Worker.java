@@ -24,15 +24,15 @@ public class Worker extends Task<Press> {
 
     @Override
     protected Press call() throws Exception {
+//        System.out.println("Thread: " + Thread.currentThread().getName() + " ID: " + Thread.currentThread().getId() +  " Press: " + this.press.getName());
         while (!isCancelled()) { //keep running until task is canceled
             try {       	
                 Thread.sleep(interval); 
             } catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
                 if (isCancelled()) {
-                    updateMessage("Cancelled");
                     break;
                 }
-//                Thread.currentThread().interrupt();
                 Logs.writeToException(interrupted.toString());
             }
 

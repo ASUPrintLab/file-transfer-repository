@@ -21,6 +21,7 @@ import application.PressManager;
 import application.SaveData;
 import application.TransferTime;
 import application.Worker;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -93,6 +95,8 @@ public class MainController implements Initializable{
     @FXML
     private ImageView close; //The 'x' to close the program
     @FXML
+    private ImageView minimize; //The '-' to minimize the program
+    @FXML
     private Label notifier; //Event Log label
     @FXML
     private Label message1; //Event Log label
@@ -143,18 +147,18 @@ public class MainController implements Initializable{
     private Press selectedPress;
     private Pane pane;
     private ArrayList<Worker> workers = new ArrayList<Worker>();
-    ExecutorService executorService;
+    ExecutorService executorService = Executors.newScheduledThreadPool(1); //Create pool of dynamic size.
     /*
      * Actions for the GUI - used for running arrows
      */
-    private FadeOut action1;
-    private FadeOut action2;
-    private FadeOut action3;
-    private FadeOut action4;
-    private FadeOut action5;
-    private FadeOut action6;
-    private FadeOut action7;
-    private Pulse playAction;
+//    private FadeOut action1;
+//    private FadeOut action2;
+//    private FadeOut action3;
+//    private FadeOut action4;
+//    private FadeOut action5;
+//    private FadeOut action6;
+//    private FadeOut action7;
+//    private Pulse playAction;
 
     private int pressListIncreased = 412;
     private int transferLocationIncreased = 400;
@@ -163,6 +167,7 @@ public class MainController implements Initializable{
     private String fromLocation;
     private String toLocation;
     private int indexofLoc;
+    private boolean running = false;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -234,6 +239,10 @@ public class MainController implements Initializable{
         close.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
             handleClose(event);
         });
+        
+        minimize.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> { //Handle mouse event on imageview
+            minimize(event);
+        });
         //Applies the objects to the actual cells in the table
         startTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("startTime"));
         endTime.setCellValueFactory(new PropertyValueFactory<TransferTime, String>("stopTime"));
@@ -241,6 +250,11 @@ public class MainController implements Initializable{
         actions.setVisible(false);
     }
     
+    private void minimize(MouseEvent event) {
+        Stage stage = (Stage) minimize.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
     /**
      * Handles the close 'x' button for the program.
      * @param event
@@ -314,13 +328,15 @@ public class MainController implements Initializable{
      */
     @FXML
     private void start(ActionEvent event) {
+        running = true;
         stop.setDisable(false);
         run.setDisable(true); //Disable button
         startAnimation(); //Start animation
+        disableContols();        
         if (!PressManager.isEmpty()) {
             ArrayList<Press> list = PressManager.getAllPresses();
+            ExecutorService executorService = Executors.newFixedThreadPool(list.size());
 
-            executorService = Executors.newFixedThreadPool(list.size());
             for (Press press : list) {
                 if (!press.locationsEmpty() && !press.timesEmpty()) { //Prevent empty presses from creating tasks
                     Worker worker = new Worker(press);
@@ -331,14 +347,64 @@ public class MainController implements Initializable{
             }
         }
     }
+    /**
+     * Disables all controls while the programming is transferring files.
+     */
+    private void disableContols() {
+        addPress.setDisable(true);
+//        minimize.setDisable(false);
+        addTransferLocation.setDisable(true);
+        addTransferTime.setDisable(true);
+        edit.setDisable(true);
+        close.setDisable(true);
+        for (int i = 0; i < transferLocList.getChildren().size(); i++) {
+            Pane wrapper = (Pane) transferLocList.getChildren().get(i);
+            for (int j = 0; j < wrapper.getChildren().size(); j++) {
+                VBox box = (VBox) wrapper.getChildren().get(j);
+                for (int k = 0; k < box.getChildren().size(); k++) {
+                    if (k == 0) {
+                        Label label = (Label) box.getChildren().get(0);
+                        label.setDisable(true);
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Disables all controls while the programming is transferring files.
+     */
+    private void enableContols() {
+        addPress.setDisable(false);
+        addTransferLocation.setDisable(false);
+        addTransferTime.setDisable(false);
+        edit.setDisable(false);
+        close.setDisable(false);
+        for (int i = 0; i < transferLocList.getChildren().size(); i++) {
+            Pane wrapper = (Pane) transferLocList.getChildren().get(i);
+            for (int j = 0; j < wrapper.getChildren().size(); j++) {
+                VBox box = (VBox) wrapper.getChildren().get(j);
+                for (int k = 0; k < box.getChildren().size(); k++) {
+                    if (k == 0) {
+                        Label label = (Label) box.getChildren().get(0);
+                        label.setDisable(false);
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Handles the animation of the start button - starts the animation.
      */
     private void startAnimation() {
-        circle.setVisible(true);
-        playAction = new Pulse(circle);
-        playAction.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
+//        circle.setVisible(true);
+//        circle.setCache(true);
+//        circle.setCacheHint(CacheHint.QUALITY);
+//        playAction = new Pulse(circle);
+//        playAction.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("0ms")).play();
+//        playAction.getNode().setCache(true);
+//        playAction.getNode().setCacheHint(CacheHint.QUALITY);
         Date date = new Date();
         String strDateFormat = "EEE, MMM d, hh:mm a";
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
@@ -347,70 +413,62 @@ public class MainController implements Initializable{
         stop.setStyle(null); //Remove style on stop button
         run.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 15, 0, 0, 0);"); //Add gradient to run button
         //Display images
-        running1.setVisible(true);
-        running2.setVisible(true);
-        running3.setVisible(true);
-        running4.setVisible(true);
-        running5.setVisible(true);
-        running6.setVisible(true);
-        running7.setVisible(true);
-        action1 = new FadeOut(running1);
-        action1.setCycleCount(500).setDelay(Duration.valueOf("50ms")).play();
-        action1.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action1.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-        action2 = new FadeOut(running2);
-        action2.setCycleCount(500).setDelay(Duration.valueOf("100ms")).play();
-        action2.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action2.setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-        action3 = new FadeOut(running3);
-        action3.setCycleCount(500).setDelay(Duration.valueOf("150ms")).play();
-        action3.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action3.setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-        action4 = new FadeOut(running4);
-        action4.setCycleCount(500).setDelay(Duration.valueOf("200ms")).play();
-        action4.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action4.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-        action5 = new FadeOut(running5);
-        action5.setCycleCount(500).setDelay(Duration.valueOf("250ms")).play();
-        action5.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action5.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-        action6 = new FadeOut(running6);
-        action6.setCycleCount(500).setDelay(Duration.valueOf("300ms")).play();
-        action6.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action6.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-        action7 = new FadeOut(running7);
-        action7.setCycleCount(500).setDelay(Duration.valueOf("350ms")).play();
-        action7.setOnFinished(new EventHandler<ActionEvent>() { //Resets animation after it finishes
-            @Override
-            public void handle(ActionEvent arg0) {
-                action7.setCycleCount(500).setDelay(Duration.valueOf("0ms")).play();
-            }
-        });
-
+//        running1.setVisible(true);
+//        running2.setVisible(true);
+//        running3.setVisible(true);
+//        running4.setVisible(true);
+//        running5.setVisible(true);
+//        running6.setVisible(true);
+//        running7.setVisible(true);
+//        running1.setCache(true);
+//        running2.setCache(true);
+//        running3.setCache(true);
+//        running4.setCache(true);
+//        running5.setCache(true);
+//        running6.setCache(true);
+//        running7.setCache(true);
+//        running1.setCacheHint(CacheHint.QUALITY);
+//        running2.setCacheHint(CacheHint.QUALITY);
+//        running3.setCacheHint(CacheHint.QUALITY);
+//        running4.setCacheHint(CacheHint.QUALITY);
+//        running5.setCacheHint(CacheHint.QUALITY);
+//        running6.setCacheHint(CacheHint.QUALITY);
+//        running7.setCacheHint(CacheHint.QUALITY);
+//        action1 = new FadeOut(running1);
+//        action1.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("50ms")).play();
+//
+//        action2 = new FadeOut(running2);
+//        action2.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("100ms")).play();
+//
+//        action3 = new FadeOut(running3);
+//        action3.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("150ms")).play();
+//
+//        action4 = new FadeOut(running4);
+//        action4.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("200ms")).play();
+//
+//        action5 = new FadeOut(running5);
+//        action5.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("250ms")).play();
+//
+//        action6 = new FadeOut(running6);
+//        action6.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("300ms")).play();
+//
+//        action7 = new FadeOut(running7);
+//        action7.setCycleCount(Timeline.INDEFINITE).setDelay(Duration.valueOf("350ms")).play();
+//
+//        action1.getNode().setCache(true);
+//        action2.getNode().setCache(true);
+//        action3.getNode().setCache(true);
+//        action4.getNode().setCache(true);
+//        action5.getNode().setCache(true);
+//        action6.getNode().setCache(true);
+//        action7.getNode().setCache(true);
+//        action1.getNode().setCache(true);
+//        action2.getNode().setCacheHint(CacheHint.QUALITY);
+//        action3.getNode().setCacheHint(CacheHint.QUALITY);
+//        action4.getNode().setCacheHint(CacheHint.QUALITY);
+//        action5.getNode().setCacheHint(CacheHint.QUALITY);
+//        action6.getNode().setCacheHint(CacheHint.QUALITY);
+//        action7.getNode().setCacheHint(CacheHint.QUALITY);
 
     }
     
@@ -422,18 +480,19 @@ public class MainController implements Initializable{
      */
     @FXML
     private void stop(ActionEvent event) {
+        running = false;
         Logs.closeFiles();
         stop.setDisable(true);
         run.setDisable(false);
-
+        
         //Stop all thread safely to prevent corrupted memory
         if (!workers.isEmpty()) {
             executorService.shutdownNow();
             for (int i = 0; i < workers.size(); i++) {
                 workers.get(i).cancel(true);
-            }	
+            }
         }
-
+        enableContols();
         stopAnimation(); //Stop the animation
     }
     
@@ -443,26 +502,26 @@ public class MainController implements Initializable{
     private void stopAnimation() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
-        playAction.stop();
-        circle.setVisible(false);
+//        playAction.stop();
+//        circle.setVisible(false);
         notifier.setText("Stopped on " + dateFormat.format(date));
         stop.setStyle("-fx-effect: dropshadow(GAUSSIAN,  #ff0000, 15, 0, 0, 0);");
         run.setStyle(null);
-        running1.setVisible(false);
-        running2.setVisible(false);
-        running3.setVisible(false);
-        running4.setVisible(false);
-        running5.setVisible(false);
-        running6.setVisible(false);
-        running7.setVisible(false);
-        //Stop animations
-        action1.stop();
-        action2.stop();
-        action3.stop();
-        action4.stop();
-        action5.stop();
-        action6.stop();
-        action7.stop();
+//        running1.setVisible(false);
+//        running2.setVisible(false);
+//        running3.setVisible(false);
+//        running4.setVisible(false);
+//        running5.setVisible(false);
+//        running6.setVisible(false);
+//        running7.setVisible(false);
+//        //Stop animations
+//        action1.stop();
+//        action2.stop();
+//        action3.stop();
+//        action4.stop();
+//        action5.stop();
+//        action6.stop();
+//        action7.stop();
     }
 
     /**
@@ -566,7 +625,7 @@ public class MainController implements Initializable{
             window.initModality(Modality.APPLICATION_MODAL);
             javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/icon.png").toExternalForm());
             window.getIcons().add(image);
-            window.setTitle("Edit Location");
+            window.setTitle("Add Location");
             window.setScene(new Scene(root));
             window.showAndWait(); //Wait until window closes
             if (mainController.isSaved()) { //If the field is not empty add the component to GUI and PressManager
@@ -602,7 +661,15 @@ public class MainController implements Initializable{
         textfield2.getStyleClass().add("textboxtext");
         textfield1.setPrefWidth(400);
         textfield2.setPrefWidth(400);
+        textfield1.setEditable(false);
         textfield2.setEditable(false);
+        //If the transfers are currently running don't allows locations to be edited
+        if (running) {
+            label.setDisable(true);
+        }
+        else {
+            
+        }
 
         label.getStyleClass().add("connections");
         label.setPadding(new Insets(25, 0, 5, 25));
@@ -714,7 +781,7 @@ public class MainController implements Initializable{
             window.initModality(Modality.APPLICATION_MODAL);
             javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("/resources/icon.png").toExternalForm());
             window.getIcons().add(image);
-            window.setTitle("Edit Location");
+            window.setTitle("Add Transfer Time");
             window.setScene(new Scene(root));
             window.showAndWait(); //Wait until window closes
             ObservableList<TransferTime> list = mainController.getTimes();
@@ -810,7 +877,7 @@ public class MainController implements Initializable{
 
 
         newPress.getStyleClass().add("addPress");
-        newPress.setMinWidth(pressLabel.getWidth());
+        newPress.setMinWidth(pressLabel.getWidth() - 20);
         newPress.setUserData(press);
 
 
@@ -827,7 +894,6 @@ public class MainController implements Initializable{
         newPress.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 clearPresses();
 
                 newPress.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");

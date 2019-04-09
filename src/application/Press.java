@@ -23,8 +23,18 @@ public class Press {
     public Press(String name, ArrayList<TransferTime> transferTimes, ArrayList<Locations> locations, int id) {
         super();
         this.name = name;
-        TransferTimes = transferTimes;
-        this.locations = locations;
+        if (transferTimes == null) {
+            this.TransferTimes = new ArrayList<TransferTime>();
+        }
+        else {
+            this.TransferTimes = transferTimes;
+        }
+        if (locations == null) {
+            this.locations = new ArrayList<Locations>();
+        }
+        else {
+            this.locations = locations;
+        }
         this.key = id;
     }
 

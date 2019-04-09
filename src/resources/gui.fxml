@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -27,12 +26,21 @@
                   <Image url="/resources/cancel.png" />
                </image>
             </ImageView>
-            <ComboBox layoutX="8.0" prefHeight="27.0" prefWidth="65.0" promptText="File" styleClass="menuDD" stylesheets="/resources/stylesheet.css" />
+            <ImageView fx:id="minimize" fitHeight="15.0" fitWidth="15.0" layoutX="838.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+               <image>
+                  <Image url="/resources/minimize.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="fullscreen" fitHeight="15.0" fitWidth="15.0" layoutX="862.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+               <image>
+                  <Image url="/resources/fullscreen.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <HBox prefHeight="86.0" prefWidth="919.0" style="-fx-background-color: #1C1C1C;" styleClass="topDiv">
          <children>
-            <Pane prefHeight="81.0" prefWidth="392.0" style="-fx-background-color: #262626;">
+            <Pane prefHeight="81.0" prefWidth="219.0" style="-fx-background-color: #262626;">
                <children>
                   <Circle fx:id="circle" centerX="65.0" centerY="65.0" fill="#0dff01" layoutY="-23.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(GAUSSIAN,  #0dff01, 20, 0, 0, 0); -fx-opacity: .5;" visible="false" />
                   <Button fx:id="run" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="33.0" layoutY="9.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" stylesheets="/resources/stylesheet.css">
@@ -61,46 +69,11 @@
                         <String fx:value="stopButton" />
                      </styleClass>
                   </Button>
-                  <ImageView fx:id="running1" fitHeight="50.0" fitWidth="75.0" layoutX="190.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="running2" fitHeight="50.0" fitWidth="50.0" layoutX="215.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="running3" fitHeight="50.0" fitWidth="50.0" layoutX="241.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="running4" fitHeight="50.0" fitWidth="50.0" layoutX="266.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="running5" fitHeight="50.0" fitWidth="50.0" layoutX="291.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="running6" fitHeight="50.0" fitWidth="50.0" layoutX="317.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="running7" fitHeight="50.0" fitWidth="50.0" layoutX="342.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="/resources/right-arrow.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
-            <VBox fx:id="messageLog" prefHeight="81.0" prefWidth="511.0" style="-fx-background-color: #121212; -fx-border-color: #1C1C1C; -fx-border-width: 0 0 0 7px;">
+            <VBox fx:id="messageLog" prefHeight="81.0" prefWidth="679.0" style="-fx-background-color: #121212; -fx-border-color: #1C1C1C; -fx-border-width: 0 0 0 7px;">
                <children>
-                  <Label fx:id="notifier" prefHeight="17.0" prefWidth="486.0" style="-fx-text-fill: white;" wrapText="true">
+                  <Label fx:id="notifier" prefHeight="17.0" prefWidth="637.0" style="-fx-text-fill: white;" wrapText="true">
                      <VBox.margin>
                         <Insets left="10.0" top="5.0" />
                      </VBox.margin>
@@ -108,7 +81,7 @@
                         <Font name="AkzidenzGroteskStd-Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="message1" prefHeight="47.0" prefWidth="486.0" style="-fx-text-fill: white;" wrapText="true">
+                  <Label fx:id="message1" prefHeight="47.0" prefWidth="641.0" style="-fx-text-fill: white;" wrapText="true">
                      <font>
                         <Font name="AkzidenzGroteskStd-Md" size="10.0" />
                      </font>

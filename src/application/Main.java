@@ -22,11 +22,9 @@ public class Main extends Application {
     public void start(final Stage primaryStage) {
 
         this.mainStage = primaryStage;
-
         try {
             //VBox is the layout of the window with the path to retrieve the FXML *Created in SceneBuilder*
             VBox root = FXMLLoader.load(getClass().getResource("/resources/gui.fxml"));
-
             // Being able to move the program around
             root.setOnMousePressed(event -> {
                 xoffset = event.getSceneX();

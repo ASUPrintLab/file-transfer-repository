@@ -23,6 +23,7 @@ public class Logs {
     private static FileHandler fh2;
     private static String year;
     private static String month;
+    public static final int FILE_SIZE = 0;
     
     /**
      * This method checks to find the log file. 
@@ -55,8 +56,8 @@ public class Logs {
             // This block configure the logger with handler and formatter  
             String transfers = "Logs\\" + Logs.year + "\\" + Logs.month + "\\transfers.log";
             String exceptions = "Logs\\exceptions.log";
-            Logs.fh = new FileHandler(transfers); 
-            Logs.fh2 = new FileHandler(exceptions); //Add file handler that logs are written to
+            Logs.fh = new FileHandler(transfers, FILE_SIZE, 1, true); 
+            Logs.fh2 = new FileHandler(exceptions, FILE_SIZE, 1, true); //Add file handler that logs are written to
             Logs.events.addHandler(fh);
             Logs.exceptions.addHandler(fh2);
             Logs.events.setLevel(Level.INFO); //Set the level
@@ -117,6 +118,8 @@ public class Logs {
         if (Logs.fh != null && Logs.fh2 != null) {
             Logs.fh.close();
             Logs.fh2.close();
+            Logs.fh.flush();
+            Logs.fh2.flush();
         }
     }
     
