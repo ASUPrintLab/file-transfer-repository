@@ -162,9 +162,14 @@ public class MainController implements Initializable{
 	private String fromLocation;
 	private String toLocation;
 	
-//	 private Locations selectedLocation;
-//	 private TextField selectedSourceLocation;
-//	 private TextField selectedTargetLocation;
+	
+	private Label selectedLabel;
+	private TextField selectedSourceLocation;
+	private TextField selectedTargetLocation;
+	private VBox selectedVBox;
+	private Pane selectedPane;
+
+
 	/**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -472,9 +477,27 @@ public class MainController implements Initializable{
 	/**
 	 * This method handles edits to the transfer location.
 	 * Re-launches the transfer location window.
+	 * @param event 
 	 */
 	@FXML
-	private void handleEditTranferLocation() {
+	private void handleEditTranferLocation(MouseEvent event) {
+		
+		selectedLabel = (Label) event.getSource();
+		
+		System.out.println("This is the selectedLabel right after receiving from event get source "+selectedLabel);
+//		System.out.println("This is the value of the first index in vbox "+selectedVBox.getChildren().get(0).getId());
+//		System.out.println("------------------------------------------------------------");
+//		System.out.println("This is the value of selectedLabel "+selectedLabel);
+//		System.out.println("------------------------------------------------------------");
+//		System.out.println("This is the value of the second index in vbox "+selectedVBox.getChildren().get(1));
+//		System.out.println("------------------------------------------------------------");
+//		System.out.println("This is the value of selectedLabel "+selectedSourceLocation);
+//		System.out.println("------------------------------------------------------------");
+//		System.out.println("This is the value of the third index in vbox "+selectedVBox.getChildren().get(2).toString());
+//		System.out.println("------------------------------------------------------------");
+//		System.out.println("This is the value of selectedLabel "+selectedTargetLocation);
+//		
+		
 		try {
 //		
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/TransferLocationWindow.fxml"));
@@ -483,36 +506,100 @@ public class MainController implements Initializable{
 			
 			Stage window = new Stage();
 			window.initModality(Modality.APPLICATION_MODAL);
-		
 			
+			
+			// Update The transfer location window with the user inputted information
 			  window.addEventHandler(WindowEvent.WINDOW_SHOWN, new EventHandler<WindowEvent>()
 		        {
+				 
 		            @Override
 		            public void handle(WindowEvent window)
 		            {
-//
+//						
+		            	
+		            	
 		            	mainController.handleWindowShownEvent();
-		                mainController.updateTransferLocation(nameTransfer, fromLocation, toLocation);
+		            	
+		            	
+		            	for(int i = 0; i < transferLocList.getChildren().size(); i ++) {
+		            		Pane pane = (Pane) transferLocList.getChildren().get(i);
+		            		for (int j = 0; j < pane.getChildren().size(); j++) {
+		            			
+		            			VBox vbox = (VBox) pane.getChildren().get(j);
+		            			System.out.println("Size of vbox "+vbox.getChildren());
+		            			for (int k = 0; k < vbox.getChildren().size(); k++) {
+		            				
+		            				if (k == 0) {
+		            					 selectedLabel = (Label) vbox.getChildren().get(k);
+		            					 System.out.println("What is selected label "+selectedLabel.getText());
+		            				}
+		            				else if (k == 1) {
+		            					 selectedSourceLocation = (TextField) vbox.getChildren().get(k);
+		            					 System.out.println("What is selected selectedSourceLocation "+selectedSourceLocation.getText());
+		            				}
+		            				else if( k == 2 ) {
+		            					 selectedTargetLocation = (TextField) vbox.getChildren().get(k);
+		            					 System.out.println("What is selected selectedTargetLocation "+selectedTargetLocation.getText());
+		            					 
+		            				}
+		            				mainController.updateTransferLocation(selectedLabel.getText(), selectedSourceLocation.getText(), selectedTargetLocation.getText());
+		            			}	
+		            						
+		            						
+										
+		            					
+							}
+								}
+							
 
-		            }
-		        });
+		            	}
+		            		
+		            });
+//		                
+
+		        
+//		        });
 			  
 			window.getIcons().add(new Image("/resources/icon.png"));
 			window.setTitle("Edit Location");
 			window.setScene(new Scene(root));
 			window.showAndWait(); //Wait until window closes
 				
+			
 			if(!mainController.getName().trim().isEmpty()) {
 				nameTransfer = mainController.getName();
 				fromLocation = mainController.getSourceLoc();
 				toLocation = mainController.getTargetLoc();
 			}
+			
+			
+//			editComponent();
+			
 				
 		} catch (IOException e) {
 			Logs.writeToException(e.toString());
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Displays the edited transfer location information once saved
+	 */
+	public void editComponent() {
+		ArrayList<Locations> locations = selectedPress.getLocations();
+		
+		System.out.println("These are all the locations that exist in the press before removing "+locations);
+		for(int i = 0; i < locations.size(); i++) {
+			if(nameTransfer != selectedLabel.getText() || fromLocation != selectedSourceLocation.getText() || toLocation != selectedTargetLocation.getText()) {
+				locations.remove(i);
+				updateGUI();
+			}
+		}
+		
+		System.out.println("These are all the locations that exist in the press after removing "+locations);
+	}
+	
+	
 	/**
 	 * Handles event for adding a new transfer location
 	 */
@@ -568,12 +655,24 @@ public class MainController implements Initializable{
 		label.getStyleClass().add("connections");
 		label.setPadding(new Insets(25, 0, 5, 25));
 		label.setPrefHeight(35);
-		label.setOnMouseClicked(event -> handleEditTranferLocation());
-		vbox.getChildren().add(0,label);
-		vbox.getChildren().add(1,textfield1);
-		vbox.getChildren().add(2,textfield2);
+		label.setOnMouseClicked(event -> handleEditTranferLocation(event));
+//		vbox.getChildren().add(0,label);
+//		vbox.getChildren().add(1,textfield1);
+//		vbox.getChildren().add(2,textfield2);
+		
+		vbox.getChildren().addAll(label, textfield1, textfield2);
 		this.pane.getChildren().add(0,vbox);
-
+		
+		
+		
+		selectedLabel = label;
+		selectedSourceLocation = textfield1;
+		selectedTargetLocation = textfield2;
+		
+		selectedVBox = vbox;
+		
+		selectedPane = this.pane;
+		
 		/* 
 		 * Once the Vbox increases more than the transfer locations pane create a scroll bar and continue
 		 * to be able to add transfer locations
@@ -588,7 +687,7 @@ public class MainController implements Initializable{
 			// Adding a new transfer location associated with a press
 			transferLocList.getChildren().add(transferLocList.getChildren().size(),pane);
 		} else {
-			System.out.println("The else line has been reached");
+			
 			transferLocationIncreased = transferLocationIncreased + 30;
 			transferLocList.setPrefHeight(transferLocationIncreased);
 			
