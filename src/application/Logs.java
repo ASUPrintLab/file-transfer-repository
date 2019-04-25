@@ -58,8 +58,8 @@ public class Logs {
             String exceptions = "Logs\\exceptions.log";
             Logs.fh = new FileHandler(transfers, FILE_SIZE, 1, true); 
             Logs.fh2 = new FileHandler(exceptions, FILE_SIZE, 1, true); //Add file handler that logs are written to
-            Logs.events.addHandler(fh);
-            Logs.exceptions.addHandler(fh2);
+            Logs.events.addHandler(fh); // send log message to transfer.log
+            Logs.exceptions.addHandler(fh2); // send log message to exceptions.log
             Logs.events.setLevel(Level.INFO); //Set the level
             Logs.exceptions.setLevel(Level.ALL);
             fh.setFormatter(new SimpleFormatter()); //Formatter for the logger
