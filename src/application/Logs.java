@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+
 /** This Class creates a file and logs events and exceptions that occur in the program.
  * @author Mitchell Roberts
  * @since 1.0
@@ -64,6 +65,8 @@ public class Logs {
             Logs.exceptions.setLevel(Level.ALL);
             fh.setFormatter(new SimpleFormatter()); //Formatter for the logger
             fh2.setFormatter(new SimpleFormatter());
+            fh.flush(); // forces any buffered bytes to be written to the appropriate output stream's destination
+            fh2.flush();
         } catch (Exception e) {  
             e.printStackTrace();  
         }
