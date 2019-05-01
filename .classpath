@@ -36,5 +36,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/gndeshpa/Documents/GitHub/file-transfer-repository/FTP.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
