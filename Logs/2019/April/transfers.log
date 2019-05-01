@@ -1,0 +1,6 @@
+Apr 25, 2019 10:52:01 AM application.Logs writeToEvent
+INFO: jobticket (4).pdfsent to jobticket (4).pdf
+Apr 25, 2019 11:07:01 AM application.Logs writeToEvent
+INFO: jobticket (4).pdf sent to C:\Users\gndeshpa\Downloads\Destination\jobticket (4).pdf
+Apr 25, 2019 11:19:05 AM application.Logs writeToEvent
+INFO: jobticket (3).pdf sent to C:\Users\gndeshpa\Downloads\Destination\jobticket (3).pdf
